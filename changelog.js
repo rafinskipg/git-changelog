@@ -7,16 +7,28 @@ var child = require('child_process');
 var fs = require('fs');
 var util = require('util');
 var q = require('qq');
-var _s = require('underscore-string');
 
-var GIT_LOG_CMD = 'git log development --grep="%s" -E --format=%s %s..HEAD';
-//var GIT_LOG_CMD = 'git log --grep="%s" -E --format=%s %s..HEAD';
+var BRANCH_NAME = ''; 
+
+var GIT_LOG_CMD = 'git log '+BRANCH_NAME+' --grep="%s" -E --format=%s %s..HEAD';
+var GIT_NOTAG_LOG_CMD = 'git log '+BRANCH_NAME+' --grep="%s" -E --format=%s';
+
 var GIT_TAG_CMD = 'git describe --tags --abbrev=0';
 
-var PROVIDER = 'BitBucket';
+var PROVIDER = 'G'; //[G]ithub [B]itbucket
 var HEADER_TPL = '<a name="%s">%s</a>\n# %s (%s)\n\n';
-var LINK_ISSUE = '[#%s](https://bitbucket.org/adesisnetlife/repsol-proyecto-f-nix-intranet/issues/%s)';
-var LINK_COMMIT = '[%s](https://bitbucket.org/adesisnetlife/repsol-proyecto-f-nix-intranet/commits/%s)';
+var USER_NAME = 'rafinskipg';
+var PROJECT_NAME = 'Git-change-log';
+
+var LINK_ISSUE = ({
+                G: '[#%s](https://github.com/'+USER_NAME+ '/'+ PROJECT_NAME+'/issues/%s)',
+                B : '[#%s](https://bitbucket.org/'+USER_NAME+ '/'+PROJECT_NAME+'/issues/%s)'})
+                [PROVIDER];
+
+var LINK_COMMIT = ({ 
+                G: '[%s](https://github.com/'+USER_NAME+ '/' +PROJECT_NAME+'/commits/%s)',
+                B: '[%s](https://bitbucket.org/'+USER_NAME+ '/'+PROJECT_NAME +'/commits/%s)'})
+                [PROVIDER];
 
 var EMPTY_COMPONENT = '$$';
 
@@ -124,10 +136,16 @@ var printSection = function(stream, title, section, printCommitLinks) {
 
 var readGitLog = function(grep, from) {
     var deferred = q.defer();
-
+    //TODO if there is no tag , create a 0.0.0 Tag automattically
+    var command = from != 'NONETAG' ? GIT_LOG_CMD: GIT_NOTAG_LOG_CMD ;
+    if(from == 'NONETAG'){
+        command = util.format(command, grep, '%H%n%s%n%b%n==END==');
+    }else{
+        command = util.format(command, grep, '%H%n%s%n%b%n==END==', from);
+    }
+    
     // TODO(vojta): if it's slow, use spawn and stream it instead
-
-    child.exec(util.format(GIT_LOG_CMD, grep, '%H%n%s%n%b%n==END==', from), function(code, stdout, stderr) {
+    child.exec(command , function(code, stdout, stderr) {
 
         var commits = [];
 
@@ -144,7 +162,7 @@ var readGitLog = function(grep, from) {
 };
 
 
-var writeChangelog = function(stream, commits, version, appName) {
+var writeChangelog = function(stream, commits) {
     var sections = {
         fix: {},
         feat: {},
@@ -174,7 +192,7 @@ var writeChangelog = function(stream, commits, version, appName) {
         };
     });
 
-    stream.write(util.format(HEADER_TPL, version, appName, version, currentDate()));
+    stream.write(util.format(HEADER_TPL, options.version, options.appName, options.version, currentDate()));
     printSection(stream, 'Documentation', sections.docs);
     printSection(stream, 'Bug Fixes', sections.fix);
     printSection(stream, 'Features', sections.feat);
@@ -186,25 +204,27 @@ var writeChangelog = function(stream, commits, version, appName) {
 var getPreviousTag = function() {
 
     var deferred = q.defer();
-    console.log(GIT_TAG_CMD);
+   
     child.exec(GIT_TAG_CMD, function(code, stdout, stderr) {
-        if (code) deferred.reject('Cannot get the previous tag.');
-        else deferred.resolve(stdout.replace('\n', ''));
+       if (code ) deferred.resolve('NONETAG');
+       else deferred.resolve(stdout.replace('\n', ''));
     });
 
     return deferred.promise;
 };
 
 
-var generate = function(version, file, appName) {
-
+var generate = function() {
+   
     getPreviousTag().then(function(tag) {
-
         console.log('Reading git log since', tag);
         readGitLog('^fix|^feat|^docs|BREAKING', tag).then(function(commits) {
             console.log('Parsed', commits.length, 'commits');
-            console.log('Generating changelog to', file || 'stdout', '(', version, ')');
-            writeChangelog(file ? fs.createWriteStream(file) : process.stdout, commits, version, appName);
+            console.log('Generating changelog to', options.file || 'stdout', '(', options.version, ')');
+            writeChangelog(options.file ? fs.createWriteStream(options.file) : process.stdout, commits);
+        },
+        function(){
+            console.log("It seems that that tag doesn't exists");
         });
     });
 };
@@ -213,13 +233,30 @@ var generate = function(version, file, appName) {
 // publish for testing
 exports.parseRawCommit = parseRawCommit;
 
+var options = {
+    version : 'ALL',
+    file: 'Changelog.MD',
+    appName : 'My app - Changelog'
+};
+
 // hacky start if not run by jasmine :-D
 if (process.argv.join('').indexOf('jasmine-node') === -1) {
-    //node changelog.js 1.0.0 changelog.md "My App"
+    
     if (process.argv[5] != undefined) {
-        if (process.argv[5] == 'GitHub' || process.argv[5] == 'BitBucket') {
+        if (process.argv[5] == 'G' || process.argv[5] == 'B') {
             PROVIDER = process.argv[5];
+           
         }
     }
-    generate(process.argv[2], process.argv[3], process.argv[4]);
+
+    var params = {
+        version :  process.argv[2],
+        file :  process.argv[3],
+        appName :   process.argv[4]
+    } 
+     
+    for (var attrname in params) { options[attrname] = (typeof(params[attrname]) != 'undefined' ? params[attrname]: options[attrname]); }
+
+    generate();
+    //node changelog.js 1.0.0 changelog.md "My App" "G"
 }
