@@ -3,6 +3,11 @@ Git-change-log
 
 Generates a git changelog, inspired &amp; based on Angular JS changelog generator
 
+## Installation
+
+You can copy "changelog.js" file into your project and install "qq" npm package (dependency).
+
+
 ## Usage
 
 Follow the Commit Guidelines when you commit.
