@@ -76,3 +76,4 @@ reference GitHub issues that this commit **Closes**.
 
 
 A detailed explanation can be found in this [document][commit-message-format].
+[commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
