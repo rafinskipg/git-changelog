@@ -46,7 +46,7 @@ grunt.initConfig({
 ### Options | Defaults
 
 * branch_name : 'The name of the branch I want to generate my changelog (Defaults to "")',
-* repo_url: '',
+* repo_url: 'The url of my project ',
 * version : '',
 * file: 'CHANGELOG.md',
 * appName : 'My app - Changelog'
