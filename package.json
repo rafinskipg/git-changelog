@@ -1,16 +1,44 @@
 {
-  "name": "git-change-log",
-  "version": "0.0.1",
-  "description": "Git change log",
+  "name": "git-changelog",
+  "description": "A git changelog based on ANGULAR JS commit standards",
+  "version": "0.1.0",
+  "homepage": "https://github.com/rafinskipg/git-changelog",
+  "author": {
+    "name": "rafinskipg",
+    "email": "rafinskipg@gmail.com"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com/rafinskipg/Git-change-log.git"
+    "url": "git://github.com/rafinskipg/git-changelog.git"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "qq": "~0.3.5"
+  "bugs": {
+    "url": "https://github.com/rafinskipg/git-changelog/issues"
   },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/rafinskipg/git-changelog/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
   "engines": {
-    "node": ">=0.8.0"
-  }
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1",
+    "q": "~0.9.7",
+    "exec": "0.0.6"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin, git, git-changelog, angularjs, angular, commit, log"
+  ]
 }

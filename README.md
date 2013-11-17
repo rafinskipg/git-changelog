@@ -1,26 +1,56 @@
-Git-change-log
-==============
+# git-changelog
 
-Generates a git changelog, inspired &amp; based on Angular JS changelog generator
+> A git changelog based on ANGULAR JS commit standards
 
-## Installation
+## Getting Started
+This plugin requires Grunt `~0.4.1`
 
-You can copy "changelog.js" file into your project and install "qq" npm package (dependency).
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
-
-## Usage
-
-Follow the Commit Guidelines when you commit.
-Create a changelog with
-
+```shell
+npm install git-changelog --save-dev
 ```
-node changelog.js
-``` 
-It does accept some parameters
 
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+
+```js
+grunt.loadNpmTasks('git-changelog');
 ```
-node changelog.js {VERSION} {OUTPUTFILE} {APPNAME} {G|B}
+
+## The "git_changelog" task
+
+### Overview
+In your project's Gruntfile, add a section named `git_changelog` to the data object passed into `grunt.initConfig()`.
+
+```js
+grunt.initConfig({
+  git_changelog: {
+    minimal: {
+      options: {
+        repo_url: 'https://github.com/rafinskipg/git-changelog',
+        appName : 'Git changelog'
+      }
+    },
+    extended: {
+      options: {
+        repo_url: 'https://github.com/rafinskipg/git-changelog',
+        appName : 'Git changelog extended',
+        file : 'EXTENDEDCHANGELOG.md',
+        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
+      }
+    }
+  }
+})
 ```
+
+### Options | Defaults
+
+* branch_name : 'The name of the branch I want to generate my changelog (Defaults to "")',
+* repo_url: '',
+* version : '',
+* file: 'CHANGELOG.md',
+* appName : 'My app - Changelog'
+* grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
 
 ## Git Commit Guidelines - Source : "Angular JS"
 
@@ -77,3 +107,10 @@ reference GitHub issues that this commit **Closes**.
 
 A detailed explanation can be found in this [document][commit-message-format].
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
+
+
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+## Release History
+_(Nothing yet)_
