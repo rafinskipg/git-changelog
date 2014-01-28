@@ -249,7 +249,7 @@ var generate = function(params) {
 
         if(typeof(tag) !== 'undefined'){
             console.log('Reading git log since', tag);
-            fn = function(){ return readGitLog(GIT_LOG_CMD);};
+            fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
         }else{
             console.log('Reading git log since the beggining');
             fn = function(){ return readGitLog(GIT_NOTAG_LOG_CMD);};
