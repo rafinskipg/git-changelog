@@ -1,7 +1,7 @@
 {
   "name": "git-changelog",
   "description": "A git changelog based on ANGULAR JS commit standards",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/rafinskipg/git-changelog",
   "author": {
     "name": "rafinskipg",
@@ -31,11 +31,11 @@
     "q": "~0.9.7"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
+    "exec": "0.0.6",
+    "grunt": "^0.4.5",
     "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt": "~0.4.1",
-    "exec": "0.0.6"
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"

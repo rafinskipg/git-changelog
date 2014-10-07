@@ -1,3 +1,5 @@
+'use strict';
+
 describe('changelog.js', function() {
   var ch = require('./changelog');
 

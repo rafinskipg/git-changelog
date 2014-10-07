@@ -1,6 +1,9 @@
 # git-changelog
 
-> A git changelog based on ANGULAR JS commit standards
+> A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
+
+You can see an example generated changelog [here](https://github.com/rafinskipg/git-changelog/blob/master/CHANGELOG.md)
+
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -45,12 +48,12 @@ grunt.initConfig({
 
 ### Options | Defaults
 
-* branch_name : 'The name of the branch I want to generate my changelog (Defaults to "")',
-* repo_url: 'The url of my project ',
-* version : '',
-* file: 'CHANGELOG.md',
-* appName : 'My app - Changelog'
-* grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
+* **branch_name** : The name of the branch. Defaults to ` `
+* **repo_url**: The version of the project. Defaults to ` `
+* **version**: The version of the project. Defaults to ` `,
+* **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
+* **appName** : The name of the projcect. Defaults to `My App - Changelog`
+* **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
 
 ## Git Commit Guidelines - Source : "Angular JS"
 

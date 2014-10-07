@@ -20,7 +20,42 @@ module.exports = function(grunt) {
     version : '',
     file: 'CHANGELOG.md',
     appName : 'My app - Changelog',
-    grep_commits: '^fix|^feat|^docs|BREAKING'
+    grep_commits: '^fix|^feat|^docs|BREAKING',
+    sections: [
+      {
+        title: 'Bug Fixes',
+        grep: '^fix'
+      },
+      {
+        title: 'Features',
+        grep: '^feat'
+      },
+      {
+        title: 'Documentation',
+        grep: '^docs'
+      },
+      {
+        title: 'Breaking changes',
+        grep: 'BREAKING'
+      },
+      {
+        title: 'Refactor',
+        grep: '^refactor'
+      },
+      {
+        title: 'Style',
+        grep: '^style'
+      },
+      {
+        title: 'Test',
+        grep: '^test'
+      },
+      {
+        title: 'Chore',
+        grep: '^chore'
+      }
+    ]
+
   };
 
   grunt.registerMultiTask('git_changelog', 'A git changelog based on ANGULAR JS commit standards', function() {

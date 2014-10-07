@@ -11,6 +11,7 @@ var child = require('child_process');
 var fs = require('fs');
 var util = require('util');
 var q = require('q');
+
 var OPTS = {};
 var PROVIDER, GIT_LOG_CMD, GIT_NOTAG_LOG_CMD, 
 	//ALLOWED_COMMITS = '^fix|^feat|^docs|BREAKING',
@@ -230,7 +231,6 @@ var getPreviousTag = function() {
  
     //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
     child.exec(GIT_TAG_CMD, function(code, stdout, stderr) {
-        console.log('THemaster');
        if (code ){ deferred.resolve();
        }else{ deferred.resolve(stdout.replace('\n', '')); }
     });
@@ -253,7 +253,7 @@ var generate = function(params) {
         }else{
             console.log('Reading git log since the beggining');
             fn = function(){ return readGitLog(GIT_NOTAG_LOG_CMD);};
-        } 
+        }
 
         fn().then(function(commits) {
             console.log('Parsed', commits.length, 'commits');
