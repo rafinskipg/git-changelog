@@ -194,6 +194,21 @@ var writeChangelog = function(stream, commits) {
 
     sections.breaks[EMPTY_COMPONENT] = [];
 
+    organizeCommitsInSections(commits, sections)
+
+    stream.write(util.format(HEADER_TPL, OPTS.version, OPTS.appName, OPTS.version, currentDate()));
+    printSection(stream, 'Documentation', sections.docs);
+    printSection(stream, 'Bug Fixes', sections.fix);
+    printSection(stream, 'Features', sections.feat);
+    printSection(stream, 'Refactor', sections.refactor, false);
+    printSection(stream, 'Style', sections.style, false);
+    printSection(stream, 'Test', sections.test, false);
+    printSection(stream, 'Chore', sections.chore, false);
+    printSection(stream, 'Docs', sections.docs, false);
+    printSection(stream, 'Breaking Changes', sections.breaks, false);
+};
+
+var organizeCommitsInSections = function(commits, sections){
     commits.forEach(function(commit) {
         var section = sections[commit.type];
         var component = commit.component || EMPTY_COMPONENT;
@@ -212,18 +227,9 @@ var writeChangelog = function(stream, commits) {
             });
         }
     });
+    return sections;
+}
 
-    stream.write(util.format(HEADER_TPL, OPTS.version, OPTS.appName, OPTS.version, currentDate()));
-    printSection(stream, 'Documentation', sections.docs);
-    printSection(stream, 'Bug Fixes', sections.fix);
-    printSection(stream, 'Features', sections.feat);
-    printSection(stream, 'Refactor', sections.refactor, false);
-    printSection(stream, 'Style', sections.style, false);
-    printSection(stream, 'Test', sections.test, false);
-    printSection(stream, 'Chore', sections.chore, false);
-    printSection(stream, 'Docs', sections.docs, false);
-    printSection(stream, 'Breaking Changes', sections.breaks, false);
-};
 
 
 var getPreviousTag = function() {
@@ -297,5 +303,6 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
 
 // publish for testing
 exports.parseRawCommit = parseRawCommit;
+exports.organizeCommitsInSections = organizeCommitsInSections;
 exports.generate = generate;
 

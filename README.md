@@ -30,13 +30,12 @@ grunt.initConfig({
   git_changelog: {
     minimal: {
       options: {
-        repo_url: 'https://github.com/rafinskipg/git-changelog',
+        file: 'CHANGELOG.md',
         appName : 'Git changelog'
       }
     },
     extended: {
       options: {
-        repo_url: 'https://github.com/rafinskipg/git-changelog',
         appName : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
         grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'

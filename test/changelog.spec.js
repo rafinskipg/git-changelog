@@ -43,6 +43,32 @@ describe('changelog.js', function() {
           'another line with more info\n');
 
       expect(msg.breaking).to.equal(' first breaking change\nsomething else\nanother line with more info\n');
+    });   
+
+    it('Should organize commits', function() {
+      var msg = ch.parseRawCommit(
+          '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
+          'feat(ng-list): Allow custom separator\n' +
+          'bla bla bla\n\n' +
+          'BREAKING CHANGE: first breaking change\nsomething else\n' +
+          'another line with more info\n');
+      
+      var sections = {
+        fix: {}
+      };
+
+      var commits = [];
+
+      for(var i = 0; i < 10; i++){
+        commits.push(ch.parseRawCommit(
+          '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
+          'fix(myModule): Allow custom separator\n' +
+          'bla bla bla\n\n'));
+      }
+
+      console.log(JSON.stringify(ch.organizeCommitsInSections(commits, sections)));
+
+      expect(sections.fix.myModule.length).to.equal(10);
     });
   });
 
