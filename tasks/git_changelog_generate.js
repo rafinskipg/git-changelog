@@ -59,9 +59,6 @@ var parseRawCommit = function(raw) {
     var lines = raw.split('\n');
     var msg = {}, match;
 
-    msg.hash = lines.shift();
-    msg.subject = lines.shift();
-
     msg.closes = [];
     msg.breaks = [];
 
@@ -69,6 +66,9 @@ var parseRawCommit = function(raw) {
         match = line.match(/(?:Closes|Fixes)\s#(\d+)/);
         if (match) { msg.closes.push(parseInt(match[1], 10)); }
     });
+
+    msg.hash = lines.shift();
+    msg.subject = lines.shift();
 
     match = raw.match(/BREAKING CHANGE:([\s\S]*)/);
     if (match) {
@@ -142,6 +142,7 @@ var printSection = function(stream, title, section, printCommitLinks) {
         section[name].forEach(function(commit) {
             if (printCommitLinks) {
                 stream.write(util.format('%s %s\n  (%s', prefix, commit.subject, linkToCommit(commit.hash)));
+
                 if (commit.closes.length) {
                     stream.write(',\n   ' + commit.closes.map(linkToIssue).join(', '));
                 }
@@ -155,7 +156,10 @@ var printSection = function(stream, title, section, printCommitLinks) {
     stream.write('\n');
 };
 
-
+var printSalute = function(stream){
+    stream.write('\n\n---\n');
+    stream.write('<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problem or suggestion, create an issue.* :) **Thanks** </sub></sup>');
+}
 
 var readGitLog = function( git_log_command, from) {
     var deferred = q.defer();
@@ -198,15 +202,18 @@ var writeChangelog = function(stream, commits) {
     organizeCommitsInSections(commits, sections)
 
     stream.write(util.format(HEADER_TPL, OPTS.version, OPTS.appName, OPTS.version, currentDate()));
-    printSection(stream, 'Documentation', sections.docs);
     printSection(stream, 'Bug Fixes', sections.fix);
     printSection(stream, 'Features', sections.feat);
     printSection(stream, 'Refactor', sections.refactor, false);
     printSection(stream, 'Style', sections.style, false);
     printSection(stream, 'Test', sections.test, false);
     printSection(stream, 'Chore', sections.chore, false);
-    printSection(stream, 'Docs', sections.docs, false);
-    printSection(stream, 'Breaking Changes', sections.breaks, false);
+    printSection(stream, 'Documentation', sections.docs, false);
+    if(sections.breaks[EMPTY_COMPONENT].length > 0 ) {
+        printSection(stream, 'Breaking Changes', sections.breaks, false);
+    }
+
+    printSalute(stream);
 };
 
 var organizeCommitsInSections = function(commits, sections){

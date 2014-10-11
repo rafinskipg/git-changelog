@@ -2,21 +2,14 @@
 #  (2014-10-11)
 
 
-## Documentation
-
-- Added docs
-  ([e0ba50c0](https://github.com/rafinskipg/git-changelog/commits/e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644))
-- **readme:** Final readme Fixes #1 Closes #1
-  ([e725d8f4](https://github.com/rafinskipg/git-changelog/commits/e725d8f4bf477b517ca6185a75fdfa0aa660b3be))
-
-
 ## Bug Fixes
 
 - **git_changelog_generate:** pass tag if it exists to gitReadLog
   ([7c801927](https://github.com/rafinskipg/git-changelog/commits/7c801927672792fc9a818653b74c78d77c7bff9e),
    [#5](https://github.com/rafinskipg/git-changelog/issues/5))
 - **nested lists:** nested list fix. Closes #9
-  ([22855518](https://github.com/rafinskipg/git-changelog/commits/2285551810919bd4d8a749ae3ddd88f9cedcdd0e))
+  ([22855518](https://github.com/rafinskipg/git-changelog/commits/2285551810919bd4d8a749ae3ddd88f9cedcdd0e),
+   [#9](https://github.com/rafinskipg/git-changelog/issues/9))
 - **package.json:** move q to dependancies since it is required to run
   ([257119cf](https://github.com/rafinskipg/git-changelog/commits/257119cf2bb6d8f341a5d65a2f47bcf803dff205))
 
@@ -32,6 +25,8 @@
   ([5afbb7a9](https://github.com/rafinskipg/git-changelog/commits/5afbb7a95c9f0e985f78666e7e231967524a8928))
   - Now it is ready to be a grunt plugin
   ([6422e055](https://github.com/rafinskipg/git-changelog/commits/6422e0552b30f6e94d11b03310a23c1342aa5965))
+- **options:** Added ignore tags option
+  ([95362e8b](https://github.com/rafinskipg/git-changelog/commits/95362e8b57a673e810ffe54ff3337de1ea5109a8))
 
 
 ## Refactor
@@ -42,12 +37,12 @@
   - Added docs
 
 
-## Docs
+## Documentation
 
 - Added docs
 - **readme:** Final readme Fixes #1 Closes #1
 
 
-## Breaking Changes
 
-
+---
+<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problem or suggestion, create an issue.* :) **Thanks** </sub></sup>

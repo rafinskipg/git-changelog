@@ -34,6 +34,15 @@ describe('changelog.js', function() {
     });
 
 
+    it('should parse closed issues in the body comment', function() {
+      var msg = ch.parseRawCommit(
+          '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
+          'feat(ng-list): Allow custom separator and Closes #33\n');
+
+      expect(msg.closes[0]).to.equal(33);
+    });
+
+
     it('should parse breaking changes', function() {
       var msg = ch.parseRawCommit(
           '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
@@ -43,7 +52,8 @@ describe('changelog.js', function() {
           'another line with more info\n');
 
       expect(msg.breaking).to.equal(' first breaking change\nsomething else\nanother line with more info\n');
-    });   
+    });
+
 
     it('Should organize commits', function() {
       var msg = ch.parseRawCommit(
