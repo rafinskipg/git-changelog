@@ -14,6 +14,7 @@ var q = require('q');
 
 var OPTS = {};
 var PROVIDER, GIT_LOG_CMD, GIT_NOTAG_LOG_CMD, 
+    IGNORE_TAGS = false,
 	//ALLOWED_COMMITS = '^fix|^feat|^docs|BREAKING',
 	//git-describe - Show the most recent tag that is reachable from a commit
 	GIT_TAG_CMD  = 'git describe --tags --abbrev=0', 
@@ -27,7 +28,7 @@ var init = function(params){
 	OPTS = params;
 	//G \ B \ ---
     PROVIDER = OPTS.repo_url.indexOf('github.com') !== -1 ? 'G' :'B';
-
+    IGNORE_TAGS = OPTS.ignore_tags ? true : false;
     //Log commits
     GIT_LOG_CMD = 'git log ' + OPTS.branch_name + ' --grep="%s" -E --format=%s %s..HEAD';
     GIT_NOTAG_LOG_CMD = 'git log ' + OPTS.branch_name + ' --grep="%s" -E --format=%s';
@@ -253,7 +254,7 @@ var generate = function(params) {
     getPreviousTag().then(function(tag) {
         var fn ;
 
-        if(typeof(tag) !== 'undefined'){
+        if(typeof(tag) !== 'undefined' && !IGNORE_TAGS){
             console.log('Reading git log since', tag);
             fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
         }else{

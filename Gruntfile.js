@@ -40,6 +40,7 @@ module.exports = function(grunt) {
         options: {
           repo_url: 'https://github.com/rafinskipg/git-changelog',
           appName : 'Git changelog extended',
+          ignore_tags: true,
           file : 'EXTENDEDCHANGELOG.md',
           grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
         }

@@ -52,7 +52,8 @@ grunt.initConfig({
 * **repo_url**: The url of the project. For issues and commits links. Defaults to ` `
 * **version**: The version of the project. Defaults to ` `,
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
-* **appName** : The name of the projcect. Defaults to `My App - Changelog`
+* **appName** : The name of the project. Defaults to `My App - Changelog`
+* **ignore_tags** : Ignore tags, read from the beggining of the history. Defaults to `false`
 * **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
 
 ## Git Commit Guidelines - Source : "Angular JS"
