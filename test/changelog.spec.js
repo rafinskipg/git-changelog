@@ -1,7 +1,9 @@
 'use strict';
+var fs = require('fs'),
+expect = require('chai').expect;
 
 describe('changelog.js', function() {
-  var ch = require('./changelog');
+  var ch = require('../tasks/git_changelog_generate');
 
   describe('parseRawCommit', function() {
     it('should parse raw commit', function() {
@@ -11,12 +13,12 @@ describe('changelog.js', function() {
           'perf testing shows that in chrome this change adds 5-15% overhead\n' +
           'when destroying 10k nested scopes where each scope has a $destroy listener\n');
 
-      expect(msg.type).toBe('feat');
-      expect(msg.hash).toBe('9b1aff905b638aa274a5fc8f88662df446d374bd');
-      expect(msg.subject).toBe('broadcast $destroy event on scope destruction');
-      expect(msg.body).toBe('perf testing shows that in chrome this change adds 5-15% overhead\n' +
+      expect(msg.type).to.equal('feat');
+      expect(msg.hash).to.equal('9b1aff905b638aa274a5fc8f88662df446d374bd');
+      expect(msg.subject).to.equal('broadcast $destroy event on scope destruction');
+      expect(msg.body).to.equal('perf testing shows that in chrome this change adds 5-15% overhead\n' +
           'when destroying 10k nested scopes where each scope has a $destroy listener\n')
-      expect(msg.component).toBe('scope');
+      expect(msg.component).to.equal('scope');
     });
 
 
@@ -27,7 +29,8 @@ describe('changelog.js', function() {
           'bla bla bla\n\n' +
           'Closes #123\nCloses #25\n');
 
-      expect(msg.closes).toEqual([123, 25]);
+      expect(msg.closes[0]).to.equal(123);
+      expect(msg.closes[1]).to.equal(25);
     });
 
 
@@ -39,7 +42,19 @@ describe('changelog.js', function() {
           'BREAKING CHANGE: first breaking change\nsomething else\n' +
           'another line with more info\n');
 
-      expect(msg.breaking).toEqual(' first breaking change\nsomething else\nanother line with more info\n');
+      expect(msg.breaking).to.equal(' first breaking change\nsomething else\nanother line with more info\n');
+    });
+  });
+
+  describe('File creation', function(){
+    it('should create A CHANGELOG.md', function(){
+      var  exists_file = fs.existsSync('CHANGELOG.md');
+      expect(exists_file).to.equal(true);
+    });
+
+    it('should create A EXTENDEDCHANGELOG.md', function(){
+      var  exists_file = fs.existsSync('EXTENDEDCHANGELOG.md');
+      expect(exists_file).to.equal(true);
     });
   });
 });

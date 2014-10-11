@@ -31,11 +31,13 @@
     "q": "~0.9.7"
   },
   "devDependencies": {
+    "chai": "^1.9.2",
     "exec": "0.0.6",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-nodeunit": "~0.2.0"
+    "grunt-mocha-test": "^0.12.1",
+    "mocha": "^1.21.4"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"

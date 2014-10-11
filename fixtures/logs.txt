@@ -1,0 +1,17 @@
+1d4f604363094d4eee3b4d7b1ca01133edaad344
+Merge pull request #7 from colegleason/fix-tags
+fix(git_changelog_generate): pass tag if it exists to gitReadLog
+==END==
+2a712b9cfd912f36b6f7f70d16b336575881881a
+Merge pull request #6 from colegleason/add-q
+fix(package.json): move q to dependancies since it is required to run
+==END==
+7c801927672792fc9a818653b74c78d77c7bff9e
+fix(git_changelog_generate): pass tag if it exists to gitReadLog
+Previously if a tag was found the script would try to find commits
+between undefined..HEAD. By passing the tag, it now finds tags between
+tag..HEAD.
+
+Closes #5.
+
+==END==

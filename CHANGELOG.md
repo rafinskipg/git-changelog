@@ -1,5 +1,5 @@
 <a name="">Git changelog</a>
-#  (2014-10-07)
+#  (2014-10-11)
 
 
 ## Documentation
@@ -21,6 +21,8 @@
 
 ## Features
 
+- Working on new API
+  ([121b9928](https://github.com/rafinskipg/git-changelog/commits/121b99285d2a04f9159951fa0e3f849d0d618fef))
 - **bootstrap:** creating initial structure
   ([dea45d68](https://github.com/rafinskipg/git-changelog/commits/dea45d68ce9555e876680bf7c0778add2f367a30))
 - **grunt-plugin:** Now it is ready to be a grunt plugin
