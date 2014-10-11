@@ -146,7 +146,7 @@ var printSection = function(stream, title, section, printCommitLinks) {
                 }
                 stream.write(')\n');
             } else {
-                stream.write(util.format('%s %s', prefix, commit.subject));
+                stream.write(util.format('%s %s\n', prefix, commit.subject));
             }
         });
     });

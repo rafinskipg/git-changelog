@@ -25,13 +25,18 @@
   ([121b9928](https://github.com/rafinskipg/git-changelog/commits/121b99285d2a04f9159951fa0e3f849d0d618fef))
 - **bootstrap:** creating initial structure
   ([dea45d68](https://github.com/rafinskipg/git-changelog/commits/dea45d68ce9555e876680bf7c0778add2f367a30))
-- **grunt-plugin:** Now it is ready to be a grunt plugin
+- **grunt-plugin:**
+  - Commit for research purposes
+  ([5afbb7a9](https://github.com/rafinskipg/git-changelog/commits/5afbb7a95c9f0e985f78666e7e231967524a8928))
+  - Now it is ready to be a grunt plugin
   ([6422e055](https://github.com/rafinskipg/git-changelog/commits/6422e0552b30f6e94d11b03310a23c1342aa5965))
 
 
 ## Docs
 
-- Added docs- **readme:** Final readme Fixes #1 Closes #1
+- Added docs
+- **readme:** Final readme Fixes #1 Closes #1
+
 
 ## Breaking Changes
 

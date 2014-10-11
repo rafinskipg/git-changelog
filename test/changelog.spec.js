@@ -66,7 +66,7 @@ describe('changelog.js', function() {
           'bla bla bla\n\n'));
       }
 
-      console.log(JSON.stringify(ch.organizeCommitsInSections(commits, sections)));
+      sections = ch.organizeCommitsInSections(commits, sections);
 
       expect(sections.fix.myModule.length).to.equal(10);
     });

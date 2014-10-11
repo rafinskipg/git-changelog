@@ -30,12 +30,13 @@ grunt.initConfig({
   git_changelog: {
     minimal: {
       options: {
-        file: 'CHANGELOG.md',
+        file: 'https://github.com/rafinskipg/git-changelog',
         appName : 'Git changelog'
       }
     },
     extended: {
       options: {
+        repo_url: 'https://github.com/rafinskipg/git-changelog',
         appName : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
         grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
@@ -48,7 +49,7 @@ grunt.initConfig({
 ### Options | Defaults
 
 * **branch_name** : The name of the branch. Defaults to ` `
-* **repo_url**: The version of the project. Defaults to ` `
+* **repo_url**: The url of the project. For issues and commits links. Defaults to ` `
 * **version**: The version of the project. Defaults to ` `,
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
 * **appName** : The name of the projcect. Defaults to `My App - Changelog`
