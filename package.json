@@ -28,7 +28,12 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "commander": "^2.5.0",
     "q": "~0.9.7"
+  },
+  "preferGlobal": "true",
+  "bin": {
+    "git-changelog": "tasks/command.js"
   },
   "devDependencies": {
     "chai": "^1.9.2",
