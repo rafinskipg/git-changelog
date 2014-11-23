@@ -16,6 +16,8 @@
 
 ## Features
 
+- CLI option with git-changelog
+  ([50af9f0a](https://github.com/rafinskipg/git-changelog/commits/50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe))
 - Working on new API
   ([121b9928](https://github.com/rafinskipg/git-changelog/commits/121b99285d2a04f9159951fa0e3f849d0d618fef))
 - **bootstrap:** creating initial structure
