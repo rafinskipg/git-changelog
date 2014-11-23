@@ -7,7 +7,7 @@
 
 There are new options available, check them out, now available as CLI
 
-You can see an example generated changelog [here](https://github.com/rafinskipg/git-changelog/blob/master/CHANGELOG.md)
+You can see an example generated changelog [here](https://github.com/rafinskipg/git-changelog/blob/master/output/tag1.md)
 
 It works as a **grunt plugin** or **CLI**, see options below
 
