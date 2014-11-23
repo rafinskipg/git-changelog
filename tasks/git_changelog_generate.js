@@ -42,7 +42,7 @@ var init = function(params){
                     [PROVIDER];
 
     LINK_COMMIT = ({ 
-                    G: '[%s]('+OPTS.repo_url+'/commits/%s)',
+                    G: '[%s]('+OPTS.repo_url+'/commit/%s)',
                     B: '[%s]('+OPTS.repo_url+'/commits/%s)'})
                     [PROVIDER];
 
