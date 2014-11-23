@@ -89,7 +89,7 @@ describe('changelog.js', function() {
     });
 
     it('should create tag1.md', function(){
-      var  exists_file = fs.existsSync('outputs/tag1.md');
+      var  exists_file = fs.existsSync('output/tag1.md');
       expect(exists_file).to.equal(true);
     });
 

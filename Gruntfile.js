@@ -38,7 +38,7 @@ module.exports = function(grunt) {
       tag1: {
         options: {
           app_name : 'Since tag 1 changelog',
-          file: 'outputs/tag1.md',
+          file: 'output/tag1.md',
           tag: 'v0.0.1',
           debug: true
         }
