@@ -4,6 +4,7 @@
  
 ## NEWS!
 ![Good news](http://www.labspaces.net/pictures/blog/4e5466b7dc69f1314154167_blog.jpg)
+
 There are new options available, check them out, now available as CLI
 
 You can see an example generated changelog [here](https://github.com/rafinskipg/git-changelog/blob/master/CHANGELOG.md)
