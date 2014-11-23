@@ -1,9 +1,13 @@
 # git-changelog
 
+## NEWS!
+There are new options available, check them out, now available as CLI
+
 > A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
 
 You can see an example generated changelog [here](https://github.com/rafinskipg/git-changelog/blob/master/CHANGELOG.md)
 
+It works as a **grunt plugin** or **CLI**, see options below
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -49,12 +53,48 @@ grunt.initConfig({
 ### Options | Defaults
 
 * **branch_name** : The name of the branch. Defaults to ` `
-* **repo_url**: The url of the project. For issues and commits links. Defaults to ` `
+* **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
 * **version**: The version of the project. Defaults to ` `,
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
-* **appName** : The name of the project. Defaults to `My App - Changelog`
-* **ignore_tags** : Ignore tags, read from the beggining of the history. Defaults to `false`
+* **appName** (DEPRECATED: Use app_name) : The name of the project. Defaults to `My App - Changelog`
+* **app_name** : The name of the project. Defaults to `My App - Changelog`
+* **ignore_tags** (DEPRECATED, use tag option): Ignore tags, read from the beggining of the history. Defaults to `false`
 * **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
+* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beggining of the project
+* **debug**: Debug mode, false by default
+
+### Command Line
+Install it globally 
+
+```
+npm install -g git-changelog
+```
+See commands
+```
+git-changelog -h
+```
+
+Use it directly with the common options
+```
+ Usage: git-changelog [options]
+
+  Options:
+
+    -h, --help                  output usage information
+    -V, --version               output the version number
+    -e, --extended              Extended log
+    -a, --app_name [app_name]   Name [app_name]
+    -b, --branch [branch_name]  Branch name [branch_name]
+    -f, --file [file]           File [file]
+    -r, --repo_url [url]        Repo url [url]
+    -t, --tag [tag]             Since tag [tag]
+    -g, --grep [grep]           Grep commits for [grep]
+    -d, --debug                 Debugger
+
+
+```
+
+
 
 ## Git Commit Guidelines - Source : "Angular JS"
 

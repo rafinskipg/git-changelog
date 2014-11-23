@@ -1,10 +1,6 @@
-#!/usr/bin/env node
 /*
  * git-changelog
  * https://github.com/rafinskipg/git-changelog
- *
- * Copyright (c) 2013 rafinskipg
- * Licensed under the MIT license.
  */
 
 var child = require('child_process');
@@ -14,21 +10,27 @@ var q = require('q');
 
 var OPTS = {};
 var PROVIDER, GIT_LOG_CMD, GIT_NOTAG_LOG_CMD, 
-    IGNORE_TAGS = false,
 	//ALLOWED_COMMITS = '^fix|^feat|^docs|BREAKING',
 	//git-describe - Show the most recent tag that is reachable from a commit
 	GIT_TAG_CMD  = 'git describe --tags --abbrev=0', 
 	HEADER_TPL = '<a name="%s">%s</a>\n# %s (%s)\n\n', 
 	LINK_ISSUE, 
-	LINK_COMMIT, 
+	LINK_COMMIT,
+  GIT_REPO_URL_CMD = 'git config --get remote.origin.url',
 	EMPTY_COMPONENT = '$$';
 
 // I have to clean that mess
 var init = function(params){
+  var deferred = q.defer();
+
 	OPTS = params;
-	//G \ B \ ---
+
+  getRepoUrl().then(function(url){
+    OPTS.repo_url = url;
+ 
+  	//G \ B \ ---
     PROVIDER = OPTS.repo_url.indexOf('github.com') !== -1 ? 'G' :'B';
-    IGNORE_TAGS = OPTS.ignore_tags ? true : false;
+
     //Log commits
     GIT_LOG_CMD = 'git log ' + OPTS.branch_name + ' --grep="%s" -E --format=%s %s..HEAD';
     GIT_NOTAG_LOG_CMD = 'git log ' + OPTS.branch_name + ' --grep="%s" -E --format=%s';
@@ -43,6 +45,12 @@ var init = function(params){
                     G: '[%s]('+OPTS.repo_url+'/commits/%s)',
                     B: '[%s]('+OPTS.repo_url+'/commits/%s)'})
                     [PROVIDER];
+
+    deferred.resolve(OPTS);
+  })
+  .catch(deferred.reject);
+
+  return deferred.promise;
 };
 
 
@@ -166,7 +174,7 @@ var readGitLog = function( git_log_command, from) {
 
     git_log_command  =  git_log_command === GIT_LOG_CMD ? util.format(git_log_command, OPTS.grep_commits, '%H%n%s%n%b%n==END==', from) : util.format(git_log_command, OPTS.grep_commits, '%H%n%s%n%b%n==END==');
     
-    console.log('Executing : ', git_log_command);
+    log('Executing : ', git_log_command);
 
     child.exec(git_log_command , {timeout: 1000}, function(code, stdout, stderr) {
 
@@ -187,21 +195,21 @@ var readGitLog = function( git_log_command, from) {
 
 var writeChangelog = function(stream, commits) {
     var sections = {
-        fix: {},
-        feat: {},
-        breaks: {},
-        style: {},
-        refactor: {},
-        test: {},
-        chore: {},
-        docs: {}
+      fix: {},
+      feat: {},
+      breaks: {},
+      style: {},
+      refactor: {},
+      test: {},
+      chore: {},
+      docs: {}
     };
 
     sections.breaks[EMPTY_COMPONENT] = [];
 
     organizeCommitsInSections(commits, sections)
 
-    stream.write(util.format(HEADER_TPL, OPTS.version, OPTS.appName, OPTS.version, currentDate()));
+    stream.write(util.format(HEADER_TPL, OPTS.version, OPTS.appName || OPTS.app_name, OPTS.version, currentDate()));
     printSection(stream, 'Bug Fixes', sections.fix);
     printSection(stream, 'Features', sections.feat);
     printSection(stream, 'Refactor', sections.refactor, false);
@@ -242,75 +250,86 @@ var organizeCommitsInSections = function(commits, sections){
 
 var getPreviousTag = function() {
     var deferred = q.defer();
- 
-    //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
-    child.exec(GIT_TAG_CMD, function(code, stdout, stderr) {
-       if (code ){ deferred.resolve();
-       }else{ deferred.resolve(stdout.replace('\n', '')); }
-    });
+    if(OPTS.tag){
+      deferred.resolve(OPTS.tag);
+    }else{
+      //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
+      child.exec(GIT_TAG_CMD, function(code, stdout, stderr) {
+        if (code ){ deferred.resolve();
+        }else{ 
+          deferred.resolve(stdout.replace('\n', '')); 
+        }
+      });
+    }
 
     return deferred.promise;
+};
+
+
+var getRepoUrl = function() {
+  var deferred = q.defer();
+
+  if(OPTS.repo_url){
+    deferred.resolve(OPTS.repo_url);
+  }else{
+    //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
+    child.exec(GIT_REPO_URL_CMD, function(code, stdout, stderr) {
+      if (code){ 
+        deferred.resolve();
+      } else {
+        stdout = stdout.replace('\n', '').replace('.git', '');
+        deferred.resolve(stdout); 
+      }
+    });
+  }
+
+  return deferred.promise;
 };
 
 
 var generate = function(params) {
-    var deferred = q.defer();
-    init(params);
+  var deferred = q.defer();
+  init(params)
+  .then(function(){
+    return getPreviousTag()
+  })
+  .then(function(tag) {
+      var fn ;
 
+      if(typeof(tag) !== 'undefined' && !OPTS.ignore_tags){
+          log('Reading git log since', tag);
+          fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
+      }else{
+          log('Reading git log since the beggining');
+          fn = function(){ return readGitLog(GIT_NOTAG_LOG_CMD);};
+      }
 
-    getPreviousTag().then(function(tag) {
-        var fn ;
+      fn().then(function(commits) {
+          log('Parsed', commits.length, 'commits');
+          log('Generating changelog to', OPTS.file || 'stdout', '(', OPTS.version, ')');
+          writeChangelog(OPTS.file ? fs.createWriteStream(OPTS.file) : process.stdout, commits);
+          deferred.resolve();
+      });
+      
+  })
+  .catch(function(err){
+    log('Error generating changelog ', err);
+    deferred.reject(err);
+  })
 
-        if(typeof(tag) !== 'undefined' && !IGNORE_TAGS){
-            console.log('Reading git log since', tag);
-            fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
-        }else{
-            console.log('Reading git log since the beggining');
-            fn = function(){ return readGitLog(GIT_NOTAG_LOG_CMD);};
-        }
-
-        fn().then(function(commits) {
-            console.log('Parsed', commits.length, 'commits');
-            console.log('Generating changelog to', OPTS.file || 'stdout', '(', OPTS.version, ')');
-            writeChangelog(OPTS.file ? fs.createWriteStream(OPTS.file) : process.stdout, commits);
-            deferred.resolve();
-        });
-        
-    });
-
-    return deferred.promise;
+  return deferred.promise;
 };
 
-// hacky start if not run by Grunt -> Can be usefull for using git_changelog in other ways
-if (process.argv.join('').indexOf('/grunt') === -1) {
-    //node changelog.js "http://github.com/myuser/myrepo" 1.0.0 changelog.md "My App" "development_branch" 
-    console.log('Starting custom mode');
-    var defaults = {
-        branch_name : '',
-        //[G]ithub [B]itbucket supported at the momment
-        repo_url: '',
-        version : '',
-        file: 'CHANGELOG.md',
-        appName : 'My app - Changelog',
-        grep_commits: '^fix|^feat|^docs|BREAKING'
-    };
 
-    var params = {
-        repo_url: process.argv[2],
-        version :  process.argv[3],
-        file :  process.argv[4],
-        appName :   process.argv[5],
-        branch_name : process.argv[6]
-    };
-     
-    for (var attrname in defaults) { params[attrname] = (typeof(params[attrname]) !== 'undefined' ? params[attrname]: defaults[attrname]); }
-
-    generate(params);
+function log(){
+  if(OPTS.debug){
+    console.log.apply(console, arguments);
+  }
 }
-
 
 // publish for testing
 exports.parseRawCommit = parseRawCommit;
 exports.organizeCommitsInSections = organizeCommitsInSections;
 exports.generate = generate;
+exports.getRepoUrl = getRepoUrl;
 

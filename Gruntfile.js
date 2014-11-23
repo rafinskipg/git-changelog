@@ -32,8 +32,15 @@ module.exports = function(grunt) {
     git_changelog: {
       minimal: {
         options: {
-          repo_url: 'https://github.com/rafinskipg/git-changelog',
           appName : 'Git changelog'
+        }
+      },
+      tag1: {
+        options: {
+          app_name : 'Since tag 1 changelog',
+          file: 'outputs/tag1.md',
+          tag: 'v0.0.1',
+          debug: true
         }
       },
       extended: {

@@ -1,5 +1,5 @@
 <a name="">Git changelog extended</a>
-#  (2014-10-11)
+#  (2014-11-23)
 
 
 ## Bug Fixes
@@ -27,6 +27,8 @@
   ([6422e055](https://github.com/rafinskipg/git-changelog/commits/6422e0552b30f6e94d11b03310a23c1342aa5965))
 - **options:** Added ignore tags option
   ([95362e8b](https://github.com/rafinskipg/git-changelog/commits/95362e8b57a673e810ffe54ff3337de1ea5109a8))
+- **package:** Added global install so you can run via command
+  ([86eae3f0](https://github.com/rafinskipg/git-changelog/commits/86eae3f013ace1c5c23afc32b2e8f878a69629f1))
 
 
 ## Refactor
@@ -35,6 +37,12 @@
 - **docs:**
   - Angular document commits
   - Added docs
+
+
+## Chore
+
+- package json version 1.1.3
+- **package:** Package json version
 
 
 ## Documentation

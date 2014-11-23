@@ -88,9 +88,23 @@ describe('changelog.js', function() {
       expect(exists_file).to.equal(true);
     });
 
+    it('should create tag1.md', function(){
+      var  exists_file = fs.existsSync('outputs/tag1.md');
+      expect(exists_file).to.equal(true);
+    });
+
     it('should create A EXTENDEDCHANGELOG.md', function(){
       var  exists_file = fs.existsSync('EXTENDEDCHANGELOG.md');
       expect(exists_file).to.equal(true);
+    });
+  });
+
+  describe('Get git settings', function(){
+    it('Should pick correct repo url', function(done){
+      ch.getRepoUrl()
+        .then(function(url){
+          done();
+        })
     });
   });
 });
