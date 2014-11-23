@@ -8,7 +8,7 @@ var git_changelog = require('./git_changelog_generate');
 var options = _.cloneDeep(require('./defaults'));
 
 program
-  .version('0.1.4')
+  .version('0.1.5')
   .option('-e, --extended', 'Extended log')
   .option('-a, --app_name [app_name]', 'Name [app_name]')
   .option('-b, --branch [branch_name]', 'Branch name [branch_name]')
