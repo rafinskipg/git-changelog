@@ -1,5 +1,7 @@
 # git-changelog
 
+[![Build Status](https://travis-ci.org/rafinskipg/git-changelog.svg)](https://travis-ci.org/rafinskipg/git-changelog)
+
 > A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
  
 ## NEWS!
@@ -118,6 +120,12 @@ format that includes a **type**, a **scope** and a **subject**:
 
 Any line of the commit message cannot be longer 100 characters! This allows the message to be easier
 to read on github as well as in various git tools.
+
+Example commit message
+
+```
+git commit -m "docs: added documentation for explaining the commit message"
+```
 
 ### Type
 Must be one of the following:

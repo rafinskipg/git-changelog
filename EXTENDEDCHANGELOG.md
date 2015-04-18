@@ -1,5 +1,5 @@
 <a name="">Git changelog extended</a>
-#  (2014-11-23)
+#  (2015-04-18)
 
 
 ## Bug Fixes
