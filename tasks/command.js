@@ -2,10 +2,10 @@
 
 
 'use strict';
-var _ = require('lodash');
+
 var program = require('commander');
 var git_changelog = require('./git_changelog_generate');
-var options = _.cloneDeep(require('./defaults'));
+var options = {};
 
 if (process.argv.join('').indexOf('/grunt') === -1) {
 
@@ -24,7 +24,7 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
   console.log('Executing git changelog:');
   if (program.extended){
     console.log('  - Extended, getting log since the BigBang');
-    options.ignore_tags = true;
+    options.tag = false;
   }
 
   if (program.app_name){

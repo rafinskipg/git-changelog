@@ -4,6 +4,8 @@
  */
 
 var child = require('child_process');
+var defaults = require('./defaults');
+var _ = require('lodash');
 var fs = require('fs');
 var util = require('util');
 var q = require('q');
@@ -20,16 +22,26 @@ var PROVIDER, GIT_LOG_CMD, GIT_NOTAG_LOG_CMD,
 	EMPTY_COMPONENT = '$$';
 
 // I have to clean that mess
+
+function initOptions(params){
+  OPTS = _.defaults(params, defaults);
+  OPTS.msg = 'name: '+ OPTS.app_name +';';
+  OPTS.msg += 'file: '+ OPTS.file +';';
+  OPTS.msg += 'grep_commits: '+ OPTS.grep_commits +';';
+  OPTS.msg += 'debug: '+ OPTS.debug +';';
+  OPTS.msg += 'version: '+ OPTS.version +';';
+}
+
 var init = function(params){
   var deferred = q.defer();
 
-	OPTS = params;
-  OPTS.msg = '';
+  initOptions(params);
 
   getRepoUrl().then(function(url){
     OPTS.repo_url = url;
+    OPTS.msg += 'remote: '+ OPTS.repo_url+';';
  
-  	//G \ B \ ---
+    //G \ B \ ---
     PROVIDER = OPTS.repo_url.indexOf('github.com') !== -1 ? 'G' :'B';
 
     //Log commits
@@ -47,7 +59,6 @@ var init = function(params){
                     B: '[%s]('+OPTS.repo_url+'/commits/%s)'})
                     [PROVIDER];
 
-    OPTS.msg += 'found remote;';
     deferred.resolve(OPTS);
   })
   .catch(function(){
@@ -56,13 +67,6 @@ var init = function(params){
   });
 
   return deferred.promise;
-};
-
-
-
-
-var warn = function() {
-    console.log('WARNING:', util.format.apply(null, arguments));
 };
 
 
@@ -214,7 +218,7 @@ var writeChangelog = function(stream, commits) {
 
     organizeCommitsInSections(commits, sections)
 
-    stream.write(util.format(HEADER_TPL, OPTS.version, OPTS.appName || OPTS.app_name, OPTS.version, currentDate()));
+    stream.write(util.format(HEADER_TPL, OPTS.version, OPTS.app_name, OPTS.version, currentDate()));
     printSection(stream, 'Bug Fixes', sections.fix);
     printSection(stream, 'Features', sections.feat);
     printSection(stream, 'Refactor', sections.refactor, false);
@@ -305,7 +309,7 @@ var generate = function(params) {
 
       if(typeof(tag) !== 'undefined' && tag !== false && !OPTS.ignore_tags){
           log('Reading git log since', tag);
-          OPTS.msg += 'since tag:'+ tag +';';
+          OPTS.msg += 'since tag: '+ tag +';';
           fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
       }else{
           log('Reading git log since the beggining');
@@ -336,6 +340,13 @@ function log(){
     console.log.apply(console, arguments);
   }
 }
+
+var warn = function() {
+  if(OPTS.debug){
+    console.log('WARNING:', util.format.apply(null, arguments));
+  }
+};
+
 
 // publish for testing
 exports.parseRawCommit = parseRawCommit;

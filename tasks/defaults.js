@@ -9,8 +9,6 @@ module.exports = {
     grep_commits: '^fix|^feat|^docs|BREAKING',
     tag: null,
     debug: false,
-    //TODO : remove ignore tags
-    ignore_tags: false,
     sections: [
       {
         title: 'Bug Fixes',

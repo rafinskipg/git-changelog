@@ -113,10 +113,9 @@ describe('changelog.js', function() {
   describe('Params tests', function() {
     it('should read log since beggining if tag is false', function(done) {
 
-      var options = _.cloneDeep(defaults);
-
-      options.tag = false;
-      options.name = 'my name';
+      var options = {
+        tag : false
+      };
 
       ch.generate(options)
         .then(function(opts){
@@ -128,5 +127,41 @@ describe('changelog.js', function() {
           console.log('error', err);
         })
     });
+
+    it('should read log since specified tag if tag is present', function(done) {
+
+      var options = {
+        tag : 'v0.0.1'
+      };
+
+      ch.generate(options)
+        .then(function(opts){
+          expect(opts.msg).to.be.a('string');
+          expect(opts.msg.indexOf('tag: v0.0.1')).to.not.equal(-1);
+          done();
+        })
+        .catch(function(err){
+          console.log('error', err);
+        })
+    });
+
+    it('should add the application name', function(done) {
+
+      var options = {
+        app_name : 'my name'
+      };
+
+      ch.generate(options)
+        .then(function(opts){
+          expect(opts.msg).to.be.a('string');
+          expect(opts.msg.indexOf('name: my name')).to.not.equal(-1);
+          done();
+        })
+        .catch(function(err){
+          console.log('error', err);
+        })
+    });
+
+
   });
 });

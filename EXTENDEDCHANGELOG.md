@@ -1,4 +1,4 @@
-<a name="">Git changelog extended</a>
+<a name="">My app - Changelog</a>
 #  (2015-04-18)
 
 

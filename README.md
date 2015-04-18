@@ -60,9 +60,7 @@ grunt.initConfig({
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
 * **version**: The version of the project. Defaults to ` `,
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
-* **appName** (DEPRECATED: Use app_name) : The name of the project. Defaults to `My App - Changelog`
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
-* **ignore_tags** (DEPRECATED, use tag option): Ignore tags, read from the beggining of the history. Defaults to `false`
 * **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
 * **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beggining of the project
 * **debug**: Debug mode, false by default
