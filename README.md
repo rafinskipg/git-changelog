@@ -98,7 +98,11 @@ Use it directly with the common options
 
 ```
 
+For example:
 
+```
+git-changelog -t false -a "My nice application"
+```
 
 ## Git Commit Guidelines - Source : "Angular JS"
 
