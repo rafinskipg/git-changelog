@@ -38,16 +38,25 @@ grunt.initConfig({
   git_changelog: {
     minimal: {
       options: {
-        file: 'https://github.com/rafinskipg/git-changelog',
-        appName : 'Git changelog'
+        file: 'MyChangelog.md',
+        app_name : 'Git changelog'
       }
     },
     extended: {
       options: {
         repo_url: 'https://github.com/rafinskipg/git-changelog',
-        appName : 'Git changelog extended',
+        app_name : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
-        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
+        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING',
+        tag : false //False for commits since the beggining
+      }
+    },
+    fromCertainTag: {
+      options: {
+        repo_url: 'https://github.com/rafinskipg/git-changelog',
+        app_name : 'My project name',
+        file : 'tags/certainTag.md',
+        tag : 'v0.0.1'
       }
     }
   }

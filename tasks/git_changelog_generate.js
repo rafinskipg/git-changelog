@@ -307,7 +307,7 @@ var generate = function(params) {
   .then(function(tag) {
       var fn ;
 
-      if(typeof(tag) !== 'undefined' && tag !== false && !OPTS.ignore_tags){
+      if(typeof(tag) !== 'undefined' && tag !== false){
           log('Reading git log since', tag);
           OPTS.msg += 'since tag: '+ tag +';';
           fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
@@ -323,7 +323,10 @@ var generate = function(params) {
         log('Generating changelog to', OPTS.file || 'stdout', '(', OPTS.version, ')');
         writeChangelog(OPTS.file ? fs.createWriteStream(OPTS.file) : process.stdout, commits);
         deferred.resolve(OPTS);
-      });
+      })
+      .catch(function(err){
+        console.log('error', err);
+      })
       
   })
   .catch(function(err){
