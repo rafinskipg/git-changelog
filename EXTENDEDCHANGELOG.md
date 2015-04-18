@@ -52,6 +52,7 @@
 
 ## Documentation
 
+- added documentation for explaining the commit message
 - Added docs
 - **readme:** Final readme Fixes #1 Closes #1
 

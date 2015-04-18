@@ -48,7 +48,9 @@ var init = function(params){
 
     deferred.resolve(OPTS);
   })
-  .catch(deferred.reject);
+  .catch(function(){
+    deferred.reject("Sorry, you doesn't have configured any origin remote or passed a `repo_url` config value");
+  });
 
   return deferred.promise;
 };
@@ -274,8 +276,8 @@ var getRepoUrl = function() {
   }else{
     //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
     child.exec(GIT_REPO_URL_CMD, function(code, stdout, stderr) {
-      if (code){ 
-        deferred.resolve();
+      if (code){
+        deferred.reject();
       } else {
         stdout = stdout.replace('\n', '').replace('.git', '');
         deferred.resolve(stdout); 
@@ -313,7 +315,7 @@ var generate = function(params) {
       
   })
   .catch(function(err){
-    log('Error generating changelog ', err);
+    console.log('Error generating changelog ', err);
     deferred.reject(err);
   })
 

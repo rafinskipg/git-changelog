@@ -86,6 +86,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jshint', 'test']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('ch', ['jshint', 'git_changelog']);
+  grunt.registerTask('ch', [ 'git_changelog']);
 
 };
