@@ -307,7 +307,7 @@ var generate = function(params) {
   .then(function(tag) {
       var fn ;
 
-      if(typeof(tag) !== 'undefined' && tag !== false && !OPTS.ignore_tags){
+      if(typeof(tag) !== 'undefined' && tag !== false){
           log('Reading git log since', tag);
           OPTS.msg += 'since tag: '+ tag +';';
           fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
