@@ -49,11 +49,11 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
   }
 
   if (program.tag != undefined){
-    options.tag = program.tag;
-
-    if(program.tag === false){
+    if(program.tag === false || program.tag === "false"){
+      options.tag = false;
       console.log('  - No tag, getting log since the BigBang');
     }else{
+      options.tag = program.tag;
       console.log('  - Generating log since tag %s', program.tag);
     }
   }

@@ -1,6 +1,8 @@
 'use strict';
 var fs = require('fs'),
 expect = require('chai').expect;
+var defaults = require('../tasks/defaults');
+var _ = require('lodash');
 
 describe('changelog.js', function() {
   var ch = require('../tasks/git_changelog_generate');
@@ -104,6 +106,26 @@ describe('changelog.js', function() {
       ch.getRepoUrl()
         .then(function(url){
           done();
+        })
+    });
+  });
+
+  describe('Params tests', function() {
+    it('should read log since beggining if tag is false', function(done) {
+
+      var options = _.cloneDeep(defaults);
+
+      options.tag = false;
+      options.name = 'my name';
+
+      ch.generate(options)
+        .then(function(opts){
+          expect(opts.msg).to.be.a('string');
+          expect(opts.msg.indexOf('since beggining')).to.not.equal(-1);
+          done();
+        })
+        .catch(function(err){
+          console.log('error', err);
         })
     });
   });

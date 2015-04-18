@@ -24,6 +24,7 @@ var init = function(params){
   var deferred = q.defer();
 
 	OPTS = params;
+  OPTS.msg = '';
 
   getRepoUrl().then(function(url){
     OPTS.repo_url = url;
@@ -46,9 +47,11 @@ var init = function(params){
                     B: '[%s]('+OPTS.repo_url+'/commits/%s)'})
                     [PROVIDER];
 
+    OPTS.msg += 'found remote;';
     deferred.resolve(OPTS);
   })
   .catch(function(){
+    OPTS.msg += 'not remote;';
     deferred.reject("Sorry, you doesn't have configured any origin remote or passed a `repo_url` config value");
   });
 
@@ -254,6 +257,8 @@ var getPreviousTag = function() {
     var deferred = q.defer();
     if(OPTS.tag){
       deferred.resolve(OPTS.tag);
+    }else if(OPTS.tag === false){
+      deferred.resolve(false);
     }else{
       //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
       child.exec(GIT_TAG_CMD, function(code, stdout, stderr) {
@@ -298,19 +303,22 @@ var generate = function(params) {
   .then(function(tag) {
       var fn ;
 
-      if(typeof(tag) !== 'undefined' && !OPTS.ignore_tags){
+      if(typeof(tag) !== 'undefined' && tag !== false && !OPTS.ignore_tags){
           log('Reading git log since', tag);
+          OPTS.msg += 'since tag:'+ tag +';';
           fn = function(){ return readGitLog(GIT_LOG_CMD, tag);};
       }else{
           log('Reading git log since the beggining');
+          OPTS.msg += 'since beggining;';
           fn = function(){ return readGitLog(GIT_NOTAG_LOG_CMD);};
       }
 
       fn().then(function(commits) {
-          log('Parsed', commits.length, 'commits');
-          log('Generating changelog to', OPTS.file || 'stdout', '(', OPTS.version, ')');
-          writeChangelog(OPTS.file ? fs.createWriteStream(OPTS.file) : process.stdout, commits);
-          deferred.resolve();
+        OPTS.msg += 'parsed commits:'+ commits.length +';';
+        log('Parsed', commits.length, 'commits');
+        log('Generating changelog to', OPTS.file || 'stdout', '(', OPTS.version, ')');
+        writeChangelog(OPTS.file ? fs.createWriteStream(OPTS.file) : process.stdout, commits);
+        deferred.resolve(OPTS);
       });
       
   })

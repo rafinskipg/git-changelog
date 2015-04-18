@@ -28,7 +28,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "commander": "^2.5.0",
+    "commander": "^2.8.0",
     "lodash": "^2.4.1",
     "q": "~0.9.7"
   },
