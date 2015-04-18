@@ -10,7 +10,7 @@ var options = _.cloneDeep(require('./defaults'));
 if (process.argv.join('').indexOf('/grunt') === -1) {
 
   program
-    .version('0.1.5')
+    .version('0.1.6')
     .option('-e, --extended', 'Extended log')
     .option('-a, --app_name [app_name]', 'Name [app_name]')
     .option('-b, --branch [branch_name]', 'Branch name [branch_name]')
