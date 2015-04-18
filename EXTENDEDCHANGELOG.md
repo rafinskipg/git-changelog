@@ -1,4 +1,4 @@
-<a name="">My app - Changelog</a>
+<a name="">Git changelog extended</a>
 #  (2015-04-18)
 
 
@@ -37,6 +37,8 @@
 
 ## Refactor
 
+- Removed ignore tags and updated documentation
+- removed deprecated options
 - **delete:** deleted some files
 - **docs:**
   - Angular document commits

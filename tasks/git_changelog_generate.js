@@ -323,7 +323,10 @@ var generate = function(params) {
         log('Generating changelog to', OPTS.file || 'stdout', '(', OPTS.version, ')');
         writeChangelog(OPTS.file ? fs.createWriteStream(OPTS.file) : process.stdout, commits);
         deferred.resolve(OPTS);
-      });
+      })
+      .catch(function(err){
+        console.log('error', err);
+      })
       
   })
   .catch(function(err){
