@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 'use strict';
 
 var program = require('commander');
@@ -48,7 +47,7 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
     console.log('  - With URL %s', program.url);
   }
 
-  if (program.tag != undefined){
+  if (program.tag !== undefined){
     if(program.tag === false || program.tag === "false"){
       options.tag = false;
       console.log('  - No tag, getting log since the BigBang');
@@ -66,6 +65,7 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
   console.log('  - The output file is %s', options.file);
 
   git_changelog.generate(options).then(function(){
-    console.log('Finished generating log Yai!')
+    console.log('Finished generating log Yai!');
   });
+
 }
