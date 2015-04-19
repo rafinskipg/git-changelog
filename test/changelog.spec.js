@@ -125,7 +125,8 @@ describe('changelog.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-        })
+          done(err);
+        });
     });
 
     it('should read log since specified tag if tag is present', function(done) {
@@ -142,7 +143,8 @@ describe('changelog.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-        })
+          done(err);
+        });
     });
 
     it('should add the application name', function(done) {
@@ -159,7 +161,8 @@ describe('changelog.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-        })
+          done(err);
+        });
     });
 
 
