@@ -7,12 +7,16 @@ var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
-chai.use(sinonChai);
+var chaiAsPromised = require("chai-as-promised");
 
 var defaults = require('../tasks/defaults');
 var _ = require('lodash');
 
 var changelog = require('../tasks/git_changelog_generate');
+var Q = require('q');
+
+chai.use(sinonChai);
+chai.use(chaiAsPromised);
 
 describe('git_changelog_generate.js', function() {
 
@@ -130,7 +134,7 @@ describe('git_changelog_generate.js', function() {
       });
 
       it('should set provider/links to GitHub', function() {
-        var repo_url = 'https://www.github.com/owner/repo';
+        var repo_url = 'https://github.com/owner/repo';
         changelog.options.repo_url = repo_url;
         changelog.getProviderLinks();
 
@@ -176,7 +180,32 @@ describe('git_changelog_generate.js', function() {
 
     });
 
-    xdescribe('.init()', function () {
+    describe('.init()', function () {
+
+      after(function() {
+        changelog.getRepoUrl.restore();
+      });
+
+      it('should succeed with options when repo specified or remote found', function() {
+        var options = {
+          app_name: 'app',
+          repo_url: 'https://github.com/owner/repo'
+        };
+        return expect(changelog.init(options))
+          .to.eventually.be.fulfilled;
+      });
+
+      it('should fail when no repo specified and no remote found', function() {
+        var options = {
+          app_name: 'app'
+        };
+
+        // simulate no remote returned by .getRepoUrl()
+        sinon.stub(changelog, 'getRepoUrl').returns(Q.reject());
+
+        return expect(changelog.init(options))
+          .to.eventually.be.rejected;
+      });
 
     });
 
@@ -258,7 +287,7 @@ describe('git_changelog_generate.js', function() {
     describe('.linkToIssue()', function() {
 
       it('should issue links based on "repo_url" and "issue" number', function() {
-        var repo_url = 'https://www.github.com/owner/repo';
+        var repo_url = 'https://github.com/owner/repo';
         var issue;
         var link;
 
@@ -278,7 +307,7 @@ describe('git_changelog_generate.js', function() {
     describe('.linkToCommit()', function() {
 
       it('should issue links based on "repo_url" and "issue" number', function() {
-        var repo_url = 'https://www.github.com/owner/repo';
+        var repo_url = 'https://github.com/owner/repo';
         var index;
         var hash;
         var link;
@@ -343,7 +372,7 @@ describe('git_changelog_generate.js', function() {
 
       before(function(done) {
         changelog.init({ app_name: 'test' }).then(function() {
-          this.stub = sinon.stub(child, 'exec', function(cmd, opts, cb) {
+          this.exec = sinon.stub(child, 'exec', function(cmd, opts, cb) {
             var commits = fs.readFileSync('./test/fixtures/list.txt', { encoding: 'utf-8' });
             cb(null, commits, null);
           });
@@ -352,16 +381,18 @@ describe('git_changelog_generate.js', function() {
       });
 
       after(function () {
-        this.stub.restore();
+        this.exec.restore();
       });
 
-      it('should read log and parse commits', function(done) {
-        changelog.readGitLog(changelog.cmd.gitLog, 'tag').then(function(commits) {
-          expect(this.stub).to.have.been.calledOnce;
-          expect(commits).to.be.an('array');
-          expect(commits).to.have.length(6);
-          done();
-        }.bind(this));
+      it('should read log and parse commits', function() {
+        return expect(changelog.readGitLog(changelog.cmd.gitLog, 'tag'))
+          .to.eventually.be.fulfilled
+          .then(function(commits) {
+            expect(this.exec).to.have.been.calledOnce;
+            expect(this.exec).to.have.been.calledWithMatch(/^git log/);
+            expect(commits).to.be.an('array');
+            expect(commits).to.have.length(6);
+          }.bind(this));
       });
 
     });
@@ -559,7 +590,7 @@ describe('git_changelog_generate.js', function() {
             chore: {},
             docs: {}
           };
-          var repo_url = 'https://www.github.com/owner/repo';
+          var repo_url = 'https://github.com/owner/repo';
           changelog.options.repo_url = repo_url;
           changelog.getProviderLinks();
 
@@ -607,8 +638,155 @@ describe('git_changelog_generate.js', function() {
 
     });
 
-  });
+    describe('.getPreviousTag()', function() {
 
+      before(function() {
+        changelog.setDefaults();
+      });
+
+      afterEach(function() {
+        if (child.exec.restore) {
+          child.exec.restore();
+        }
+      });
+
+      it('should succeed when tag option is specified', function() {
+        changelog.options.tag = 'tag';
+        return expect(changelog.getPreviousTag())
+          .to.eventually.become('tag');
+      });
+
+      it('should succeed when tag option is false', function() {
+        changelog.options.tag = false;
+        return expect(changelog.getPreviousTag())
+          .to.eventually.become(false);
+      });
+
+      it('should call "git describe --tags" when no tag options', function() {
+        changelog.options.tag = null;
+
+        // simulate return tag
+        sinon.stub(child, 'exec', function(cmd, callback) {
+          callback(null, 'tag');
+        });
+        return expect(changelog.getPreviousTag())
+          .to.eventually.become('tag');
+      });
+
+      it('should fail when "git describe" returns a code', function() {
+        changelog.options.tag = null;
+
+        // simulate failure
+        sinon.stub(child, 'exec', function(cmd, callback) {
+          callback(-1);
+        });
+        return expect(changelog.getPreviousTag())
+          .to.eventually.be.rejected;
+      });
+
+    });
+
+    describe('.getRepoUrl()', function() {
+
+      before(function() {
+        changelog.setDefaults();
+        this.repo = 'https://github.com/owner/repo';
+      });
+
+      afterEach(function() {
+        if (child.exec.restore) {
+          child.exec.restore();
+        }
+      });
+
+      it('should succeed when repo_url option is specified', function() {
+        changelog.options.repo_url = this.repo;
+        return expect(changelog.getRepoUrl())
+          .to.eventually.become(this.repo);
+      });
+
+      it('should call "git describe --tags" when no tag options', function() {
+        changelog.options.repo_url = null;
+
+        // simulate return tag
+        sinon.stub(child, 'exec', function(cmd, callback) {
+          callback(null, this.repo);
+        }.bind(this));
+        return expect(changelog.getRepoUrl())
+          .to.eventually.become(this.repo);
+      });
+
+      it('should fail when "git describe" returns a code', function() {
+        changelog.options.repo_url = null;
+
+        // simulate failure
+        sinon.stub(child, 'exec', function(cmd, callback) {
+          callback(-1);
+        });
+        return expect(changelog.getRepoUrl())
+          .to.eventually.be.rejected;
+      });
+
+    });
+
+    xdescribe('.generate()', function () {
+
+    });
+
+    describe('.log()', function() {
+
+      beforeEach(function() {
+        sinon.stub(console, 'log');
+      });
+
+      it('should call console.log() when debug option is true', function () {
+        changelog.options.debug = true;
+
+        changelog.log('test');
+        expect(console.log).to.have.been.calledOnce;
+        expect(console.log).to.have.been.calledWith('test');
+        console.log.restore();
+      })
+
+      it('should call console.log() when debug option is true', function () {
+        changelog.options.debug = false;
+
+        changelog.log('test');
+        expect(console.log).to.not.have.been.called;
+        console.log.restore();
+      })
+
+    });
+
+    describe('.warn()', function() {
+
+      beforeEach(function() {
+        sinon.stub(changelog, 'log');
+      });
+
+      afterEach(function() {
+        changelog.log.restore();
+      })
+
+      it('should always call .log(), when debug is true', function () {
+        changelog.options.debug = true;
+
+        changelog.warn('test');
+        expect(changelog.log).to.have.been.calledOnce;
+        expect(changelog.log).to.have.been.calledWith('WARNING:','test');
+      });
+
+      it('should always call .log(), when debug is false', function () {
+        changelog.options.debug = false;
+
+        changelog.warn('test');
+        expect(changelog.log).to.have.been.calledOnce;
+        expect(changelog.log).to.have.been.calledWith('WARNING:','test');
+      });
+
+    });
+
+  });
 
   describe('File creation', function(){
     it('should create A CHANGELOG.md', function(){
@@ -624,15 +802,6 @@ describe('git_changelog_generate.js', function() {
     it('should create A EXTENDEDCHANGELOG.md', function(){
       var  exists_file = fs.existsSync('EXTENDEDCHANGELOG.md');
       expect(exists_file).to.equal(true);
-    });
-  });
-
-  describe('Get git settings', function(){
-    it('Should pick correct repo url', function(done){
-      changelog.getRepoUrl()
-        .then(function(url){
-          done();
-        });
     });
   });
 
