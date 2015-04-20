@@ -3,7 +3,7 @@
 var fs = require('fs');
 var child = require('child_process');
 
-var chai = require('chai')
+var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
@@ -11,8 +11,6 @@ chai.use(sinonChai);
 
 var defaults = require('../tasks/defaults');
 var _ = require('lodash');
-
-
 
 var changelog = require('../tasks/git_changelog_generate');
 
@@ -71,10 +69,10 @@ describe('git_changelog_generate.js', function() {
 
       beforeEach(function() {
         changelog.setDefaults();
-      })
+      });
 
       it('should append ";", when single arg', function() {
-        changelog.message('test')
+        changelog.message('test');
         expect(changelog.options.msg).to.contain('test;');
       });
 
@@ -129,7 +127,7 @@ describe('git_changelog_generate.js', function() {
 
       beforeEach(function() {
         changelog.setDefaults();
-      })
+      });
 
       it('should set provider/links to GitHub', function() {
         var repo_url = 'https://www.github.com/owner/repo';
@@ -195,7 +193,7 @@ describe('git_changelog_generate.js', function() {
         expect(msg.hash).to.equal('9b1aff905b638aa274a5fc8f88662df446d374bd');
         expect(msg.subject).to.equal('broadcast $destroy event on scope destruction');
         expect(msg.body).to.equal('perf testing shows that in chrome this change adds 5-15% overhead\n' +
-            'when destroying 10k nested scopes where each scope has a $destroy listener\n')
+            'when destroying 10k nested scopes where each scope has a $destroy listener\n');
         expect(msg.component).to.equal('scope');
       });
 
@@ -292,7 +290,7 @@ describe('git_changelog_generate.js', function() {
           hash = this.randomHash();
           link = changelog.linkToCommit(hash);
           expect(link).to.contain(repo_url);
-          expect(link).to.contain('[' + hash.substr(0, 8) + ']')
+          expect(link).to.contain('[' + hash.substr(0, 8) + ']');
           expect(link).to.contain(hash.toString());
         }
       });
@@ -329,7 +327,7 @@ describe('git_changelog_generate.js', function() {
 
       afterEach(function() {
         this.stream = null;
-      })
+      });
 
       it('should call stream.write() twice', function() {
         expect(this.stream.write).to.have.been.calledTwice;
@@ -506,7 +504,7 @@ describe('git_changelog_generate.js', function() {
             docs: {}
           };
           this.commits = require('./fixtures/commits.js').withoutBreaking;
-          this.sections = changelog.organizeCommits(this.commits, this.sections)
+          this.sections = changelog.organizeCommits(this.commits, this.sections);
         });
 
         it('should return 8 sections', function() {
@@ -566,7 +564,7 @@ describe('git_changelog_generate.js', function() {
           changelog.getProviderLinks();
 
           this.commits = require('./fixtures/commits.js').withBreaking;
-          this.sections = changelog.organizeCommits(this.commits, this.sections)
+          this.sections = changelog.organizeCommits(this.commits, this.sections);
         });
 
         it('should return 8 sections', function() {
@@ -634,7 +632,7 @@ describe('git_changelog_generate.js', function() {
       changelog.getRepoUrl()
         .then(function(url){
           done();
-        })
+        });
     });
   });
 
