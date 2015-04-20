@@ -7,6 +7,7 @@ var fs = require('fs');
 var child = require('child_process');
 var format = require('util').format;
 
+var debug = require('debug')('changelog');
 var _ = require('lodash');
 var q = require('q');
 
@@ -14,23 +15,31 @@ var defaults = require('./defaults');
 
 //ALLOWED_COMMITS = '^fix|^feat|^docs|BREAKING',
 //git-describe - Show the most recent tag that is reachable from a commit
-var GIT_TAG_CMD  = 'git describe --tags --abbrev=0';
-var HEADER_TPL = '<a name="%s">%s</a>\n# %s (%s)\n\n';
-var GIT_REPO_URL_CMD = 'git config --get remote.origin.url';
-var EMPTY_COMPONENT = '$$';
-var GIT_LOG_CMD;
-var GIT_NOTAG_LOG_CMD;
-var LINK_ISSUE;
-var LINK_COMMIT;
 
 // I have to clean that mess
 
 var Changelog = function Changelog() {
+  debug('initializing constructor');
+  this.setDefaults();
+};
+
+Changelog.prototype.setDefaults = function setDefaults() {
+  debug('setting defaults');
   this.options = {};
-  this.options.msg = '';
+  this.cmd = {
+    gitTag: 'git describe --tags --abbrev=0',
+    gitRepoUrl: 'git config --get remote.origin.url',
+    gitLog: null,
+    gitLogNoTag: null
+  };
+  this.header = '<a name="%s">%s</a>\n# %s (%s)\n\n';
+  this.emptyComponent = '$$';
+  this.links = null;
+  this.provider = null;
 };
 
 Changelog.prototype.message = function message() {
+  debug('adding message');
   Array.prototype.slice.call(arguments).forEach(function(value, index) {
     this.options.msg += (index ? ': ' : '') + value;
   }, this);
@@ -39,16 +48,47 @@ Changelog.prototype.message = function message() {
 };
 
 Changelog.prototype.initOptions = function initOptions(params) {
+  debug('initializing options');
+  this.setDefaults();
+
   this.options = _.defaults(params, defaults);
+  this.options.msg = '';
 
   this.message('name', this.options.app_name);
   this.message('file', this.options.file);
   this.message('grep_commits', this.options.grep_commits);
   this.message('debug', this.options.debug);
   this.message('version', this.options.version);
+
+};
+
+Changelog.prototype.getProviderLinks = function getProviderLinks() {
+  debug('getting provider links');
+  // This is just in case they differ their urls at some point in the future.
+  // Also brings the posibility of adding more providers
+  var providerLinks = {
+    github: {
+      issue: '[#%s](' + this.options.repo_url + '/issues/%s)',
+      commit: '[%s](' + this.options.repo_url + '/commit/%s)'
+    },
+    bitbucket: {
+      issue: '[#%s](' + this.options.repo_url + '/issues/%s)',
+      commit: '[%s](' + this.options.repo_url + '/commits/%s)'
+    }
+  };
+
+  this.provider = this.options.repo_url.indexOf('github.com') !== -1 ? 'github' :'bitbucket';
+  this.links = providerLinks[this.provider];
+};
+
+Changelog.prototype.getGitLogCommands = function getGitLogCommands() {
+  debug('getting log commands');
+  this.cmd.gitLog = 'git log ' + this.options.branch_name + ' --grep="%s" -E --format=%s %s..HEAD';
+  this.cmd.gitLogNoTag = 'git log ' + this.options.branch_name + ' --grep="%s" -E --format=%s';
 };
 
 Changelog.prototype.init = function init(params) {
+  debug('initializing ...');
   var self = this;
   var deferred = q.defer();
 
@@ -60,27 +100,12 @@ Changelog.prototype.init = function init(params) {
     self.options.repo_url = url;
     self.message('remote', self.options.repo_url);
 
-    //G \ B \ ---
-    provider = self.options.repo_url.indexOf('github.com') !== -1 ? 'G' :'B';
-
-    //Log commits
-    GIT_LOG_CMD = 'git log ' + self.options.branch_name + ' --grep="%s" -E --format=%s %s..HEAD';
-    GIT_NOTAG_LOG_CMD = 'git log ' + self.options.branch_name + ' --grep="%s" -E --format=%s';
-
-    //This is just in case they differ their urls at some point in the future. Also brings the posibility of adding more providers
-    LINK_ISSUE = ({
-                    G: '[#%s]('+self.options.repo_url+'/issues/%s)',
-                    B : '[#%s]('+self.options.repo_url+'/issues/%s)'})
-                    [provider];
-
-    LINK_COMMIT = ({
-                    G: '[%s]('+self.options.repo_url+'/commit/%s)',
-                    B: '[%s]('+self.options.repo_url+'/commits/%s)'})
-                    [provider];
+    self.getProviderLinks();
+    self.getGitLogCommands();
 
     deferred.resolve(self.options);
   })
-  .catch(function() {
+  .catch(function(err) {
     self.message('not remote');
     deferred.reject("Sorry, you doesn't have configured any origin remote or passed a `repo_url` config value");
   });
@@ -89,6 +114,7 @@ Changelog.prototype.init = function init(params) {
 };
 
 Changelog.prototype.parseRawCommit = function parseRawCommit(raw) {
+  debug('parsing raw commit');
   if (!raw) {
     return null;
   }
@@ -137,14 +163,17 @@ Changelog.prototype.parseRawCommit = function parseRawCommit(raw) {
 };
 
 Changelog.prototype.linkToIssue = function linkToIssue(issue) {
-  return format(LINK_ISSUE, issue, issue);
+  debug('generating link to issue');
+  return format(this.links.issue, issue, issue);
 };
 
 Changelog.prototype.linkToCommit = function linkToCommit(hash) {
-  return format(LINK_COMMIT, hash.substr(0, 8), hash);
+  debug('geenrating link to commit');
+  return format(this.links.commit, hash.substr(0, 8), hash);
 };
 
 Changelog.prototype.currentDate = function currentDate() {
+  debug('getting current date');
   var now = new Date();
   var pad = function(i) {
     return ('0' + i).substr(-2);
@@ -154,6 +183,7 @@ Changelog.prototype.currentDate = function currentDate() {
 };
 
 Changelog.prototype.printSection = function printSection(stream, title, section, printCommitLinks) {
+  debug('printing section ...');
   printCommitLinks = printCommitLinks === undefined ? true : printCommitLinks;
   var components = Object.keys(section).sort();
 
@@ -167,7 +197,7 @@ Changelog.prototype.printSection = function printSection(stream, title, section,
     var prefix = '-';
     var nested = section[name].length > 1;
 
-    if (name !== EMPTY_COMPONENT) {
+    if (name !== this.emptyComponent) {
       if (nested) {
         stream.write(format('- **%s:**\n', name));
         prefix = '  -';
@@ -181,7 +211,7 @@ Changelog.prototype.printSection = function printSection(stream, title, section,
         stream.write(format('%s %s\n  (%s', prefix, commit.subject, this.linkToCommit(commit.hash)));
 
         if (commit.closes.length) {
-          stream.write(',\n   ' + commit.closes.map(this.linkToIssue).join(', '));
+          stream.write(',\n   ' + commit.closes.map(this.linkToIssue, this).join(', '));
         }
         stream.write(')\n');
       } else {
@@ -194,21 +224,24 @@ Changelog.prototype.printSection = function printSection(stream, title, section,
 };
 
 Changelog.prototype.printSalute = function printSalute(stream) {
+  debug('printing salute');
   stream.write('\n\n---\n');
   stream.write('<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problem or suggestion, create an issue.* :) **Thanks** </sub></sup>');
 };
 
-Changelog.prototype.readGitLog = function prototype( git_log_command, from) {
+Changelog.prototype.readGitLog = function readGitLog(git_log_command, from) {
+  debug('reading git log ...');
   var self = this;
   var deferred = q.defer();
 
-  git_log_command  =  git_log_command === GIT_LOG_CMD ? format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==', from) : format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==');
+  git_log_command  =  git_log_command === this.cmd.gitLog ? format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==', from) : format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==');
 
   this.log('Executing : ', git_log_command);
 
+  debug('executing git log command');
   child.exec(git_log_command , {timeout: 1000}, function(code, stdout, stderr) {
+    debug('returning from git log command');
     var commits = [];
-
     stdout.split('\n==END==\n').forEach(function(rawCommit) {
       var commit = self.parseRawCommit(rawCommit);
       if (commit) {
@@ -223,6 +256,7 @@ Changelog.prototype.readGitLog = function prototype( git_log_command, from) {
 };
 
 Changelog.prototype.writeChangelog = function writeChangelog(stream, commits) {
+  debug('writing change log');
   var sections = {
     fix: {},
     feat: {},
@@ -234,11 +268,11 @@ Changelog.prototype.writeChangelog = function writeChangelog(stream, commits) {
     docs: {}
   };
 
-  sections.breaks[EMPTY_COMPONENT] = [];
+  sections.breaks[this.emptyComponent] = [];
 
-  this.organizeCommitsInSections(commits, sections);
+  this.organizeCommits(commits, sections);
 
-  stream.write(format(HEADER_TPL, this.options.version, this.options.app_name, this.options.version, this.currentDate()));
+  stream.write(format(this.header, this.options.version, this.options.app_name, this.options.version, this.currentDate()));
   this.printSection(stream, 'Bug Fixes', sections.fix);
   this.printSection(stream, 'Features', sections.feat);
   this.printSection(stream, 'Refactor', sections.refactor, false);
@@ -246,17 +280,18 @@ Changelog.prototype.writeChangelog = function writeChangelog(stream, commits) {
   this.printSection(stream, 'Test', sections.test, false);
   this.printSection(stream, 'Chore', sections.chore, false);
   this.printSection(stream, 'Documentation', sections.docs, false);
-  if (sections.breaks[EMPTY_COMPONENT].length > 0 ) {
+  if (sections.breaks[this.emptyComponent].length > 0 ) {
     this.printSection(stream, 'Breaking Changes', sections.breaks, false);
   }
 
   this.printSalute(stream);
 };
 
-Changelog.prototype.organizeCommitsInSections = function organizeCommitsInSections(commits, sections) {
+Changelog.prototype.organizeCommits = function organizeCommits(commits, sections) {
+  debug('organizaing commits');
   commits.forEach(function(commit) {
     var section = sections[commit.type];
-    var component = commit.component || EMPTY_COMPONENT;
+    var component = commit.component || this.emptyComponent;
 
     if (section) {
       section[component] = section[component] || [];
@@ -277,6 +312,7 @@ Changelog.prototype.organizeCommitsInSections = function organizeCommitsInSectio
 };
 
 Changelog.prototype.getPreviousTag = function getPreviousTag() {
+  debug('getting previous tag');
   var deferred = q.defer();
 
   if (this.options.tag) {
@@ -285,9 +321,11 @@ Changelog.prototype.getPreviousTag = function getPreviousTag() {
     deferred.resolve(false);
   } else {
     //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
-    child.exec(GIT_TAG_CMD, function(code, stdout, stderr) {
-      if (code ) {
-        deferred.resolve();
+    debug('calling git tag command');
+    child.exec(this.cmd.gitTag, function(code, stdout, stderr) {
+      debug('returning from git tag');
+      if (code) {
+        deferred.reject();
       } else {
         deferred.resolve(stdout.replace('\n', ''));
       }
@@ -298,13 +336,16 @@ Changelog.prototype.getPreviousTag = function getPreviousTag() {
 };
 
 Changelog.prototype.getRepoUrl = function getRepoUrl() {
+  debug('getting repo url');
   var deferred = q.defer();
 
   if (this.options.repo_url) {
     deferred.resolve(this.options.repo_url);
   } else {
     //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
-    child.exec(GIT_REPO_URL_CMD, function(code, stdout, stderr) {
+    debug('calling git repo url command');
+    child.exec(this.cmd.gitRepoUrl, function(code, stdout, stderr) {
+      debug('returning git repo url command');
       if (code) {
         deferred.reject();
       } else {
@@ -318,32 +359,26 @@ Changelog.prototype.getRepoUrl = function getRepoUrl() {
 };
 
 Changelog.prototype.generate = function generate(params) {
+  debug('generating ...');
   var self = this;
   var deferred = q.defer();
 
   this.init(params).then(function() {
     return self.getPreviousTag();
   }).then(function(tag) {
-    var fn;
+    var readGitLog;
 
     if (typeof(tag) !== 'undefined' && tag !== false) {
       self.log('Reading git log since', tag);
       self.message('since tag', tag);
-
-      fn = function() {
-        return self.readGitLog(GIT_LOG_CMD, tag);
-      }
-
-    }else{
+      readGitLog = self.readGitLog.bind(self, self.cmd.gitLog, tag);
+    } else {
       self.log('Reading git log since the beggining');
       self.message('since beggining');
-
-      fn = function() {
-        return self.readGitLog(GIT_NOTAG_LOG_CMD);
-      }
+      readGitLog = self.readGitLog.bind(self, self.cmd.gitLogNoTag);
     }
 
-    fn().then(function(commits) {
+    readGitLog().then(function(commits) {
       self.message('parsed commits', commits.length);
       self.log('Parsed', commits.length, 'commits');
       self.log('Generating changelog to', self.options.file || 'stdout', '(', self.options.version, ')');
@@ -364,7 +399,7 @@ Changelog.prototype.generate = function generate(params) {
 
 Changelog.prototype.log = function log() {
   if (this.options.debug) {
-    console.log.apply(console, arguments);
+    console.log.apply(null, arguments);
   }
 };
 
@@ -372,4 +407,6 @@ Changelog.prototype.warn = function warn() {
   this.log('WARNING:', format.apply(null, arguments));
 };
 
-module.exports = new Changelog();
+var changelog = new Changelog();
+
+module.exports = changelog;
