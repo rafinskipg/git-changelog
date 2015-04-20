@@ -36,10 +36,6 @@ describe('git_changelog_generate.js', function() {
 
   describe('Changelog()', function() {
 
-    afterEach(function() {
-      changelog.setDefaults();
-    })
-
     it('should return an object', function() {
       expect(changelog).to.be.an('object');
     });
@@ -68,6 +64,10 @@ describe('git_changelog_generate.js', function() {
     });
 
     describe('.message()', function() {
+
+      beforeEach(function() {
+        changelog.setDefaults();
+      })
 
       it('should append ";", when single arg', function() {
         changelog.message('test')
@@ -123,6 +123,10 @@ describe('git_changelog_generate.js', function() {
 
     describe('.getProviderLinks()', function() {
 
+      beforeEach(function() {
+        changelog.setDefaults();
+      })
+
       it('should set provider/links to GitHub', function() {
         var repo_url = 'https://www.github.com/owner/repo';
         changelog.options.repo_url = repo_url;
@@ -154,6 +158,10 @@ describe('git_changelog_generate.js', function() {
     });
 
     describe('.getGitLogCommands()', function () {
+
+      beforeEach(function() {
+        changelog.setDefaults();
+      });
 
       it('should generate "git log" commands for "branch_name"', function() {
         var branch_name = 'master';
@@ -346,10 +354,10 @@ describe('git_changelog_generate.js', function() {
       });
 
       it('should read log and parse commits', function(done) {
-        changelog.readGitLog(changelog.cmd.gitLog, 'tag').then(function(results) {
+        changelog.readGitLog(changelog.cmd.gitLog, 'tag').then(function(commits) {
           expect(this.stub).to.have.been.calledOnce;
-          expect(results).to.be.an('array');
-          expect(results).to.have.length(6);
+          expect(commits).to.be.an('array');
+          expect(commits).to.have.length(6);
           done();
         }.bind(this));
       });
@@ -357,6 +365,243 @@ describe('git_changelog_generate.js', function() {
     });
 
     describe('.writeChangelog()', function() {
+
+      describe('without breaking commits', function() {
+
+        before(function() {
+          this.stream = {
+            write: sinon.stub()
+          };
+          this.commits = require('./fixtures/commits.js').withoutBreaking;
+
+          sinon.stub(changelog, 'organizeCommits');
+          sinon.stub(changelog, 'printSalute');
+          sinon.stub(changelog, 'printSection');
+
+          changelog.initOptions({ app_name: 'app', version: 'version' });
+          changelog.writeChangelog(this.stream, this.commits);
+        });
+
+        after(function() {
+          changelog.organizeCommits.restore();
+          changelog.printSection.restore();
+          changelog.printSalute.restore();
+        });
+
+        it('should organize commits', function() {
+          expect(changelog.organizeCommits).to.have.been.calledOnce;
+          expect(changelog.organizeCommits).to.have.been.calledWith(this.commits);
+        });
+
+        it('should write the header to the stream', function() {
+          expect(this.stream.write).to.have.been.calledOnce;
+          expect(this.stream.write).to.have.been.calledWithMatch(/^<a name=/);
+        });
+
+        it('should print 7 sections', function() {
+          var sections = [
+            'Bug Fixes',
+            'Features',
+            'Refactor',
+            'Style',
+            'Test',
+            'Chore',
+            'Documentation'
+          ];
+
+          expect(changelog.printSection.callCount).to.equal(7);
+          sections.forEach(function(section, index) {
+            var call = changelog.printSection.getCall(index);
+            expect(call.args).to.include(section);
+          });
+        });
+
+        it('should print salute', function() {
+          expect(changelog.printSalute).to.have.been.calledOnce;
+          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
+        });
+
+      });
+
+      describe('with breaking commits', function() {
+
+        before(function() {
+          this.stream = {
+            write: sinon.stub()
+          };
+          this.commits = require('./fixtures/commits.js').withBreaking;
+
+          sinon.stub(changelog, 'organizeCommits', function(commits, sections) {
+            sections.breaks[changelog.emptyComponent] = [ 'breaking commit'];
+          });
+          sinon.stub(changelog, 'printSalute');
+          sinon.stub(changelog, 'printSection');
+
+          changelog.initOptions({ app_name: 'app', version: 'version' });
+          changelog.writeChangelog(this.stream, this.commits);
+        });
+
+        after(function() {
+          changelog.organizeCommits.restore();
+          changelog.printSection.restore();
+          changelog.printSalute.restore();
+        });
+
+        it('should organize commits', function() {
+          expect(changelog.organizeCommits).to.have.been.calledOnce;
+          expect(changelog.organizeCommits).to.have.been.calledWith(this.commits);
+        });
+
+        it('should write the header to the stream', function() {
+          expect(this.stream.write).to.have.been.calledOnce;
+          expect(this.stream.write).to.have.been.calledWithMatch(/^<a name=/);
+        });
+
+        it('should print 8 sections', function() {
+          var sections = [
+            'Bug Fixes',
+            'Features',
+            'Refactor',
+            'Style',
+            'Test',
+            'Chore',
+            'Documentation',
+            'Breaking Changes'
+          ];
+
+          expect(changelog.printSection.callCount).to.equal(8);
+          sections.forEach(function(section, index) {
+            var call = changelog.printSection.getCall(index);
+            expect(call.args).to.include(section);
+          });
+        });
+
+        it('should print salute', function() {
+          expect(changelog.printSalute).to.have.been.calledOnce;
+          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
+        });
+
+      });
+
+    });
+
+    describe('.organizeCommits()', function() {
+
+      describe('without breaking commits', function () {
+
+        before(function() {
+          changelog.setDefaults();
+          this.sections = {
+            fix: {},
+            feat: {},
+            breaks: {},
+            style: {},
+            refactor: {},
+            test: {},
+            chore: {},
+            docs: {}
+          };
+          this.commits = require('./fixtures/commits.js').withoutBreaking;
+          this.sections = changelog.organizeCommits(this.commits, this.sections)
+        });
+
+        it('should return 8 sections', function() {
+          expect(Object.keys(this.sections).length).to.equal(8);
+        });
+
+        it('should fix section to have 1 commit', function() {
+          expect(this.sections.fix.$scope.length).to.equal(1);
+        });
+
+        it('should feat section to have 1 commit', function() {
+          expect(this.sections.feat.$scope.length).to.equal(1);
+        });
+
+        it('should breaks section to be empty', function() {
+          expect(this.sections.breaks).to.deep.equal({});
+        });
+
+        it('should style section to be empty', function() {
+          expect(this.sections.style).to.deep.equal({});
+        });
+
+        it('should refactor section be empty', function() {
+          expect(this.sections.refactor).to.deep.equal({});
+        });
+
+        it('should test section to be empty', function() {
+          expect(this.sections.test).to.deep.equal({});
+        });
+
+        it('should chore section to have 1 commit', function() {
+          expect(this.sections.chore.$scope.length).to.equal(3);
+        });
+
+        it('should docs section to be empty', function() {
+          expect(this.sections.docs).to.deep.equal({});
+        });
+
+      });
+
+      describe('with breaking commits', function () {
+
+        before(function() {
+          changelog.setDefaults();
+          this.sections = {
+            fix: {},
+            feat: {},
+            breaks: {},
+            style: {},
+            refactor: {},
+            test: {},
+            chore: {},
+            docs: {}
+          };
+          var repo_url = 'https://www.github.com/owner/repo';
+          changelog.options.repo_url = repo_url;
+          changelog.getProviderLinks();
+
+          this.commits = require('./fixtures/commits.js').withBreaking;
+          this.sections = changelog.organizeCommits(this.commits, this.sections)
+        });
+
+        it('should return 8 sections', function() {
+          expect(Object.keys(this.sections).length).to.equal(8);
+        });
+
+        it('should fix section to have 1 commit', function() {
+          expect(this.sections.fix.$scope.length).to.equal(1);
+        });
+
+        it('should feat section to have 1 commit', function() {
+          expect(this.sections.feat.$scope.length).to.equal(1);
+        });
+
+        it('should breaks section to be empty', function() {
+          expect(this.sections.breaks.$scope.length).to.equal(1);
+        });
+
+        it('should style section to be empty', function() {
+          expect(this.sections.style).to.deep.equal({});
+        });
+
+        it('should refactor section be empty', function() {
+          expect(this.sections.refactor).to.deep.equal({});
+        });
+
+        it('should test section to be empty', function() {
+          expect(this.sections.test).to.deep.equal({});
+        });
+
+        it('should chore section to have 1 commit', function() {
+          expect(this.sections.chore.$scope.length).to.equal(3);
+        });
+
+        it('should docs section to be empty', function() {
+          expect(this.sections.docs).to.deep.equal({});
+        });
+
+      });
 
     });
 
