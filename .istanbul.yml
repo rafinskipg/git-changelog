@@ -1,0 +1,11 @@
+reporting:
+  print: summary
+  reports:
+      - lcov
+      - html
+  dir: ./coverage
+  report-config:
+    dir: './coverage'
+    lcovonly: {file: lcov.info}
+    text: {file: null, maxCols: 0}
+    text-summary: {file: null}
