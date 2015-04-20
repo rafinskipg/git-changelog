@@ -22,5 +22,5 @@ before_script:
   - grunt jshint pre-test
 
 after_script:
-  - istanbul cover node_modules/.bin/_mocha
+  - istanbul cover node_modules/.bin/_mocha -- -R dot
   - codeclimate < ./coverage/lcov.info
