@@ -6,6 +6,7 @@ var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
+var q = require('q');
 var grunt = require('grunt');
 var changelog = require('../tasks/git_changelog_generate');
 
@@ -13,7 +14,11 @@ describe('git_changelog.js', function() {
 
   before(function() {
     sinon.spy(grunt, 'registerMultiTask');
-    sinon.stub(changelog, 'generate');
+    sinon.stub(changelog, 'generate', function() {
+      var deferred = q.defer();
+      deferred.resolve();
+      return deferred.promise;
+    });
   });
 
   after(function() {
