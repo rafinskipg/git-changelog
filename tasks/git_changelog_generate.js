@@ -168,7 +168,7 @@ Changelog.prototype.linkToIssue = function linkToIssue(issue) {
 };
 
 Changelog.prototype.linkToCommit = function linkToCommit(hash) {
-  debug('geenrating link to commit');
+  debug('generating link to commit');
   return format(this.links.commit, hash.substr(0, 8), hash);
 };
 
