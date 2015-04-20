@@ -36,6 +36,10 @@ describe('git_changelog_generate.js', function() {
 
   describe('Changelog()', function() {
 
+    before(function() {
+      changelog.setDefaults();
+    });
+
     it('should return an object', function() {
       expect(changelog).to.be.an('object');
     });
