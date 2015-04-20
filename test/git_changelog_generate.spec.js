@@ -342,7 +342,7 @@ describe('git_changelog_generate.js', function() {
     describe('.readGitLog()', function() {
 
       before(function(done) {
-        changelog.init({ app_name: 'test', debug: true }).then(function() {
+        changelog.init({ app_name: 'test' }).then(function() {
           this.stub = sinon.stub(child, 'exec', function(cmd, opts, cb) {
             var commits = fs.readFileSync('./test/fixtures/list.txt', { encoding: 'utf-8' });
             cb(null, commits, null);
