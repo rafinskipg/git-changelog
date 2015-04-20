@@ -746,7 +746,7 @@ describe('git_changelog_generate.js', function() {
         expect(console.log).to.have.been.calledOnce;
         expect(console.log).to.have.been.calledWith('test');
         console.log.restore();
-      })
+      });
 
       it('should call console.log() when debug option is true', function () {
         changelog.options.debug = false;
@@ -754,7 +754,7 @@ describe('git_changelog_generate.js', function() {
         changelog.log('test');
         expect(console.log).to.not.have.been.called;
         console.log.restore();
-      })
+      });
 
     });
 
@@ -766,7 +766,7 @@ describe('git_changelog_generate.js', function() {
 
       afterEach(function() {
         changelog.log.restore();
-      })
+      });
 
       it('should always call .log(), when debug is true', function () {
         changelog.options.debug = true;
