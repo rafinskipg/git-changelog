@@ -27,7 +27,7 @@
   "scripts": {
     "pre-test": "grunt",
     "test": "mocha -R spec test/**/*.spec.js",
-    "coverage": "istanbul cover node_modules/.bin/_mocha"
+    "coverage": "istanbul cover node_modules/.bin/_mocha -- -R dot"
   },
   "dependencies": {
     "commander": "^2.8.0",
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "chai": "^2.2.0",
+    "chai-as-promised": "^5.0.0",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.2",
