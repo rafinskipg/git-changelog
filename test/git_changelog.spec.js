@@ -13,7 +13,7 @@ describe('git_changelog.js', function() {
 
   before(function() {
     sinon.spy(grunt, 'registerMultiTask');
-    sinon.spy(changelog, 'generate');
+    sinon.stub(changelog, 'generate');
   });
 
   after(function() {
