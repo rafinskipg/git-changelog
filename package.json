@@ -47,7 +47,9 @@
     "grunt-mocha-istanbul": "^2.4.0",
     "grunt-mocha-test": "^0.12.1",
     "istanbul": "^0.3.13",
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.7.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
