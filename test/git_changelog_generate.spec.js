@@ -404,6 +404,9 @@ describe('git_changelog_generate.js', function() {
         before(function(done) {
           this.stream = {
             write: sinon.stub(),
+            end : function(){
+
+            },
             on: sinon.spy(function(event, callback) {
               callback();
             })
@@ -466,6 +469,9 @@ describe('git_changelog_generate.js', function() {
         before(function(done) {
           this.stream = {
             write: sinon.stub(),
+            end : function(){
+
+            },
             on: sinon.spy(function(event, callback) {
               callback();
             })
