@@ -19,7 +19,7 @@ This release includes a big refactor with a huge improvement on test coverage.
 **Git changelog is secure enough**
 
 Next releases will include:
-- Downlodable resources area on the generated changelog, for linking to your zip project folder of certain tag.
+- Downloadable resources area on the generated changelog, for linking to your zip project folder of certain tag.
 - .gitchangelogrc specification. That will allow using any comment standards for your commit messages.
 
 ![Good news](http://www.labspaces.net/pictures/blog/4e5466b7dc69f1314154167_blog.jpg)
@@ -84,7 +84,7 @@ grunt.initConfig({
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
 * **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
-* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beggining of the project
+* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
 * **debug**: Debug mode, false by default
 
 ### Command Line
@@ -188,7 +188,7 @@ A detailed explanation can be found in this [document][commit-message-format].
 
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 _(Nothing yet)_
