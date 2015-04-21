@@ -401,9 +401,12 @@ describe('git_changelog_generate.js', function() {
 
       describe('without breaking commits', function() {
 
-        before(function() {
+        before(function(done) {
           this.stream = {
-            write: sinon.stub()
+            write: sinon.stub(),
+            on: sinon.spy(function(event, callback) {
+              callback();
+            })
           };
           this.commits = require('./fixtures/commits.js').withoutBreaking;
 
@@ -412,7 +415,9 @@ describe('git_changelog_generate.js', function() {
           sinon.stub(changelog, 'printSection');
 
           changelog.initOptions({ app_name: 'app', version: 'version' });
-          changelog.writeChangelog(this.stream, this.commits);
+          changelog.writeChangelog(this.stream, this.commits).then(function() {
+            done();
+          });
         });
 
         after(function() {
@@ -458,9 +463,12 @@ describe('git_changelog_generate.js', function() {
 
       describe('with breaking commits', function() {
 
-        before(function() {
+        before(function(done) {
           this.stream = {
-            write: sinon.stub()
+            write: sinon.stub(),
+            on: sinon.spy(function(event, callback) {
+              callback();
+            })
           };
           this.commits = require('./fixtures/commits.js').withBreaking;
 
@@ -471,7 +479,9 @@ describe('git_changelog_generate.js', function() {
           sinon.stub(changelog, 'printSection');
 
           changelog.initOptions({ app_name: 'app', version: 'version' });
-          changelog.writeChangelog(this.stream, this.commits);
+          changelog.writeChangelog(this.stream, this.commits).then(function() {
+            done();
+          });
         });
 
         after(function() {
