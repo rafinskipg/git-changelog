@@ -5,7 +5,9 @@
 
 > A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
 
-** Works as a `CLI` option or `grunt` plugin **
+**Works as a `CLI` option or `grunt` plugin**
+
+[Example output](https://github.com/rafinskipg/git-changelog/blob/master/EXTENDEDCHANGELOG.md)
  
 ## NEWS!
 
@@ -13,7 +15,7 @@ version 0.1.7 is out, special thanks to [JohnnyStilles](https://github.com/Johnn
 
 This release includes a big refactor with a huge improvement on test coverage.
 
-** Git changelog is secure enough **
+**Git changelog is secure enough**
 
 Next releases will include:
 - Downlodable resources area on the generated changelog, for linking to your zip project folder of certain tag.
