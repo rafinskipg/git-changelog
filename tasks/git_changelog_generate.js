@@ -291,6 +291,7 @@ Changelog.prototype.writeChangelog = function writeChangelog(stream, commits) {
     stream.on('finish', function() {
       deferred.resolve();
     });
+    
   }.bind(this));
 
   return deferred.promise;
