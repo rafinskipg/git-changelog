@@ -4,7 +4,10 @@
 
 var program = require('commander');
 var git_changelog = require('./git_changelog_generate');
-var options = {};
+var defaults = require('./defaults');
+var _ = require('lodash');
+var options = _.defaults({}, defaults);
+
 
 if (process.argv.join('').indexOf('/grunt') === -1) {
 

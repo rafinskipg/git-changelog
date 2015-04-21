@@ -1,6 +1,7 @@
 # git-changelog
 
 [![Build Status](https://travis-ci.org/rafinskipg/git-changelog.svg)](https://travis-ci.org/rafinskipg/git-changelog)
+[![Code Climate](https://codeclimate.com/github/rafinskipg/git-changelog/badges/gpa.svg)](https://codeclimate.com/github/rafinskipg/git-changelog)
 
 > A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
  

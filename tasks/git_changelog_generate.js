@@ -17,8 +17,6 @@ var defaults = require('./defaults');
 //ALLOWED_COMMITS = '^fix|^feat|^docs|BREAKING',
 //git-describe - Show the most recent tag that is reachable from a commit
 
-// I have to clean that mess
-
 var Changelog = function Changelog() {
   debug('initializing constructor');
   this.setDefaults();
@@ -289,7 +287,10 @@ Changelog.prototype.writeChangelog = function writeChangelog(stream, commits) {
     }
 
     this.printSalute(stream);
-    deferred.resolve();
+    stream.end();
+    stream.on('finish', function() {
+      deferred.resolve();
+    });
   }.bind(this));
 
   return deferred.promise;
