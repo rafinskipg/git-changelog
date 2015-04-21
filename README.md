@@ -1,17 +1,18 @@
 # git-changelog
+[![NPM Version][npm-badge]][npm-url]
+[![Build Status][travis-badge]][travis-url]
+[![Test Coverage][coverage-badge]][codeclimate-url]
+[![Code Climate][codeclimate-badge]][codeclimate-url]
 
-[![Build Status](https://travis-ci.org/rafinskipg/git-changelog.svg)](https://travis-ci.org/rafinskipg/git-changelog)
-[![Code Climate](https://codeclimate.com/github/rafinskipg/git-changelog/badges/gpa.svg)](https://codeclimate.com/github/rafinskipg/git-changelog)
-
-> A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
+> A git changelog based on ANGULAR JS commit standards. [NPM page][npm-url]
 
 **Works as a `CLI` option or `grunt` plugin**
 
 [Example output](https://github.com/rafinskipg/git-changelog/blob/master/EXTENDEDCHANGELOG.md)
- 
+
 ## NEWS!
 
-version 0.1.7 is out, special thanks to [JohnnyStilles](https://github.com/JohnnyEstilles) for his work.
+version 0.1.7 is out, special thanks to [JohnnyEstilles][JohnnyEstilles] for his work.
 
 This release includes a big refactor with a huge improvement on test coverage.
 
@@ -87,7 +88,7 @@ grunt.initConfig({
 * **debug**: Debug mode, false by default
 
 ### Command Line
-Install it globally 
+Install it globally
 
 ```
 npm install -g git-changelog
@@ -191,3 +192,16 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 _(Nothing yet)_
+
+[npm-badge]: https://badge.fury.io/js/git-changelog.svg
+[npm-url]: https://www.npmjs.org/package/git-changelog
+
+[travis-badge]: https://travis-ci.org/rafinskipg/git-changelog.svg
+[travis-url]: https://travis-ci.org/rafinskipg/git-changelog
+
+[codeclimate-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/rafinskipg/git-changelog
+
+[coverage-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/coverage.svg
+
+[JohnnyEstilles]: https://github.com/JohnnyEstilles
