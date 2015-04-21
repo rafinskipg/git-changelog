@@ -1,3 +1,7 @@
+coverage
 node_modules
 npm-debug.log
 tmp
+CHANGELOG.md
+EXTENDEDCHANGELOG.md
+output

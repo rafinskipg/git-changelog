@@ -1,7 +1,26 @@
 language: node_js
 node_js:
   - "0.10"
-before_install: 
+  - "0.12"
+
+notifications:
+  email:
+    - "rafinskipg@gmail.com"
+    - "johnny.estilles@agentia.asia"
+
+addons:
+  code_climate:
+    repo_token: b6ed20570f0ec30b5b2acdbd706593928f204693efcd634110a36bc5f94822d9
+
+before_install:
   - npm install -g grunt-cli
-install: 
-  - npm install
+  - npm install -g mocha
+  - npm install -g istanbul
+  - npm install -g codeclimate-test-reporter
+
+before_script:
+  - grunt jshint pre-test
+
+after_script:
+  - istanbul cover node_modules/.bin/_mocha -- -R dot
+  - codeclimate < ./coverage/lcov.info

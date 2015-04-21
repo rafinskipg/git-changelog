@@ -15,8 +15,8 @@ module.exports = function(grunt) {
     jshint: {
       all: [
         'Gruntfile.js',
-        'tasks/*.js',
-        '<%= nodeunit.tests %>',
+        'tasks/**/*.js',
+        'test/**/*.spec.js'
       ],
       options: {
         jshintrc: '.jshintrc',
@@ -25,14 +25,17 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: [
+        'output/tag1.md',
+        'EXTENDEDCHANGELOG.md'
+      ],
     },
 
     // Configuration to be run (and then tested).
     git_changelog: {
       minimal: {
         options: {
-          appName : 'Git changelog'
+          app_name : 'Git changelog'
         }
       },
       tag1: {
@@ -46,8 +49,9 @@ module.exports = function(grunt) {
       extended: {
         options: {
           repo_url: 'https://github.com/rafinskipg/git-changelog',
-          appName : 'Git changelog extended',
-          ignore_tags: true,
+          app_name : 'Git changelog extended',
+          tag: false,
+          debug: true,
           file : 'EXTENDEDCHANGELOG.md',
           grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
         }
@@ -67,7 +71,8 @@ module.exports = function(grunt) {
         },
         src: ['test/**/*.spec.js']
       }
-    }
+    },
+
   });
 
   // Actually load this plugin's task(s).
@@ -80,10 +85,11 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'git_changelog', 'mochaTest']);
+  grunt.registerTask('pre-test', ['clean', 'git_changelog']);
+  // grunt.registerTask('test', ['clean', 'git_changelog', 'mochaTest']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint', 'pre-test']);
 
   // By default, lint and run all tests.
   grunt.registerTask('ch', [ 'git_changelog']);
