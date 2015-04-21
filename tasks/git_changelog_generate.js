@@ -4,6 +4,7 @@
  */
 
 var fs = require('fs');
+var path = require('path');
 var child = require('child_process');
 var format = require('util').format;
 
@@ -365,6 +366,49 @@ Changelog.prototype.getRepoUrl = function getRepoUrl() {
   return deferred.promise;
 };
 
+Changelog.prototype.checkPath = function chekPath(dirname, done) {
+  fs.stat(dirname, function (err, stats) {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        this.checkPath(path.dirname(dirname), function (err) {
+          if (err) {
+            throw err;
+          } else {
+            fs.mkdir(dirname, function (err) {
+              if (err) {
+                throw err;
+              }
+              done()
+            });
+          }
+        });
+      } else {
+        throw err
+      }
+    } else if (stats.isDirectory()) {
+      done();
+    } else {
+      throw new Error(dirname + ' exists and is not a directory');
+    }
+  }.bind(this));
+};
+
+Changelog.prototype.getStream = function getStream(filename) {
+  debug('getting stream ...');
+  var deferred = q.defer();
+  var stream;
+
+  if (filename) {
+    this.checkPath(path.dirname(filename), function() {
+      deferred.resolve(fs.createWriteStream(filename));
+    });
+  } else {
+    deferred.resolve(process.stdout);
+  }
+
+  return deferred.promise;
+};
+
 Changelog.prototype.generate = function generate(params) {
   debug('generating ...');
   var self = this;
@@ -390,10 +434,11 @@ Changelog.prototype.generate = function generate(params) {
       self.log('Parsed', commits.length, 'commits');
       self.log('Generating changelog to', self.options.file || 'stdout', '(', self.options.version, ')');
 
-      self.writeChangelog(self.options.file ? fs.createWriteStream(self.options.file) : process.stdout, commits)
-        .then(function() {
+      self.getStream(self.options.file).then(function(stream) {
+        self.writeChangelog(stream, commits).then(function() {
           deferred.resolve(self.options);
         });
+      });
     }).catch(function(err) {
       console.log('error', err);
     });
