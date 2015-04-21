@@ -1,5 +1,13 @@
-<a name="">Since tag 1 changelog</a>
-#  (2015-04-21)
+<a name="">Version 0.2.0</a>
+
+<img width="300px" src="http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" />
+
+__Git changelog__
+
+_a project by Google Corp_
+
+
+#  v0.2.0 (2015-04-21)
 
 
 ## Bug Fixes
