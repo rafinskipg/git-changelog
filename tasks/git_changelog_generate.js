@@ -257,6 +257,7 @@ Changelog.prototype.readGitLog = function readGitLog(git_log_command, from) {
 
 Changelog.prototype.writeChangelog = function writeChangelog(stream, commits) {
   debug('writing change log');
+  var deferred = q.defer();
   var sections = {
     fix: {},
     feat: {},
@@ -272,19 +273,25 @@ Changelog.prototype.writeChangelog = function writeChangelog(stream, commits) {
 
   this.organizeCommits(commits, sections);
 
-  stream.write(format(this.header, this.options.version, this.options.app_name, this.options.version, this.currentDate()));
-  this.printSection(stream, 'Bug Fixes', sections.fix);
-  this.printSection(stream, 'Features', sections.feat);
-  this.printSection(stream, 'Refactor', sections.refactor, false);
-  this.printSection(stream, 'Style', sections.style, false);
-  this.printSection(stream, 'Test', sections.test, false);
-  this.printSection(stream, 'Chore', sections.chore, false);
-  this.printSection(stream, 'Documentation', sections.docs, false);
-  if (sections.breaks[this.emptyComponent].length > 0 ) {
-    this.printSection(stream, 'Breaking Changes', sections.breaks, false);
-  }
+  stream.on('open', function() {
+    stream.write(format(this.header, this.options.version, this.options.app_name, this.options.version, this.currentDate()));
 
-  this.printSalute(stream);
+    this.printSection(stream, 'Bug Fixes', sections.fix);
+    this.printSection(stream, 'Features', sections.feat);
+    this.printSection(stream, 'Refactor', sections.refactor, false);
+    this.printSection(stream, 'Style', sections.style, false);
+    this.printSection(stream, 'Test', sections.test, false);
+    this.printSection(stream, 'Chore', sections.chore, false);
+    this.printSection(stream, 'Documentation', sections.docs, false);
+    if (sections.breaks[this.emptyComponent].length > 0 ) {
+      this.printSection(stream, 'Breaking Changes', sections.breaks, false);
+    }
+
+    this.printSalute(stream);
+    deferred.resolve();
+  }.bind(this));
+
+  return deferred.promise;
 };
 
 Changelog.prototype.organizeCommits = function organizeCommits(commits, sections) {
@@ -383,9 +390,10 @@ Changelog.prototype.generate = function generate(params) {
       self.log('Parsed', commits.length, 'commits');
       self.log('Generating changelog to', self.options.file || 'stdout', '(', self.options.version, ')');
 
-      self.writeChangelog(self.options.file ? fs.createWriteStream(self.options.file) : process.stdout, commits);
-
-      deferred.resolve(self.options);
+      self.writeChangelog(self.options.file ? fs.createWriteStream(self.options.file) : process.stdout, commits)
+        .then(function() {
+          deferred.resolve(self.options);
+        });
     }).catch(function(err) {
       console.log('error', err);
     });
