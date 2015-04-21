@@ -1,24 +1,25 @@
 # git-changelog
+[![NPM Version][npm-badge]][npm-url]
+[![Build Status][travis-badge]][travis-url]
+[![Test Coverage][coverage-badge]][codeclimate-url]
+[![Code Climate][codeclimate-badge]][codeclimate-url]
 
-[![Build Status](https://travis-ci.org/rafinskipg/git-changelog.svg)](https://travis-ci.org/rafinskipg/git-changelog)
-[![Code Climate](https://codeclimate.com/github/rafinskipg/git-changelog/badges/gpa.svg)](https://codeclimate.com/github/rafinskipg/git-changelog)
-
-> A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
+> A git changelog based on ANGULAR JS commit standards. [NPM page][npm-url]
 
 **Works as a `CLI` option or `grunt` plugin**
 
 [Example output](https://github.com/rafinskipg/git-changelog/blob/master/EXTENDEDCHANGELOG.md)
- 
+
 ## NEWS!
 
-version 0.1.7 is out, special thanks to [JohnnyStilles](https://github.com/JohnnyEstilles) for his work.
+version 0.1.7 is out, special thanks to [JohnnyEstilles][JohnnyEstilles] for his work.
 
 This release includes a big refactor with a huge improvement on test coverage.
 
 **Git changelog is secure enough**
 
 Next releases will include:
-- Downlodable resources area on the generated changelog, for linking to your zip project folder of certain tag.
+- Downloadable resources area on the generated changelog, for linking to your zip project folder of certain tag.
 - .gitchangelogrc specification. That will allow using any comment standards for your commit messages.
 
 ![Good news](http://www.labspaces.net/pictures/blog/4e5466b7dc69f1314154167_blog.jpg)
@@ -83,11 +84,11 @@ grunt.initConfig({
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
 * **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
-* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beggining of the project
+* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
 * **debug**: Debug mode, false by default
 
 ### Command Line
-Install it globally 
+Install it globally
 
 ```
 npm install -g git-changelog
@@ -187,7 +188,20 @@ A detailed explanation can be found in this [document][commit-message-format].
 
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 _(Nothing yet)_
+
+[npm-badge]: https://badge.fury.io/js/git-changelog.svg
+[npm-url]: https://www.npmjs.org/package/git-changelog
+
+[travis-badge]: https://travis-ci.org/rafinskipg/git-changelog.svg
+[travis-url]: https://travis-ci.org/rafinskipg/git-changelog
+
+[codeclimate-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/rafinskipg/git-changelog
+
+[coverage-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/coverage.svg
+
+[JohnnyEstilles]: https://github.com/JohnnyEstilles
