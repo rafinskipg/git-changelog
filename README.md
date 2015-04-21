@@ -4,15 +4,23 @@
 [![Code Climate](https://codeclimate.com/github/rafinskipg/git-changelog/badges/gpa.svg)](https://codeclimate.com/github/rafinskipg/git-changelog)
 
 > A git changelog based on ANGULAR JS commit standards. [NPM page](https://www.npmjs.org/package/git-changelog)
+
+** Works as a `CLI` option or `grunt` plugin **
  
 ## NEWS!
+
+version 0.1.7 is out, special thanks to [JohnnyStilles](https://github.com/JohnnyEstilles) for his work.
+
+This release includes a big refactor with a huge improvement on test coverage.
+
+** Git changelog is secure enough **
+
+Next releases will include:
+- Downlodable resources area on the generated changelog, for linking to your zip project folder of certain tag.
+- .gitchangelogrc specification. That will allow using any comment standards for your commit messages.
+
 ![Good news](http://www.labspaces.net/pictures/blog/4e5466b7dc69f1314154167_blog.jpg)
 
-There are new options available, check them out, now available as CLI
-
-You can see an example generated changelog [here](https://github.com/rafinskipg/git-changelog/blob/master/output/tag1.md)
-
-It works as a **grunt plugin** or **CLI**, see options below
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -49,6 +57,7 @@ grunt.initConfig({
         app_name : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
         grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING',
+        debug: true,
         tag : false //False for commits since the beggining
       }
     },
