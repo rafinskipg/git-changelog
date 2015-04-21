@@ -378,12 +378,12 @@ Changelog.prototype.checkPath = function chekPath(dirname, done) {
               if (err) {
                 throw err;
               }
-              done()
+              done();
             });
           }
         });
       } else {
-        throw err
+        throw err;
       }
     } else if (stats.isDirectory()) {
       done();
