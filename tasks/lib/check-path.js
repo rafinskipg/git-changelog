@@ -2,6 +2,7 @@
 
 var debug = require('debug')('changelog:checkPath');
 var fs = require('fs');
+var path = require('path');
 
 function makePathDone(done, err) {
   if (err) {
