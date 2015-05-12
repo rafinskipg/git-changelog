@@ -25,7 +25,7 @@ function cmdDone(deferred, code, stdout, stderr) {
 
 function gitLogCommand(git_log_command, from) {
   if (git_log_command === this.cmd.gitLog) {
-    return format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==', from)
+    return format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==', from);
   } else {
     return format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==');
   }
