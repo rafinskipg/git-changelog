@@ -3,14 +3,7 @@
  * https://github.com/rafinskipg/git-changelog
  */
 
-var fs = require('fs');
-var path = require('path');
-var child = require('child_process');
-var format = require('util').format;
-
 var debug = require('debug')('changelog');
-var _ = require('lodash');
-var q = require('q');
 
 //ALLOWED_COMMITS = '^fix|^feat|^docs|BREAKING',
 //git-describe - Show the most recent tag that is reachable from a commit
