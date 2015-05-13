@@ -11,5 +11,6 @@
   "eqnull": true,
   "node": true,
   "mocha": true,
-  "expr": true
+  "expr": true,
+  "validthis": true
 }
