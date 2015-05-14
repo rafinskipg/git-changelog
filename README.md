@@ -1,4 +1,5 @@
-# git-changelog
+![git-changelog logo][logo-image]
+---
 [![NPM Version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 [![Test Coverage][coverage-badge]][codeclimate-url]
@@ -192,6 +193,8 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 
 ## Release History
 _(Nothing yet)_
+
+[logo-image]: images/git-changelog-logo.png
 
 [npm-badge]: https://badge.fury.io/js/git-changelog.svg
 [npm-url]: https://www.npmjs.org/package/git-changelog
