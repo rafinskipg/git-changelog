@@ -152,10 +152,22 @@ format that includes a **type**, a **scope** and a **subject**:
 Any line of the commit message cannot be longer 100 characters! This allows the message to be easier
 to read on github as well as in various git tools.
 
-Example commit message
+Example commit messages
 
 ```
-git commit -m "docs: added documentation for explaining the commit message"
+git commit -m "docs(readme): added documentation for explaining the commit message"
+git commit -m "refactor: Changed other things"
+```
+
+Closing issues : 
+
+```
+git commit -m "fix(git_changelog_generate): pass tag if it exists to gitReadLog
+Previously if a tag was found the script would try to find commits
+between undefined..HEAD. By passing the tag, it now finds tags between
+tag..HEAD.
+
+Closes #5."
 ```
 
 ### Type
@@ -207,6 +219,11 @@ In order to do that, you can use git annotated tags:
 git tag -a v1.4.0 -m 'chore(release): v1.4.0 codename(jaracimrman-existence)'
 ```
 
+If you are publishing NPM modules you can let NPM [do that for you][npm-versioning]:
+
+```
+npm version patch -m "chore(release): %s codename(furious-stallman)"
+```
 
 ## Contributing
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
@@ -228,3 +245,4 @@ _(Nothing yet)_
 [coverage-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/coverage.svg
 
 [JohnnyEstilles]: https://github.com/JohnnyEstilles
+[npm-versioning]: https://docs.npmjs.com/cli/version
