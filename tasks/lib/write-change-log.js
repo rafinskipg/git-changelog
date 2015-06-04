@@ -5,8 +5,9 @@ var format = require('util').format;
 var q = require('q');
 
 function sendToStream(stream, sections, deferred) {
-  stream.write(format(this.header, this.options.version, this.options.app_name, this.options.version, this.currentDate()));
+  //stream.write(format(this.header, , this.currentDate()));
 
+  this.printHeader(stream, this.options, this.currentDate());
   this.printSection(stream, 'Bug Fixes', sections.fix);
   this.printSection(stream, 'Features', sections.feat);
   this.printSection(stream, 'Refactor', sections.refactor, false);

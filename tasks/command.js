@@ -18,6 +18,7 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
     .option('-b, --branch [branch_name]', 'Branch name [branch_name]')
     .option('-f, --file [file]', 'File [file]')
     .option('-r, --repo_url [url]', 'Repo url [url]')
+    .option('-l, --logo [logo]', 'Logo path [logo]')
     .option('-t, --tag [tag]', 'Since tag [tag]')
     .option('-g, --grep [grep]', 'Grep commits for [grep]')
     .option('-d, --debug', 'Debugger')
@@ -45,6 +46,11 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
   if (program.file){
     options.file = program.file;
   }
+
+  if (program.logo){
+    options.logo = program.logo;
+  }
+
   if (program.url){
     options.repo_url = program.url;
     console.log('  - With URL %s', program.url);

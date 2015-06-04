@@ -8,6 +8,7 @@ module.exports = {
   app_name : 'My app - Changelog',
   grep_commits: '^fix|^feat|^docs|BREAKING',
   tag: null,
+  logo : null,
   debug: false,
   sections: [
     {
