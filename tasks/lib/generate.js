@@ -39,11 +39,6 @@ function generateFromTag(deferred, tag) {
     .catch(console.log.bind(console, 'error'));
 }
 
-// function handleGenerateError(deferred, err) {
-//   console.log('Error generating changelog ', err);
-//   deferred.reject(err);
-// }
-
 function generate(params) {
   debug('generating ...');
   var self = this;
