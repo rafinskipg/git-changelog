@@ -31,8 +31,6 @@ Changelog.prototype.writeChangelog = require('./lib/write-change-log');
 Changelog.prototype.organizeCommits = require('./lib/organize-commits');
 Changelog.prototype.getPreviousTag = require('./lib/get-previous-tag');
 Changelog.prototype.getRepoUrl = require('./lib/get-repo-url');
-Changelog.prototype.checkPath = require('./lib/check-path');
-Changelog.prototype.getStream = require('./lib/get-stream');
 Changelog.prototype.generate = require('./lib/generate');
 
 Changelog.prototype.log = require('./lib/log');
