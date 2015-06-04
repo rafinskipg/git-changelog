@@ -28,7 +28,7 @@
     "pre-test": "grunt",
     "post-test": "grunt",
     "test": "mocha -R spec test/**/*.spec.js",
-    "preversion": "mocha -R spec test/**/*.spec.js",
+    "preversion": "npm test",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- -R dot"
   },
   "dependencies": {

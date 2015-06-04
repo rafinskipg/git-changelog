@@ -45,6 +45,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([6422e055](https://github.com/rafinskipg/git-changelog/commit/6422e0552b30f6e94d11b03310a23c1342aa5965))
 - **options:** Added ignore tags option
   ([95362e8b](https://github.com/rafinskipg/git-changelog/commit/95362e8b57a673e810ffe54ff3337de1ea5109a8))
+- **output:** added logo in printHeader
+  ([6b489450](https://github.com/rafinskipg/git-changelog/commit/6b489450a90172dc57059d7fd55fb4c6110152b2))
 - **package:** Added global install so you can run via command
   ([86eae3f0](https://github.com/rafinskipg/git-changelog/commit/86eae3f013ace1c5c23afc32b2e8f878a69629f1))
 
@@ -103,14 +105,19 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   - have jshint ignore false positives
   - fixing jshint errors
 - **package:** Package json version
+- **package.json:** Added preversion script
+- **release:** 0.1.8 codename(furious-stallman)
 - **task:** cleanup unused requires
 
 
 ## Documentation
 
+- Updated options and tagging info
 - added documentation for explaining the commit message
 - Added docs
-- **README:** add logo
+- **README:**
+  - added more commit examples and npm versioning usage
+  - add logo
 - **readme:** Final readme Fixes #1 Closes #1
 
 
