@@ -52,7 +52,9 @@ grunt.initConfig({
     minimal: {
       options: {
         file: 'MyChangelog.md',
-        app_name : 'Git changelog'
+        app_name : 'Git changelog',
+        logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+        intro : 'Git changelog is a utility tool for generating changelogs. It is free and opensource. :)'
       }
     },
     extended: {
@@ -81,9 +83,11 @@ grunt.initConfig({
 
 * **branch_name** : The name of the branch. Defaults to ` `
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
-* **version**: The version of the project. Defaults to ` `,
+* **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
+* **intro** : The introduction text on the header of the changelog. Defaults to `null`
+* **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
 * **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
 * **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
 * **debug**: Debug mode, false by default
@@ -112,6 +116,8 @@ Use it directly with the common options
     -b, --branch [branch_name]  Branch name [branch_name]
     -f, --file [file]           File [file]
     -r, --repo_url [url]        Repo url [url]
+    -l, --logo [logo]           Logo path [logo]
+    -i, --intro [intro]         intro text [intro]
     -t, --tag [tag]             Since tag [tag]
     -g, --grep [grep]           Grep commits for [grep]
     -d, --debug                 Debugger
@@ -186,6 +192,20 @@ reference GitHub issues that this commit **Closes**.
 
 A detailed explanation can be found in this [document][commit-message-format].
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
+
+## Tagging your project
+
+In order to have you project versions correctly displayed on your changelog, try to use this commit message format:
+
+```
+chore(release): v1.4.0 codename(jaracimrman-existence)
+```
+
+In order to do that, you can use git annotated tags:
+
+```
+git tag -a v1.4.0 -m 'chore(release): v1.4.0 codename(jaracimrman-existence)'
+```
 
 
 ## Contributing
