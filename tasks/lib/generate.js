@@ -2,27 +2,23 @@
 
 var debug = require('debug')('changelog:generate');
 var q = require('q');
-
-function writeChangelogDone(deferred) {
-  deferred.resolve(this.options);
-}
-
-function writeCommitsToStream(deferred, commits, stream) {
-  this.writeChangelog(stream, commits)
-    .then(writeChangelogDone.bind(this, deferred));
-}
+var fse = require('fs-extra');
 
 function generateFromCommits(deferred, commits) {
+  var stream;
+
   this.message('parsed commits', commits.length);
   this.log('Parsed', commits.length, 'commits');
   this.log('Generating changelog to', this.options.file || 'stdout', '(', this.options.version, ')');
 
-  this.getStream(this.options.file)
-    .then(writeCommitsToStream.bind(this, deferred, commits));
-}
+  if (this.options.file) {
+    stream = fse.createOutputStream(this.options.file);
+  } else {
+    stream = process.stdout;
+  }
 
-function handleReadGitLogError(err) {
-  console.log('error', err);
+  this.writeChangelog(stream, commits)
+    .then(deferred.resolve.bind(deferred, this.options));
 }
 
 function generateFromTag(deferred, tag) {
@@ -40,13 +36,13 @@ function generateFromTag(deferred, tag) {
 
   readGitLog()
     .then(generateFromCommits.bind(this, deferred))
-    .catch(handleReadGitLogError);
+    .catch(console.log.bind(console, 'error'));
 }
 
-function handleGenerateError(deferred, err) {
-  console.log('Error generating changelog ', err);
-  deferred.reject(err);
-}
+// function handleGenerateError(deferred, err) {
+//   console.log('Error generating changelog ', err);
+//   deferred.reject(err);
+// }
 
 function generate(params) {
   debug('generating ...');
@@ -56,7 +52,7 @@ function generate(params) {
   this.init(params)
     .then(this.getPreviousTag.bind(this))
     .then(generateFromTag.bind(this, deferred))
-    .catch(handleGenerateError.bind(null, deferred));
+    .catch(deferred.reject.bind(deferred));
 
   return deferred.promise;
 }
