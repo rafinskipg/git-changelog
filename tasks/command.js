@@ -19,6 +19,7 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
     .option('-f, --file [file]', 'File [file]')
     .option('-r, --repo_url [url]', 'Repo url [url]')
     .option('-l, --logo [logo]', 'Logo path [logo]')
+    .option('-i, --intro [intro]', 'intro text [intro]')
     .option('-t, --tag [tag]', 'Since tag [tag]')
     .option('-g, --grep [grep]', 'Grep commits for [grep]')
     .option('-d, --debug', 'Debugger')
@@ -49,6 +50,9 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
 
   if (program.logo){
     options.logo = program.logo;
+  }
+  if (program.intro){
+    options.intro = program.intro;
   }
 
   if (program.url){

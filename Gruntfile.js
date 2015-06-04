@@ -35,21 +35,27 @@ module.exports = function(grunt) {
     git_changelog: {
       minimal: {
         options: {
-          app_name : 'Git changelog'
+          app_name : 'Git changelog',
+          logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+          intro : 'Git changelog is a utility tool for generating changelogs. It is free and opensource. :)'
         }
       },
       tag1: {
         options: {
           app_name : 'Since tag 1 changelog',
           file: 'output/tag1.md',
+          logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+          version : 'squeezy potatoe',
           tag: 'v0.0.1',
           debug: true
         }
       },
       extended: {
         options: {
-          repo_url: 'https://github.com/rafinskipg/git-changelog',
           app_name : 'Git changelog extended',
+          logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+          intro : 'Git changelog is a utility tool for generating changelogs. It is free and opensource. :)',
+          repo_url: 'https://github.com/rafinskipg/git-changelog',
           tag: false,
           debug: true,
           file : 'EXTENDEDCHANGELOG.md',

@@ -107,6 +107,12 @@ describe('git_changelog_generate.js', function() {
         expect(changelog.options.msg).to.contain('logo: test');
       });
 
+      it('should store "intro" if passed as an option', function() {
+        changelog.initOptions({ intro: 'test' });
+        expect(changelog.options.intro).to.equal('test');
+        expect(changelog.options.msg).to.contain('intro: test');
+      });
+
       it('should store "grep_commits" if passed as an option', function() {
         changelog.initOptions({ grep_commits: 'test' });
         expect(changelog.options.grep_commits).to.equal('test');
@@ -422,6 +428,7 @@ describe('git_changelog_generate.js', function() {
           sinon.stub(changelog, 'organizeCommits');
           sinon.stub(changelog, 'printSalute');
           sinon.stub(changelog, 'printSection');
+          sinon.stub(changelog, 'printHeader');
 
           changelog.initOptions({ app_name: 'app', version: 'version' });
           changelog.writeChangelog(this.stream, this.commits).then(function() {
@@ -432,6 +439,7 @@ describe('git_changelog_generate.js', function() {
         after(function() {
           changelog.organizeCommits.restore();
           changelog.printSection.restore();
+          changelog.printHeader.restore();
           changelog.printSalute.restore();
         });
 
@@ -441,8 +449,8 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should write the header to the stream', function() {
-          expect(this.stream.write).to.have.been.calledOnce;
-          expect(this.stream.write).to.have.been.calledWithMatch(/^<a name=/);
+          expect(changelog.printHeader).to.have.been.calledOnce;
+          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
         it('should print 7 sections', function() {
@@ -489,6 +497,7 @@ describe('git_changelog_generate.js', function() {
           });
           sinon.stub(changelog, 'printSalute');
           sinon.stub(changelog, 'printSection');
+          sinon.stub(changelog, 'printHeader');
 
           changelog.initOptions({ app_name: 'app', version: 'version' });
           changelog.writeChangelog(this.stream, this.commits).then(function() {
@@ -500,6 +509,7 @@ describe('git_changelog_generate.js', function() {
           changelog.organizeCommits.restore();
           changelog.printSection.restore();
           changelog.printSalute.restore();
+          changelog.printHeader.restore();
         });
 
         it('should organize commits', function() {
@@ -508,8 +518,8 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should write the header to the stream', function() {
-          expect(this.stream.write).to.have.been.calledOnce;
-          expect(this.stream.write).to.have.been.calledWithMatch(/^<a name=/);
+          expect(changelog.printHeader).to.have.been.calledOnce;
+          expect(changelog.printHeader).to.have.been.calledWith(this.stream, changelog.options);
         });
 
         it('should print 8 sections', function() {
@@ -536,70 +546,6 @@ describe('git_changelog_generate.js', function() {
           expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
-      });
-
-      describe('with logo', function() {
-
-        before(function(done) {
-          this.stream = {
-            write: sinon.stub(),
-            end : function(){
-
-            },
-            on: sinon.spy(function(event, callback) {
-              callback();
-            })
-          };
-          this.commits = require('./fixtures/commits.js').withoutBreaking;
-
-          sinon.stub(changelog, 'organizeCommits');
-          sinon.stub(changelog, 'printSalute');
-          sinon.stub(changelog, 'printSection');
-
-          changelog.initOptions({ app_name: 'app', version: 'version' });
-          changelog.writeChangelog(this.stream, this.commits).then(function() {
-            done();
-          });
-        });
-
-        after(function() {
-          changelog.organizeCommits.restore();
-          changelog.printSection.restore();
-          changelog.printSalute.restore();
-        });
-
-        it('should organize commits', function() {
-          expect(changelog.organizeCommits).to.have.been.calledOnce;
-          expect(changelog.organizeCommits).to.have.been.calledWith(this.commits);
-        });
-
-        it('should write the header to the stream', function() {
-          expect(this.stream.write).to.have.been.calledOnce;
-          expect(this.stream.write).to.have.been.calledWithMatch(/^<a name=/);
-        });
-
-        it('should print 7 sections', function() {
-          var sections = [
-            'Bug Fixes',
-            'Features',
-            'Refactor',
-            'Style',
-            'Test',
-            'Chore',
-            'Documentation'
-          ];
-
-          expect(changelog.printSection.callCount).to.equal(7);
-          sections.forEach(function(section, index) {
-            var call = changelog.printSection.getCall(index);
-            expect(call.args).to.include(section);
-          });
-        });
-
-        it('should print salute', function() {
-          expect(changelog.printSalute).to.have.been.calledOnce;
-          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
-        });
       });
 
     });

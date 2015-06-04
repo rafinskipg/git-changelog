@@ -1,11 +1,23 @@
-<a name="">Git changelog extended</a>
-#  (2015-04-21)
+<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
 
+__Git changelog extended__
+
+_Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
+
+#   (2015-06-05)
+
+
+
+---
 
 ## Bug Fixes
 
+- Stream didn't close properly
+  ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
   ([c186f2d8](https://github.com/rafinskipg/git-changelog/commit/c186f2d877e7907305953610bcaaef331406178a))
+- **checkPath:** add missing require('path')
+  ([e5dab826](https://github.com/rafinskipg/git-changelog/commit/e5dab826062bd22dd37c8c3d3c24a4d9b4701f6d))
 - **generate:** create path to file if it does not already exist
   ([62f6210f](https://github.com/rafinskipg/git-changelog/commit/62f6210f6895bcf5f9984b26948178b1a93cbc9e))
 - **git_changelog_generate:** pass tag if it exists to gitReadLog
@@ -47,11 +59,14 @@
 - **docs:**
   - Angular document commits
   - Added docs
+- **lib:** simplify methods and refactor into separate files
 - **writeChangelog:** method now returns a promise
 
 
 ## Chore
 
+- a couple of spelling corrections [ci skip]
+- minor edits to README
 - fixing lint errors
 - added chai-as-promise to handle methods that return promises
 - updated travis config
@@ -79,14 +94,23 @@
 - added node.js `0.12` to travis-ci config
 - Updated readme
 - package json version 1.1.3
-- **lint:** fixing jshint errors
+- **images:**
+  - add logo in JPEG format
+  - add logo in PNG format
+- **lint:**
+  - add missing semicolon
+  - fix indentation
+  - have jshint ignore false positives
+  - fixing jshint errors
 - **package:** Package json version
+- **task:** cleanup unused requires
 
 
 ## Documentation
 
 - added documentation for explaining the commit message
 - Added docs
+- **README:** add logo
 - **readme:** Final readme Fixes #1 Closes #1
 
 

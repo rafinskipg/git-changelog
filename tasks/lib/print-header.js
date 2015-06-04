@@ -2,18 +2,28 @@
 
 var debug = require('debug')('changelog:printHeader');
 var format = require('util').format;
-var tpl = 
-  '<a name="">Version %s</a>\n\n'+
-  '<img width="300px" src="http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" />\n\n'+
-  '__%s %s__\n\n' +
-  '_a project by Google Corp_\n\n' +
-  '#  v%s (%s)\n\n';
+
+//Templates
+var logoTemplate = '<img width="300px" src="%s" />\n\n';
+var titleTemplate = '__%s__\n\n';
+var subtitleTemplate = '_%s_\n\n';
+var versionTemplate = '# %s %s (%s)\n\n';
 
 function printHeader(stream, options, date) {
 
   debug('printing header');
+  if(options.logo){
+    stream.write(format(logoTemplate, options.logo));
+  }
+
+  stream.write(format(titleTemplate, options.app_name));
+
+  if(options.intro){
+    stream.write(format(subtitleTemplate, options.intro));
+  }
+
+  stream.write(format(versionTemplate, options.version || '', options.versionName || '', date));
   stream.write('\n\n---\n');
-  stream.write(format(tpl, options.version, options.logo, options.app_name, options.version, date));
 }
 
 module.exports = printHeader;

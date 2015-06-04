@@ -9,6 +9,7 @@ module.exports = {
   grep_commits: '^fix|^feat|^docs|BREAKING',
   tag: null,
   logo : null,
+  intro : null,
   debug: false,
   sections: [
     {

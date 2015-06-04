@@ -1,11 +1,14 @@
+<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
+
+__Git changelog__
+
+_Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
+
+#   (2015-06-05)
+
 
 
 ---
-<a name="">Version </a>
-<img width="300px" src="http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" />
-__null my name__
-_a project by Google Corp_
-#  v (2015-06-04)
 
 ## Bug Fixes
 

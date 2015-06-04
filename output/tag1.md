@@ -1,19 +1,21 @@
-<a name="">Version 0.2.0</a>
+<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
 
-<img width="300px" src="http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" />
+__Since tag 1 changelog__
 
-__Git changelog__
-
-_a project by Google Corp_
+# squeezy potatoe  (2015-06-05)
 
 
-#  v0.2.0 (2015-04-21)
 
+---
 
 ## Bug Fixes
 
+- Stream didn't close properly
+  ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
   ([c186f2d8](https://github.com/rafinskipg/git-changelog/commit/c186f2d877e7907305953610bcaaef331406178a))
+- **checkPath:** add missing require('path')
+  ([e5dab826](https://github.com/rafinskipg/git-changelog/commit/e5dab826062bd22dd37c8c3d3c24a4d9b4701f6d))
 - **generate:** create path to file if it does not already exist
   ([62f6210f](https://github.com/rafinskipg/git-changelog/commit/62f6210f6895bcf5f9984b26948178b1a93cbc9e))
 - **git_changelog_generate:** pass tag if it exists to gitReadLog
@@ -49,6 +51,7 @@ _a project by Google Corp_
 
 - added documentation for explaining the commit message
 - Added docs
+- **README:** add logo
 - **readme:** Final readme Fixes #1 Closes #1
 
 
