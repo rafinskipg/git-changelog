@@ -53,6 +53,7 @@ grunt.initConfig({
       options: {
         file: 'MyChangelog.md',
         app_name : 'Git changelog',
+        changelogrc : '/files/.changelogrc',
         logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
         intro : 'Git changelog is a utility tool for generating changelogs. It is free and opensource. :)'
       }
@@ -88,7 +89,8 @@ grunt.initConfig({
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
 * **intro** : The introduction text on the header of the changelog. Defaults to `null`
 * **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
-* **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
+* **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'` **DEPRECATED ** use .changelogrc specification
+* **changelogrc ** : Relative path indicating the location of the .changelogrc file, defaults to current dir.
 * **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
 * **debug**: Debug mode, false by default
 
@@ -109,19 +111,19 @@ Use it directly with the common options
 
   Options:
 
-    -h, --help                  output usage information
-    -V, --version               output the version number
-    -e, --extended              Extended log
-    -a, --app_name [app_name]   Name [app_name]
-    -b, --branch [branch_name]  Branch name [branch_name]
-    -f, --file [file]           File [file]
-    -r, --repo_url [url]        Repo url [url]
-    -l, --logo [logo]           Logo path [logo]
-    -i, --intro [intro]         intro text [intro]
-    -t, --tag [tag]             Since tag [tag]
-    -g, --grep [grep]           Grep commits for [grep]
-    -d, --debug                 Debugger
-
+    -h, --help                        output usage information
+    -V, --version                     output the version number
+    -e, --extended                    Extended log
+    -a, --app_name [app_name]         Name [app_name]
+    -b, --branch [branch_name]        Branch name [branch_name]
+    -f, --file [file]                 File [file]
+    -r, --repo_url [url]              Repo url [url]
+    -l, --logo [logo]                 Logo path [logo]
+    -i, --intro [intro]               intro text [intro]
+    -t, --tag [tag]                   Since tag [tag]
+    -rc, --changelogrc [changelogrc]  .changelogrc relative path [changelogrc]
+    -g, --grep [grep]                 Grep commits for [grep]
+    -d, --debug                       Debugger
 
 ```
 
@@ -129,6 +131,27 @@ For example:
 
 ```
 git-changelog -t false -a "My nice application"
+```
+
+## `.changelogrc` specification
+
+The `.changelogrc` file contains the commit specification that you and your team are following.
+
+This specification is used to grep the commits on your log, it contains a valid JSON that will tell git-changelog which sections to include on the changelog. 
+
+_The format of each line is `grep : title`_
+
+```javascript
+{
+  '^fix' : 'Fixes',
+  '^docs' : 'Documentation',
+  '^feat' : 'New features',
+  '^refactor' : 'Refactor',
+  '^chore' : 'Chore',
+  '^style' : 'Style changes',
+  '^test' : 'Tests',
+  'BREAKING' : 'Breaking changes',
+}
 ```
 
 ## Git Commit Guidelines - Source : "Angular JS"
@@ -170,7 +193,10 @@ tag..HEAD.
 Closes #5."
 ```
 
-### Type
+### Example types
+
+**You may define your own types refering to the `.changelogrc` specification**
+
 Must be one of the following:
 
 * **feat**: A new feature
