@@ -11,6 +11,7 @@ module.exports = {
   logo : null,
   intro : null,
   debug: false,
+  changelogrc : null,
   sections: [
     {
       title: 'Bug Fixes',

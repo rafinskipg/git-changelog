@@ -18,6 +18,7 @@ function initOptions(params) {
   this.message('grep_commits', this.options.grep_commits);
   this.message('debug', this.options.debug);
   this.message('version', this.options.version);
+  this.message('changelogrc', this.options.changelogrc);
 
 }
 

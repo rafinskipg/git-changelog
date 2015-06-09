@@ -1,10 +1,6 @@
-<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
+__my name__
 
-__Git changelog__
-
-_Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
-
-#   (2015-06-05)
+#   (2015-06-10)
 
 
 

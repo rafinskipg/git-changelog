@@ -21,6 +21,7 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
     .option('-l, --logo [logo]', 'Logo path [logo]')
     .option('-i, --intro [intro]', 'intro text [intro]')
     .option('-t, --tag [tag]', 'Since tag [tag]')
+    .option('-rc, --changelogrc [changelogrc]', '.changelogrc relative path [changelogrc]')
     .option('-g, --grep [grep]', 'Grep commits for [grep]')
     .option('-d, --debug', 'Debugger')
     .parse(process.argv);
@@ -46,6 +47,10 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
 
   if (program.file){
     options.file = program.file;
+  }
+
+  if (program.changelogrc){
+    options.changelogrc = program.changelogrc;
   }
 
   if (program.logo){

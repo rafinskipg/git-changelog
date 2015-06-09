@@ -4,7 +4,7 @@ var debug = require('debug')('changelog:generate');
 var q = require('q');
 var fse = require('fs-extra');
 
-function generateFromCommits(deferred, commits) {
+function generateFromCommits(deferred, commits, sections) {
   var stream;
 
   this.message('parsed commits', commits.length);
@@ -17,7 +17,7 @@ function generateFromCommits(deferred, commits) {
     stream = process.stdout;
   }
 
-  this.writeChangelog(stream, commits)
+  this.writeChangelog(stream, commits, sections)
     .then(deferred.resolve.bind(deferred, this.options));
 }
 

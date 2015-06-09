@@ -101,6 +101,12 @@ describe('git_changelog_generate.js', function() {
         expect(changelog.options.msg).to.contain('file: test');
       });
 
+      it('should store "changelogrc" if passed as an option', function() {
+        changelog.initOptions({ changelogrc: 'test' });
+        expect(changelog.options.changelogrc).to.equal('test');
+        expect(changelog.options.msg).to.contain('changelogrc: test');
+      });
+
       it('should store "logo" if passed as an option', function() {
         changelog.initOptions({ logo: 'test' });
         expect(changelog.options.logo).to.equal('test');
@@ -776,7 +782,8 @@ describe('git_changelog_generate.js', function() {
 
         changelog.log('test');
         expect(console.log).to.have.been.calledOnce;
-        expect(console.log).to.have.been.calledWith('test');
+
+        expect(console.log).to.have.been.calledWithMatch('test');
         console.log.restore();
       });
 

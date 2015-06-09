@@ -11,8 +11,10 @@ function getRepoSuccess(deferred, url) {
 
   this.getProviderLinks();
   this.getGitLogCommands();
-
-  deferred.resolve(this.options);
+  this.getCommitSections()
+    .then(function(){
+      deferred.resolve(this.options);
+    }.bind(this));
 }
 
 function getRepoFailure(deferred, err) {
