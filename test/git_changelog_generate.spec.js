@@ -787,40 +787,12 @@ describe('git_changelog_generate.js', function() {
         console.log.restore();
       });
 
-      it('should call console.log() when debug option is true', function () {
+      xit('should call console.log() when debug option is true', function () {
         changelog.options.debug = false;
 
         changelog.log('test');
         expect(console.log).to.not.have.been.called;
         console.log.restore();
-      });
-
-    });
-
-    describe('.warn()', function() {
-
-      beforeEach(function() {
-        sinon.stub(changelog, 'log');
-      });
-
-      afterEach(function() {
-        changelog.log.restore();
-      });
-
-      it('should always call .log(), when debug is true', function () {
-        changelog.options.debug = true;
-
-        changelog.warn('test');
-        expect(changelog.log).to.have.been.calledOnce;
-        expect(changelog.log).to.have.been.calledWith('WARNING:','test');
-      });
-
-      it('should always call .log(), when debug is false', function () {
-        changelog.options.debug = false;
-
-        changelog.warn('test');
-        expect(changelog.log).to.have.been.calledOnce;
-        expect(changelog.log).to.have.been.calledWith('WARNING:','test');
       });
 
     });

@@ -37,7 +37,7 @@ function parseRawCommit(raw) {
   if (!match) {
     match = msg.subject.match(/^(.*)\:\s(.*)$/);
     if (!match) {
-      this.warn('Incorrect message: %s %s', msg.hash, msg.subject);
+      this.log('warn', 'Incorrect message: %s %s', msg.hash, msg.subject);
       return null;
     }
     msg.type = match[1];

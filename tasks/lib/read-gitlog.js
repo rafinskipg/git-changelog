@@ -36,7 +36,7 @@ function readGitLog(git_log_command, from) {
   var deferred = q.defer();
 
   git_log_command = gitLogCommand.call(this, git_log_command, from);
-  this.log('Executing : ', git_log_command);
+  this.log('debug', 'Executing : ', git_log_command);
   debug('executing git log command');
   child.exec(git_log_command , {timeout: 1000}, cmdDone.bind(this, deferred));
 

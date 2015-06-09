@@ -35,7 +35,6 @@ Changelog.prototype.getRepoUrl = require('./lib/get-repo-url');
 Changelog.prototype.generate = require('./lib/generate');
 
 Changelog.prototype.log = require('./lib/log');
-Changelog.prototype.warn = require('./lib/warn');
 
 var changelog = new Changelog();
 

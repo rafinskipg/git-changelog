@@ -8,8 +8,8 @@ function generateFromCommits(deferred, commits, sections) {
   var stream;
 
   this.message('parsed commits', commits.length);
-  this.log('Parsed', commits.length, 'commits');
-  this.log('Generating changelog to', this.options.file || 'stdout', '(', this.options.version, ')');
+  this.log('debug', 'Parsed', commits.length, 'commits');
+  this.log('info','Generating changelog to', this.options.file || 'stdout', '(', this.options.version, ')');
 
   if (this.options.file) {
     stream = fse.createOutputStream(this.options.file);
@@ -25,11 +25,11 @@ function generateFromTag(deferred, tag) {
   var readGitLog;
 
   if (typeof(tag) !== 'undefined' && tag !== false) {
-    this.log('Reading git log since', tag);
+    this.log('info', 'Reading git log since', tag);
     this.message('since tag', tag);
     readGitLog = this.readGitLog.bind(this, this.cmd.gitLog, tag);
   } else {
-    this.log('Reading git log since the beggining');
+    this.log('info', 'Reading git log since the beggining');
     this.message('since beggining');
     readGitLog = this.readGitLog.bind(this, this.cmd.gitLogNoTag);
   }

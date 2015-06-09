@@ -79,11 +79,11 @@ if (process.argv.join('').indexOf('/grunt') === -1) {
     options.grep_commits = program.grep;
   }
 
-  console.log('  - The APP name is %s', options.app_name);
-  console.log('  - The output file is %s', options.file);
+  git_changelog.log('info', '  - The APP name is %s', options.app_name);
+  git_changelog.log('info', '  - The output file is %s', options.file);
 
   git_changelog.generate(options).then(function(){
-    console.log('Finished generating log Yai!');
+    git_changelog.log('success', 'Finished generating log Yai!');
   });
 
 }
