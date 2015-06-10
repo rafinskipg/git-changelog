@@ -17,10 +17,10 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Breaking changes](#breaking-changes)
-- [Getting Started](#getting-started)
 - [`.changelogrc` specification](#changelogrc-specification)
 - [The "git_changelog" task](#the-git_changelog-task)
   - [Grunt Task](#grunt-task)
+    - [Getting Started](#getting-started)
     - [Options | Defaults](#options-%7C-defaults)
   - [Command Line](#command-line)
 - [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--angular-js)
