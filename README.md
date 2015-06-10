@@ -7,26 +7,38 @@
 
 > A git changelog based on ANGULAR JS commit standards (but adaptable to your needs). [NPM page][npm-url]
 
-<!-- MarkdownTOC -->
-
-- [Breaking changes][breaking-changes]
-- [Getting Started][getting-started]
-- [The "git_changelog" task][the-git_changelog-task]
-- [`.changelogrc` specification][changelogrc-specification]
-- [Git Commit Guidelines - Source : "Angular JS"][git-commit-guidelines---source--angular-js]
-- [Tagging your project][tagging-your-project]
-- [ROADMAP][roadmap]
-- [Release History][release-history]
-- [Contributors][contributors]
-
-<!-- /MarkdownTOC -->
-
-
 **Works as a `CLI` option or `grunt` plugin**
 
 [Example output](https://github.com/rafinskipg/git-changelog/blob/master/EXTENDEDCHANGELOG.md)
 
-<a name="breaking-changes"></a>
+----
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Breaking changes](#breaking-changes)
+- [Getting Started](#getting-started)
+- [`.changelogrc` specification](#changelogrc-specification)
+- [The "git_changelog" task](#the-git_changelog-task)
+  - [Grunt Task](#grunt-task)
+    - [Options | Defaults](#options-%7C-defaults)
+  - [Command Line](#command-line)
+- [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--angular-js)
+  - [Commit Message Format](#commit-message-format)
+  - [Example types](#example-types)
+  - [Scope](#scope)
+  - [Subject](#subject)
+  - [Body](#body)
+  - [Footer](#footer)
+- [Tagging your project](#tagging-your-project)
+- [ROADMAP](#roadmap)
+  - [v0.3.0](#v030)
+- [Release History](#release-history)
+- [Contributors](#contributors)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
 ## Breaking changes
 
 Since version `0.2.0` git-changelog has included the [`.changelogrc` specification][changelog_specification] and has discontinued the next things:
@@ -35,7 +47,6 @@ Since version `0.2.0` git-changelog has included the [`.changelogrc` specificati
 - `tag = false` && `group=false` will log from the begining of the project, without grouping by tag
 
 
-<a name="getting-started"></a>
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
@@ -51,10 +62,37 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('git-changelog');
 ```
 
-<a name="the-git_changelog-task"></a>
+
+## `.changelogrc` specification
+
+The `.changelogrc` file contains the commit specification that you and your team are following.
+
+This specification is used to grep the commits on your log, it contains a valid JSON that will tell git-changelog which sections to include on the changelog. 
+
+_The format of each line im the sections is `grep : SectionTitle`_
+
+```javascript
+{
+  tag : 'v0.2.0', 
+  logo : '/images/logo.png',
+  name : 'Git-changelog - Changelog',
+  intro : 'Git changelog important changes since the last version',
+  sections : {
+    '^fix' : 'Fixes',
+    '^docs' : 'Documentation',
+    '^feat' : 'New features',
+    '^refactor' : 'Refactor',
+    '^chore' : 'Chore',
+    '^style' : 'Style changes',
+    '^test' : 'Tests',
+    'BREAKING' : 'Breaking changes',
+  }
+}
+```
+
 ## The "git_changelog" task
 
-### Overview
+### Grunt Task
 In your project's Gruntfile, add a section named `git_changelog` to the data object passed into `grunt.initConfig()`.
 
 ```js
@@ -93,7 +131,7 @@ grunt.initConfig({
 })
 ```
 
-### Options | Defaults
+#### Options | Defaults
 
 * **branch_name** : The name of the branch. Defaults to ` `
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
@@ -145,35 +183,7 @@ For example:
 git-changelog -t false -a "My nice application"
 ```
 
-<a name="changelogrc-specification"></a>
-## `.changelogrc` specification
 
-The `.changelogrc` file contains the commit specification that you and your team are following.
-
-This specification is used to grep the commits on your log, it contains a valid JSON that will tell git-changelog which sections to include on the changelog. 
-
-_The format of each line is `grep : title`_
-
-```javascript
-{
-  tag : 'v0.2.0', 
-  logo : '/images/logo.png',
-  name : 'Git-changelog - Changelog',
-  intro : 'Git changelog important changes since the last version',
-  sections : {
-    '^fix' : 'Fixes',
-    '^docs' : 'Documentation',
-    '^feat' : 'New features',
-    '^refactor' : 'Refactor',
-    '^chore' : 'Chore',
-    '^style' : 'Style changes',
-    '^test' : 'Tests',
-    'BREAKING' : 'Breaking changes',
-  }
-}
-```
-
-<a name="git-commit-guidelines---source--angular-js"></a>
 ## Git Commit Guidelines - Source : "Angular JS"
 
 We have very precise rules over how our git commit messages can be formatted.  This leads to **more
@@ -251,7 +261,6 @@ reference GitHub issues that this commit **Closes**.
 A detailed explanation can be found in this [document][commit-message-format].
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
 
-<a name="tagging-your-project"></a>
 ## Tagging your project
 
 In order to have you project versions correctly displayed on your changelog, try to use this commit message format:
@@ -272,7 +281,6 @@ If you are publishing NPM modules you can let NPM [do that for you][npm-versioni
 npm version patch -m "chore(release): %s codename(furious-stallman)"
 ```
 
-<a name="roadmap"></a>
 ## ROADMAP
 
 ### v0.3.0
@@ -280,11 +288,9 @@ npm version patch -m "chore(release): %s codename(furious-stallman)"
 
 ![Evolution](http://1.bp.blogspot.com/-YgUV9XTA9Rk/UVHhe4vJA-I/AAAAAAAAEyg/RPL3sjMQb0k/s1600/scala-naturae-robots.png)
 
-<a name="release-history"></a>
 ## Release History
 _(Nothing yet)_
 
-<a name="contributors"></a>
 ## Contributors
 
 _Add your name here by contributing to this project_
