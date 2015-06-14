@@ -1,6 +1,6 @@
-__my name__
+__My app - Changelog__
 
-#   (2015-06-10)
+#   (2015-06-15)
 
 
 
@@ -8,7 +8,11 @@ __my name__
 
 ## Documentation
 
-- **README:** added more commit examples and npm versioning usage
+- **README:**
+  - Reorder contents
+  - TOC
+  - Added more information on the new specification
+  - added more commit examples and npm versioning usage
 
 
 

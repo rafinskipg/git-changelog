@@ -1,6 +1,5 @@
 'use strict';
 
-var debug = require('debug')('changelog:init');
 var q = require('q');
 
 function getRepoSuccess(deferred, url) {
@@ -12,9 +11,8 @@ function getRepoSuccess(deferred, url) {
   this.getProviderLinks();
   this.getGitLogCommands();
   this.getCommitSections()
-    .then(function(){
-      deferred.resolve(this.options);
-    }.bind(this));
+    .then(deferred.resolve)
+    .catch(deferred.reject);
 }
 
 function getRepoFailure(deferred, err) {
@@ -23,7 +21,7 @@ function getRepoFailure(deferred, err) {
 }
 
 function init(params) {
-  debug('initializing ...');
+  this.log('debug', 'Initializing changelog options');
   var self = this;
   var deferred = q.defer();
 

@@ -14,7 +14,7 @@ function cmdDone(deferred, code, stdout, stderr) {
 }
 
 function getPreviousTag() {
-  debug('getting previous tag');
+  this.log('debug', 'Getting last tag');
   var deferred = q.defer();
 
   if (this.options.tag) {
