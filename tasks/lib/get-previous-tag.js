@@ -22,7 +22,7 @@ function getPreviousTag() {
   } else if (this.options.tag === false) {
     deferred.resolve(false);
   } else {
-    //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
+    //IF we dont find a previous tag, we get all the commits from the beginning - The bigbang of the code
     debug('calling git tag command');
     child.exec(this.cmd.gitTag, cmdDone.bind(null, deferred));
   }
