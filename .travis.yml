@@ -23,5 +23,5 @@ before_script:
 
 after_script:
   - istanbul cover node_modules/.bin/_mocha -- -R dot
-  - codeclimate < ./coverage/lcov.info
+  - codeclimate-test-reporter < ./coverage/lcov.info
   - grunt
