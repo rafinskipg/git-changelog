@@ -1,6 +1,6 @@
 'use strict';
 
-var debug = require('debug')('changelog:getCommitSections');
+var debug = require('debug')('changelog:loadChangelogRc');
 var q = require('q'),
   fs = require('fs');
 
@@ -31,28 +31,35 @@ function readDefaultSections(){
   return this.options.sections;
 }
 
-function getCommitSections() {
-  this.log('debug','getting repo url');
-
+function loadChangelogRc() {
+  this.log('debug','loading changelog rc specification from', this.options.changelogrc);
+  var module = this;
   var deferred = q.defer();
 
   readChangelogRcFile(this.options.changelogrc, this.log.bind(this))
     .then(function(contents){
+
       try{
-        var options = JSON.parse(contents);
-        this.options.sections = options.sections;
-        //TODO: Read git changelog.rc for all options not just sections
+        contents = JSON.parse(contents);
+
+        deferred.resolve(contents);
       }catch(e){
-        console.log(e);
+        module.log('warn', 'Invalid changelogrc file', e);
+        return deferred.reject(e);
       }
-      deferred.resolve(contents);
+
     })
     .catch(function(){
-      this.log('warn', 'No .changelog.rc file found, using default settings',this.options.sections);
-      deferred.resolve();
+      var sectionNames = module.options.sections.map(function(section){
+        return section.title;
+      }).join(', ');
+
+      module.log('warn', 'No .changelog.rc file found, using default settings');
+      module.log('info', 'Sections: ', sectionNames);
+      deferred.resolve({});
     }.bind(this));
 
   return deferred.promise;
 }
 
-module.exports = getCommitSections;
+module.exports = loadChangelogRc;

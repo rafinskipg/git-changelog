@@ -14,7 +14,6 @@ function cmdDone(deferred, code, stdout, stderr) {
 }
 
 function getPreviousTag() {
-  this.log('debug', 'Getting last tag');
   var deferred = q.defer();
 
   if (this.options.tag) {
@@ -22,6 +21,7 @@ function getPreviousTag() {
   } else if (this.options.tag === false) {
     deferred.resolve(false);
   } else {
+    this.log('debug', 'Getting last tag');
     //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
     debug('calling git tag command');
     child.exec(this.cmd.gitTag, cmdDone.bind(null, deferred));

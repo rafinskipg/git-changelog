@@ -47,7 +47,10 @@ function generate(params) {
   this.init(params)
     .then(this.getPreviousTag.bind(this))
     .then(generateFromTag.bind(this, deferred))
-    .catch(deferred.reject.bind(deferred));
+    .catch(function(err){
+      self.log('error', err);
+      deferred.reject(err);
+    });
 
   return deferred.promise;
 }

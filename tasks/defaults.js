@@ -6,7 +6,6 @@ module.exports = {
   version : '',
   file: 'CHANGELOG.md',
   app_name : 'My app - Changelog',
-  grep_commits: '^fix|^feat|^docs|BREAKING',
   tag: null,
   logo : null,
   intro : null,

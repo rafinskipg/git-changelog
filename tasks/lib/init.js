@@ -1,18 +1,17 @@
 'use strict';
 
 var q = require('q');
+var _ = require('lodash');
 
 function getRepoSuccess(deferred, url) {
-  var provider;
+  var module = this;
 
   this.options.repo_url = url;
   this.message('remote', this.options.repo_url);
 
   this.getProviderLinks();
   this.getGitLogCommands();
-  this.getCommitSections()
-    .then(deferred.resolve)
-    .catch(deferred.reject);
+  deferred.resolve();
 }
 
 function getRepoFailure(deferred, err) {
@@ -22,12 +21,28 @@ function getRepoFailure(deferred, err) {
 
 function init(params) {
   this.log('debug', 'Initializing changelog options');
-  var self = this;
+  var module = this;
+
   var deferred = q.defer();
 
   this.initOptions(params);
 
-  this.getRepoUrl()
+  this.loadChangelogRc()
+    .then(function(options) {
+
+      module.options = _.defaults(options, module.options);
+
+      module.log('info', '  - The APP name is', module.options.app_name);
+      module.log('info', '  - The output file is', module.options.file);
+
+      module.options.grep_commits = module.options.sections.map(function(section) {
+        return section.grep;
+      }).join('|');
+
+      module.log('debug', 'Grep commits: ', module.options.grep_commits);
+
+      return module.getRepoUrl();
+    })
     .then(getRepoSuccess.bind(this, deferred))
     .catch(getRepoFailure.bind(this, deferred));
 

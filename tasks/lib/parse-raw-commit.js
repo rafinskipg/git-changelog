@@ -33,19 +33,20 @@ function parseRawCommit(raw) {
 
   msg.body = lines.join('\n');
   match = msg.subject.match(/^(.*)\((.*)\)\:\s(.*)$/);
-
+  //@TODO: match merges and pull request messages
   if (!match) {
     match = msg.subject.match(/^(.*)\:\s(.*)$/);
+    console.log(msg.subject);
     if (!match) {
-      this.log('warn', 'Incorrect message: %s %s', msg.hash, msg.subject);
+      this.log('warn', 'Incorrect message:', msg.hash, msg.subject);
       return null;
     }
     msg.type = match[1];
+    console.log(msg.type);
     msg.subject = match[2];
 
     return msg;
   }
-
   msg.type = match[1];
   msg.component = match[2];
   msg.subject = match[3];

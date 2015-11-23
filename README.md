@@ -45,7 +45,7 @@ Since version `0.2.0` git-changelog has included the [`.changelogrc` specificati
 - `grep_commits` option has been removed
 - `tag = false`, in addition to pick logs fromt the begining of the project, now groups the commits by tag [see example].
 - `tag = false` && `group=false` will log from the begining of the project, without grouping by tag
-
+- `repo_url` fixed as parameter 
 
 ## `.changelogrc` specification
 

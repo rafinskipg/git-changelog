@@ -5,16 +5,16 @@ var format = require('util').format;
 var q = require('q');
 
 function sendToStream(stream, sections, deferred) {
-  //stream.write(format(this.header, , this.currentDate()));
+
+  var module = this;
 
   this.printHeader(stream, this.options, this.currentDate());
-  this.printSection(stream, 'Bug Fixes', sections.fix);
-  this.printSection(stream, 'Features', sections.feat);
-  this.printSection(stream, 'Refactor', sections.refactor, false);
-  this.printSection(stream, 'Style', sections.style, false);
-  this.printSection(stream, 'Test', sections.test, false);
-  this.printSection(stream, 'Chore', sections.chore, false);
-  this.printSection(stream, 'Documentation', sections.docs, false);
+
+  this.options.sections.forEach(function(section){
+    var sectionType = section.grep.replace('^', '');
+    module.printSection(stream, section.title, sections[sectionType]);
+  });
+
   if (sections.breaks[this.emptyComponent].length > 0 ) {
     this.printSection(stream, 'Breaking Changes', sections.breaks, false);
   }
@@ -28,15 +28,13 @@ function writeChangelog(stream, commits) {
   debug('writing change log');
   var deferred = q.defer();
   var sections = {
-    fix: {},
-    feat: {},
-    breaks: {},
-    style: {},
-    refactor: {},
-    test: {},
-    chore: {},
-    docs: {}
+    breaks : {}
   };
+
+  this.options.sections.forEach(function(sectionInfo){
+    var sectionType = sectionInfo.grep.replace('^', '');
+    sections[sectionType] = {}; 
+  });
 
   sections.breaks[this.emptyComponent] = [];
   this.organizeCommits(commits, sections);
