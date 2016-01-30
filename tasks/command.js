@@ -35,8 +35,8 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     options.app_name = program.app_name;
   }
 
-  if (program.branch_name){
-    options.branch_name = program.branch_name;
+  if (program.branch){
+    options.branch_name = program.branch;
     console.log('  - Branch %s', program.branch);
   }
   if (program.debug){
