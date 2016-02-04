@@ -12,8 +12,9 @@ var options = _.defaults({}, defaults);
 if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
 
   program
-    .version('0.1.7')
+    .version(require('../package').version)
     .option('-e, --extended', 'Extended log')
+    .option('-n, --version_name [version_name]', 'Name of the version')
     .option('-a, --app_name [app_name]', 'Name [app_name]')
     .option('-b, --branch [branch_name]', 'Branch name [branch_name]')
     .option('-f, --file [file]', 'File [file]')
@@ -29,6 +30,10 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
   if (program.extended){
     console.log('  - Extended, getting log since the BigBang');
     options.tag = false;
+  }
+
+  if (program.version_name){
+    options.versionName = program.version_name;
   }
 
   if (program.app_name){
