@@ -17,7 +17,7 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     .option('-a, --app_name [app_name]', 'Name [app_name]')
     .option('-b, --branch [branch_name]', 'Branch name [branch_name]')
     .option('-f, --file [file]', 'File [file]')
-    .option('-r, --repo_url [url]', 'Repo url [url]')
+    .option('-r, --repo_url [repo_url]', 'Repo url [repo_url]')
     .option('-l, --logo [logo]', 'Logo path [logo]')
     .option('-i, --intro [intro]', 'intro text [intro]')
     .option('-t, --tag [tag]', 'Since tag [tag]')
@@ -55,9 +55,9 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     options.intro = program.intro;
   }
 
-  if (program.url){
-    options.repo_url = program.url;
-    console.log('  - With URL %s', program.url);
+  if (program.repo_url){
+    options.repo_url = program.repo_url;
+    console.log('  - With URL %s', program.repo_url);
   }
 
   if (program.tag !== undefined){
