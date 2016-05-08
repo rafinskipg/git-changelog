@@ -3,8 +3,23 @@
 var debug = require('debug')('changelog:organizeCommits');
 var format = require('util').format;
 
+function grepSection(sections, commit){
+  //TODO: MONKEY METHOD, please use the regexp greps
+
+  var keys = Object.keys(sections);
+
+  for (var i = 0; i < keys.length; i++){
+    if(commit.subject.indexOf(keys[i]) === 0){
+      return sections[keys[i]];
+    }
+  }
+
+  return null;
+}
+
 function organizeCommit(sections, commit) {
-  var section = sections[commit.type];
+  var section = commit.type ? sections[commit.type] : grepSection(sections, commit) ;
+  
   var component = commit.component || this.emptyComponent;
 
   if (section) {

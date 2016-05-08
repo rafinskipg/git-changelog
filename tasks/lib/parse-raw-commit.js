@@ -42,7 +42,7 @@ function parseRawCommit(raw) {
       this.log('warn', 'Incorrect message:', msg.hash, msg.subject);
       //return null;
     }
-    msg.type = match ? match[1] : 'unknown';
+    msg.type = match ? match[1] : null;
     msg.subject = match ? match[2] : msg.subject;
 
     return msg;

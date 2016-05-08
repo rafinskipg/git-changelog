@@ -37,6 +37,12 @@ __my name__
   ([2d252d89](https://github.com/rafinskipg/git-changelog/commit/2d252d89017a70008896497e36f03e9d2add2c97))
 
 
+## Test
+
+- Tests fixed
+  ([b9edae3b](https://github.com/rafinskipg/git-changelog/commit/b9edae3bfc64f2a8c2320f6f27326225bd586cc7))
+
+
 ## Chore
 
 - typos and grammar

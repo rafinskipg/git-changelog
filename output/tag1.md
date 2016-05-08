@@ -10,8 +10,12 @@ __Since tag 1 changelog__
 
 ## Bug Fixes
 
+- Fix generation of logs
+  ([cddb2408](https://github.com/rafinskipg/git-changelog/commit/cddb2408fa3017be704acac51dabbba9f477a547))
 - correctly detect when running under grunt on Windows
   ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
+- fixed tests
+  ([2e60172a](https://github.com/rafinskipg/git-changelog/commit/2e60172a4666c70d27e66d15dad297b89fff9583))
 - Stream didn't close properly
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
@@ -28,6 +32,30 @@ __Since tag 1 changelog__
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
 - **package.json:** move q to dependancies since it is required to run
   ([257119cf](https://github.com/rafinskipg/git-changelog/commit/257119cf2bb6d8f341a5d65a2f47bcf803dff205))
+
+
+## Pull requests merged
+
+- Merge pull request #46 from zoner14/master
+  ([0485a1fd](https://github.com/rafinskipg/git-changelog/commit/0485a1fd4bf01662f50b93098c6b535eb7c527eb))
+- Merge pull request #37 from richardthombs/fix-grunt-on-windows
+  ([5f024339](https://github.com/rafinskipg/git-changelog/commit/5f02433963b5b603c5763bd5c1a37cf8ca9e3598))
+- Merge pull request #33 from richardthombs/fix-typos
+  ([2656d150](https://github.com/rafinskipg/git-changelog/commit/2656d150eb95c6ad9326e4265ba64edf8e49a11c))
+- Merge pull request #30 from JohnnyEstilles/refactor/get-stream
+  ([a52b1169](https://github.com/rafinskipg/git-changelog/commit/a52b1169a2510d83d6d4fd5113ce157f30c4d4d0))
+- Merge pull request #25 from JohnnyEstilles/code-climate
+  ([28053b92](https://github.com/rafinskipg/git-changelog/commit/28053b9292d3d61fb33a004f6088c244e653b76b))
+- Merge pull request #23 from JohnnyEstilles/docs/readme-updates
+  ([3079151a](https://github.com/rafinskipg/git-changelog/commit/3079151a8d5f90d0830aab4437a65dff4d837b2a))
+- Merge pull request #20 from JohnnyEstilles/feature/code-refactoring
+  ([be209f04](https://github.com/rafinskipg/git-changelog/commit/be209f04c22f1ce2cb82e6412c4ddf117897a9e7))
+- Merge pull request #12 from jodybrewster/master
+  ([219ea809](https://github.com/rafinskipg/git-changelog/commit/219ea8091ac81a55b0210c9a7fd41a7f0ee5660f))
+- Merge pull request #7 from colegleason/fix-tags
+  ([1d4f6043](https://github.com/rafinskipg/git-changelog/commit/1d4f604363094d4eee3b4d7b1ca01133edaad344))
+- Merge pull request #6 from colegleason/add-q
+  ([2a712b9c](https://github.com/rafinskipg/git-changelog/commit/2a712b9cfd912f36b6f7f70d16b336575881881a))
 
 
 
