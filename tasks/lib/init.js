@@ -19,15 +19,16 @@ function getRepoFailure(deferred, err) {
   deferred.reject("Sorry, you've not configured an origin remote or passed a `repo_url` config value");
 }
 
-function init(params) {
+function init(params, loadRC) {
   this.log('debug', 'Initializing changelog options');
   var module = this;
 
   var deferred = q.defer();
 
   this.initOptions(params);
-
-  this.loadChangelogRc()
+  var promise = loadRC ? this.loadChangelogRc() : new Promise(function (resolve) { resolve(params) });
+  
+  promise
     .then(function(options) {
 
       module.options = _.defaults(options, module.options);

@@ -47,7 +47,17 @@ module.exports = function(grunt) {
           logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
           version : 'squeezy potatoe',
           tag: 'v0.0.1',
-          debug: true
+          debug: true,
+          sections: [
+            {
+              "title": "Bug Fixes",
+              "grep": "^fix"
+            },
+            {
+              "title": "Pull requests merged",
+              "grep": "^Merge pull request"
+            }
+          ]
         }
       },
       extended: {
@@ -61,44 +71,44 @@ module.exports = function(grunt) {
           file : 'EXTENDEDCHANGELOG.md',
           sections: [
             {
-                "title": "Bug Fixes",
-                "grep": "^fix"
+              "title": "Bug Fixes",
+              "grep": "^fix"
             },
             {
-                "title": "Features",
-                "grep": "^feat"
+              "title": "Features",
+              "grep": "^feat"
             },
             {
-                "title": "Documentation",
-                "grep": "^docs"
+              "title": "Documentation",
+              "grep": "^docs"
             },
             {
-                "title": "Breaking changes",
-                "grep": "BREAKING"
+              "title": "Breaking changes",
+              "grep": "BREAKING"
             },
             {
-                "title": "Refactor",
-                "grep": "^refactor"
+              "title": "Refactor",
+              "grep": "^refactor"
             },
             {
-                "title": "Style",
-                "grep": "^style"
+              "title": "Style",
+              "grep": "^style"
             },
             {
-                "title": "Test",
-                "grep": "^test"
+              "title": "Test",
+              "grep": "^test"
             },
             {
-                "title": "Chore",
-                "grep": "^chore"
+              "title": "Chore",
+              "grep": "^chore"
             },
             {
-                "title": "Branchs merged",
-                "grep": "^Merge branch"
+              "title": "Branchs merged",
+              "grep": "^Merge branch"
             },
             {
-                "title" : "Pull requests merged",
-                "grep": "^Merge pull request"
+              "title" : "Pull requests merged",
+              "grep": "^Merge pull request"
             }
           ]
         }

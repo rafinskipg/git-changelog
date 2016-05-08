@@ -26,10 +26,6 @@ function readChangelogRcFile(changelogrc, logger) {
   return dfd.promise;
 }
 
-function readDefaultSections(){
-  
-  return this.options.sections;
-}
 
 function loadChangelogRc() {
   this.log('debug','loading changelog rc specification from', this.options.changelogrc);

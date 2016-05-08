@@ -36,14 +36,14 @@ function parseRawCommit(raw) {
   //@TODO: match merges and pull request messages
   if (!match) {
     match = msg.subject.match(/^(.*)\:\s(.*)$/);
-    console.log(msg.subject);
+    
     if (!match) {
+      //console.log(msg.subject, '------------');
       this.log('warn', 'Incorrect message:', msg.hash, msg.subject);
-      return null;
+      //return null;
     }
-    msg.type = match[1];
-    console.log(msg.type);
-    msg.subject = match[2];
+    msg.type = match ? match[1] : 'unknown';
+    msg.subject = match ? match[2] : msg.subject;
 
     return msg;
   }

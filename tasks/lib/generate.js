@@ -39,12 +39,12 @@ function generateFromTag(deferred, tag) {
     .catch(console.log.bind(console, 'error'));
 }
 
-function generate(params) {
+function generate(params, loadRC) {
   debug('generating ...');
   var self = this;
   var deferred = q.defer();
 
-  this.init(params)
+  this.init(params, loadRC)
     .then(this.getPreviousTag.bind(this))
     .then(generateFromTag.bind(this, deferred))
     .catch(function(err){

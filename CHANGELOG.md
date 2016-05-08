@@ -10,9 +10,19 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ---
 
+## Bug Fixes
+
+- correctly detect when running under grunt on Windows
+  ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
+
+
 ## Documentation
 
+- Updated readme with the correct specification
+  ([ec2de4bf](https://github.com/rafinskipg/git-changelog/commit/ec2de4bf599dfc77c24c9b86ee9c0d86fe37e5b8))
 - **README:**
+  - Follow proper style in example commits
+  ([6fef01ba](https://github.com/rafinskipg/git-changelog/commit/6fef01ba8a71bb5cd779ddb84f52b8f75296618d))
   - Reorder contents
   ([14e8a772](https://github.com/rafinskipg/git-changelog/commit/14e8a772c3a05c32bc9fba6f75565132025d4942))
   - TOC
@@ -31,6 +41,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Chore
 
+- typos and grammar
+  ([5ae2ee52](https://github.com/rafinskipg/git-changelog/commit/5ae2ee52d1f096d375d077299047684eae2cd5e2))
 - **cleanup:**
   - remove unnecessary code [skip ci]
   ([80dbe3ec](https://github.com/rafinskipg/git-changelog/commit/80dbe3ec7a28e7c20d99e89009856c70138350b0))
@@ -42,4 +54,4 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 
 ---
-<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problem or suggestion, create an issue.* :) **Thanks** </sub></sup>
+<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problems or suggestions, create an issue.* :) **Thanks** </sub></sup>

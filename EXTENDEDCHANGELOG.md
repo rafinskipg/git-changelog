@@ -12,6 +12,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Bug Fixes
 
+- correctly detect when running under grunt on Windows
+  ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
 - Stream didn't close properly
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
@@ -53,6 +55,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Documentation
 
+- Updated readme with the correct specification
+  ([ec2de4bf](https://github.com/rafinskipg/git-changelog/commit/ec2de4bf599dfc77c24c9b86ee9c0d86fe37e5b8))
 - Updated options and tagging info
   ([1ad3b6be](https://github.com/rafinskipg/git-changelog/commit/1ad3b6bedc6431b70e3a2e93e5967bad9a7830ee))
 - added documentation for explaining the commit message
@@ -60,6 +64,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 - Added docs
   ([e0ba50c0](https://github.com/rafinskipg/git-changelog/commit/e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644))
 - **README:**
+  - Follow proper style in example commits
+  ([6fef01ba](https://github.com/rafinskipg/git-changelog/commit/6fef01ba8a71bb5cd779ddb84f52b8f75296618d))
   - Reorder contents
   ([14e8a772](https://github.com/rafinskipg/git-changelog/commit/14e8a772c3a05c32bc9fba6f75565132025d4942))
   - TOC
@@ -134,6 +140,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Chore
 
+- typos and grammar
+  ([5ae2ee52](https://github.com/rafinskipg/git-changelog/commit/5ae2ee52d1f096d375d077299047684eae2cd5e2))
 - a couple of spelling corrections [ci skip]
   ([1486a845](https://github.com/rafinskipg/git-changelog/commit/1486a84537c5fd2d7997721820981c7949487af2))
 - minor edits to README
@@ -225,4 +233,4 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 
 ---
-<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problem or suggestion, create an issue.* :) **Thanks** </sub></sup>
+<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problems or suggestions, create an issue.* :) **Thanks** </sub></sup>
