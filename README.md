@@ -155,8 +155,8 @@ to read on github as well as in various git tools.
 Example commit messages
 
 ```
-git commit -m "docs(readme): added documentation for explaining the commit message"
-git commit -m "refactor: Changed other things"
+git commit -m "docs(readme): Add documentation for explaining the commit message"
+git commit -m "refactor: Change other things"
 ```
 
 Closing issues : 
