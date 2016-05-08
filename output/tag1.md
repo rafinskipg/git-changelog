@@ -10,16 +10,16 @@ __Since tag 1 changelog__
 
 ## Bug Fixes
 
-- correctly get branch name from the command line
-  ([4baa075b](https://github.com/rafinskipg/git-changelog/commit/4baa075bd93f878ee708817f911fe89c102dec02))
+- Fix generation of logs
+  ([cddb2408](https://github.com/rafinskipg/git-changelog/commit/cddb2408fa3017be704acac51dabbba9f477a547))
 - correctly detect when running under grunt on Windows
   ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
+- fixed tests
+  ([2e60172a](https://github.com/rafinskipg/git-changelog/commit/2e60172a4666c70d27e66d15dad297b89fff9583))
 - Stream didn't close properly
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
   ([c186f2d8](https://github.com/rafinskipg/git-changelog/commit/c186f2d877e7907305953610bcaaef331406178a))
-- **Options:** use repo_url instead of url
-  ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
 - **checkPath:** add missing require('path')
   ([e5dab826](https://github.com/rafinskipg/git-changelog/commit/e5dab826062bd22dd37c8c3d3c24a4d9b4701f6d))
 - **generate:** create path to file if it does not already exist
@@ -32,43 +32,30 @@ __Since tag 1 changelog__
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
 - **package.json:** move q to dependancies since it is required to run
   ([257119cf](https://github.com/rafinskipg/git-changelog/commit/257119cf2bb6d8f341a5d65a2f47bcf803dff205))
-- **params:** Restores versionName in CLI
-  ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
 
-## Features
+## Pull requests merged
 
-- improve `git log` synthax command to use the branch name
-  ([4ce61281](https://github.com/rafinskipg/git-changelog/commit/4ce6128103ece64b44695ac196b457e63649229b))
-- CLI option with git-changelog
-  ([50af9f0a](https://github.com/rafinskipg/git-changelog/commit/50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe))
-- Working on new API
-  ([121b9928](https://github.com/rafinskipg/git-changelog/commit/121b99285d2a04f9159951fa0e3f849d0d618fef))
-- **bootstrap:** creating initial structure
-  ([dea45d68](https://github.com/rafinskipg/git-changelog/commit/dea45d68ce9555e876680bf7c0778add2f367a30))
-- **grunt-plugin:**
-  - Commit for research purposes
-  ([5afbb7a9](https://github.com/rafinskipg/git-changelog/commit/5afbb7a95c9f0e985f78666e7e231967524a8928))
-  - Now it is ready to be a grunt plugin
-  ([6422e055](https://github.com/rafinskipg/git-changelog/commit/6422e0552b30f6e94d11b03310a23c1342aa5965))
-- **options:** Added ignore tags option
-  ([95362e8b](https://github.com/rafinskipg/git-changelog/commit/95362e8b57a673e810ffe54ff3337de1ea5109a8))
-- **output:** added logo in printHeader
-  ([6b489450](https://github.com/rafinskipg/git-changelog/commit/6b489450a90172dc57059d7fd55fb4c6110152b2))
-- **package:** Added global install so you can run via command
-  ([86eae3f0](https://github.com/rafinskipg/git-changelog/commit/86eae3f013ace1c5c23afc32b2e8f878a69629f1))
-
-
-## Documentation
-
-- Updated options and tagging info
-- added documentation for explaining the commit message
-- Added docs
-- **README:**
-  - Follow proper style in example commits
-  - added more commit examples and npm versioning usage
-  - add logo
-- **readme:** Final readme Fixes #1 Closes #1
+- Merge pull request #46 from zoner14/master
+  ([0485a1fd](https://github.com/rafinskipg/git-changelog/commit/0485a1fd4bf01662f50b93098c6b535eb7c527eb))
+- Merge pull request #37 from richardthombs/fix-grunt-on-windows
+  ([5f024339](https://github.com/rafinskipg/git-changelog/commit/5f02433963b5b603c5763bd5c1a37cf8ca9e3598))
+- Merge pull request #33 from richardthombs/fix-typos
+  ([2656d150](https://github.com/rafinskipg/git-changelog/commit/2656d150eb95c6ad9326e4265ba64edf8e49a11c))
+- Merge pull request #30 from JohnnyEstilles/refactor/get-stream
+  ([a52b1169](https://github.com/rafinskipg/git-changelog/commit/a52b1169a2510d83d6d4fd5113ce157f30c4d4d0))
+- Merge pull request #25 from JohnnyEstilles/code-climate
+  ([28053b92](https://github.com/rafinskipg/git-changelog/commit/28053b9292d3d61fb33a004f6088c244e653b76b))
+- Merge pull request #23 from JohnnyEstilles/docs/readme-updates
+  ([3079151a](https://github.com/rafinskipg/git-changelog/commit/3079151a8d5f90d0830aab4437a65dff4d837b2a))
+- Merge pull request #20 from JohnnyEstilles/feature/code-refactoring
+  ([be209f04](https://github.com/rafinskipg/git-changelog/commit/be209f04c22f1ce2cb82e6412c4ddf117897a9e7))
+- Merge pull request #12 from jodybrewster/master
+  ([219ea809](https://github.com/rafinskipg/git-changelog/commit/219ea8091ac81a55b0210c9a7fd41a7f0ee5660f))
+- Merge pull request #7 from colegleason/fix-tags
+  ([1d4f6043](https://github.com/rafinskipg/git-changelog/commit/1d4f604363094d4eee3b4d7b1ca01133edaad344))
+- Merge pull request #6 from colegleason/add-q
+  ([2a712b9c](https://github.com/rafinskipg/git-changelog/commit/2a712b9cfd912f36b6f7f70d16b336575881881a))
 
 
 

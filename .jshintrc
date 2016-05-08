@@ -12,5 +12,6 @@
   "node": true,
   "mocha": true,
   "expr": true,
-  "validthis": true
+  "validthis": true,
+  "esnext": true
 }

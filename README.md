@@ -5,29 +5,130 @@
 [![Test Coverage][coverage-badge]][codeclimate-url]
 [![Code Climate][codeclimate-badge]][codeclimate-url]
 
-> A git changelog based on ANGULAR JS commit standards. [NPM page][npm-url]
+> A git changelog based on ANGULAR JS commit standards (but adaptable to your needs). [NPM page][npm-url]
 
 **Works as a `CLI` option or `grunt` plugin**
 
 [Example output](https://github.com/rafinskipg/git-changelog/blob/master/EXTENDEDCHANGELOG.md)
 
-## NEWS!
+----
 
-version 0.1.7 is out, special thanks to [JohnnyEstilles][JohnnyEstilles] for his work.
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-This release includes a big refactor with a huge improvement on test coverage.
+- [Breaking changes](#breaking-changes)
+- [`.changelogrc` specification](#changelogrc-specification)
+- [The "git_changelog" task](#the-git_changelog-task)
+  - [Grunt Task](#grunt-task)
+    - [Getting Started](#getting-started)
+    - [Options | Defaults](#options-%7C-defaults)
+  - [Command Line](#command-line)
+- [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--angular-js)
+  - [Commit Message Format](#commit-message-format)
+  - [Example types](#example-types)
+  - [Scope](#scope)
+  - [Subject](#subject)
+  - [Body](#body)
+  - [Footer](#footer)
+- [Tagging your project](#tagging-your-project)
+- [ROADMAP](#roadmap)
+  - [v0.3.0](#v030)
+- [Release History](#release-history)
+- [Contributors](#contributors)
 
-**Git changelog is secure enough**
-
-Next releases will include:
-- Downloadable resources area on the generated changelog, for linking to your zip project folder of certain tag.
-- .gitchangelogrc specification. That will allow using any comment standards for your commit messages.
-
-![Good news](http://www.labspaces.net/pictures/blog/4e5466b7dc69f1314154167_blog.jpg)
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-## Getting Started
-This plugin requires Grunt `~0.4.1`
+## Breaking changes
+
+Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelog_specification) and has discontinued the next options:
+- `grep_commits` option has been removed in favour of the changelogrc options
+- `tag = false`, in addition to pick logs from the begining of the project, now groups the commits by tag [see example]. **TODO**
+- `tag = false` && `group=false` will log from the begining of the project, without grouping by tag **TODO**
+- `repo_url` fixed as parameter 
+- `branch_name` changed to `branch`
+
+## `.changelogrc` specification
+
+The `.changelogrc` file contains the "standard commit guideliness" that you and your team are following.
+
+This specification is used to grep the commits on your log, it contains a valid JSON that will tell git-changelog which sections to include on the changelog. 
+
+```javascript
+    {
+    "app_name": "Git Changelog",
+    "logo": "https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png",
+    "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
+    "branch" : "",
+    "repo_url": "",
+    "version" : "v1.0.0",
+    "file": 'CHANGELOG.md',
+    "sections": [
+        {
+            "title": "Bug Fixes",
+            "grep": "^fix"
+        },
+        {
+            "title": "Features",
+            "grep": "^feat"
+        },
+        {
+            "title": "Documentation",
+            "grep": "^docs"
+        },
+        {
+            "title": "Breaking changes",
+            "grep": "BREAKING"
+        },
+        {
+            "title": "Refactor",
+            "grep": "^refactor"
+        },
+        {
+            "title": "Style",
+            "grep": "^style"
+        },
+        {
+            "title": "Test",
+            "grep": "^test"
+        },
+        {
+            "title": "Chore",
+            "grep": "^chore"
+        },
+        {
+            "title": "Branchs merged",
+            "grep": "^Merge branch"
+        },
+        {
+            "title" : "Pull requests merged",
+            "grep": "^Merge pull request"
+        }
+    ]
+}
+```
+
+### Options | Defaults
+
+* **branch** : The name of the branch. Defaults to ` `
+* **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
+* **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
+* **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
+* **app_name** : The name of the project. Defaults to `My App - Changelog`
+* **intro** : The introduction text on the header of the changelog. Defaults to `null`
+* **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
+* **changelogrc ** : Relative path indicating the location of the .changelogrc file, defaults to current dir.
+* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
+* **debug**: Debug mode, false by default
+* **sections**: Group the commit by sections. The sections included by default are the ones that are on the previous example of .changelogrc file.
+
+
+## The "git_changelog" task
+
+### Grunt Task
+
+#### Getting Started
+This plugin requires Grunt `1.0.0`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -41,9 +142,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('git-changelog');
 ```
 
-## The "git_changelog" task
 
-### Overview
 In your project's Gruntfile, add a section named `git_changelog` to the data object passed into `grunt.initConfig()`.
 
 ```js
@@ -53,16 +152,26 @@ grunt.initConfig({
       options: {
         file: 'MyChangelog.md',
         app_name : 'Git changelog',
+        changelogrc : '/files/.changelogrc',
         logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
         intro : 'Git changelog is a utility tool for generating changelogs. It is free and opensource. :)'
       }
     },
     extended: {
       options: {
-        repo_url: 'https://github.com/rafinskipg/git-changelog',
         app_name : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
-        grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING',
+        version : 'squeezy potatoe',
+        sections : [
+          {
+            "title": "Test commits",
+            "grep": "^test"
+          },
+          {
+            "title": "New Awesome Features!",
+            "grep": "^feat"
+          }
+        ],
         debug: true,
         tag : false //False for commits since the beggining
       }
@@ -79,18 +188,6 @@ grunt.initConfig({
 })
 ```
 
-### Options | Defaults
-
-* **branch_name** : The name of the branch. Defaults to ` `
-* **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
-* **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
-* **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
-* **app_name** : The name of the project. Defaults to `My App - Changelog`
-* **intro** : The introduction text on the header of the changelog. Defaults to `null`
-* **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
-* **grep_commits**: The commits that will be picked. Defaults to `'^fix|^feat|^docs|^refactor|^chore|BREAKING'`
-* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
-* **debug**: Debug mode, false by default
 
 ### Command Line
 Install it globally
@@ -109,19 +206,19 @@ Use it directly with the common options
 
   Options:
 
-    -h, --help                  output usage information
-    -V, --version               output the version number
-    -e, --extended              Extended log
-    -a, --app_name [app_name]   Name [app_name]
-    -b, --branch [branch_name]  Branch name [branch_name]
-    -f, --file [file]           File [file]
-    -r, --repo_url [url]        Repo url [url]
-    -l, --logo [logo]           Logo path [logo]
-    -i, --intro [intro]         intro text [intro]
-    -t, --tag [tag]             Since tag [tag]
-    -g, --grep [grep]           Grep commits for [grep]
-    -d, --debug                 Debugger
-
+    -h, --help                        output usage information
+    -V, --version                     output the version number
+    -e, --extended                    Extended log
+    -a, --app_name [app_name]         Name [app_name]
+    -b, --branch [branch]   Branch name [branch]
+    -f, --file [file]                 File [file]
+    -r, --repo_url [url]              Repo url [url]
+    -l, --logo [logo]                 Logo path [logo]
+    -i, --intro [intro]               intro text [intro]
+    -t, --tag [tag]                   Since tag [tag]
+    -rc, --changelogrc [changelogrc]  .changelogrc relative path [changelogrc]
+    -g, --grep [grep]                 Grep commits for [grep]
+    -d, --debug                       Debugger
 
 ```
 
@@ -130,6 +227,7 @@ For example:
 ```
 git-changelog -t false -a "My nice application"
 ```
+
 
 ## Git Commit Guidelines - Source : "Angular JS"
 
@@ -170,7 +268,10 @@ tag..HEAD.
 Closes #5."
 ```
 
-### Type
+### Example types
+
+**You may define your own types refering to the `.changelogrc` specification**
+
 Must be one of the following:
 
 * **feat**: A new feature
@@ -225,11 +326,31 @@ If you are publishing NPM modules you can let NPM [do that for you][npm-versioni
 npm version patch -m "chore(release): %s codename(furious-stallman)"
 ```
 
-## Contributing
-In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+## ROADMAP
+
+### v2.0.0
+- Downloadable resources area on the generated changelog, for linking to your zip project folder of certain tag.
+
+![Evolution](http://1.bp.blogspot.com/-YgUV9XTA9Rk/UVHhe4vJA-I/AAAAAAAAEyg/RPL3sjMQb0k/s1600/scala-naturae-robots.png)
 
 ## Release History
-_(Nothing yet)_
+
+### v1.0.0
+
+- Support for `.changelogrc`
+
+
+## Contributors
+
+_Add your name here by contributing to this project_
+
+- [rafinskipg][Rafinskipg]
+- [JohnnyEstilles][JohnnyEstilles]
+- [colegleason][colegleason]
+- [jodybrewster][jodybrewster]
+
+
+
 
 [logo-image]: images/git-changelog-logo.png
 
@@ -244,5 +365,12 @@ _(Nothing yet)_
 
 [coverage-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/coverage.svg
 
+[Rafinskipg]: https://github.com/rafinskipg
 [JohnnyEstilles]: https://github.com/JohnnyEstilles
+
+[jodybrewster]: https://github.com/jodybrewster
+[colegleason]: https://github.com/colegleason
+
+[npm-versioning]: https://docs.npmjs.com/cli/version
+[changelog_specification]: https://github.com/rafinskipg/git-changelog/#changelog-specification
 [npm-versioning]: https://docs.npmjs.com/cli/version

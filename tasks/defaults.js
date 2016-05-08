@@ -1,16 +1,16 @@
 //Defaults options
 module.exports = {
-  branch_name : '',
+  branch : '',
   //[G]ithub [B]itbucket supported at the momment
   repo_url: '',
   version : '',
   file: 'CHANGELOG.md',
   app_name : 'My app - Changelog',
-  grep_commits: '^fix|^feat|^docs|BREAKING',
   tag: null,
   logo : null,
   intro : null,
   debug: false,
+  changelogrc : '.changelogrc',
   sections: [
     {
       title: 'Bug Fixes',

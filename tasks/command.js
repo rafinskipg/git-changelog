@@ -16,17 +16,19 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     .option('-e, --extended', 'Extended log')
     .option('-n, --version_name [version_name]', 'Name of the version')
     .option('-a, --app_name [app_name]', 'Name [app_name]')
-    .option('-b, --branch [branch_name]', 'Branch name [branch_name]')
+    .option('-b, --branch [branch]', 'Branch name [branch]')
     .option('-f, --file [file]', 'File [file]')
     .option('-r, --repo_url [repo_url]', 'Repo url [repo_url]')
     .option('-l, --logo [logo]', 'Logo path [logo]')
     .option('-i, --intro [intro]', 'intro text [intro]')
     .option('-t, --tag [tag]', 'Since tag [tag]')
+    .option('-rc, --changelogrc [changelogrc]', '.changelogrc relative path [changelogrc]')
     .option('-g, --grep [grep]', 'Grep commits for [grep]')
     .option('-d, --debug', 'Debugger')
     .parse(process.argv);
 
   console.log('Executing git changelog:');
+
   if (program.extended){
     console.log('  - Extended, getting log since the BigBang');
     options.tag = false;
@@ -41,7 +43,7 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
   }
 
   if (program.branch){
-    options.branch_name = program.branch;
+    options.branch = program.branch;
     console.log('  - Branch %s', program.branch);
   }
   if (program.debug){
@@ -51,6 +53,10 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
 
   if (program.file){
     options.file = program.file;
+  }
+
+  if (program.changelogrc){
+    options.changelogrc = program.changelogrc;
   }
 
   if (program.logo){
@@ -75,15 +81,8 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     }
   }
 
-  if (program.grep){
-    options.grep_commits = program.grep;
-  }
-
-  console.log('  - The APP name is %s', options.app_name);
-  console.log('  - The output file is %s', options.file);
-
-  git_changelog.generate(options).then(function(){
-    console.log('Finished generating log Yai!');
+  git_changelog.generate(options, true).then(function(){
+    git_changelog.log('success', 'Finished generating log Yai!');
   });
 
 }
