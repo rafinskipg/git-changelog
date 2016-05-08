@@ -1,6 +1,6 @@
 <img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
 
-__Git Changelog__
+__Git changelog extended__
 
 _Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
 
@@ -12,8 +12,12 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Bug Fixes
 
+- Fix generation of logs
+  ([cddb2408](https://github.com/rafinskipg/git-changelog/commit/cddb2408fa3017be704acac51dabbba9f477a547))
 - correctly detect when running under grunt on Windows
   ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
+- fixed tests
+  ([2e60172a](https://github.com/rafinskipg/git-changelog/commit/2e60172a4666c70d27e66d15dad297b89fff9583))
 - Stream didn't close properly
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
@@ -34,6 +38,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Features
 
+- Show pull requests merged
+  ([65f5504c](https://github.com/rafinskipg/git-changelog/commit/65f5504ce8e92fa39ced7da308e471cc85f750b5))
 - CLI option with git-changelog
   ([50af9f0a](https://github.com/rafinskipg/git-changelog/commit/50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe))
 - Working on new API
@@ -114,6 +120,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Test
 
+- Tests fixed
+  ([b9edae3b](https://github.com/rafinskipg/git-changelog/commit/b9edae3bfc64f2a8c2320f6f27326225bd586cc7))
 - added test for .init(), .getPreviousTag(), getRepoUrl(), .log() and .warn()
   ([fd099a85](https://github.com/rafinskipg/git-changelog/commit/fd099a858b44e67e28f4e18f07c520803f3ac55e))
 - removed unnecessary debug setting (was using for "debugging")
@@ -229,6 +237,38 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([b9432318](https://github.com/rafinskipg/git-changelog/commit/b943231854ffd6cb0c5f32e5482cadd99c96f3e9))
 - **task:** cleanup unused requires
   ([8a41d4e7](https://github.com/rafinskipg/git-changelog/commit/8a41d4e7b245b2698749279765bcef4748e18ac7))
+
+
+## Branchs merged
+
+- Merge branch 'feature/add-logo'
+  ([e29b2dd8](https://github.com/rafinskipg/git-changelog/commit/e29b2dd8e088386eeec3f0c125973de6c8cdc2c6))
+- Merge branch 'development' into feature/code-refactoring
+  ([34ea0198](https://github.com/rafinskipg/git-changelog/commit/34ea0198b976c72c638fd815be5a5913c67ef80a))
+
+
+## Pull requests merged
+
+- Merge pull request #46 from zoner14/master
+  ([0485a1fd](https://github.com/rafinskipg/git-changelog/commit/0485a1fd4bf01662f50b93098c6b535eb7c527eb))
+- Merge pull request #37 from richardthombs/fix-grunt-on-windows
+  ([5f024339](https://github.com/rafinskipg/git-changelog/commit/5f02433963b5b603c5763bd5c1a37cf8ca9e3598))
+- Merge pull request #33 from richardthombs/fix-typos
+  ([2656d150](https://github.com/rafinskipg/git-changelog/commit/2656d150eb95c6ad9326e4265ba64edf8e49a11c))
+- Merge pull request #30 from JohnnyEstilles/refactor/get-stream
+  ([a52b1169](https://github.com/rafinskipg/git-changelog/commit/a52b1169a2510d83d6d4fd5113ce157f30c4d4d0))
+- Merge pull request #25 from JohnnyEstilles/code-climate
+  ([28053b92](https://github.com/rafinskipg/git-changelog/commit/28053b9292d3d61fb33a004f6088c244e653b76b))
+- Merge pull request #23 from JohnnyEstilles/docs/readme-updates
+  ([3079151a](https://github.com/rafinskipg/git-changelog/commit/3079151a8d5f90d0830aab4437a65dff4d837b2a))
+- Merge pull request #20 from JohnnyEstilles/feature/code-refactoring
+  ([be209f04](https://github.com/rafinskipg/git-changelog/commit/be209f04c22f1ce2cb82e6412c4ddf117897a9e7))
+- Merge pull request #12 from jodybrewster/master
+  ([219ea809](https://github.com/rafinskipg/git-changelog/commit/219ea8091ac81a55b0210c9a7fd41a7f0ee5660f))
+- Merge pull request #7 from colegleason/fix-tags
+  ([1d4f6043](https://github.com/rafinskipg/git-changelog/commit/1d4f604363094d4eee3b4d7b1ca01133edaad344))
+- Merge pull request #6 from colegleason/add-q
+  ([2a712b9c](https://github.com/rafinskipg/git-changelog/commit/2a712b9cfd912f36b6f7f70d16b336575881881a))
 
 
 

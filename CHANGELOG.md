@@ -1,4 +1,8 @@
-__my name__
+<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
+
+__Git changelog__
+
+_Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
 
 #   (2016-05-08)
 
@@ -12,6 +16,12 @@ __my name__
   ([cddb2408](https://github.com/rafinskipg/git-changelog/commit/cddb2408fa3017be704acac51dabbba9f477a547))
 - correctly detect when running under grunt on Windows
   ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
+
+
+## Features
+
+- Show pull requests merged
+  ([65f5504c](https://github.com/rafinskipg/git-changelog/commit/65f5504ce8e92fa39ced7da308e471cc85f750b5))
 
 
 ## Documentation

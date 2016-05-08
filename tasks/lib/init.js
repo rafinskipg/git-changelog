@@ -26,8 +26,8 @@ function init(params, loadRC) {
   var deferred = q.defer();
 
   this.initOptions(params);
-  var promise = loadRC ? this.loadChangelogRc() : new Promise(function (resolve) { resolve(params) });
-  
+  var promise = loadRC ? this.loadChangelogRc() : new Promise(function (resolve) { resolve(params); });
+
   promise
     .then(function(options) {
 
