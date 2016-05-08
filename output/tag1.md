@@ -2,7 +2,7 @@
 
 __Since tag 1 changelog__
 
-# squeezy potatoe  (2015-06-05)
+# squeezy potatoe  (2016-05-08)
 
 
 
@@ -10,10 +10,16 @@ __Since tag 1 changelog__
 
 ## Bug Fixes
 
+- correctly get branch name from the command line
+  ([4baa075b](https://github.com/rafinskipg/git-changelog/commit/4baa075bd93f878ee708817f911fe89c102dec02))
+- correctly detect when running under grunt on Windows
+  ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
 - Stream didn't close properly
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
   ([c186f2d8](https://github.com/rafinskipg/git-changelog/commit/c186f2d877e7907305953610bcaaef331406178a))
+- **Options:** use repo_url instead of url
+  ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
 - **checkPath:** add missing require('path')
   ([e5dab826](https://github.com/rafinskipg/git-changelog/commit/e5dab826062bd22dd37c8c3d3c24a4d9b4701f6d))
 - **generate:** create path to file if it does not already exist
@@ -26,10 +32,14 @@ __Since tag 1 changelog__
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
 - **package.json:** move q to dependancies since it is required to run
   ([257119cf](https://github.com/rafinskipg/git-changelog/commit/257119cf2bb6d8f341a5d65a2f47bcf803dff205))
+- **params:** Restores versionName in CLI
+  ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
 
 ## Features
 
+- improve `git log` synthax command to use the branch name
+  ([4ce61281](https://github.com/rafinskipg/git-changelog/commit/4ce6128103ece64b44695ac196b457e63649229b))
 - CLI option with git-changelog
   ([50af9f0a](https://github.com/rafinskipg/git-changelog/commit/50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe))
 - Working on new API
@@ -55,6 +65,7 @@ __Since tag 1 changelog__
 - added documentation for explaining the commit message
 - Added docs
 - **README:**
+  - Follow proper style in example commits
   - added more commit examples and npm versioning usage
   - add logo
 - **readme:** Final readme Fixes #1 Closes #1
@@ -62,4 +73,4 @@ __Since tag 1 changelog__
 
 
 ---
-<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problem or suggestion, create an issue.* :) **Thanks** </sub></sup>
+<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problems or suggestions, create an issue.* :) **Thanks** </sub></sup>
