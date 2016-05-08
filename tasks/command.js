@@ -15,7 +15,7 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     .version('0.1.7')
     .option('-e, --extended', 'Extended log')
     .option('-a, --app_name [app_name]', 'Name [app_name]')
-    .option('-b, --branch [branch_name]', 'Branch name [branch_name]')
+    .option('-b, --branch [branch]', 'Branch name [branch]')
     .option('-f, --file [file]', 'File [file]')
     .option('-r, --repo_url [repo_url]', 'Repo url [repo_url]')
     .option('-l, --logo [logo]', 'Logo path [logo]')
@@ -37,8 +37,8 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     options.app_name = program.app_name;
   }
 
-  if (program.branch_name){
-    options.branch_name = program.branch_name;
+  if (program.branch){
+    options.branch = program.branch;
     console.log('  - Branch %s', program.branch);
   }
   if (program.debug){

@@ -1,8 +1,4 @@
-<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
-
-__Git changelog__
-
-_Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
+__my name__
 
 #   (2016-05-08)
 
@@ -55,6 +51,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Chore
 
+- Remove grunt from peer dependencies
+  ([f6111d31](https://github.com/rafinskipg/git-changelog/commit/f6111d31f0c70f8368d2a57ea708bf58990f6bfd))
+- Updated jshint
+  ([1d5f6b1d](https://github.com/rafinskipg/git-changelog/commit/1d5f6b1d471e9d48ac2b4c7c8b78e3e5a8021ff4))
 - typos and grammar
   ([5ae2ee52](https://github.com/rafinskipg/git-changelog/commit/5ae2ee52d1f096d375d077299047684eae2cd5e2))
 - **cleanup:**

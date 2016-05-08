@@ -58,15 +58,10 @@ This specification is used to grep the commits on your log, it contains a valid 
     "app_name": "Git Changelog",
     "logo": "https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png",
     "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
-    "branch_name" : "",
+    "branch" : "",
     "repo_url": "",
-    "version" : '',
+    "version" : "v1.0.0",
     "file": 'CHANGELOG.md',
-    
-    tag: null,
-    
-    
-    debug: false,
     "sections": [
         {
             "title": "Bug Fixes",
@@ -114,7 +109,7 @@ This specification is used to grep the commits on your log, it contains a valid 
 
 ### Options | Defaults
 
-* **branch_name** : The name of the branch. Defaults to ` `
+* **branch** : The name of the branch. Defaults to ` `
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
 * **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
@@ -132,7 +127,7 @@ This specification is used to grep the commits on your log, it contains a valid 
 ### Grunt Task
 
 #### Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `1.0.0`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -165,6 +160,7 @@ grunt.initConfig({
       options: {
         app_name : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
+        version : 'squeezy potatoe',
         sections : [
           {
             "title": "Test commits",
@@ -213,7 +209,7 @@ Use it directly with the common options
     -V, --version                     output the version number
     -e, --extended                    Extended log
     -a, --app_name [app_name]         Name [app_name]
-    -b, --branch [branch_name]        Branch name [branch_name]
+    -b, --branch [branch]   Branch name [branch]
     -f, --file [file]                 File [file]
     -r, --repo_url [url]              Repo url [url]
     -l, --logo [logo]                 Logo path [logo]
@@ -331,13 +327,17 @@ npm version patch -m "chore(release): %s codename(furious-stallman)"
 
 ## ROADMAP
 
-### v0.3.0
+### v2.0.0
 - Downloadable resources area on the generated changelog, for linking to your zip project folder of certain tag.
 
 ![Evolution](http://1.bp.blogspot.com/-YgUV9XTA9Rk/UVHhe4vJA-I/AAAAAAAAEyg/RPL3sjMQb0k/s1600/scala-naturae-robots.png)
 
 ## Release History
-_(Nothing yet)_
+
+### v1.0.0
+
+- Support for `.changelogrc`
+
 
 ## Contributors
 

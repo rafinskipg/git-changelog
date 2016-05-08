@@ -1,6 +1,6 @@
 //Defaults options
 module.exports = {
-  branch_name : '',
+  branch : '',
   //[G]ithub [B]itbucket supported at the momment
   repo_url: '',
   version : '',

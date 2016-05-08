@@ -182,13 +182,13 @@ describe('git_changelog_generate.js', function() {
         changelog.setDefaults();
       });
 
-      it('should generate "git log" commands for "branch_name"', function() {
-        var branch_name = 'master';
-        changelog.options.branch_name = branch_name;
+      it('should generate "git log" commands for "branch"', function() {
+        var branch = 'master';
+        changelog.options.branch = branch;
         changelog.getGitLogCommands();
 
-        expect(changelog.cmd.gitLog).to.include('git log ' + branch_name);
-        expect(changelog.cmd.gitLogNoTag).to.include('git log ' + branch_name);
+        expect(changelog.cmd.gitLog).to.include('git log ' + branch);
+        expect(changelog.cmd.gitLogNoTag).to.include('git log ' + branch);
       });
 
     });
