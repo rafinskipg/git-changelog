@@ -1,7 +1,7 @@
 {
   "name": "git-changelog",
   "description": "A git changelog tool",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "homepage": "https://github.com/rafinskipg/git-changelog",
   "author": {
     "name": "rafinskipg",
