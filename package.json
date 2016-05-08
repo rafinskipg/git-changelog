@@ -1,6 +1,6 @@
 {
   "name": "git-changelog",
-  "description": "A git changelog based on ANGULAR JS commit standards",
+  "description": "A git changelog tool",
   "version": "0.1.8",
   "homepage": "https://github.com/rafinskipg/git-changelog",
   "author": {
@@ -22,7 +22,7 @@
   ],
   "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.12.0"
   },
   "scripts": {
     "pre-test": "grunt",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "chai": "^2.2.0",
     "chai-as-promised": "^5.0.0",
-    "grunt": "^0.4.5",
+    "grunt": "^1.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-mocha-test": "^0.12.1",
@@ -54,9 +54,6 @@
     "mocha": "^2.2.4",
     "sinon": "^1.14.1",
     "sinon-chai": "^2.7.0"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.1"
   },
   "keywords": [
     "gruntplugin, git, git-changelog, angularjs, angular, commit, log"
