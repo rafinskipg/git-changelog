@@ -186,8 +186,9 @@ describe('git_changelog_generate.js', function() {
         var branch = 'master';
         changelog.options.branch = branch;
         changelog.getGitLogCommands();
+        expect(changelog.cmd.gitLog).to.include('git log ')
+            .and.include('..' + branch);
 
-        expect(changelog.cmd.gitLog).to.include('git log ' + branch);
         expect(changelog.cmd.gitLogNoTag).to.include('git log ' + branch);
       });
 

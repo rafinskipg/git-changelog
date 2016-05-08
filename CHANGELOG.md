@@ -39,6 +39,8 @@ __my name__
 
 ## Refactor
 
+- Refactor branch name
+  ([8774b963](https://github.com/rafinskipg/git-changelog/commit/8774b963fd5e15de1cc1066c91034f9b1d34c4bc))
 - **generate:** replace `#getStream` with `fse#createOutputStream`
   ([2d252d89](https://github.com/rafinskipg/git-changelog/commit/2d252d89017a70008896497e36f03e9d2add2c97))
 

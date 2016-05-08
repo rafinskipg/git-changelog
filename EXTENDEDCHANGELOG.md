@@ -89,6 +89,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Refactor
 
+- Refactor branch name
+  ([8774b963](https://github.com/rafinskipg/git-changelog/commit/8774b963fd5e15de1cc1066c91034f9b1d34c4bc))
 - added debug messages and refactored some additional code
   ([70e48caf](https://github.com/rafinskipg/git-changelog/commit/70e48caf330b7f76fdea474ce58bcf96cb11ccbc))
 - modified the task using a factory pattern to improve testability
@@ -148,6 +150,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Chore
 
+- Remove grunt from peer dependencies
+  ([f6111d31](https://github.com/rafinskipg/git-changelog/commit/f6111d31f0c70f8368d2a57ea708bf58990f6bfd))
+- Updated jshint
+  ([1d5f6b1d](https://github.com/rafinskipg/git-changelog/commit/1d5f6b1d471e9d48ac2b4c7c8b78e3e5a8021ff4))
 - typos and grammar
   ([5ae2ee52](https://github.com/rafinskipg/git-changelog/commit/5ae2ee52d1f096d375d077299047684eae2cd5e2))
 - a couple of spelling corrections [ci skip]
