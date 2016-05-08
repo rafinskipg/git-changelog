@@ -119,11 +119,6 @@ describe('git_changelog_generate.js', function() {
         expect(changelog.options.msg).to.contain('intro: test');
       });
 
-      it('should store "grep_commits" if passed as an option', function() {
-        changelog.initOptions({ grep_commits: 'test' });
-        expect(changelog.options.grep_commits).to.equal('test');
-        expect(changelog.options.msg).to.contain('grep_commits: test');
-      });
 
       it('should store "debug" if passed as an option', function() {
         changelog.initOptions({ debug: 'test' });
@@ -418,6 +413,40 @@ describe('git_changelog_generate.js', function() {
     describe('.writeChangelog()', function() {
 
       describe('without breaking commits', function() {
+        var sections = [
+          {
+            title: 'Bug Fixes',
+            grep: '^fix'
+          },
+          {
+            title: 'Features',
+            grep: '^feat'
+          },
+          {
+            title: 'Documentation',
+            grep: '^docs'
+          },
+          {
+            title: 'Refactor',
+            grep: '^refactor'
+          },
+          {
+            title: 'Style',
+            grep: '^style'
+          },
+          {
+            title: 'Test',
+            grep: '^test'
+          },
+          {
+            title: 'Chore',
+            grep: '^chore'
+          },
+          {
+            title: 'Breaking changes',
+            grep: 'BREAKING'
+          }
+        ];
 
         before(function(done) {
           this.stream = {
@@ -436,7 +465,7 @@ describe('git_changelog_generate.js', function() {
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version' });
+          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections });
           changelog.writeChangelog(this.stream, this.commits).then(function() {
             done();
           });
@@ -460,20 +489,14 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should print 7 sections', function() {
-          var sections = [
-            'Bug Fixes',
-            'Features',
-            'Refactor',
-            'Style',
-            'Test',
-            'Chore',
-            'Documentation'
-          ];
-
           expect(changelog.printSection.callCount).to.equal(7);
           sections.forEach(function(section, index) {
             var call = changelog.printSection.getCall(index);
-            expect(call.args).to.include(section);
+            if(!call){
+              expect(section.title).to.equals('Breaking changes');
+            }else{
+              expect(call.args).to.include(section.title);
+            }
           });
         });
 
@@ -485,6 +508,40 @@ describe('git_changelog_generate.js', function() {
       });
 
       describe('with breaking commits', function() {
+        var sections = [
+          {
+            title: 'Bug Fixes',
+            grep: '^fix'
+          },
+          {
+            title: 'Features',
+            grep: '^feat'
+          },
+          {
+            title: 'Documentation',
+            grep: '^docs'
+          },
+          {
+            title: 'Refactor',
+            grep: '^refactor'
+          },
+          {
+            title: 'Style',
+            grep: '^style'
+          },
+          {
+            title: 'Test',
+            grep: '^test'
+          },
+          {
+            title: 'Chore',
+            grep: '^chore'
+          },
+          {
+            title: 'Breaking Changes',
+            grep: 'BREAKING'
+          }
+        ];
 
         before(function(done) {
           this.stream = {
@@ -499,13 +556,13 @@ describe('git_changelog_generate.js', function() {
           this.commits = require('./fixtures/commits.js').withBreaking;
 
           sinon.stub(changelog, 'organizeCommits', function(commits, sections) {
-            sections.breaks[changelog.emptyComponent] = [ 'breaking commit'];
+            sections.BREAKING[changelog.emptyComponent] = [ 'breaking commit'];
           });
           sinon.stub(changelog, 'printSalute');
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version' });
+          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections });
           changelog.writeChangelog(this.stream, this.commits).then(function() {
             done();
           });
@@ -529,21 +586,10 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should print 8 sections', function() {
-          var sections = [
-            'Bug Fixes',
-            'Features',
-            'Refactor',
-            'Style',
-            'Test',
-            'Chore',
-            'Documentation',
-            'Breaking Changes'
-          ];
-
           expect(changelog.printSection.callCount).to.equal(8);
           sections.forEach(function(section, index) {
             var call = changelog.printSection.getCall(index);
-            expect(call.args).to.include(section);
+            expect(call.args).to.include(section.title);
           });
         });
 
@@ -565,7 +611,7 @@ describe('git_changelog_generate.js', function() {
           this.sections = {
             fix: {},
             feat: {},
-            breaks: {},
+            BREAKING: {},
             style: {},
             refactor: {},
             test: {},
@@ -589,7 +635,7 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should breaks section to be empty', function() {
-          expect(this.sections.breaks).to.deep.equal({});
+          expect(this.sections.BREAKING).to.deep.equal({});
         });
 
         it('should style section to be empty', function() {
@@ -621,7 +667,7 @@ describe('git_changelog_generate.js', function() {
           this.sections = {
             fix: {},
             feat: {},
-            breaks: {},
+            BREAKING: {},
             style: {},
             refactor: {},
             test: {},
@@ -649,7 +695,7 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should breaks section to be empty', function() {
-          expect(this.sections.breaks.$scope.length).to.equal(1);
+          expect(this.sections.BREAKING.$scope.length).to.equal(1);
         });
 
         it('should style section to be empty', function() {

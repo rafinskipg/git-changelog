@@ -12,12 +12,12 @@ function sendToStream(stream, sections, deferred) {
 
   this.options.sections.forEach(function(section){
     var sectionType = section.grep.replace('^', '');
-    module.printSection(stream, section.title, sections[sectionType]);
+    if(sectionType !== 'BREAKING'){
+      module.printSection(stream, section.title, sections[sectionType]);
+    }else if (sections.BREAKING[module.emptyComponent].length > 0 ) {
+      module.printSection(stream, 'Breaking Changes', sections.BREAKING, false);
+    }
   });
-
-  if (sections.breaks[this.emptyComponent].length > 0 ) {
-    this.printSection(stream, 'Breaking Changes', sections.breaks, false);
-  }
 
   this.printSalute(stream);
   stream.end();
@@ -28,7 +28,7 @@ function writeChangelog(stream, commits) {
   debug('writing change log');
   var deferred = q.defer();
   var sections = {
-    breaks : {}
+    BREAKING : {}
   };
 
   this.options.sections.forEach(function(sectionInfo){
@@ -36,7 +36,7 @@ function writeChangelog(stream, commits) {
     sections[sectionType] = {}; 
   });
 
-  sections.breaks[this.emptyComponent] = [];
+  sections.BREAKING[this.emptyComponent] = [];
   this.organizeCommits(commits, sections);
   stream.on('open', sendToStream.bind(this, stream, sections, deferred));
 

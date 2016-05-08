@@ -13,8 +13,8 @@ function organizeCommit(sections, commit) {
   }
 
   if (commit.breaking) {
-    sections.breaks[component] = sections.breaks[component] || [];
-    sections.breaks[component].push({
+    sections.BREAKING[component] = sections.BREAKING[component] || [];
+    sections.BREAKING[component].push({
       subject: format("due to %s,\n %s", this.linkToCommit(commit.hash), commit.breaking),
       hash: commit.hash,
       closes: []
