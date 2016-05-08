@@ -1,7 +1,7 @@
 {
   "name": "git-changelog",
   "description": "A git changelog based on ANGULAR JS commit standards",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "homepage": "https://github.com/rafinskipg/git-changelog",
   "author": {
     "name": "rafinskipg",
