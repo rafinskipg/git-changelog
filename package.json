@@ -47,7 +47,7 @@
     "chai": "^2.2.0",
     "chai-as-promised": "^5.0.0",
     "grunt": "^1.0.0",
-    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-mocha-test": "^0.12.1",
     "istanbul": "^0.3.13",
