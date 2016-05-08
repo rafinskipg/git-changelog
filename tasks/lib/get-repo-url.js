@@ -21,7 +21,7 @@ function getRepoUrl() {
   if (this.options.repo_url) {
     deferred.resolve(this.options.repo_url);
   } else {
-    //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
+    //IF we dont find a previous tag, we get all the commits from the beginning - The bigbang of the code
     debug('calling git repo url command');
     child.exec(this.cmd.gitRepoUrl, cmdDone.bind(null, deferred));
   }

@@ -9,7 +9,7 @@ var _ = require('lodash');
 var options = _.defaults({}, defaults);
 
 
-if (process.argv.join('').indexOf('/grunt') === -1) {
+if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
 
   program
     .version('0.1.7')

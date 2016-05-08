@@ -256,8 +256,8 @@ to read on github as well as in various git tools.
 Example commit messages
 
 ```
-git commit -m "docs(readme): added documentation for explaining the commit message"
-git commit -m "refactor: Changed other things"
+git commit -m "docs(readme): Add documentation for explaining the commit message"
+git commit -m "refactor: Change other things"
 ```
 
 Closing issues : 
@@ -366,8 +366,10 @@ _Add your name here by contributing to this project_
 
 [Rafinskipg]: https://github.com/rafinskipg
 [JohnnyEstilles]: https://github.com/JohnnyEstilles
+
 [jodybrewster]: https://github.com/jodybrewster
 [colegleason]: https://github.com/colegleason
 
 [npm-versioning]: https://docs.npmjs.com/cli/version
 [changelog_specification]: https://github.com/rafinskipg/git-changelog/#changelog-specification
+[npm-versioning]: https://docs.npmjs.com/cli/version

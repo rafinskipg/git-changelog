@@ -16,7 +16,7 @@ function getRepoSuccess(deferred, url) {
 
 function getRepoFailure(deferred, err) {
   this.message('not remote');
-  deferred.reject("Sorry, you doesn't have configured any origin remote or passed a `repo_url` config value");
+  deferred.reject("Sorry, you've not configured an origin remote or passed a `repo_url` config value");
 }
 
 function init(params) {
