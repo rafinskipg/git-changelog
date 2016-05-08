@@ -10,7 +10,7 @@ module.exports = {
   logo : null,
   intro : null,
   debug: false,
-  changelogrc : '.changelog.rc',
+  changelogrc : '.changelogrc',
   sections: [
     {
       title: 'Bug Fixes',

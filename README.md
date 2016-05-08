@@ -41,7 +41,7 @@
 
 ## Breaking changes
 
-Since version `0.2.0` git-changelog has included the [`.changelogrc` specification][changelog_specification] and has discontinued the next things:
+Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelog_specification) and has discontinued the next options:
 - `grep_commits` option has been removed
 - `tag = false`, in addition to pick logs fromt the begining of the project, now groups the commits by tag [see example].
 - `tag = false` && `group=false` will log from the begining of the project, without grouping by tag
@@ -49,30 +49,83 @@ Since version `0.2.0` git-changelog has included the [`.changelogrc` specificati
 
 ## `.changelogrc` specification
 
-The `.changelogrc` file contains the commit specification that you and your team are following.
+The `.changelogrc` file contains the "standard commit guideliness" that you and your team are following.
 
 This specification is used to grep the commits on your log, it contains a valid JSON that will tell git-changelog which sections to include on the changelog. 
 
-_The format of each line im the sections is `grep : SectionTitle`_
-
 ```javascript
-{
-  tag : 'v0.2.0', 
-  logo : '/images/logo.png',
-  name : 'Git-changelog - Changelog',
-  intro : 'Git changelog important changes since the last version',
-  sections : {
-    '^fix' : 'Fixes',
-    '^docs' : 'Documentation',
-    '^feat' : 'New features',
-    '^refactor' : 'Refactor',
-    '^chore' : 'Chore',
-    '^style' : 'Style changes',
-    '^test' : 'Tests',
-    'BREAKING' : 'Breaking changes',
-  }
+    {
+    "app_name": "Git Changelog",
+    "logo": "https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png",
+    "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
+    "branch_name" : "",
+    "repo_url": "",
+    "version" : '',
+    "file": 'CHANGELOG.md',
+    
+    tag: null,
+    
+    
+    debug: false,
+    "sections": [
+        {
+            "title": "Bug Fixes",
+            "grep": "^fix"
+        },
+        {
+            "title": "Features",
+            "grep": "^feat"
+        },
+        {
+            "title": "Documentation",
+            "grep": "^docs"
+        },
+        {
+            "title": "Breaking changes",
+            "grep": "BREAKING"
+        },
+        {
+            "title": "Refactor",
+            "grep": "^refactor"
+        },
+        {
+            "title": "Style",
+            "grep": "^style"
+        },
+        {
+            "title": "Test",
+            "grep": "^test"
+        },
+        {
+            "title": "Chore",
+            "grep": "^chore"
+        },
+        {
+            "title": "Branchs merged",
+            "grep": "^Merge branch"
+        },
+        {
+            "title" : "Pull requests merged",
+            "grep": "^Merge pull request"
+        }
+    ]
 }
 ```
+
+### Options | Defaults
+
+* **branch_name** : The name of the branch. Defaults to ` `
+* **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
+* **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
+* **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
+* **app_name** : The name of the project. Defaults to `My App - Changelog`
+* **intro** : The introduction text on the header of the changelog. Defaults to `null`
+* **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
+* **changelogrc ** : Relative path indicating the location of the .changelogrc file, defaults to current dir.
+* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
+* **debug**: Debug mode, false by default
+* **sections**: Group the commit by sections. The sections included by default are the ones that are on the previous example of .changelogrc file.
+
 
 ## The "git_changelog" task
 
@@ -112,10 +165,16 @@ grunt.initConfig({
       options: {
         app_name : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
-        sections : {
-          '^feat' : 'New features',
-          '^test' : 'Test'
-        },
+        sections : [
+          {
+            "title": "Test commits",
+            "grep": "^test"
+          },
+          {
+            "title": "New Awesome Features!",
+            "grep": "^feat"
+          }
+        ],
         debug: true,
         tag : false //False for commits since the beggining
       }
@@ -132,18 +191,6 @@ grunt.initConfig({
 })
 ```
 
-#### Options | Defaults
-
-* **branch_name** : The name of the branch. Defaults to ` `
-* **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
-* **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
-* **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
-* **app_name** : The name of the project. Defaults to `My App - Changelog`
-* **intro** : The introduction text on the header of the changelog. Defaults to `null`
-* **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
-* **changelogrc ** : Relative path indicating the location of the .changelogrc file, defaults to current dir.
-* **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
-* **debug**: Debug mode, false by default
 
 ### Command Line
 Install it globally

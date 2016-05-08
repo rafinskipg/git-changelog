@@ -1,7 +1,8 @@
-{
+    {
     "app_name": "Git Changelog",
     "logo": "https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png",
     "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
+    "debug": "true",
     "sections": [
         {
             "title": "Bug Fixes",

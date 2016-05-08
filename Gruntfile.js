@@ -59,7 +59,48 @@ module.exports = function(grunt) {
           tag: false,
           debug: true,
           file : 'EXTENDEDCHANGELOG.md',
-          grep_commits: '^fix|^feat|^docs|^refactor|^chore|BREAKING'
+          sections: [
+            {
+                "title": "Bug Fixes",
+                "grep": "^fix"
+            },
+            {
+                "title": "Features",
+                "grep": "^feat"
+            },
+            {
+                "title": "Documentation",
+                "grep": "^docs"
+            },
+            {
+                "title": "Breaking changes",
+                "grep": "BREAKING"
+            },
+            {
+                "title": "Refactor",
+                "grep": "^refactor"
+            },
+            {
+                "title": "Style",
+                "grep": "^style"
+            },
+            {
+                "title": "Test",
+                "grep": "^test"
+            },
+            {
+                "title": "Chore",
+                "grep": "^chore"
+            },
+            {
+                "title": "Branchs merged",
+                "grep": "^Merge branch"
+            },
+            {
+                "title" : "Pull requests merged",
+                "grep": "^Merge pull request"
+            }
+          ]
         }
       }
     },
