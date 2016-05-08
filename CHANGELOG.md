@@ -1,8 +1,4 @@
-<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
-
-__Git Changelog__
-
-_Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
+__my name__
 
 #   (2016-05-08)
 
@@ -12,6 +8,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Bug Fixes
 
+- Fix generation of logs
+  ([cddb2408](https://github.com/rafinskipg/git-changelog/commit/cddb2408fa3017be704acac51dabbba9f477a547))
 - correctly detect when running under grunt on Windows
   ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
 
