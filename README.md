@@ -41,11 +41,11 @@
 
 ## Breaking changes
 
-Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelog_specification) and has discontinued the next options:
-- `grep_commits` option has been removed in favour of the changelogrc options
+Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelogrc-specification) and has discontinued the next options:
+- `grep_commits` option has been removed in favour of the `.changelogrc` options
 - `tag = false`, in addition to pick logs from the begining of the project, now groups the commits by tag [see example]. **TODO**
 - `tag = false` && `group=false` will log from the begining of the project, without grouping by tag **TODO**
-- `repo_url` fixed as parameter 
+- `repo_url` fixed as parameter
 - `branch_name` changed to `branch`
 
 ## `.changelogrc` specification
@@ -55,7 +55,7 @@ The `.changelogrc` file contains the "standard commit guideliness" that you and 
 This specification is used to grep the commits on your log, it contains a valid JSON that will tell git-changelog which sections to include on the changelog. 
 
 ```javascript
-    {
+{
     "app_name": "Git Changelog",
     "logo": "https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png",
     "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
