@@ -97,7 +97,7 @@ describe('changelogrc.spec.js', function() {
 
         sections = changelog.organizeCommits(commits, sections);
 
-        expect(sections.fix.myModule.length).to.equal(10);
+        expect(sections.fix.mymodule.length).to.equal(10);
       });
 
     });

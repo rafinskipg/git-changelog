@@ -24,9 +24,7 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
   ([c186f2d8](https://github.com/rafinskipg/git-changelog/commit/c186f2d877e7907305953610bcaaef331406178a))
-- **Options:** use repo_url instead of url
-  ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
-- **checkPath:** add missing require('path')
+- **checkpath:** add missing require('path')
   ([e5dab826](https://github.com/rafinskipg/git-changelog/commit/e5dab826062bd22dd37c8c3d3c24a4d9b4701f6d))
 - **generate:** create path to file if it does not already exist
   ([62f6210f](https://github.com/rafinskipg/git-changelog/commit/62f6210f6895bcf5f9984b26948178b1a93cbc9e))
@@ -39,6 +37,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 - **nested lists:** nested list fix. Closes #9
   ([22855518](https://github.com/rafinskipg/git-changelog/commit/2285551810919bd4d8a749ae3ddd88f9cedcdd0e),
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
+- **options:** use repo_url instead of url
+  ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
 - **package.json:** move q to dependancies since it is required to run
   ([257119cf](https://github.com/rafinskipg/git-changelog/commit/257119cf2bb6d8f341a5d65a2f47bcf803dff205))
 - **params:** Restores versionName in CLI
@@ -80,7 +80,11 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([d516c2fb](https://github.com/rafinskipg/git-changelog/commit/d516c2fb464072fc1f4c86ec71a910eeab3e830c))
 - Added docs
   ([e0ba50c0](https://github.com/rafinskipg/git-changelog/commit/e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644))
-- **README:**
+- **readme:**
+  - Unuseful commit
+  ([4373f472](https://github.com/rafinskipg/git-changelog/commit/4373f4726eedad6d450c8255f5e57036a3e5e223))
+  - fix link to the `.changelogrc` section
+  ([2975171d](https://github.com/rafinskipg/git-changelog/commit/2975171d89e1823253399bbe87a184e9164e9799))
   - Follow proper style in example commits
   ([6fef01ba](https://github.com/rafinskipg/git-changelog/commit/6fef01ba8a71bb5cd779ddb84f52b8f75296618d))
   - Reorder contents
@@ -93,11 +97,6 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([51341b7a](https://github.com/rafinskipg/git-changelog/commit/51341b7aae082c6c1a1caaa77dfdbfdc2622a56f))
   - add logo
   ([1af36c9b](https://github.com/rafinskipg/git-changelog/commit/1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b))
-- **Readme:** Unuseful commit
-  ([4373f472](https://github.com/rafinskipg/git-changelog/commit/4373f4726eedad6d450c8255f5e57036a3e5e223))
-- **readme:**
-  - fix link to the `.changelogrc` section
-  ([2975171d](https://github.com/rafinskipg/git-changelog/commit/2975171d89e1823253399bbe87a184e9164e9799))
   - Final readme Fixes #1 Closes #1
   ([e725d8f4](https://github.com/rafinskipg/git-changelog/commit/e725d8f4bf477b517ca6185a75fdfa0aa660b3be),
    [#1](https://github.com/rafinskipg/git-changelog/issues/1))
@@ -126,7 +125,7 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([2d252d89](https://github.com/rafinskipg/git-changelog/commit/2d252d89017a70008896497e36f03e9d2add2c97))
 - **lib:** simplify methods and refactor into separate files
   ([7a3600bf](https://github.com/rafinskipg/git-changelog/commit/7a3600bf9a5487cb26e3eb4b65ac774a68b6b91e))
-- **writeChangelog:** method now returns a promise
+- **writechangelog:** method now returns a promise
   ([69fa1b0b](https://github.com/rafinskipg/git-changelog/commit/69fa1b0b11a603683342a9e0626cb69550b92002))
 
 
@@ -160,7 +159,7 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([1fc1e809](https://github.com/rafinskipg/git-changelog/commit/1fc1e809dcca7d499f870c314d2860121fcb6bab))
 - Added unit tests for commit parsing
   ([504a61a7](https://github.com/rafinskipg/git-changelog/commit/504a61a715ed541feee4570810c2153ba8984420))
-- **writeChangelog:** updated test to reflect changes to method
+- **writechangelog:** updated test to reflect changes to method
   ([b999948f](https://github.com/rafinskipg/git-changelog/commit/b999948f2c38f5d002fa0dc535429a80acdf2d75))
 
 

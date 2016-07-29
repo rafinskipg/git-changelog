@@ -22,9 +22,7 @@ __Since tag 1 changelog__
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
   ([c186f2d8](https://github.com/rafinskipg/git-changelog/commit/c186f2d877e7907305953610bcaaef331406178a))
-- **Options:** use repo_url instead of url
-  ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
-- **checkPath:** add missing require('path')
+- **checkpath:** add missing require('path')
   ([e5dab826](https://github.com/rafinskipg/git-changelog/commit/e5dab826062bd22dd37c8c3d3c24a4d9b4701f6d))
 - **generate:** create path to file if it does not already exist
   ([62f6210f](https://github.com/rafinskipg/git-changelog/commit/62f6210f6895bcf5f9984b26948178b1a93cbc9e))
@@ -37,6 +35,8 @@ __Since tag 1 changelog__
 - **nested lists:** nested list fix. Closes #9
   ([22855518](https://github.com/rafinskipg/git-changelog/commit/2285551810919bd4d8a749ae3ddd88f9cedcdd0e),
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
+- **options:** use repo_url instead of url
+  ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
 - **package.json:** move q to dependancies since it is required to run
   ([257119cf](https://github.com/rafinskipg/git-changelog/commit/257119cf2bb6d8f341a5d65a2f47bcf803dff205))
 - **params:** Restores versionName in CLI

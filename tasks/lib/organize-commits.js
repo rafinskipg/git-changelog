@@ -20,8 +20,7 @@ function grepSection(sections, commit){
 function organizeCommit(sections, commit) {
   var section = commit.type ? sections[commit.type] : grepSection(sections, commit) ;
   
-  var component = commit.component || this.emptyComponent;
-
+  var component = commit.component ? commit.component.toLowerCase() : this.emptyComponent;
   if (section) {
     section[component] = section[component] || [];
     section[component].push(commit);
