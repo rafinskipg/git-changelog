@@ -4,7 +4,7 @@ __Git changelog extended__
 
 _Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
 
-#   (2016-05-08)
+#   (2016-07-29)
 
 
 
@@ -14,6 +14,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 - Fix generation of logs
   ([cddb2408](https://github.com/rafinskipg/git-changelog/commit/cddb2408fa3017be704acac51dabbba9f477a547))
+- correctly get branch name from the command line
+  ([4baa075b](https://github.com/rafinskipg/git-changelog/commit/4baa075bd93f878ee708817f911fe89c102dec02))
 - correctly detect when running under grunt on Windows
   ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
 - fixed tests
@@ -22,10 +24,15 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([99f228cf](https://github.com/rafinskipg/git-changelog/commit/99f228cfa5cb26c46ef9e3b00171a5e3d38fd844))
 - Github commit url
   ([c186f2d8](https://github.com/rafinskipg/git-changelog/commit/c186f2d877e7907305953610bcaaef331406178a))
+- **Options:** use repo_url instead of url
+  ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
 - **checkPath:** add missing require('path')
   ([e5dab826](https://github.com/rafinskipg/git-changelog/commit/e5dab826062bd22dd37c8c3d3c24a4d9b4701f6d))
 - **generate:** create path to file if it does not already exist
   ([62f6210f](https://github.com/rafinskipg/git-changelog/commit/62f6210f6895bcf5f9984b26948178b1a93cbc9e))
+- **git log:** Ignores letter case
+  ([d4cff0a8](https://github.com/rafinskipg/git-changelog/commit/d4cff0a86c5ce46405f3c0dd03f9c49a7d620792),
+   [#54](https://github.com/rafinskipg/git-changelog/issues/54))
 - **git_changelog_generate:** pass tag if it exists to gitReadLog
   ([7c801927](https://github.com/rafinskipg/git-changelog/commit/7c801927672792fc9a818653b74c78d77c7bff9e),
    [#5](https://github.com/rafinskipg/git-changelog/issues/5))
@@ -34,12 +41,16 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
 - **package.json:** move q to dependancies since it is required to run
   ([257119cf](https://github.com/rafinskipg/git-changelog/commit/257119cf2bb6d8f341a5d65a2f47bcf803dff205))
+- **params:** Restores versionName in CLI
+  ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
 
 ## Features
 
 - Show pull requests merged
   ([65f5504c](https://github.com/rafinskipg/git-changelog/commit/65f5504ce8e92fa39ced7da308e471cc85f750b5))
+- improve `git log` synthax command to use the branch name
+  ([4ce61281](https://github.com/rafinskipg/git-changelog/commit/4ce6128103ece64b44695ac196b457e63649229b))
 - CLI option with git-changelog
   ([50af9f0a](https://github.com/rafinskipg/git-changelog/commit/50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe))
 - Working on new API
@@ -82,7 +93,12 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([51341b7a](https://github.com/rafinskipg/git-changelog/commit/51341b7aae082c6c1a1caaa77dfdbfdc2622a56f))
   - add logo
   ([1af36c9b](https://github.com/rafinskipg/git-changelog/commit/1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b))
-- **readme:** Final readme Fixes #1 Closes #1
+- **Readme:** Unuseful commit
+  ([4373f472](https://github.com/rafinskipg/git-changelog/commit/4373f4726eedad6d450c8255f5e57036a3e5e223))
+- **readme:**
+  - fix link to the `.changelogrc` section
+  ([2975171d](https://github.com/rafinskipg/git-changelog/commit/2975171d89e1823253399bbe87a184e9164e9799))
+  - Final readme Fixes #1 Closes #1
   ([e725d8f4](https://github.com/rafinskipg/git-changelog/commit/e725d8f4bf477b517ca6185a75fdfa0aa660b3be),
    [#1](https://github.com/rafinskipg/git-changelog/issues/1))
 
@@ -150,6 +166,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Chore
 
+- updated grunt contrib clean
+  ([e28c0c76](https://github.com/rafinskipg/git-changelog/commit/e28c0c763b7953861c05bcbedf04c3d6d48f8243))
 - Remove grunt from peer dependencies
   ([f6111d31](https://github.com/rafinskipg/git-changelog/commit/f6111d31f0c70f8368d2a57ea708bf58990f6bfd))
 - Updated jshint
@@ -239,7 +257,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([990b8ea0](https://github.com/rafinskipg/git-changelog/commit/990b8ea04ca04f3c907653b0fa89ae6ddd601092))
 - **package.json:** Added preversion script
   ([b3f1e44a](https://github.com/rafinskipg/git-changelog/commit/b3f1e44a900b00bda1facaee5354ba1ff58166aa))
-- **release:** 0.1.8 codename(furious-stallman)
+- **release:**
+  - 1.0.0 codename(magnificent-goldman)
+  ([6b836fbe](https://github.com/rafinskipg/git-changelog/commit/6b836fbea9405727bfc6d8e83349ea5cf8965b05))
+  - 0.1.8 codename(furious-stallman)
   ([b9432318](https://github.com/rafinskipg/git-changelog/commit/b943231854ffd6cb0c5f32e5482cadd99c96f3e9))
 - **task:** cleanup unused requires
   ([8a41d4e7](https://github.com/rafinskipg/git-changelog/commit/8a41d4e7b245b2698749279765bcef4748e18ac7))
@@ -255,6 +276,16 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 ## Pull requests merged
 
+- Merge pull request #55 from kerimdzhanov/patch-1
+  ([31d13896](https://github.com/rafinskipg/git-changelog/commit/31d1389637b59ac3a6c68c3f8fca99045675c36c))
+- Merge pull request #50 from rafinskipg/changelogrc
+  ([fd07a4bf](https://github.com/rafinskipg/git-changelog/commit/fd07a4bf039c7c8ddbb496c644dfd5fcc1627904))
+- Merge pull request #41 from pmiossec/fix_branch_option
+  ([6247118a](https://github.com/rafinskipg/git-changelog/commit/6247118a573259cbe71c6fdd28cb53dcb7f1b855))
+- Merge pull request #45 from xcambar/versionName
+  ([2e50373a](https://github.com/rafinskipg/git-changelog/commit/2e50373a6f42e53598612f0e474c008624d6e80c))
+- Merge pull request #47 from Sjors/patch-1
+  ([d786fd08](https://github.com/rafinskipg/git-changelog/commit/d786fd084d7c1c250c866bec3c5d0c73b9abe271))
 - Merge pull request #46 from zoner14/master
   ([0485a1fd](https://github.com/rafinskipg/git-changelog/commit/0485a1fd4bf01662f50b93098c6b535eb7c527eb))
 - Merge pull request #37 from richardthombs/fix-grunt-on-windows
