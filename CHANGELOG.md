@@ -1,6 +1,6 @@
 __my name__
 
-#   (2016-05-08)
+#   (2016-07-29)
 
 
 
@@ -8,64 +8,15 @@ __my name__
 
 ## Bug Fixes
 
-- Fix generation of logs
-  ([cddb2408](https://github.com/rafinskipg/git-changelog/commit/cddb2408fa3017be704acac51dabbba9f477a547))
-- correctly detect when running under grunt on Windows
-  ([4205ea49](https://github.com/rafinskipg/git-changelog/commit/4205ea49a893e4d1807a39268739c13754d40cf2))
-
-
-## Features
-
-- Show pull requests merged
-  ([65f5504c](https://github.com/rafinskipg/git-changelog/commit/65f5504ce8e92fa39ced7da308e471cc85f750b5))
+- **git log:** Ignores letter case
+  ([d4cff0a8](https://github.com/rafinskipg/git-changelog/commit/d4cff0a86c5ce46405f3c0dd03f9c49a7d620792),
+   [#54](https://github.com/rafinskipg/git-changelog/issues/54))
 
 
 ## Documentation
 
-- Updated readme with the correct specification
-  ([ec2de4bf](https://github.com/rafinskipg/git-changelog/commit/ec2de4bf599dfc77c24c9b86ee9c0d86fe37e5b8))
-- **README:**
-  - Follow proper style in example commits
-  ([6fef01ba](https://github.com/rafinskipg/git-changelog/commit/6fef01ba8a71bb5cd779ddb84f52b8f75296618d))
-  - Reorder contents
-  ([14e8a772](https://github.com/rafinskipg/git-changelog/commit/14e8a772c3a05c32bc9fba6f75565132025d4942))
-  - TOC
-  ([d6338ab4](https://github.com/rafinskipg/git-changelog/commit/d6338ab45f6e45e5562e5e6f4f1db86f39ca458d))
-  - Added more information on the new specification
-  ([f984eedd](https://github.com/rafinskipg/git-changelog/commit/f984eedde6be5db804d0b6bf2e238ab2e7ca15fb))
-  - added more commit examples and npm versioning usage
-  ([51341b7a](https://github.com/rafinskipg/git-changelog/commit/51341b7aae082c6c1a1caaa77dfdbfdc2622a56f))
-
-
-## Refactor
-
-- Refactor branch name
-  ([8774b963](https://github.com/rafinskipg/git-changelog/commit/8774b963fd5e15de1cc1066c91034f9b1d34c4bc))
-- **generate:** replace `#getStream` with `fse#createOutputStream`
-  ([2d252d89](https://github.com/rafinskipg/git-changelog/commit/2d252d89017a70008896497e36f03e9d2add2c97))
-
-
-## Test
-
-- Tests fixed
-  ([b9edae3b](https://github.com/rafinskipg/git-changelog/commit/b9edae3bfc64f2a8c2320f6f27326225bd586cc7))
-
-
-## Chore
-
-- Remove grunt from peer dependencies
-  ([f6111d31](https://github.com/rafinskipg/git-changelog/commit/f6111d31f0c70f8368d2a57ea708bf58990f6bfd))
-- Updated jshint
-  ([1d5f6b1d](https://github.com/rafinskipg/git-changelog/commit/1d5f6b1d471e9d48ac2b4c7c8b78e3e5a8021ff4))
-- typos and grammar
-  ([5ae2ee52](https://github.com/rafinskipg/git-changelog/commit/5ae2ee52d1f096d375d077299047684eae2cd5e2))
-- **cleanup:**
-  - remove unnecessary code [skip ci]
-  ([80dbe3ec](https://github.com/rafinskipg/git-changelog/commit/80dbe3ec7a28e7c20d99e89009856c70138350b0))
-  - remove `#getStream` and `#checkPath`
-  ([cd75ebc4](https://github.com/rafinskipg/git-changelog/commit/cd75ebc44e39242b7e9c8ef2363c86d3f1cabc0e))
-- **deps:** install fs-extra@0.18.4
-  ([7c8e257b](https://github.com/rafinskipg/git-changelog/commit/7c8e257b81f0daeba7e347d175583af1a7a9bfa0))
+- **readme:** fix link to the `.changelogrc` section
+  ([2975171d](https://github.com/rafinskipg/git-changelog/commit/2975171d89e1823253399bbe87a184e9164e9799))
 
 
 
