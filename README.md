@@ -331,7 +331,6 @@ npm version patch -m "chore(release): %s codename(furious-stallman)"
 ### v2.0.0
 - Downloadable resources area on the generated changelog, for linking to your zip project folder of certain tag.
 
-![Evolution](http://1.bp.blogspot.com/-YgUV9XTA9Rk/UVHhe4vJA-I/AAAAAAAAEyg/RPL3sjMQb0k/s1600/scala-naturae-robots.png)
 
 ## Release History
 
@@ -348,7 +347,6 @@ _Add your name here by contributing to this project_
 - [JohnnyEstilles][JohnnyEstilles]
 - [colegleason][colegleason]
 - [jodybrewster][jodybrewster]
-
 
 
 
