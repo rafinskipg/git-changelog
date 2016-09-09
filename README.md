@@ -62,7 +62,7 @@ This specification is used to grep the commits on your log, it contains a valid 
     "branch" : "",
     "repo_url": "",
     "version" : "v1.0.0",
-    "file": 'CHANGELOG.md',
+    "file": "CHANGELOG.md",
     "sections": [
         {
             "title": "Bug Fixes",
