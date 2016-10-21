@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 
   var defaults = require('./defaults');
 
-  grunt.registerMultiTask('git_changelog', 'A git changelog based on ANGULAR JS commit standards', function() {
+  grunt.registerMultiTask('git_changelog_jira_tasks', 'A git changelog based on ANGULAR JS commit standards', function() {
 
     var done = this.async();
     // Options object 
