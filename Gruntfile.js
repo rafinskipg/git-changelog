@@ -91,13 +91,13 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('pre-test', ['clean', 'git_changelog']);
-  // grunt.registerTask('test', ['clean', 'git_changelog', 'mochaTest']);
+  grunt.registerTask('pre-test', ['clean', 'git_changelog_jira_tasks']);
+  // grunt.registerTask('test', ['clean', 'git_changelog_jira_tasks', 'mochaTest']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'pre-test']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('ch', [ 'git_changelog']);
+  grunt.registerTask('ch', [ 'git_changelog_jira_tasks']);
 
 };
