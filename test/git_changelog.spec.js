@@ -32,12 +32,12 @@ describe('git_changelog.js', function() {
     taskRegister(grunt);
     expect(grunt.registerMultiTask).to.have.been.calledOnce;
     expect(grunt.registerMultiTask.getCall(0).args.length).to.equal(3);
-    expect(grunt.registerMultiTask).to.have.been.calledWith('git_changelog', 'A git changelog based on ANGULAR JS commit standards');
+    expect(grunt.registerMultiTask).to.have.been.calledWith('git_changelog_jira_tasks', 'A git changelog based on ANGULAR JS commit standards');
     expect(grunt.registerMultiTask.getCall(0).args[2]).to.be.a('function');
   });
 
   it('should register the "git_changelog" task', function() {
-    expect(grunt.task.exists('git_changelog')).to.be.true;
+    expect(grunt.task.exists('git_changelog_jira_tasks')).to.be.true;
   });
 
   it('shoud call "changelog.generate()" when task is run', function() {
