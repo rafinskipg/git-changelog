@@ -1,6 +1,6 @@
 /*
- * git-changelog
- * https://github.com/rafinskipg/git-changelog
+ * git-changelog-jira-tasks
+ * https://github.com/pgn/git-changelog-jira-tasks
  *
  * Copyright (c) 2013 rafinskipg
  * Licensed under the MIT license.
