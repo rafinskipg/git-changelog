@@ -51,7 +51,7 @@ describe('git_changelog_generate.js', function() {
       expect(changelog).to.have.property('cmd');
 
       expect(changelog).to.have.deep.property('cmd.gitTag');
-      expect(changelog.cmd.gitTag).to.equal('git describe --tags --abbrev=0');
+      expect(changelog.cmd.gitTag).to.equal('git tag | tail -n1');
 
       expect(changelog).to.have.deep.property('cmd.gitRepoUrl');
       expect(changelog.cmd.gitRepoUrl).to.equal('git config --get remote.origin.url');
