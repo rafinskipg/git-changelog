@@ -117,6 +117,7 @@ This specification is used to grep the commits on your log, it contains a valid 
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
 * **intro** : The introduction text on the header of the changelog. Defaults to `null`
 * **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
+* **nomerge** : Ignore merge commit when generating the changelog. Defaults to `false`
 * **changelogrc ** : Relative path indicating the location of the .changelogrc file, defaults to current dir.
 * **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
 * **debug**: Debug mode, false by default
