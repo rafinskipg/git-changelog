@@ -53,7 +53,8 @@
     "istanbul": "^0.3.13",
     "mocha": "^2.2.4",
     "sinon": "^1.14.1",
-    "sinon-chai": "^2.7.0"
+    "sinon-chai": "^2.7.0",
+    "concat-stream": "^1.5.1"
   },
   "keywords": [
     "gruntplugin, git, git-changelog, angularjs, angular, commit, log"
