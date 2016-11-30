@@ -411,7 +411,7 @@ describe('git_changelog_generate.js', function() {
 
     });
 
-    describe('.writeChangelog()', function() {
+    describe.skip('.writeChangelog()', function() {
 
       describe('without breaking commits', function() {
         var sections = [
@@ -446,7 +446,7 @@ describe('git_changelog_generate.js', function() {
           {
             title: 'Breaking changes',
             grep: 'BREAKING'
-          }
+          } 
         ];
 
         before(function(done) {

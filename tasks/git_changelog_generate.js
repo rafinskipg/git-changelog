@@ -19,6 +19,7 @@ Changelog.prototype.setDefaults = require('./lib/set-defaults');
 Changelog.prototype.message = require('./lib/message');
 Changelog.prototype.getProviderLinks = require('./lib/get-provider-links');
 Changelog.prototype.loadChangelogRc = require('./lib/load-changelog-rc');
+Changelog.prototype.loadTemplate = require('./lib/load-template');
 Changelog.prototype.getGitLogCommands = require('./lib/get-gitlog-commands');
 Changelog.prototype.parseRawCommit = require('./lib/parse-raw-commit');
 Changelog.prototype.linkToIssue = require('./lib/link-to-issue');

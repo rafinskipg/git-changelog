@@ -35,13 +35,18 @@ function init(params, loadRC) {
 
       module.log('info', '  - The APP name is', module.options.app_name);
       module.log('info', '  - The output file is', module.options.file);
+      module.log('template', '  - The template file is', module.options.template);
 
       module.options.grep_commits = module.options.sections.map(function(section) {
         return section.grep;
       }).join('|');
 
       module.log('debug', 'Grep commits: ', module.options.grep_commits);
+      return module.loadTemplate()
+    })
+    .then(function(data){
 
+      console.log('Tempate loaded')
       return module.getRepoUrl();
     })
     .then(getRepoSuccess.bind(this, deferred))

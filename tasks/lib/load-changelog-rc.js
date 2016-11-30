@@ -5,7 +5,7 @@ var q = require('q'),
   fs = require('fs');
 
 function readChangelogRcFile(changelogrc, logger) {
-  debug('returning git repo url command');
+  debug('finding changelogrc file');
 
   if(!changelogrc){
     return q.reject();

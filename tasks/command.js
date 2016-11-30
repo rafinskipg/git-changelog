@@ -18,6 +18,7 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     .option('-a, --app_name [app_name]', 'Name [app_name]')
     .option('-b, --branch [branch]', 'Branch name [branch]')
     .option('-f, --file [file]', 'File [file]')
+    .option('-t, --template [template]', 'Template [template]')
     .option('-r, --repo_url [repo_url]', 'Repo url [repo_url]')
     .option('-l, --logo [logo]', 'Logo path [logo]')
     .option('-i, --intro [intro]', 'intro text [intro]')
@@ -53,6 +54,10 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
 
   if (program.file){
     options.file = program.file;
+  }
+
+  if (program.template){
+    options.template = program.template;
   }
 
   if (program.changelogrc){

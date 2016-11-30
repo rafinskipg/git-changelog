@@ -2,32 +2,31 @@
 
 var debug = require('debug')('changelog:getPreviousTag');
 var child = require('child_process');
-var q = require('q');
 
-function cmdDone(deferred, code, stdout, stderr) {
+function cmdDone(resolve, reject, code, stdout, stderr) {
   debug('returning from git tag');
   if (code) {
-    deferred.reject();
+    reject();
   } else {
-    deferred.resolve(stdout.replace('\n', ''));
+    resolve(stdout.replace('\n', ''));
   }
 }
 
 function getPreviousTag() {
-  var deferred = q.defer();
+  var module = this;
 
-  if (this.options.tag) {
-    deferred.resolve(this.options.tag);
-  } else if (this.options.tag === false) {
-    deferred.resolve(false);
-  } else {
-    this.log('debug', 'Getting last tag');
-    //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
-    debug('calling git tag command');
-    child.exec(this.cmd.gitTag, cmdDone.bind(null, deferred));
-  }
-
-  return deferred.promise;
+  return new Promise(function(resolve, reject){
+    if (module.options.tag) {
+      resolve(module.options.tag);
+    } else if (module.options.tag === false) {
+      resolve(false);
+    } else {
+      module.log('debug', 'Getting last tag');
+      //IF we dont find a previous tag, we get all the commits from the beggining - The bigbang of the code
+      debug('calling git tag command');
+      child.exec(module.cmd.gitTag, cmdDone.bind(null, resolve, reject));
+    }  
+  })
 }
 
 module.exports = getPreviousTag;

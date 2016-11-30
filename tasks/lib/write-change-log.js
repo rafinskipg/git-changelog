@@ -2,9 +2,9 @@
 
 var debug = require('debug')('changelog:writeChangelog');
 var format = require('util').format;
-var q = require('q');
+var fse = require('fs-extra');
 
-function sendToStream(stream, sections, deferred) {
+function sendToStream(stream, sections, resolve) {
 
   var module = this;
 
@@ -21,12 +21,14 @@ function sendToStream(stream, sections, deferred) {
 
   this.printSalute(stream);
   stream.end();
-  stream.on('finish', deferred.resolve);
+  stream.on('finish', resolve);
 }
 
-function writeChangelog(stream, commits) {
+function writeChangelog(options, commits, sectionsdef) {
+  var module = this;
+
   debug('writing change log');
-  var deferred = q.defer();
+
   var sections = {
     BREAKING : {}
   };
@@ -38,9 +40,23 @@ function writeChangelog(stream, commits) {
 
   sections.BREAKING[this.emptyComponent] = [];
   this.organizeCommits(commits, sections);
-  stream.on('open', sendToStream.bind(this, stream, sections, deferred));
 
-  return deferred.promise;
+  var stream;
+  
+  return new Promise(function(resolve, reject){
+    if (module.options.file) {
+      stream = fse.createOutputStream(module.options.file);
+    } else {
+      stream = process.stdout;
+    }
+
+    stream.on('open', sendToStream.bind(module, stream, sections, resolve));
+
+  })
+}
+
+function writeTemplateChangelog(stream, sections, resolve, reject){
+
 }
 
 module.exports = writeChangelog;

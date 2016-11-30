@@ -10,6 +10,7 @@ module.exports = {
   logo : null,
   intro : null,
   debug: false,
+  template: 'templates/template.md',
   changelogrc : '.changelogrc',
   sections: [
     {

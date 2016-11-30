@@ -60,6 +60,18 @@ module.exports = function(grunt) {
           ]
         }
       },
+      customTemplate: {
+        options: {
+          app_name : 'Custom Template',
+          intro: 'This changelog is generated with a custom template',
+          file: 'output/customTemplate.md',
+          template: 'templates/template_two.md',
+          logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+          version : 'squeezy potatoe',
+          tag: 'v0.0.1',
+          debug: true
+        }
+      },
       extended: {
         options: {
           app_name : 'Git changelog extended',
