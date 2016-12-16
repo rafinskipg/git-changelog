@@ -35,7 +35,7 @@ function printComponent(stream, section, printCommitLinks, name) {
 function printSection(stream, title, section, printCommitLinks) {
   debug('printing section ...');
   printCommitLinks = printCommitLinks === undefined ? true : printCommitLinks;
-  var components = Object.keys(section).sort();
+  var components = Object.keys(section.commits).sort();
 
   if (!components.length) {
     return;
@@ -43,7 +43,7 @@ function printSection(stream, title, section, printCommitLinks) {
 
   stream.write(format('\n## %s\n\n', title));
 
-  components.forEach(printComponent.bind(this, stream, section, printCommitLinks), this);
+  components.forEach(printComponent.bind(this, stream, section.commits, printCommitLinks), this);
 
   stream.write('\n');
 }

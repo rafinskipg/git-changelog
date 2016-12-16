@@ -82,9 +82,10 @@ describe('changelogrc.spec.js', function() {
             'BREAKING CHANGE: first breaking change\nsomething else\n' +
             'another line with more info\n');
 
-        var sections = {
-          fix: {}
-        };
+        var sections = [{
+          title: 'Bug Fixes',
+          grep: '^fix'
+        }]
 
         var commits = [];
 
@@ -96,8 +97,8 @@ describe('changelogrc.spec.js', function() {
         }
 
         sections = changelog.organizeCommits(commits, sections);
-
-        expect(sections.fix.mymodule.length).to.equal(10);
+        expect(sections[0].components[0].name).to.equal('mymodule');
+        expect(sections[0].components[0].commits.length).to.equal(10);
       });
 
     });

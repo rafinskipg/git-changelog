@@ -278,9 +278,10 @@ describe('git_changelog_generate.js', function() {
             'BREAKING CHANGE: first breaking change\nsomething else\n' +
             'another line with more info\n');
 
-        var sections = {
-          fix: {}
-        };
+        var sections = [{
+          title: 'Bug Fixes',
+          grep: '^fix'
+        }]
 
         var commits = [];
 
@@ -292,8 +293,8 @@ describe('git_changelog_generate.js', function() {
         }
 
         sections = changelog.organizeCommits(commits, sections);
-
-        expect(sections.fix.mymodule.length).to.equal(10);
+        expect(sections[0].components[0].name).to.equal('mymodule');
+        expect(sections[0].components[0].commits.length).to.equal(10);
       });
 
     });
@@ -609,54 +610,84 @@ describe('git_changelog_generate.js', function() {
 
         before(function() {
           changelog.setDefaults();
-          this.sections = {
-            fix: {},
-            feat: {},
-            BREAKING: {},
-            style: {},
-            refactor: {},
-            test: {},
-            chore: {},
-            docs: {}
-          };
+          this.sections = [
+            {
+              title: 'Bug Fixes',
+              grep: '^fix'
+            },
+            {
+              title: 'Features',
+              grep: '^feat'
+            },
+            {
+              title: 'Documentation',
+              grep: '^docs'
+            },
+            {
+              title: 'Breaking changes',
+              grep: 'BREAKING'
+            },
+            {
+              title: 'Refactor',
+              grep: '^refactor'
+            },
+            {
+              title: 'Style',
+              grep: '^style'
+            },
+            {
+              title: 'Test',
+              grep: '^test'
+            },
+            {
+              title: 'Chore',
+              grep: '^chore'
+            }
+          ];
+
           this.commits = require('./fixtures/commits.js').withoutBreaking;
           this.sections = changelog.organizeCommits(this.commits, this.sections);
         });
 
         it('should return 8 sections', function() {
-          expect(Object.keys(this.sections).length).to.equal(8);
+          expect(this.sections.length).to.equal(8);
         });
 
+        function findItem(key, value){
+          return function (item){
+            return item[key] === value
+          }
+        }
         it('should fix section to have 1 commit', function() {
-          expect(this.sections.fix.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'fix')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
         it('should feat section to have 1 commit', function() {
-          expect(this.sections.feat.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'feat')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
         it('should breaks section to be empty', function() {
-          expect(this.sections.BREAKING).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'BREAKING'))).to.equal(undefined);
         });
 
         it('should style section to be empty', function() {
-          expect(this.sections.style).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'style'))).to.equal(undefined)
         });
 
         it('should refactor section be empty', function() {
-          expect(this.sections.refactor).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'refactor'))).to.equal(undefined)
         });
 
         it('should test section to be empty', function() {
-          expect(this.sections.test).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'test'))).to.equal(undefined)
         });
 
         it('should chore section to have 1 commit', function() {
-          expect(this.sections.chore.$scope.length).to.equal(3);
+          expect(this.sections.find(findItem('type', 'chore')).components.find(findItem('name', '$scope')).commits.length).to.equal(3);
         });
 
         it('should docs section to be empty', function() {
-          expect(this.sections.docs).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'docs'))).to.equal(undefined)
         });
 
       });
@@ -878,7 +909,7 @@ describe('git_changelog_generate.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-          done();
+          done(err);
         });
     });
 
@@ -896,7 +927,7 @@ describe('git_changelog_generate.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-          done();
+          done(err);
         });
     });
 
@@ -914,7 +945,7 @@ describe('git_changelog_generate.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-          done();
+          done(err);
         });
     });
 

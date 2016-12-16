@@ -42,11 +42,7 @@ function init(params, loadRC) {
       }).join('|');
 
       module.log('debug', 'Grep commits: ', module.options.grep_commits);
-      return module.loadTemplate()
-    })
-    .then(function(data){
-
-      console.log('Tempate loaded')
+    
       return module.getRepoUrl();
     })
     .then(getRepoSuccess.bind(this, deferred))

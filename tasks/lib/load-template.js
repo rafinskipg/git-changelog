@@ -1,8 +1,9 @@
 'use strict';
 
 var debug = require('debug')('changelog:loadTemplateFile');
-var q = require('q'),
-  fs = require('fs');
+var q = require('q');
+var _ = require('lodash');
+var fs = require('fs');
 
 function readTemplateFile(template, logger) {
   debug('finding template file');
@@ -27,36 +28,35 @@ function readTemplateFile(template, logger) {
 }
 
 
-function loadTemplateFile() {
+function loadTemplateFile(data) {
   this.log('debug','loading template from', this.options.template);
+  
   var module = this;
-  var deferred = q.defer();
 
-  readTemplateFile(this.options.template, this.log.bind(this))
+  var viewHelpers = {
+    getCommitLinks: function(commit){
+      return module.linkToCommit(commit.hash)
+    },
+    getCommitCloses: function(commit){
+      return commit.closes.map(module.linkToIssue, module)
+    }
+  }
+
+  _.extend(data, viewHelpers);
+
+  return readTemplateFile(this.options.template, this.log.bind(this))
     .then(function(contents){
-
-      try{
-        console.log(contents)
-        //contents = JSON.parse(contents);
-
-        deferred.resolve(contents);
+      try{  
+        var fn = _.template(contents, data);
+        var tpl =  fn(data)
+        console.log(tpl)
+        return tpl
       }catch(e){
         module.log('warn', 'Invalid template file', e);
-        return deferred.reject(e);
+        throw 'Invalid template file \n' + e
       }
 
-    })
-    .catch(function(){
-      var sectionNames = module.options.sections.map(function(section){
-        return section.title;
-      }).join(', ');
-
-      module.log('warn', 'No .template.rc file found, using default settings');
-      module.log('info', 'Sections: ', sectionNames);
-      deferred.resolve({});
-    }.bind(this));
-
-  return deferred.promise;
+    });
 }
 
 module.exports = loadTemplateFile;
