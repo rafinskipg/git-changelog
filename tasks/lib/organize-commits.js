@@ -27,7 +27,7 @@ function organizeCommit(sections, commit) {
     section.commitsCount++;
     
     if(component === this.emptyComponent){
-      section.commits.push(commit)
+      section.commits.push(commit);
     }else{
       section.components[component] = section.components[component] || [];
       section.components[component].push(commit);  
@@ -44,7 +44,7 @@ function organizeCommit(sections, commit) {
     };
 
     if(component === this.emptyComponent){
-      sections.BREAKING.commits.push(breakingCommit)
+      sections.BREAKING.commits.push(breakingCommit);
     }else{
       sections.BREAKING.components[component] = sections.BREAKING.components[component] || [];
       sections.BREAKING.components[component].push(breakingCommit);  
@@ -53,16 +53,18 @@ function organizeCommit(sections, commit) {
 }
 
 function organizeCommits(commits, defaultSections) {
+  commits = commits ? commits : [];
+
   var sections = {
     BREAKING : {
       components: {},
       commitsCount: 0,
       title: 'Breaking Changes',
       commits: [],
-      type: 'BREAKING'
+      type: 'BREAKING',
+      printCommitLinks: false
     }
   };
-
 
   defaultSections.forEach(function(sectionInfo){
     var sectionType = sectionInfo.grep.replace('^', '');
@@ -72,7 +74,8 @@ function organizeCommits(commits, defaultSections) {
       components: {},
       commits: [],
       commitsCount: 0,
-      type: sectionType
+      type: sectionType,
+      printCommitLinks: sectionInfo.printCommitLinks === false ? false : true
     };
   });
 
@@ -81,16 +84,16 @@ function organizeCommits(commits, defaultSections) {
   commits.forEach(organizeCommit.bind(this, sections), this);
 
   return _.compact(Object.keys(sections).map(function(key){
-    var section = sections[key]
+    var section = sections[key];
     
     section.components = Object.keys(section.components).sort().map(function(key){
       return { name: key, 
         commits: section.components[key]
-      }
-    })
+      };
+    });
 
     return section.commitsCount > 0 ? section : null;
-  }))
+  }));
 }
 
 module.exports = organizeCommits;

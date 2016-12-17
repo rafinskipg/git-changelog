@@ -35,7 +35,7 @@ function init(params, loadRC) {
 
       module.log('info', '  - The APP name is', module.options.app_name);
       module.log('info', '  - The output file is', module.options.file);
-      module.log('template', '  - The template file is', module.options.template);
+      module.log('info', '  - The template file is', module.options.template);
 
       module.options.grep_commits = module.options.sections.map(function(section) {
         return section.grep;

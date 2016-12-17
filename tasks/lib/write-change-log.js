@@ -5,38 +5,27 @@ var format = require('util').format;
 var _ = require('lodash');
 var fse = require('fs-extra');
 
-function sendToStream(stream, sections, resolve) {
+function sendToStream(stream, sections) {
 
   var module = this;
 
   this.printHeader(stream, this.options, this.currentDate());
-
-  Object.keys(sections).forEach(function(sectionType){
-    var section = sections[sectionType]
-    if(sectionType !== 'BREAKING'){
-      module.printSection(stream, section.title, section.commits);
-    }else if (sections.BREAKING.commits[module.emptyComponent].length > 0 ) {
-      module.printSection(stream, sections.BREAKING.title, sections.BREAKING.commits, false);
-    }
+ 
+  sections.forEach(function(section){
+    module.printSection(stream, section);
   });
 
   this.printSalute(stream);
   stream.end();
-  stream.on('finish', resolve);
 }
 
-function writeChangelog(options, commits, sectionsdef) {
+function writeChangelog(commits) {
   var module = this;
 
   debug('writing change log');
-
   var sections = this.organizeCommits(commits, this.options.sections);
-
   var stream;
-
-
-  console.log(module.options)
-        
+  
   var data = {
     logo: module.options.logo,
     sections: sections,
@@ -46,8 +35,7 @@ function writeChangelog(options, commits, sectionsdef) {
       number: module.options.tag,
       name: module.options.name
     } 
-  }
-
+  };
 
   return new Promise(function(resolve, reject){
 
@@ -61,31 +49,32 @@ function writeChangelog(options, commits, sectionsdef) {
         }
 
         if(template){
-          console.log('Proceding with template')
+          debug('Proceding with template');
 
           stream.on('open', function(){
             var lines = template.split('\n');
-            console.log(lines)
+
             lines.forEach(function(line){
               stream.write(line);
               stream.write('\n');
-            })
-            console.log('ehe')
+            });
+
             stream.end();
-            stream.on('finish', resolve)
+            stream.on('finish', resolve);
           });
-
-        }else {
-          console.log('Standard printing output')
-          stream.on('open', sendToStream.bind(module, stream, sections, resolve));
+        }else{
+          debug('Proceding with legacy output');
+          
+          stream.on('open', sendToStream.bind(module, stream, sections));
+          stream.on('finish', resolve);
         }
+
       })
-      .catch(reject)
-  })
+      .catch(reject);
+  });
 }
 
-function writeTemplateChangelog(stream, sections, resolve, reject){
 
-}
+
 
 module.exports = writeChangelog;

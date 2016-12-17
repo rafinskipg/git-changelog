@@ -85,7 +85,7 @@ describe('changelogrc.spec.js', function() {
         var sections = [{
           title: 'Bug Fixes',
           grep: '^fix'
-        }]
+        }];
 
         var commits = [];
 

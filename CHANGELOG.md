@@ -1,16 +1,15 @@
-# my name
+<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
+
+# Git changelog
+
+_Git changelog is a utility tool for generating changelogs. It is free and opensource. :)_
 
 ##   (  )
 
 
 ## Bug Fixes
-
-
   - **git tag**
-
     - get latest tag, regardless of branch for workflows that rely on git-flow releases (48800306fa5ac19b7e9a4c6d7f2f432ee8ae4d84)
-
-
 
 
 

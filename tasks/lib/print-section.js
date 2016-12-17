@@ -16,36 +16,41 @@ function printCommit(stream, printCommitLinks, prefix, commit) {
   }
 }
 
-function printComponent(stream, section, printCommitLinks, name) {
+function printComponent(stream, printCommitLinks, component) {
   var prefix = '-';
-  var nested = section[name].length > 1;
-
-  if (name !== this.emptyComponent) {
-    if (nested) {
-      stream.write(format('- **%s:**\n', name));
-      prefix = '  -';
-    } else {
-      prefix = format('- **%s:**', name);
-    }
+  
+  var nested = component.commits.length > 1;
+  if (nested) {
+    stream.write(format('- **%s:**\n', component.name));
+    prefix = '  -';
+  } else {
+    prefix = format('- **%s:**', component.name);
   }
 
-  section[name].forEach(printCommit.bind(this, stream, printCommitLinks, prefix), this);
+  component.commits.forEach(printCommit.bind(this, stream, printCommitLinks, prefix), this);
 }
 
-function printSection(stream, title, section, printCommitLinks) {
-  debug('printing section ...');
-  printCommitLinks = printCommitLinks === undefined ? true : printCommitLinks;
-  var components = Object.keys(section.commits).sort();
+function printSection(stream, section) {
+  try{
 
-  if (!components.length) {
+  debug('printing section ...');
+
+  if (!section.commits.length && !section.components.length) {
     return;
   }
 
-  stream.write(format('\n## %s\n\n', title));
 
-  components.forEach(printComponent.bind(this, stream, section.commits, printCommitLinks), this);
+  stream.write(format('\n## %s\n\n', section.title));
+
+  section.commits.forEach(printCommit.bind(this, stream, section.printCommitLinks, '-'), this);
+ 
+  section.components.forEach(printComponent.bind(this, stream, section.printCommitLinks), this);
 
   stream.write('\n');
+
+  }catch(e){
+    console.log(e);
+  }
 }
 
 module.exports = printSection;

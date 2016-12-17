@@ -26,7 +26,7 @@ function getPreviousTag() {
       debug('calling git tag command');
       child.exec(module.cmd.gitTag, cmdDone.bind(null, resolve, reject));
     }  
-  })
+  });
 }
 
 module.exports = getPreviousTag;

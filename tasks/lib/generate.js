@@ -7,7 +7,7 @@ function generateFromCommits(commits, sections) {
   this.log('debug', 'Parsed', commits.length, 'commits');
   this.log('info','Generating changelog to', this.options.file || 'stdout', '(', this.options.version, ')');
 
-  return this.writeChangelog(this.options, commits, sections);
+  return this.writeChangelog(commits, sections);
 }
 
 function generateFromTag(tag) {

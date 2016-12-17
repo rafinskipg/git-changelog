@@ -43,6 +43,7 @@ module.exports = function(grunt) {
       tag1: {
         options: {
           app_name : 'Since tag 1 changelog',
+          intro: 'This changelog is from the previous tag',
           file: 'output/tag1.md',
           logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
           version : 'squeezy potatoe',

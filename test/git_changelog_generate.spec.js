@@ -281,7 +281,7 @@ describe('git_changelog_generate.js', function() {
         var sections = [{
           title: 'Bug Fixes',
           grep: '^fix'
-        }]
+        }];
 
         var commits = [];
 
@@ -412,7 +412,7 @@ describe('git_changelog_generate.js', function() {
 
     });
 
-    describe.skip('.writeChangelog()', function() {
+    describe('.writeChangelog()', function() {
 
       describe('without breaking commits', function() {
         var sections = [
@@ -451,60 +451,40 @@ describe('git_changelog_generate.js', function() {
         ];
 
         before(function(done) {
-          this.stream = {
-            write: sinon.stub(),
-            end : function(){
-
-            },
-            on: sinon.spy(function(event, callback) {
-              callback();
-            })
-          };
+          this.timeout = 10000;
+         
           this.commits = require('./fixtures/commits.js').withoutBreaking;
 
-          sinon.stub(changelog, 'organizeCommits');
           sinon.stub(changelog, 'printSalute');
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections });
-          changelog.writeChangelog(this.stream, this.commits).then(function() {
+          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections, template: false });
+          changelog.writeChangelog(this.commits)
+          .then(function() {
             done();
+          })
+          .catch(function(err){
+            console.log('error', err);
           });
         });
 
         after(function() {
-          changelog.organizeCommits.restore();
           changelog.printSection.restore();
           changelog.printHeader.restore();
           changelog.printSalute.restore();
         });
 
-        it('should organize commits', function() {
-          expect(changelog.organizeCommits).to.have.been.calledOnce;
-          expect(changelog.organizeCommits).to.have.been.calledWith(this.commits);
-        });
-
         it('should write the header to the stream', function() {
           expect(changelog.printHeader).to.have.been.calledOnce;
-          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
-        it('should print 7 sections', function() {
-          expect(changelog.printSection.callCount).to.equal(7);
-          sections.forEach(function(section, index) {
-            var call = changelog.printSection.getCall(index);
-            if(!call){
-              expect(section.title).to.equals('Breaking changes');
-            }else{
-              expect(call.args).to.include(section.title);
-            }
-          });
+        it('should print 3 sections', function() {
+          expect(changelog.printSection.callCount).to.equal(3);
         });
 
         it('should print salute', function() {
           expect(changelog.printSalute).to.have.been.calledOnce;
-          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
       });
@@ -546,26 +526,43 @@ describe('git_changelog_generate.js', function() {
         ];
 
         before(function(done) {
-          this.stream = {
-            write: sinon.stub(),
-            end : function(){
-
-            },
-            on: sinon.spy(function(event, callback) {
-              callback();
-            })
-          };
+          
           this.commits = require('./fixtures/commits.js').withBreaking;
 
           sinon.stub(changelog, 'organizeCommits', function(commits, sections) {
-            sections.BREAKING[changelog.emptyComponent] = [ 'breaking commit'];
+            return [{
+              type: 'BREAKING',
+              commits: [{
+                closes: [],
+                breaks: [],
+                hash: '1d4f604363094d4eee3b4d7b1ca01133edaad344',
+                subject: 'did 2 thing',
+                body: '',
+                type: 'feat',
+                component: '',
+                breaking: true
+              }],
+              components:[{
+                name: '$scope',
+                commits: [{
+                  closes: [],
+                  breaks: [],
+                  hash: '1d4f604363012394d4eee3b4d7b1ca01133edaad344',
+                  subject: 'did 4 thing',
+                  body: '',
+                  type: 'feat',
+                  component: '$scope',
+                  breaking: true
+                }]
+              }]
+            }];
           });
           sinon.stub(changelog, 'printSalute');
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections });
-          changelog.writeChangelog(this.stream, this.commits).then(function() {
+          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections, template:false });
+          changelog.writeChangelog(this.commits).then(function() {
             done();
           });
         });
@@ -584,20 +581,14 @@ describe('git_changelog_generate.js', function() {
 
         it('should write the header to the stream', function() {
           expect(changelog.printHeader).to.have.been.calledOnce;
-          expect(changelog.printHeader).to.have.been.calledWith(this.stream, changelog.options);
         });
 
-        it('should print 8 sections', function() {
-          expect(changelog.printSection.callCount).to.equal(8);
-          sections.forEach(function(section, index) {
-            var call = changelog.printSection.getCall(index);
-            expect(call.args).to.include(section.title);
-          });
+        it('should print 1 sections', function() {
+          expect(changelog.printSection.callCount).to.equal(1);
         });
 
         it('should print salute', function() {
           expect(changelog.printSalute).to.have.been.calledOnce;
-          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
       });
@@ -607,9 +598,10 @@ describe('git_changelog_generate.js', function() {
     describe('.organizeCommits()', function() {
       function findItem(key, value){
         return function (item){
-          return item[key] === value
-        }
+          return item[key] === value;
+        };
       }
+
       describe('without breaking commits', function () {
 
         before(function() {
@@ -670,15 +662,15 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should style section to be empty', function() {
-          expect(this.sections.find(findItem('type', 'style'))).to.equal(undefined)
+          expect(this.sections.find(findItem('type', 'style'))).to.equal(undefined);
         });
 
         it('should refactor section be empty', function() {
-          expect(this.sections.find(findItem('type', 'refactor'))).to.equal(undefined)
+          expect(this.sections.find(findItem('type', 'refactor'))).to.equal(undefined);
         });
 
         it('should test section to be empty', function() {
-          expect(this.sections.find(findItem('type', 'test'))).to.equal(undefined)
+          expect(this.sections.find(findItem('type', 'test'))).to.equal(undefined);
         });
 
         it('should chore section to have 1 commit', function() {
@@ -686,7 +678,7 @@ describe('git_changelog_generate.js', function() {
         });
 
         it('should docs section to be empty', function() {
-          expect(this.sections.find(findItem('type', 'docs'))).to.equal(undefined)
+          expect(this.sections.find(findItem('type', 'docs'))).to.equal(undefined);
         });
 
       });
