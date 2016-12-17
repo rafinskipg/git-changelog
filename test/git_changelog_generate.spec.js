@@ -605,7 +605,11 @@ describe('git_changelog_generate.js', function() {
     });
 
     describe('.organizeCommits()', function() {
-
+      function findItem(key, value){
+        return function (item){
+          return item[key] === value
+        }
+      }
       describe('without breaking commits', function () {
 
         before(function() {
@@ -649,15 +653,10 @@ describe('git_changelog_generate.js', function() {
           this.sections = changelog.organizeCommits(this.commits, this.sections);
         });
 
-        it('should return 8 sections', function() {
-          expect(this.sections.length).to.equal(8);
+        it('should return 3 sections', function() {
+          expect(this.sections.length).to.equal(3);
         });
 
-        function findItem(key, value){
-          return function (item){
-            return item[key] === value
-          }
-        }
         it('should fix section to have 1 commit', function() {
           expect(this.sections.find(findItem('type', 'fix')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
@@ -696,16 +695,40 @@ describe('git_changelog_generate.js', function() {
 
         before(function() {
           changelog.setDefaults();
-          this.sections = {
-            fix: {},
-            feat: {},
-            BREAKING: {},
-            style: {},
-            refactor: {},
-            test: {},
-            chore: {},
-            docs: {}
-          };
+          this.sections = [
+            {
+              title: 'Bug Fixes',
+              grep: '^fix'
+            },
+            {
+              title: 'Features',
+              grep: '^feat'
+            },
+            {
+              title: 'Documentation',
+              grep: '^docs'
+            },
+            {
+              title: 'Breaking changes',
+              grep: 'BREAKING'
+            },
+            {
+              title: 'Refactor',
+              grep: '^refactor'
+            },
+            {
+              title: 'Style',
+              grep: '^style'
+            },
+            {
+              title: 'Test',
+              grep: '^test'
+            },
+            {
+              title: 'Chore',
+              grep: '^chore'
+            }
+          ];
           var repo_url = 'https://github.com/owner/repo';
           changelog.options.repo_url = repo_url;
           changelog.getProviderLinks();
@@ -714,40 +737,25 @@ describe('git_changelog_generate.js', function() {
           this.sections = changelog.organizeCommits(this.commits, this.sections);
         });
 
-        it('should return 8 sections', function() {
-          expect(Object.keys(this.sections).length).to.equal(8);
+        it('should return 4 sections', function() {
+          expect(this.sections.length).to.equal(4);
         });
 
         it('should fix section to have 1 commit', function() {
-          expect(this.sections.fix.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'fix')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
         it('should feat section to have 1 commit', function() {
-          expect(this.sections.feat.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'feat')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
-        it('should breaks section to be empty', function() {
-          expect(this.sections.BREAKING.$scope.length).to.equal(1);
+        it('should breaks have 1 component and 2 comits', function() {
+          expect(this.sections.find(findItem('type', 'BREAKING')).components.length).to.equals(1);
+          expect(this.sections.find(findItem('type', 'BREAKING')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
-        it('should style section to be empty', function() {
-          expect(this.sections.style).to.deep.equal({});
-        });
-
-        it('should refactor section be empty', function() {
-          expect(this.sections.refactor).to.deep.equal({});
-        });
-
-        it('should test section to be empty', function() {
-          expect(this.sections.test).to.deep.equal({});
-        });
-
-        it('should chore section to have 1 commit', function() {
-          expect(this.sections.chore.$scope.length).to.equal(3);
-        });
-
-        it('should docs section to be empty', function() {
-          expect(this.sections.docs).to.deep.equal({});
+        it('should chore section to have 3 commit', function() {
+          expect(this.sections.find(findItem('type', 'chore')).components.find(findItem('name', '$scope')).commits.length).to.equal(3);
         });
 
       });

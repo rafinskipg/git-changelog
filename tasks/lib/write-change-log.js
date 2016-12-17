@@ -31,14 +31,9 @@ function writeChangelog(options, commits, sectionsdef) {
   debug('writing change log');
 
   var sections = this.organizeCommits(commits, this.options.sections);
-  
+
   var stream;
 
-  if (module.options.file) {
-    stream = fse.createOutputStream(module.options.file);
-  } else {
-    stream = process.stdout;
-  }
 
   console.log(module.options)
         
@@ -55,16 +50,29 @@ function writeChangelog(options, commits, sectionsdef) {
 
 
   return new Promise(function(resolve, reject){
-    this.loadTemplate(data)
+
+    module.loadTemplate(data)
       .then(function(template){
+
+        if (module.options.file) {
+          stream = fse.createOutputStream(module.options.file);
+        } else {
+          stream = process.stdout;
+        }
+
         if(template){
           console.log('Proceding with template')
 
           stream.on('open', function(){
-            stream.write(template);
-            console.
+            var lines = template.split('\n');
+            console.log(lines)
+            lines.forEach(function(line){
+              stream.write(line);
+              stream.write('\n');
+            })
+            console.log('ehe')
             stream.end();
-            resolve();
+            stream.on('finish', resolve)
           });
 
         }else {

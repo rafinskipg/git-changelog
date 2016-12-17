@@ -84,7 +84,7 @@ exports.withBreaking = [
     component: '$scope' },
   {
     closes: [],
-    breaks: [],
+    breaks: [3, 4],
     hash: '1d4f604363094d4eee3b4d7b1ca01133edaad344',
     subject: 'did 4 thing',
     body: '',
@@ -93,7 +93,7 @@ exports.withBreaking = [
   },
   {
     closes: [],
-    breaks: [],
+    breaks: [2,3],
     hash: '1d4f604363094d4eee3b4d7b1ca01133edaad344',
     subject: 'did 5 thing',
     body: '',

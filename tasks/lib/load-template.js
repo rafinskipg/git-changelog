@@ -49,7 +49,6 @@ function loadTemplateFile(data) {
       try{  
         var fn = _.template(contents, data);
         var tpl =  fn(data)
-        console.log(tpl)
         return tpl
       }catch(e){
         module.log('warn', 'Invalid template file', e);
