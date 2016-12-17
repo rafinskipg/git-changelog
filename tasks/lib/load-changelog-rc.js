@@ -41,7 +41,7 @@ function loadChangelogRc() {
         deferred.resolve(contents);
       }catch(e){
         module.log('warn', 'Invalid changelogrc file', e);
-        return deferred.reject(e);
+        return deferred.reject('Invalid changelogrc file' + e);
       }
 
     })

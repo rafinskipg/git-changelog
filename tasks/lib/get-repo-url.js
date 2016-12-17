@@ -7,7 +7,7 @@ var q = require('q');
 function cmdDone(deferred, code, stdout, stderr) {
   debug('returning git repo url command');
   if (code) {
-    deferred.reject();
+    deferred.reject("Sorry, you've not configured an origin remote or passed a `repo_url` config value");
   } else {
     stdout = stdout.replace('\n', '').replace('.git', '');
     deferred.resolve(stdout);

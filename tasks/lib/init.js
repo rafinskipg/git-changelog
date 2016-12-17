@@ -16,7 +16,7 @@ function getRepoSuccess(deferred, url) {
 
 function getRepoFailure(deferred, err) {
   this.message('not remote');
-  deferred.reject("Sorry, you've not configured an origin remote or passed a `repo_url` config value");
+  deferred.reject(err);
 }
 
 function init(params, loadRC) {
@@ -43,7 +43,7 @@ function init(params, loadRC) {
 
       module.log('debug', 'Grep commits: ', module.options.grep_commits);
     
-      return module.getRepoUrl();
+      return module.getRepoUrl()
     })
     .then(getRepoSuccess.bind(this, deferred))
     .catch(getRepoFailure.bind(this, deferred));
