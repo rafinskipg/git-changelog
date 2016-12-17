@@ -52,7 +52,7 @@ function loadTemplateFile(data) {
           var tpl =  fn(data);
           return tpl;
         }catch(e){
-          module.log('warn', 'Invalid template file', e);
+          module.log('error', 'Invalid template file', e);
           throw 'Invalid template file \n' + e;
         }
       }else{

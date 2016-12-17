@@ -12,8 +12,8 @@ function generateFromCommits(commits, sections) {
 
 function generateFromTag(tag) {
   var readGitLog;
-
-  if (typeof(tag) !== 'undefined' && tag !== false) {
+ 
+  if (typeof(tag) !== 'undefined' && tag && tag !== false) {
     this.log('info', 'Reading git log since', tag);
     this.message('since tag', tag);
     readGitLog = this.readGitLog.bind(this, this.cmd.gitLog, tag);
