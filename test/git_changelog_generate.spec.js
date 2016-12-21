@@ -270,6 +270,16 @@ describe('git_changelog_generate.js', function() {
         expect(msg.breaking).to.equal(' first breaking change\nsomething else\nanother line with more info\n');
       });
 
+      it('should add everything as a message if there are 2 sections', function(){
+        var msg = changelog.parseRawCommit(
+          '13f31602f396bc269076ab4d389cfd8ca94b20ba\n'+
+          'feat(ad): make new ad\n' +
+          'some note here\n' +
+          'reg(ad): need a walk through\n');
+
+        expect(msg.body).to.equals('some note here\nreg(ad): need a walk through\n')
+      })
+
       it('should organize commits', function() {
         var msg = changelog.parseRawCommit(
             '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
