@@ -27,6 +27,7 @@ Changelog.prototype.linkToCommit = require('./lib/link-to-commit');
 Changelog.prototype.currentDate = require('./lib/current-date');
 Changelog.prototype.printHeader = require('./lib/print-header');
 Changelog.prototype.printSection = require('./lib/print-section');
+Changelog.prototype.printCommit = require('./lib/print-commit');
 Changelog.prototype.printSalute = require('./lib/print-salute');
 Changelog.prototype.readGitLog = require('./lib/read-gitlog');
 Changelog.prototype.writeChangelog = require('./lib/write-change-log');

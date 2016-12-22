@@ -39,7 +39,8 @@ function loadTemplateFile(data) {
     },
     getCommitCloses: function(commit){
       return commit.closes.map(module.linkToIssue, module);
-    }
+    },
+    printCommit: this.printCommit.bind(this)
   };
 
   _.extend(data, viewHelpers);

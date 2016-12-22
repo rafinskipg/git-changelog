@@ -277,8 +277,8 @@ describe('git_changelog_generate.js', function() {
           'some note here\n' +
           'reg(ad): need a walk through\n');
 
-        expect(msg.body).to.equals('some note here\nreg(ad): need a walk through\n')
-      })
+        expect(msg.body).to.equals('some note here\nreg(ad): need a walk through\n');
+      });
 
       it('should organize commits', function() {
         var msg = changelog.parseRawCommit(

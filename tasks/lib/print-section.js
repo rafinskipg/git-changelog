@@ -3,7 +3,7 @@
 var debug = require('debug')('changelog:printSection');
 var format = require('util').format;
 
-function printCommit(stream, printCommitLinks, prefix, commit) {
+function printCommitStream(stream, printCommitLinks, prefix, commit) {
   if (printCommitLinks) {
     stream.write(format('%s %s\n  (%s', prefix, commit.subject, this.linkToCommit(commit.hash)));
 
@@ -27,7 +27,7 @@ function printComponent(stream, printCommitLinks, component) {
     prefix = format('- **%s:**', component.name);
   }
 
-  component.commits.forEach(printCommit.bind(this, stream, printCommitLinks, prefix), this);
+  component.commits.forEach(printCommitStream.bind(this, stream, printCommitLinks, prefix), this);
 }
 
 function printSection(stream, section) {
@@ -42,7 +42,7 @@ function printSection(stream, section) {
 
   stream.write(format('\n## %s\n\n', section.title));
 
-  section.commits.forEach(printCommit.bind(this, stream, section.printCommitLinks, '-'), this);
+  section.commits.forEach(printCommitStream.bind(this, stream, section.printCommitLinks, '-'), this);
  
   section.components.forEach(printComponent.bind(this, stream, section.printCommitLinks), this);
 
