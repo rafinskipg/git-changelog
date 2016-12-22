@@ -63,6 +63,7 @@ This specification is used to grep the commits on your log, it contains a valid 
     "repo_url": "",
     "version" : "v1.0.0",
     "file": "CHANGELOG.md",
+    "template": "myCustomTemplate.md",
     "sections": [
         {
             "title": "Bug Fixes",
@@ -114,10 +115,11 @@ This specification is used to grep the commits on your log, it contains a valid 
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
 * **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
+* **template**: The template for generating the changelog. It defaults to the one inside this project (/templates/template.md)
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
 * **intro** : The introduction text on the header of the changelog. Defaults to `null`
 * **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
-* **changelogrc ** : Relative path indicating the location of the .changelogrc file, defaults to current dir.
+* **changelogrc** : Relative path indicating the location of the .changelogrc file, defaults to current dir.
 * **tag**: You can select from which tag to generate the log, it defaults to the last one. Set it to false for log since the beginning of the project
 * **debug**: Debug mode, false by default
 * **sections**: Group the commit by sections. The sections included by default are the ones that are on the previous example of .changelogrc file.
@@ -182,6 +184,18 @@ grunt.initConfig({
         app_name : 'My project name',
         file : 'tags/certainTag.md',
         tag : 'v0.0.1'
+      }
+    },
+    customTemplate: {
+      options: {
+        app_name : 'Custom Template',
+        intro: 'This changelog is generated with a custom template',
+        file: 'output/customTemplate.md',
+        template: 'templates/template_two.md',
+        logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+        version : 'squeezy potatoe',
+        tag: 'v0.0.1',
+        debug: true
       }
     }
   }
