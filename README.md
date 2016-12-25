@@ -45,7 +45,13 @@ Since version `1.0.0` git-changelog has included the [`.changelogrc` specificati
 - `grep_commits` option has been removed in favour of the `.changelogrc` options
 - `repo_url` fixed as parameter
 - `branch_name` changed to `branch`
+
+### v1.1.0
 - `version_name` instead of `version`
+
+
+**ATTENTION: Help wanted, there are some easy issues that you can contribute to. WINK WINK**
+
 
 ## `.changelogrc` specification
 
