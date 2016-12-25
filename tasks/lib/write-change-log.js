@@ -33,7 +33,8 @@ function writeChangelog(commits) {
     title: module.options.app_name,
     version:{
       number: module.options.tag,
-      name: module.options.version_name
+      name: module.options.version_name,
+      date: new Date()//Todo get the date of the tag
     } 
   };
 

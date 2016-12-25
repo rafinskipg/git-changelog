@@ -16,15 +16,35 @@ function readTemplateFile(template, logger) {
 
   fs.readFile(template, 'utf8' ,function (err, data) {
     if (err) {
-      logger('error', 'No template found', err);
-      dfd.resolve(null);
+      logger('error', 'No custom template found', err);
+      loadDefaultTemplate(logger)
+        .then(dfd.resolve)
+        .catch(dfd.reject)
     }else{
-      logger('info', 'Found template rc');
+      logger('info', 'Found template');
       dfd.resolve(data);
     }
   });
 
   return dfd.promise;
+}
+
+function loadDefaultTemplate(logger){
+  return new Promise(function(resolve, reject){
+
+    debug('loading default template')
+
+    fs.readFile(__dirname +'/../../templates/template.md', 'utf8', function(err, data){
+      if (err) {
+        logger('error', 'No default template found', err);
+        resolve(null);
+      }else{
+        logger('info', 'Found default template');
+        resolve(data);
+      }
+    })
+    
+  })
 }
 
 
