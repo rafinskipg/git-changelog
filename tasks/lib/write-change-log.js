@@ -2,45 +2,80 @@
 
 var debug = require('debug')('changelog:writeChangelog');
 var format = require('util').format;
-var q = require('q');
+var _ = require('lodash');
+var fse = require('fs-extra');
 
-function sendToStream(stream, sections, deferred) {
+function sendToStream(stream, sections) {
 
   var module = this;
 
   this.printHeader(stream, this.options, this.currentDate());
-
-  this.options.sections.forEach(function(section){
-    var sectionType = section.grep.replace('^', '');
-    if(sectionType !== 'BREAKING'){
-      module.printSection(stream, section.title, sections[sectionType]);
-    }else if (sections.BREAKING[module.emptyComponent].length > 0 ) {
-      module.printSection(stream, 'Breaking Changes', sections.BREAKING, false);
-    }
+ 
+  sections.forEach(function(section){
+    module.printSection(stream, section);
   });
 
   this.printSalute(stream);
   stream.end();
-  stream.on('finish', deferred.resolve);
 }
 
-function writeChangelog(stream, commits) {
+function writeChangelog(commits) {
+  var module = this;
+
   debug('writing change log');
-  var deferred = q.defer();
-  var sections = {
-    BREAKING : {}
+  var sections = this.organizeCommits(commits, this.options.sections);
+  var stream;
+  
+  var data = {
+    logo: module.options.logo,
+    sections: sections,
+    intro: module.options.intro,
+    title: module.options.app_name,
+    version:{
+      number: module.options.tag,
+      name: module.options.version_name,
+      date: new Date()//Todo get the date of the tag
+    } 
   };
 
-  this.options.sections.forEach(function(sectionInfo){
-    var sectionType = sectionInfo.grep.replace('^', '');
-    sections[sectionType] = {}; 
+  return new Promise(function(resolve, reject){
+
+    module.loadTemplate(data)
+      .then(function(template){
+
+        if (module.options.file) {
+          stream = fse.createOutputStream(module.options.file);
+        } else {
+          stream = process.stdout;
+        }
+
+        if(template){
+          debug('Proceding with template');
+
+          stream.on('open', function(){
+            var lines = template.split('\n');
+
+            lines.forEach(function(line){
+              stream.write(line);
+              stream.write('\n');
+            });
+
+            stream.end();
+            stream.on('finish', resolve);
+          });
+        }else{
+          debug('Proceding with legacy output');
+          
+          stream.on('open', sendToStream.bind(module, stream, sections));
+          stream.on('finish', resolve);
+        }
+
+      })
+      .catch(reject);
   });
-
-  sections.BREAKING[this.emptyComponent] = [];
-  this.organizeCommits(commits, sections);
-  stream.on('open', sendToStream.bind(this, stream, sections, deferred));
-
-  return deferred.promise;
 }
+
+
+
 
 module.exports = writeChangelog;

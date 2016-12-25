@@ -3,6 +3,7 @@
     "logo": "https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png",
     "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
     "debug": "true",
+    "template": "templates/template.md",
     "sections": [
         {
             "title": "Bug Fixes",

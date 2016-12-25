@@ -43,6 +43,7 @@ module.exports = function(grunt) {
       tag1: {
         options: {
           app_name : 'Since tag 1 changelog',
+          intro: 'This changelog is from the previous tag',
           file: 'output/tag1.md',
           logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
           version : 'squeezy potatoe',
@@ -58,6 +59,18 @@ module.exports = function(grunt) {
               "grep": "^Merge pull request"
             }
           ]
+        }
+      },
+      customTemplate: {
+        options: {
+          app_name : 'Custom Template',
+          intro: 'This changelog is generated with a custom template',
+          file: 'output/customTemplate.md',
+          template: 'templates/template_two.md',
+          logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+          version : 'squeezy potatoe',
+          tag: 'v0.0.1',
+          debug: true
         }
       },
       extended: {

@@ -7,7 +7,7 @@ var format = require('util').format;
 var logoTemplate = '<img width="300px" src="%s" />\n\n';
 var titleTemplate = '__%s__\n\n';
 var subtitleTemplate = '_%s_\n\n';
-var versionTemplate = '# %s %s (%s)\n\n';
+var versionTemplate = '# %s (%s)\n\n';
 
 function printHeader(stream, options, date) {
 
@@ -22,7 +22,7 @@ function printHeader(stream, options, date) {
     stream.write(format(subtitleTemplate, options.intro));
   }
 
-  stream.write(format(versionTemplate, options.version || '', options.versionName || '', date));
+  stream.write(format(versionTemplate, options.version_name || '', date));
   stream.write('\n\n---\n');
 }
 

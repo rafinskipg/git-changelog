@@ -126,10 +126,10 @@ describe('git_changelog_generate.js', function() {
         expect(changelog.options.msg).to.contain('debug: test');
       });
 
-      it('should store "version" if passed as an option', function() {
-        changelog.initOptions({ version: 'test' });
-        expect(changelog.options.version).to.equal('test');
-        expect(changelog.options.msg).to.contain('version: test');
+      it('should store "version_name" if passed as an option', function() {
+        changelog.initOptions({ version_name: 'test' });
+        expect(changelog.options.version_name).to.equal('test');
+        expect(changelog.options.msg).to.contain('version_name: test');
       });
 
       it('should store any other option, but not save in msg', function() {
@@ -270,6 +270,16 @@ describe('git_changelog_generate.js', function() {
         expect(msg.breaking).to.equal(' first breaking change\nsomething else\nanother line with more info\n');
       });
 
+      it('should add everything as a message if there are 2 sections', function(){
+        var msg = changelog.parseRawCommit(
+          '13f31602f396bc269076ab4d389cfd8ca94b20ba\n'+
+          'feat(ad): make new ad\n' +
+          'some note here\n' +
+          'reg(ad): need a walk through\n');
+
+        expect(msg.body).to.equals('some note here\nreg(ad): need a walk through\n');
+      });
+
       it('should organize commits', function() {
         var msg = changelog.parseRawCommit(
             '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
@@ -278,9 +288,10 @@ describe('git_changelog_generate.js', function() {
             'BREAKING CHANGE: first breaking change\nsomething else\n' +
             'another line with more info\n');
 
-        var sections = {
-          fix: {}
-        };
+        var sections = [{
+          title: 'Bug Fixes',
+          grep: '^fix'
+        }];
 
         var commits = [];
 
@@ -292,8 +303,8 @@ describe('git_changelog_generate.js', function() {
         }
 
         sections = changelog.organizeCommits(commits, sections);
-
-        expect(sections.fix.mymodule.length).to.equal(10);
+        expect(sections[0].components[0].name).to.equal('mymodule');
+        expect(sections[0].components[0].commits.length).to.equal(10);
       });
 
     });
@@ -446,64 +457,44 @@ describe('git_changelog_generate.js', function() {
           {
             title: 'Breaking changes',
             grep: 'BREAKING'
-          }
+          } 
         ];
 
         before(function(done) {
-          this.stream = {
-            write: sinon.stub(),
-            end : function(){
-
-            },
-            on: sinon.spy(function(event, callback) {
-              callback();
-            })
-          };
+          this.timeout = 10000;
+         
           this.commits = require('./fixtures/commits.js').withoutBreaking;
 
-          sinon.stub(changelog, 'organizeCommits');
           sinon.stub(changelog, 'printSalute');
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections });
-          changelog.writeChangelog(this.stream, this.commits).then(function() {
+          changelog.initOptions({ app_name: 'app', version_name: 'version_name', sections: sections, template: false });
+          changelog.writeChangelog(this.commits)
+          .then(function() {
             done();
+          })
+          .catch(function(err){
+            console.log('error', err);
           });
         });
 
         after(function() {
-          changelog.organizeCommits.restore();
           changelog.printSection.restore();
           changelog.printHeader.restore();
           changelog.printSalute.restore();
         });
 
-        it('should organize commits', function() {
-          expect(changelog.organizeCommits).to.have.been.calledOnce;
-          expect(changelog.organizeCommits).to.have.been.calledWith(this.commits);
-        });
-
         it('should write the header to the stream', function() {
           expect(changelog.printHeader).to.have.been.calledOnce;
-          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
-        it('should print 7 sections', function() {
-          expect(changelog.printSection.callCount).to.equal(7);
-          sections.forEach(function(section, index) {
-            var call = changelog.printSection.getCall(index);
-            if(!call){
-              expect(section.title).to.equals('Breaking changes');
-            }else{
-              expect(call.args).to.include(section.title);
-            }
-          });
+        it('should print 3 sections', function() {
+          expect(changelog.printSection.callCount).to.equal(3);
         });
 
         it('should print salute', function() {
           expect(changelog.printSalute).to.have.been.calledOnce;
-          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
       });
@@ -545,26 +536,43 @@ describe('git_changelog_generate.js', function() {
         ];
 
         before(function(done) {
-          this.stream = {
-            write: sinon.stub(),
-            end : function(){
-
-            },
-            on: sinon.spy(function(event, callback) {
-              callback();
-            })
-          };
+          
           this.commits = require('./fixtures/commits.js').withBreaking;
 
           sinon.stub(changelog, 'organizeCommits', function(commits, sections) {
-            sections.BREAKING[changelog.emptyComponent] = [ 'breaking commit'];
+            return [{
+              type: 'BREAKING',
+              commits: [{
+                closes: [],
+                breaks: [],
+                hash: '1d4f604363094d4eee3b4d7b1ca01133edaad344',
+                subject: 'did 2 thing',
+                body: '',
+                type: 'feat',
+                component: '',
+                breaking: true
+              }],
+              components:[{
+                name: '$scope',
+                commits: [{
+                  closes: [],
+                  breaks: [],
+                  hash: '1d4f604363012394d4eee3b4d7b1ca01133edaad344',
+                  subject: 'did 4 thing',
+                  body: '',
+                  type: 'feat',
+                  component: '$scope',
+                  breaking: true
+                }]
+              }]
+            }];
           });
           sinon.stub(changelog, 'printSalute');
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections });
-          changelog.writeChangelog(this.stream, this.commits).then(function() {
+          changelog.initOptions({ app_name: 'app', version_name: 'version_name', sections: sections, template:false });
+          changelog.writeChangelog(this.commits).then(function() {
             done();
           });
         });
@@ -583,20 +591,14 @@ describe('git_changelog_generate.js', function() {
 
         it('should write the header to the stream', function() {
           expect(changelog.printHeader).to.have.been.calledOnce;
-          expect(changelog.printHeader).to.have.been.calledWith(this.stream, changelog.options);
         });
 
-        it('should print 8 sections', function() {
-          expect(changelog.printSection.callCount).to.equal(8);
-          sections.forEach(function(section, index) {
-            var call = changelog.printSection.getCall(index);
-            expect(call.args).to.include(section.title);
-          });
+        it('should print 1 sections', function() {
+          expect(changelog.printSection.callCount).to.equal(1);
         });
 
         it('should print salute', function() {
           expect(changelog.printSalute).to.have.been.calledOnce;
-          expect(changelog.printSalute).to.have.been.calledWith(this.stream);
         });
 
       });
@@ -604,59 +606,89 @@ describe('git_changelog_generate.js', function() {
     });
 
     describe('.organizeCommits()', function() {
+      function findItem(key, value){
+        return function (item){
+          return item[key] === value;
+        };
+      }
 
       describe('without breaking commits', function () {
 
         before(function() {
           changelog.setDefaults();
-          this.sections = {
-            fix: {},
-            feat: {},
-            BREAKING: {},
-            style: {},
-            refactor: {},
-            test: {},
-            chore: {},
-            docs: {}
-          };
+          this.sections = [
+            {
+              title: 'Bug Fixes',
+              grep: '^fix'
+            },
+            {
+              title: 'Features',
+              grep: '^feat'
+            },
+            {
+              title: 'Documentation',
+              grep: '^docs'
+            },
+            {
+              title: 'Breaking changes',
+              grep: 'BREAKING'
+            },
+            {
+              title: 'Refactor',
+              grep: '^refactor'
+            },
+            {
+              title: 'Style',
+              grep: '^style'
+            },
+            {
+              title: 'Test',
+              grep: '^test'
+            },
+            {
+              title: 'Chore',
+              grep: '^chore'
+            }
+          ];
+
           this.commits = require('./fixtures/commits.js').withoutBreaking;
           this.sections = changelog.organizeCommits(this.commits, this.sections);
         });
 
-        it('should return 8 sections', function() {
-          expect(Object.keys(this.sections).length).to.equal(8);
+        it('should return 3 sections', function() {
+          expect(this.sections.length).to.equal(3);
         });
 
         it('should fix section to have 1 commit', function() {
-          expect(this.sections.fix.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'fix')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
         it('should feat section to have 1 commit', function() {
-          expect(this.sections.feat.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'feat')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
         it('should breaks section to be empty', function() {
-          expect(this.sections.BREAKING).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'BREAKING'))).to.equal(undefined);
         });
 
         it('should style section to be empty', function() {
-          expect(this.sections.style).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'style'))).to.equal(undefined);
         });
 
         it('should refactor section be empty', function() {
-          expect(this.sections.refactor).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'refactor'))).to.equal(undefined);
         });
 
         it('should test section to be empty', function() {
-          expect(this.sections.test).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'test'))).to.equal(undefined);
         });
 
         it('should chore section to have 1 commit', function() {
-          expect(this.sections.chore.$scope.length).to.equal(3);
+          expect(this.sections.find(findItem('type', 'chore')).components.find(findItem('name', '$scope')).commits.length).to.equal(3);
         });
 
         it('should docs section to be empty', function() {
-          expect(this.sections.docs).to.deep.equal({});
+          expect(this.sections.find(findItem('type', 'docs'))).to.equal(undefined);
         });
 
       });
@@ -665,16 +697,40 @@ describe('git_changelog_generate.js', function() {
 
         before(function() {
           changelog.setDefaults();
-          this.sections = {
-            fix: {},
-            feat: {},
-            BREAKING: {},
-            style: {},
-            refactor: {},
-            test: {},
-            chore: {},
-            docs: {}
-          };
+          this.sections = [
+            {
+              title: 'Bug Fixes',
+              grep: '^fix'
+            },
+            {
+              title: 'Features',
+              grep: '^feat'
+            },
+            {
+              title: 'Documentation',
+              grep: '^docs'
+            },
+            {
+              title: 'Breaking changes',
+              grep: 'BREAKING'
+            },
+            {
+              title: 'Refactor',
+              grep: '^refactor'
+            },
+            {
+              title: 'Style',
+              grep: '^style'
+            },
+            {
+              title: 'Test',
+              grep: '^test'
+            },
+            {
+              title: 'Chore',
+              grep: '^chore'
+            }
+          ];
           var repo_url = 'https://github.com/owner/repo';
           changelog.options.repo_url = repo_url;
           changelog.getProviderLinks();
@@ -683,40 +739,25 @@ describe('git_changelog_generate.js', function() {
           this.sections = changelog.organizeCommits(this.commits, this.sections);
         });
 
-        it('should return 8 sections', function() {
-          expect(Object.keys(this.sections).length).to.equal(8);
+        it('should return 4 sections', function() {
+          expect(this.sections.length).to.equal(4);
         });
 
         it('should fix section to have 1 commit', function() {
-          expect(this.sections.fix.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'fix')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
         it('should feat section to have 1 commit', function() {
-          expect(this.sections.feat.$scope.length).to.equal(1);
+          expect(this.sections.find(findItem('type', 'feat')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
-        it('should breaks section to be empty', function() {
-          expect(this.sections.BREAKING.$scope.length).to.equal(1);
+        it('should breaks have 1 component and 2 comits', function() {
+          expect(this.sections.find(findItem('type', 'BREAKING')).components.length).to.equals(1);
+          expect(this.sections.find(findItem('type', 'BREAKING')).components.find(findItem('name', '$scope')).commits.length).to.equal(1);
         });
 
-        it('should style section to be empty', function() {
-          expect(this.sections.style).to.deep.equal({});
-        });
-
-        it('should refactor section be empty', function() {
-          expect(this.sections.refactor).to.deep.equal({});
-        });
-
-        it('should test section to be empty', function() {
-          expect(this.sections.test).to.deep.equal({});
-        });
-
-        it('should chore section to have 1 commit', function() {
-          expect(this.sections.chore.$scope.length).to.equal(3);
-        });
-
-        it('should docs section to be empty', function() {
-          expect(this.sections.docs).to.deep.equal({});
+        it('should chore section to have 3 commit', function() {
+          expect(this.sections.find(findItem('type', 'chore')).components.find(findItem('name', '$scope')).commits.length).to.equal(3);
         });
 
       });
@@ -878,7 +919,7 @@ describe('git_changelog_generate.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-          done();
+          done(err);
         });
     });
 
@@ -896,7 +937,7 @@ describe('git_changelog_generate.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-          done();
+          done(err);
         });
     });
 
@@ -914,7 +955,7 @@ describe('git_changelog_generate.js', function() {
         })
         .catch(function(err){
           console.log('error', err);
-          done();
+          done(err);
         });
     });
 

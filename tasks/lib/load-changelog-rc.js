@@ -5,7 +5,7 @@ var q = require('q'),
   fs = require('fs');
 
 function readChangelogRcFile(changelogrc, logger) {
-  debug('returning git repo url command');
+  debug('finding changelogrc file');
 
   if(!changelogrc){
     return q.reject();
@@ -40,8 +40,8 @@ function loadChangelogRc() {
 
         deferred.resolve(contents);
       }catch(e){
-        module.log('warn', 'Invalid changelogrc file', e);
-        return deferred.reject(e);
+        module.log('error', 'Invalid changelogrc file', e);
+        return deferred.reject('Invalid changelogrc file' + e);
       }
 
     })
@@ -50,7 +50,7 @@ function loadChangelogRc() {
         return section.title;
       }).join(', ');
 
-      module.log('warn', 'No .changelog.rc file found, using default settings');
+      module.log('error', 'No .changelog.rc file found, using default settings');
       module.log('info', 'Sections: ', sectionNames);
       deferred.resolve({});
     }.bind(this));
