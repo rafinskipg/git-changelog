@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-##  v0.0.1 (  )
+##  v0.0.1 ( Sun Dec 25 2016 13:33:22 GMT+0100 (CET) )
 
 
 ## Bug Fixes
@@ -28,7 +28,7 @@ _This changelog is generated with a custom template_
   - **nested lists**
     - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](https://github.com/rafinskipg/git-changelog/issues/9))
   - **options**
-    - use repo_url instead of url (346b39491923a49a3421f174a566b204d5fc7db9)
+    - Use version_name instead of version (43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c)    - use repo_url instead of url (346b39491923a49a3421f174a566b204d5fc7db9)
   - **package.json**
     - move q to dependancies since it is required to run (257119cf2bb6d8f341a5d65a2f47bcf803dff205)
   - **params**
@@ -51,6 +51,8 @@ _This changelog is generated with a custom template_
     - added logo in printHeader (6b489450a90172dc57059d7fd55fb4c6110152b2)
   - **package**
     - Added global install so you can run via command (86eae3f013ace1c5c23afc32b2e8f878a69629f1)
+  - **template**
+    - Load default template if no custom template is found (41d5128b922efe3ced883a37bb4e170410160f4f)
 
 
 

@@ -5,6 +5,26 @@ var q = require('q');
 var _ = require('lodash');
 var fs = require('fs');
 
+
+function loadDefaultTemplate(logger){
+  return new Promise(function(resolve, reject){
+
+    debug('loading default template');
+
+    fs.readFile(__dirname +'/../../templates/template.md', 'utf8', function(err, data){
+      if (err) {
+        logger('error', 'No default template found', err);
+        resolve(null);
+      }else{
+        logger('info', 'Found default template');
+        resolve(data);
+      }
+    });
+    
+  });
+}
+
+
 function readTemplateFile(template, logger) {
   debug('finding template file');
 
@@ -19,7 +39,7 @@ function readTemplateFile(template, logger) {
       logger('error', 'No custom template found', err);
       loadDefaultTemplate(logger)
         .then(dfd.resolve)
-        .catch(dfd.reject)
+        .catch(dfd.reject);
     }else{
       logger('info', 'Found template');
       dfd.resolve(data);
@@ -27,24 +47,6 @@ function readTemplateFile(template, logger) {
   });
 
   return dfd.promise;
-}
-
-function loadDefaultTemplate(logger){
-  return new Promise(function(resolve, reject){
-
-    debug('loading default template')
-
-    fs.readFile(__dirname +'/../../templates/template.md', 'utf8', function(err, data){
-      if (err) {
-        logger('error', 'No default template found', err);
-        resolve(null);
-      }else{
-        logger('info', 'Found default template');
-        resolve(data);
-      }
-    })
-    
-  })
 }
 
 

@@ -4,7 +4,7 @@
 
 _This changelog is from the previous tag_
 
-## v0.0.1 
+## v0.0.1 ( Sun Dec 25 2016 13:33:21 GMT+0100 (CET) )
 
 
 ## Bug Fixes
@@ -51,6 +51,8 @@ _This changelog is from the previous tag_
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
 
   - **options**
+    - Use version_name instead of version
+  ([43fdac85](https://github.com/rafinskipg/git-changelog/commit/43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c))
     - use repo_url instead of url
   ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
 

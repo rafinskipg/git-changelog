@@ -50,6 +50,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
    [#9](https://github.com/rafinskipg/git-changelog/issues/9))
 
   - **options**
+    - Use version_name instead of version
+  ([43fdac85](https://github.com/rafinskipg/git-changelog/commit/43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c))
     - use repo_url instead of url
   ([346b3949](https://github.com/rafinskipg/git-changelog/commit/346b39491923a49a3421f174a566b204d5fc7db9))
 
@@ -95,6 +97,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   - **package**
     - Added global install so you can run via command
   ([86eae3f0](https://github.com/rafinskipg/git-changelog/commit/86eae3f013ace1c5c23afc32b2e8f878a69629f1))
+
+  - **template**
+    - Load default template if no custom template is found
+  ([41d5128b](https://github.com/rafinskipg/git-changelog/commit/41d5128b922efe3ced883a37bb4e170410160f4f))
 
 
 

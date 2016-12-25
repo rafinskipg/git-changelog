@@ -14,6 +14,19 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
     - get latest tag, regardless of branch for workflows that rely on git-flow releases
   ([48800306](https://github.com/rafinskipg/git-changelog/commit/48800306fa5ac19b7e9a4c6d7f2f432ee8ae4d84))
 
+  - **options**
+    - Use version_name instead of version
+  ([43fdac85](https://github.com/rafinskipg/git-changelog/commit/43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c))
+
+
+
+
+## Features
+
+  - **template**
+    - Load default template if no custom template is found
+  ([41d5128b](https://github.com/rafinskipg/git-changelog/commit/41d5128b922efe3ced883a37bb4e170410160f4f))
+
 
 
 
