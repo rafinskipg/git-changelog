@@ -19,7 +19,7 @@ function initOptions(params) {
   this.message('logo', this.options.logo);
   this.message('sections', this.options.sections);
   this.message('debug', this.options.debug);
-  this.message('version', this.options.version);
+  this.message('version_name', this.options.version_name);
   this.message('changelogrc', this.options.changelogrc);
 }
 

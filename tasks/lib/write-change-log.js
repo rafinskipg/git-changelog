@@ -33,7 +33,7 @@ function writeChangelog(commits) {
     title: module.options.app_name,
     version:{
       number: module.options.tag,
-      name: module.options.name
+      name: module.options.version_name
     } 
   };
 

@@ -55,6 +55,7 @@ _This changelog is generated with a custom template_
 
 
 ## Documentation
+  - updating documentation with template info (70fb97742ea2182a9d25ca92d6eeab081b44cc63
   - Updated readme with the correct specification (ec2de4bf599dfc77c24c9b86ee9c0d86fe37e5b8
   - Updated options and tagging info (1ad3b6bedc6431b70e3a2e93e5967bad9a7830ee
   - added documentation for explaining the commit message (d516c2fb464072fc1f4c86ec71a910eeab3e830c

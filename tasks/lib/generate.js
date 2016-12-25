@@ -5,14 +5,14 @@ var debug = require('debug')('changelog:generate');
 function generateFromCommits(commits, sections) {
   this.message('parsed commits', commits.length);
   this.log('debug', 'Parsed', commits.length, 'commits');
-  this.log('info','Generating changelog to', this.options.file || 'stdout', '(', this.options.version, ')');
+  this.log('info','Generating changelog to', this.options.file || 'stdout', '(', this.options.version_name, ')');
 
   return this.writeChangelog(commits, sections);
 }
 
 function generateFromTag(tag) {
   var readGitLog;
- 
+  
   if (typeof(tag) !== 'undefined' && tag && tag !== false) {
     this.log('info', 'Reading git log since', tag);
     this.message('since tag', tag);

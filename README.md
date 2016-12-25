@@ -43,10 +43,9 @@
 
 Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelogrc-specification) and has discontinued the next options:
 - `grep_commits` option has been removed in favour of the `.changelogrc` options
-- `tag = false`, in addition to pick logs from the begining of the project, now groups the commits by tag [see example]. **TODO**
-- `tag = false` && `group=false` will log from the begining of the project, without grouping by tag **TODO**
 - `repo_url` fixed as parameter
 - `branch_name` changed to `branch`
+- `version_name` instead of `version`
 
 ## `.changelogrc` specification
 
@@ -61,7 +60,7 @@ This specification is used to grep the commits on your log, it contains a valid 
     "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
     "branch" : "",
     "repo_url": "",
-    "version" : "v1.0.0",
+    "version_name" : "v1.0.0",
     "file": "CHANGELOG.md",
     "template": "myCustomTemplate.md",
     "sections": [
@@ -113,7 +112,7 @@ This specification is used to grep the commits on your log, it contains a valid 
 
 * **branch** : The name of the branch. Defaults to ` `
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
-* **version**: The version of the project. Defaults to ` `, *DEPRECATED* will default to the tag name
+* **version_name**: The version name of the project.
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
 * **template**: The template for generating the changelog. It defaults to the one inside this project (/templates/template.md)
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
@@ -163,7 +162,7 @@ grunt.initConfig({
       options: {
         app_name : 'Git changelog extended',
         file : 'EXTENDEDCHANGELOG.md',
-        version : 'squeezy potatoe',
+        version_name : 'squeezy potatoe',
         sections : [
           {
             "title": "Test commits",
@@ -193,7 +192,7 @@ grunt.initConfig({
         file: 'output/customTemplate.md',
         template: 'templates/template_two.md',
         logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
-        version : 'squeezy potatoe',
+        version_name : 'squeezy potatoe',
         tag: 'v0.0.1',
         debug: true
       }
@@ -220,19 +219,21 @@ Use it directly with the common options
 
   Options:
 
-    -h, --help                        output usage information
-    -V, --version                     output the version number
-    -e, --extended                    Extended log
-    -a, --app_name [app_name]         Name [app_name]
-    -b, --branch [branch]   Branch name [branch]
-    -f, --file [file]                 File [file]
-    -r, --repo_url [url]              Repo url [url]
-    -l, --logo [logo]                 Logo path [logo]
-    -i, --intro [intro]               intro text [intro]
-    -t, --tag [tag]                   Since tag [tag]
-    -rc, --changelogrc [changelogrc]  .changelogrc relative path [changelogrc]
-    -g, --grep [grep]                 Grep commits for [grep]
-    -d, --debug                       Debugger
+    -h, --help                         output usage information
+    -V, --version                      output the version number of the package
+    -e, --extended                     Extended log
+    -n, --version_name [version_name]  Name of the version
+    -a, --app_name [app_name]          Name [app_name]
+    -b, --branch [branch]              Branch name [branch]
+    -f, --file [file]                  File [file]
+    -tpl, --template [template]        Template [template]
+    -r, --repo_url [repo_url]          Repo url [repo_url]
+    -l, --logo [logo]                  Logo path [logo]
+    -i, --intro [intro]                intro text [intro]
+    -t, --tag [tag]                    Since tag [tag]
+    -rc, --changelogrc [changelogrc]   .changelogrc relative path [changelogrc]
+    -g, --grep [grep]                  Grep commits for [grep]
+    -d, --debug                        Debugger
 
 ```
 

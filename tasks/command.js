@@ -36,7 +36,7 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
   }
 
   if (program.version_name){
-    options.versionName = program.version_name;
+    options.version_name = program.version_name;
   }
 
   if (program.app_name){

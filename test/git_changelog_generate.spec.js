@@ -126,10 +126,10 @@ describe('git_changelog_generate.js', function() {
         expect(changelog.options.msg).to.contain('debug: test');
       });
 
-      it('should store "version" if passed as an option', function() {
-        changelog.initOptions({ version: 'test' });
-        expect(changelog.options.version).to.equal('test');
-        expect(changelog.options.msg).to.contain('version: test');
+      it('should store "version_name" if passed as an option', function() {
+        changelog.initOptions({ version_name: 'test' });
+        expect(changelog.options.version_name).to.equal('test');
+        expect(changelog.options.msg).to.contain('version_name: test');
       });
 
       it('should store any other option, but not save in msg', function() {
@@ -469,7 +469,7 @@ describe('git_changelog_generate.js', function() {
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections, template: false });
+          changelog.initOptions({ app_name: 'app', version_name: 'version_name', sections: sections, template: false });
           changelog.writeChangelog(this.commits)
           .then(function() {
             done();
@@ -571,7 +571,7 @@ describe('git_changelog_generate.js', function() {
           sinon.stub(changelog, 'printSection');
           sinon.stub(changelog, 'printHeader');
 
-          changelog.initOptions({ app_name: 'app', version: 'version', sections: sections, template:false });
+          changelog.initOptions({ app_name: 'app', version_name: 'version_name', sections: sections, template:false });
           changelog.writeChangelog(this.commits).then(function() {
             done();
           });

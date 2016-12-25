@@ -3,7 +3,7 @@ module.exports = {
   branch : '',
   //[G]ithub [B]itbucket supported at the momment
   repo_url: '',
-  version : '',
+  version_name : '',
   file: 'CHANGELOG.md',
   app_name : 'My app - Changelog',
   tag: null,
