@@ -63,6 +63,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
     - Restores versionName in CLI
   ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
+  - **travis**
+    - Removed 0.12 nodejs version, addd 7.3.0
+  ([18190836](https://github.com/rafinskipg/git-changelog/commit/1819083690e70e0af28d0c155b6fa67cbeb1dfb3))
+
 
 
 
@@ -118,6 +122,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([e0ba50c0](https://github.com/rafinskipg/git-changelog/commit/e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644))
 
   - **readme**
+    - Updated readme
+  ([2d7b1762](https://github.com/rafinskipg/git-changelog/commit/2d7b17625b9783532ee9ba655651cf8d475aa4ce))
     - Unuseful commit
   ([4373f472](https://github.com/rafinskipg/git-changelog/commit/4373f4726eedad6d450c8255f5e57036a3e5e223))
     - fix link to the `.changelogrc` section
@@ -179,6 +185,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 
 ## Style
+
+  - **jshint**
+    - Fixed style
+  ([217bdf58](https://github.com/rafinskipg/git-changelog/commit/217bdf588729e8dba5739bd6edb424523e48b001))
 
   - **message**
     - Added a message on the changelog for referencing the github
@@ -321,6 +331,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([b3f1e44a](https://github.com/rafinskipg/git-changelog/commit/b3f1e44a900b00bda1facaee5354ba1ff58166aa))
 
   - **release**
+    - 1.1.0 codename(christmas-templates)
+  ([d7d37854](https://github.com/rafinskipg/git-changelog/commit/d7d37854f9bcf6a885be278d05bf78651d493b1d))
     - 1.0.0 codename(magnificent-goldman)
   ([6b836fbe](https://github.com/rafinskipg/git-changelog/commit/6b836fbea9405727bfc6d8e83349ea5cf8965b05))
     - 0.1.8 codename(furious-stallman)
@@ -343,6 +355,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 
 ## Pull requests merged
+  - Merge pull request #70 from rafinskipg/templating
+  ([5e60232c](https://github.com/rafinskipg/git-changelog/commit/5e60232cf92b66cf50f64f3a7734de98fe2637e7))
   - Merge pull request #60 from seivan/feature/latest_tag_regardless_of_branch
   ([1ff50d0d](https://github.com/rafinskipg/git-changelog/commit/1ff50d0dc03f8c0db9961c034945c3ef8f4268f7))
   - Merge pull request #58 from olamothe/master

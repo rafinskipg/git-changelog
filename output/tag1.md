@@ -4,7 +4,7 @@
 
 _This changelog is from the previous tag_
 
-## v0.0.1 ( Sun Dec 25 2016 13:33:21 GMT+0100 (CET) )
+## squeezy potatoe v0.0.1 ( Fri Jan 06 2017 13:50:31 GMT+0100 (CET) )
 
 
 ## Bug Fixes
@@ -64,10 +64,16 @@ _This changelog is from the previous tag_
     - Restores versionName in CLI
   ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
+  - **travis**
+    - Removed 0.12 nodejs version, addd 7.3.0
+  ([18190836](https://github.com/rafinskipg/git-changelog/commit/1819083690e70e0af28d0c155b6fa67cbeb1dfb3))
+
 
 
 
 ## Pull requests merged
+  - Merge pull request #70 from rafinskipg/templating
+  ([5e60232c](https://github.com/rafinskipg/git-changelog/commit/5e60232cf92b66cf50f64f3a7734de98fe2637e7))
   - Merge pull request #60 from seivan/feature/latest_tag_regardless_of_branch
   ([1ff50d0d](https://github.com/rafinskipg/git-changelog/commit/1ff50d0dc03f8c0db9961c034945c3ef8f4268f7))
   - Merge pull request #58 from olamothe/master

@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-##  v0.0.1 ( Sun Dec 25 2016 13:33:22 GMT+0100 (CET) )
+## squeezy potatoe v0.0.1 ( Fri Jan 06 2017 13:50:31 GMT+0100 (CET) )
 
 
 ## Bug Fixes
@@ -33,6 +33,8 @@ _This changelog is generated with a custom template_
     - move q to dependancies since it is required to run (257119cf2bb6d8f341a5d65a2f47bcf803dff205)
   - **params**
     - Restores versionName in CLI (1d97f952bd5d37f67c1febdf161f4ce9b310eebf)
+  - **travis**
+    - Removed 0.12 nodejs version, addd 7.3.0 (1819083690e70e0af28d0c155b6fa67cbeb1dfb3)
 
 
 
@@ -63,7 +65,7 @@ _This changelog is generated with a custom template_
   - added documentation for explaining the commit message (d516c2fb464072fc1f4c86ec71a910eeab3e830c
   - Added docs (e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644
   - **readme**
-    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](https://github.com/rafinskipg/git-changelog/issues/1))
+    - Updated readme (2d7b17625b9783532ee9ba655651cf8d475aa4ce)    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](https://github.com/rafinskipg/git-changelog/issues/1))
 
 
 
@@ -87,6 +89,8 @@ _This changelog is generated with a custom template_
 
 
 ## Style
+  - **jshint**
+    - Fixed style (217bdf588729e8dba5739bd6edb424523e48b001)
   - **message**
     - Added a message on the changelog for referencing the github (d20031a9dc6fd92cba205903b2fd9d25feae6ea7)
 
@@ -156,7 +160,7 @@ _This changelog is generated with a custom template_
   - **package.json**
     - Added preversion script (b3f1e44a900b00bda1facaee5354ba1ff58166aa)
   - **release**
-    - 1.0.0 codename(magnificent-goldman) (6b836fbea9405727bfc6d8e83349ea5cf8965b05)    - 0.1.8 codename(furious-stallman) (b943231854ffd6cb0c5f32e5482cadd99c96f3e9)
+    - 1.1.0 codename(christmas-templates) (d7d37854f9bcf6a885be278d05bf78651d493b1d)    - 1.0.0 codename(magnificent-goldman) (6b836fbea9405727bfc6d8e83349ea5cf8965b05)    - 0.1.8 codename(furious-stallman) (b943231854ffd6cb0c5f32e5482cadd99c96f3e9)
   - **task**
     - cleanup unused requires (8a41d4e7b245b2698749279765bcef4748e18ac7)
 

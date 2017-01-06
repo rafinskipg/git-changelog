@@ -46,7 +46,7 @@ module.exports = function(grunt) {
           intro: 'This changelog is from the previous tag',
           file: 'output/tag1.md',
           logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
-          version : 'squeezy potatoe',
+          version_name : 'squeezy potatoe',
           tag: 'v0.0.1',
           debug: true,
           sections: [
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
           file: 'output/customTemplate.md',
           template: 'templates/template_two.md',
           logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
-          version : 'squeezy potatoe',
+          version_name : 'squeezy potatoe',
           tag: 'v0.0.1',
           debug: true
         }
