@@ -154,24 +154,38 @@ describe('git_changelog_generate.js', function() {
         expect(changelog.provider).to.equal('github');
 
         expect(changelog.links.issue).to.contain(repo_url);
-        expect(changelog.links.issue).to.contain('issue');
+        expect(changelog.links.issue).to.contain('issues/%s');
 
         expect(changelog.links.commit).to.contain(repo_url);
-        expect(changelog.links.commit).to.contain('commit');
+        expect(changelog.links.commit).to.contain('commit/%s');
       });
 
       it('should set provider/links to BitBucket', function() {
-        var repo_url = 'https://www.bitbuket.com/owner/repo';
+        var repo_url = 'https://www.bitbucket.com/owner/repo';
         changelog.options.repo_url = repo_url;
         changelog.getProviderLinks();
 
         expect(changelog.provider).to.equal('bitbucket');
 
         expect(changelog.links.issue).to.contain(repo_url);
-        expect(changelog.links.issue).to.contain('issue');
+        expect(changelog.links.issue).to.contain('issues/%s');
 
         expect(changelog.links.commit).to.contain(repo_url);
-        expect(changelog.links.commit).to.contain('commit');
+        expect(changelog.links.commit).to.contain('commits/%s');
+      });
+
+      it('should set provider/links to GitLab', function() {
+        var repo_url = 'https://gitlab.com/owner/repo';
+        changelog.options.repo_url = repo_url;
+        changelog.getProviderLinks();
+
+        expect(changelog.provider).to.equal('gitlab');
+
+        expect(changelog.links.issue).to.contain(repo_url);
+        expect(changelog.links.issue).to.contain('issues/%s');
+
+        expect(changelog.links.commit).to.contain(repo_url);
+        expect(changelog.links.commit).to.contain('commit/%s');
       });
 
     });

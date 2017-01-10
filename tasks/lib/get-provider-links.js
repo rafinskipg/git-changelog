@@ -14,10 +14,21 @@ function getProviderLinks() {
     bitbucket: {
       issue: '[#%s](' + this.options.repo_url + '/issues/%s)',
       commit: '[%s](' + this.options.repo_url + '/commits/%s)'
+    },
+    gitlab: {
+      issue: '[#%s](' + this.options.repo_url + '/issues/%s)',
+      commit: '[%s](' + this.options.repo_url + '/commit/%s)'
     }
   };
 
-  this.provider = this.options.repo_url.indexOf('github.com') !== -1 ? 'github' :'bitbucket';
+  if (this.options.repo_url.match(/bitbucket/)) {
+    this.provider = 'bitbucket';
+  } else if (this.options.repo_url.match(/gitlab/)) {
+    this.provider = 'gitlab';
+  } else {
+    // use github as default provider
+    this.provider = 'github';
+  }
   this.links = providerLinks[this.provider];
 }
 
