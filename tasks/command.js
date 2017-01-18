@@ -26,6 +26,7 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     .option('-rc, --changelogrc [changelogrc]', '.changelogrc relative path [changelogrc]')
     .option('-g, --grep [grep]', 'Grep commits for [grep]')
     .option('-d, --debug', 'Debugger')
+    .option('-p, --provider [provider]', 'Provider: gitlab, github, bitbucket (Optional)')
     .parse(process.argv);
 
   console.log('Executing git changelog:');
@@ -74,6 +75,11 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
   if (program.repo_url){
     options.repo_url = program.repo_url;
     console.log('  - With URL %s', program.repo_url);
+  }
+
+  if (program.provider){
+    options.provider = program.provider;
+    console.log('  - With forced provider %s', program.provider);
   }
 
   if (program.tag !== undefined){

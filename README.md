@@ -118,6 +118,7 @@ This specification is used to grep the commits on your log, it contains a valid 
 
 * **branch** : The name of the branch. Defaults to ` `
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
+* **provider** : Optional field, the provider is calculated from the repo_url, but can also be passed as config parameter. Values available: gitlab, github, bitbucket.
 * **version_name**: The version name of the project.
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
 * **template**: The template for generating the changelog. It defaults to the one inside this project (/templates/template.md)
@@ -226,7 +227,7 @@ Use it directly with the common options
   Options:
 
     -h, --help                         output usage information
-    -V, --version                      output the version number of the package
+    -V, --version                      output the version number
     -e, --extended                     Extended log
     -n, --version_name [version_name]  Name of the version
     -a, --app_name [app_name]          Name [app_name]
@@ -240,6 +241,7 @@ Use it directly with the common options
     -rc, --changelogrc [changelogrc]   .changelogrc relative path [changelogrc]
     -g, --grep [grep]                  Grep commits for [grep]
     -d, --debug                        Debugger
+    -p, --provider [provider]          Provider: gitlab, github, bitbucket (Optional)
 
 ```
 

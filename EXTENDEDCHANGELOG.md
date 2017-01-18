@@ -63,6 +63,11 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
     - Restores versionName in CLI
   ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
+  - **template**
+    - Fixes missing space in version_name output in template
+  ([f494f4a9](https://github.com/rafinskipg/git-changelog/commit/f494f4a93a3c4a245f706cfb65f735a5ccccb2ce),
+   [#72](https://github.com/rafinskipg/git-changelog/issues/72))
+
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0
   ([18190836](https://github.com/rafinskipg/git-changelog/commit/1819083690e70e0af28d0c155b6fa67cbeb1dfb3))
@@ -101,6 +106,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   - **package**
     - Added global install so you can run via command
   ([86eae3f0](https://github.com/rafinskipg/git-changelog/commit/86eae3f013ace1c5c23afc32b2e8f878a69629f1))
+
+  - **providers**
+    - Add possibility to set providers in the options
+  ([14da6fee](https://github.com/rafinskipg/git-changelog/commit/14da6fee8aa8b1fcec198ea26812aa1871008438))
 
   - **template**
     - Load default template if no custom template is found
@@ -355,6 +364,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 
 ## Pull requests merged
+  - Merge pull request #74 from Treyone/master
+  ([4d539ace](https://github.com/rafinskipg/git-changelog/commit/4d539ace7ff22a9be468270114109f2565203aa4))
+  - Merge pull request #73 from fabn/gitlab-links
+  ([6df54f09](https://github.com/rafinskipg/git-changelog/commit/6df54f09ab62175b89a853d3695e8d43bfedac95))
   - Merge pull request #70 from rafinskipg/templating
   ([5e60232c](https://github.com/rafinskipg/git-changelog/commit/5e60232cf92b66cf50f64f3a7734de98fe2637e7))
   - Merge pull request #60 from seivan/feature/latest_tag_regardless_of_branch

@@ -4,7 +4,7 @@
 
 _This changelog is from the previous tag_
 
-## squeezy potatoe v0.0.1 ( Fri Jan 06 2017 13:50:31 GMT+0100 (CET) )
+## squeezy potatoe v0.0.1 ( Wed Jan 18 2017 13:36:19 GMT+0100 (CET) )
 
 
 ## Bug Fixes
@@ -64,6 +64,11 @@ _This changelog is from the previous tag_
     - Restores versionName in CLI
   ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
+  - **template**
+    - Fixes missing space in version_name output in template
+  ([f494f4a9](https://github.com/rafinskipg/git-changelog/commit/f494f4a93a3c4a245f706cfb65f735a5ccccb2ce),
+   [#72](https://github.com/rafinskipg/git-changelog/issues/72))
+
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0
   ([18190836](https://github.com/rafinskipg/git-changelog/commit/1819083690e70e0af28d0c155b6fa67cbeb1dfb3))
@@ -72,6 +77,10 @@ _This changelog is from the previous tag_
 
 
 ## Pull requests merged
+  - Merge pull request #74 from Treyone/master
+  ([4d539ace](https://github.com/rafinskipg/git-changelog/commit/4d539ace7ff22a9be468270114109f2565203aa4))
+  - Merge pull request #73 from fabn/gitlab-links
+  ([6df54f09](https://github.com/rafinskipg/git-changelog/commit/6df54f09ab62175b89a853d3695e8d43bfedac95))
   - Merge pull request #70 from rafinskipg/templating
   ([5e60232c](https://github.com/rafinskipg/git-changelog/commit/5e60232cf92b66cf50f64f3a7734de98fe2637e7))
   - Merge pull request #60 from seivan/feature/latest_tag_regardless_of_branch

@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Fri Jan 06 2017 13:50:31 GMT+0100 (CET) )
+## squeezy potatoe v0.0.1 ( Wed Jan 18 2017 13:36:19 GMT+0100 (CET) )
 
 
 ## Bug Fixes
@@ -33,6 +33,8 @@ _This changelog is generated with a custom template_
     - move q to dependancies since it is required to run (257119cf2bb6d8f341a5d65a2f47bcf803dff205)
   - **params**
     - Restores versionName in CLI (1d97f952bd5d37f67c1febdf161f4ce9b310eebf)
+  - **template**
+    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/rafinskipg/git-changelog/issues/72))
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0 (1819083690e70e0af28d0c155b6fa67cbeb1dfb3)
 
@@ -53,6 +55,8 @@ _This changelog is generated with a custom template_
     - added logo in printHeader (6b489450a90172dc57059d7fd55fb4c6110152b2)
   - **package**
     - Added global install so you can run via command (86eae3f013ace1c5c23afc32b2e8f878a69629f1)
+  - **providers**
+    - Add possibility to set providers in the options (14da6fee8aa8b1fcec198ea26812aa1871008438)
   - **template**
     - Load default template if no custom template is found (41d5128b922efe3ced883a37bb4e170410160f4f)
 
