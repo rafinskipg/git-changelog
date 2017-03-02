@@ -63,6 +63,10 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
     - Restores versionName in CLI
   ([1d97f952](https://github.com/rafinskipg/git-changelog/commit/1d97f952bd5d37f67c1febdf161f4ce9b310eebf))
 
+  - **provider**
+    - Added provider option in the command
+  ([8f3b3fef](https://github.com/rafinskipg/git-changelog/commit/8f3b3fef0d123e4fd11ea79bb9552285befc6689))
+
   - **template**
     - Fixes missing space in version_name output in template
   ([f494f4a9](https://github.com/rafinskipg/git-changelog/commit/f494f4a93a3c4a245f706cfb65f735a5ccccb2ce),
@@ -108,6 +112,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   ([86eae3f0](https://github.com/rafinskipg/git-changelog/commit/86eae3f013ace1c5c23afc32b2e8f878a69629f1))
 
   - **providers**
+    - possiblity to override issue URL when using an external issue tracker
+  ([d831bb1a](https://github.com/rafinskipg/git-changelog/commit/d831bb1a1e05fae8dd5f932e1f3b1ffef0c4f456))
     - Add possibility to set providers in the options
   ([14da6fee](https://github.com/rafinskipg/git-changelog/commit/14da6fee8aa8b1fcec198ea26812aa1871008438))
 
