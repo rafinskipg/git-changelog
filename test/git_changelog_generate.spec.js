@@ -155,6 +155,19 @@ describe('git_changelog_generate.js', function () {
                 expect(changelog.provider).to.equal('gitlab');
 
             });
+
+
+            it('should take the issue url passed in the options in priority', function () {
+                changelog.options.issue_url = 'http://toto.toto.com';
+
+                changelog.options.provider = 'gitlab';
+                changelog.getProviderLinks();
+                expect(changelog.links.issue).to.equal('[#%s](http://toto.toto.com/issues/%s)');
+
+            });
+
+
+
             it('should ignore unknown providers', function () {
                 var repo_url = 'https://github.com/owner/repo';
                 changelog.options.repo_url = repo_url;

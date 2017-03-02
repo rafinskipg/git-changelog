@@ -9,8 +9,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 ## Features
 
   - **providers**
-    - Add possibility to set providers in the options
-  ([14da6fee](https://github.com/rafinskipg/git-changelog/commit/14da6fee8aa8b1fcec198ea26812aa1871008438))
+    - possiblity to override issue URL when using an external issue tracker
+  ([d831bb1a](https://github.com/Treyone/git-changelog/commit/d831bb1a1e05fae8dd5f932e1f3b1ffef0c4f456))
 
 
 
