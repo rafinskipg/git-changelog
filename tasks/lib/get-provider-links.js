@@ -8,15 +8,15 @@ function getProviderLinks() {
     // Also brings the posibility of adding more providers
     var providerLinks = {
         github: {
-            issue: '[#%s](' + this.options.repo_url + '/issues/%s)',
+            issue: '[#%s](%issue_url%/issues/%s)',
             commit: '[%s](' + this.options.repo_url + '/commit/%s)'
         },
         bitbucket: {
-            issue: '[#%s](' + this.options.repo_url + '/issues/%s)',
+            issue: '[#%s](%issue_url%/issues/%s)',
             commit: '[%s](' + this.options.repo_url + '/commits/%s)'
         },
         gitlab: {
-            issue: '[#%s](' + this.options.repo_url + '/issues/%s)',
+            issue: '[#%s](%issue_url%/issues/%s)',
             commit: '[%s](' + this.options.repo_url + '/commit/%s)'
         }
     };
@@ -35,6 +35,8 @@ function getProviderLinks() {
         }
     }
     this.links = providerLinks[this.provider];
+    this.links.issue = this.links.issue.replace('%issue_url%', this.options.issue_url || this.options.repo_url)
+
 }
 
 module.exports = getProviderLinks;
