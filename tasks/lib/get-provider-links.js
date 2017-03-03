@@ -35,7 +35,7 @@ function getProviderLinks() {
         }
     }
     this.links = providerLinks[this.provider];
-    this.links.issue = this.links.issue.replace('%issue_url%', this.options.issue_url || this.options.repo_url)
+    this.links.issue = this.links.issue.replace('%issue_url%', this.options.issue_url || this.options.repo_url);
 
 }
 
