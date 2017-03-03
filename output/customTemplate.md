@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Wed Jan 18 2017 13:36:19 GMT+0100 (CET) )
+## squeezy potatoe v0.0.1 ( Thu Mar 02 2017 16:18:32 GMT+0100 (CET) )
 
 
 ## Bug Fixes
@@ -20,21 +20,23 @@ _This changelog is generated with a custom template_
   - **generate**
     - create path to file if it does not already exist (62f6210f6895bcf5f9984b26948178b1a93cbc9e)
   - **git log**
-    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](https://github.com/rafinskipg/git-changelog/issues/54))
+    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](https://github.com/Treyone/git-changelog/issues/54))
   - **git tag**
     - get latest tag, regardless of branch for workflows that rely on git-flow releases (48800306fa5ac19b7e9a4c6d7f2f432ee8ae4d84)
   - **git_changelog_generate**
-    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](https://github.com/rafinskipg/git-changelog/issues/5))
+    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](https://github.com/Treyone/git-changelog/issues/5))
   - **nested lists**
-    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](https://github.com/rafinskipg/git-changelog/issues/9))
+    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](https://github.com/Treyone/git-changelog/issues/9))
   - **options**
     - Use version_name instead of version (43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c)    - use repo_url instead of url (346b39491923a49a3421f174a566b204d5fc7db9)
   - **package.json**
     - move q to dependancies since it is required to run (257119cf2bb6d8f341a5d65a2f47bcf803dff205)
   - **params**
     - Restores versionName in CLI (1d97f952bd5d37f67c1febdf161f4ce9b310eebf)
+  - **provider**
+    - Added provider option in the command (8f3b3fef0d123e4fd11ea79bb9552285befc6689)
   - **template**
-    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/rafinskipg/git-changelog/issues/72))
+    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/Treyone/git-changelog/issues/72))
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0 (1819083690e70e0af28d0c155b6fa67cbeb1dfb3)
 
@@ -56,7 +58,7 @@ _This changelog is generated with a custom template_
   - **package**
     - Added global install so you can run via command (86eae3f013ace1c5c23afc32b2e8f878a69629f1)
   - **providers**
-    - Add possibility to set providers in the options (14da6fee8aa8b1fcec198ea26812aa1871008438)
+    - possiblity to override issue URL when using an external issue tracker (d831bb1a1e05fae8dd5f932e1f3b1ffef0c4f456)    - Add possibility to set providers in the options (14da6fee8aa8b1fcec198ea26812aa1871008438)
   - **template**
     - Load default template if no custom template is found (41d5128b922efe3ced883a37bb4e170410160f4f)
 
@@ -69,7 +71,7 @@ _This changelog is generated with a custom template_
   - added documentation for explaining the commit message (d516c2fb464072fc1f4c86ec71a910eeab3e830c
   - Added docs (e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644
   - **readme**
-    - Updated readme (2d7b17625b9783532ee9ba655651cf8d475aa4ce)    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](https://github.com/rafinskipg/git-changelog/issues/1))
+    - Updated readme (2d7b17625b9783532ee9ba655651cf8d475aa4ce)    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](https://github.com/Treyone/git-changelog/issues/1))
 
 
 
