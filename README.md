@@ -119,6 +119,7 @@ This specification is used to grep the commits on your log, it contains a valid 
 * **branch** : The name of the branch. Defaults to ` `
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
 * **provider** : Optional field, the provider is calculated from the repo_url, but can also be passed as config parameter. Values available: gitlab, github, bitbucket.
+* **issue_url** : Optional field, can be used to override the default provider URL, if using an external bug tracker.
 * **version_name**: The version name of the project.
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
 * **template**: The template for generating the changelog. It defaults to the one inside this project (/templates/template.md)
