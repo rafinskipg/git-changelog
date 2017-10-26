@@ -32,7 +32,7 @@ function parseRawCommit(raw) {
   }
 
   msg.body = lines.join('\n');
-  match = msg.subject.match(/^(.*)\((.*)\)\:\s(.*)$/);
+  match = msg.subject.match(/^(.*)\((.*)\)\s*\:?\s(.*)$/);
   //@TODO: match merges and pull request messages
   if (!match) {
     match = msg.subject.match(/^(.*)\:\s(.*)$/);
@@ -47,7 +47,7 @@ function parseRawCommit(raw) {
 
     return msg;
   }
-  msg.type = match[1];
+  msg.type = match[1].trim();
   msg.component = match[2];
   msg.subject = match[3];
 
