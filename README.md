@@ -41,7 +41,7 @@
 
 ## Breaking changes
 
-Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelogrc-specification) and has discontinued the next options:
+Since version `1.0.0` git-generate-changelog has included the [`.changelogrc` specification](#changelogrc-specification) and has discontinued the next options:
 - `grep_commits` option has been removed in favour of the `.changelogrc` options
 - `repo_url` fixed as parameter
 - `branch_name` changed to `branch`
@@ -141,13 +141,13 @@ This plugin requires Grunt `1.0.0`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install git-changelog --save-dev
+npm install git-generate-changelog --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('git-changelog');
+grunt.loadNpmTasks('git-generate-changelog');
 ```
 
 
@@ -213,16 +213,16 @@ grunt.initConfig({
 Install it globally
 
 ```
-npm install -g git-changelog
+npm install -g git-generate-changelog
 ```
 See commands
 ```
-git-changelog -h
+git-generate-changelog -h
 ```
 
 Use it directly with the common options
 ```
- Usage: git-changelog [options]
+ Usage: git-generate-changelog [options]
 
   Options:
 
@@ -248,7 +248,7 @@ Use it directly with the common options
 For example:
 
 ```
-git-changelog -t false -a "My nice application"
+git-generate-changelog -t false -a "My nice application"
 ```
 
 

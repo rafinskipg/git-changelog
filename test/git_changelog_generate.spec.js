@@ -424,8 +424,8 @@ describe('git_changelog_generate.js', function () {
                 expect(this.stream.write).to.have.been.calledTwice;
             });
 
-            it('should call stream.write() with git-changelog message', function () {
-                expect(this.stream.write).to.have.been.calledWithMatch(/Generated with \[git-changelog\]/);
+            it('should call stream.write() with git-generate-changelog message', function () {
+                expect(this.stream.write).to.have.been.calledWithMatch(/Generated with \[git-generate-changelog\]/);
             });
 
         });

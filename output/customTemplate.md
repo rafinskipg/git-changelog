@@ -1,4 +1,4 @@
-<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png" />
+<img width="300px" src="https://github.com/rafinskipg/git-changelog/raw/master/images/git-generate-changelog-logo.png" />
 
 # Custom Template
 
@@ -20,13 +20,13 @@ _This changelog is generated with a custom template_
   - **generate**
     - create path to file if it does not already exist (62f6210f6895bcf5f9984b26948178b1a93cbc9e)
   - **git log**
-    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](https://github.com/rafinskipg/git-changelog/issues/54))
+    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](https://github.com/rafinskipg/git-generate-changelog/issues/54))
   - **git tag**
     - get latest tag, regardless of branch for workflows that rely on git-flow releases (48800306fa5ac19b7e9a4c6d7f2f432ee8ae4d84)
   - **git_changelog_generate**
-    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](https://github.com/rafinskipg/git-changelog/issues/5))
+    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](https://github.com/rafinskipg/git-generate-changelog/issues/5))
   - **nested lists**
-    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](https://github.com/rafinskipg/git-changelog/issues/9))
+    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](https://github.com/rafinskipg/git-generate-changelog/issues/9))
   - **options**
     - Use version_name instead of version (43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c)    - use repo_url instead of url (346b39491923a49a3421f174a566b204d5fc7db9)
   - **package.json**
@@ -34,7 +34,7 @@ _This changelog is generated with a custom template_
   - **params**
     - Restores versionName in CLI (1d97f952bd5d37f67c1febdf161f4ce9b310eebf)
   - **template**
-    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/rafinskipg/git-changelog/issues/72))
+    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/rafinskipg/git-generate-changelog/issues/72))
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0 (1819083690e70e0af28d0c155b6fa67cbeb1dfb3)
 
@@ -43,7 +43,7 @@ _This changelog is generated with a custom template_
 ## Features
   - Show pull requests merged (65f5504ce8e92fa39ced7da308e471cc85f750b5
   - improve `git log` synthax command to use the branch name (4ce6128103ece64b44695ac196b457e63649229b
-  - CLI option with git-changelog (50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe
+  - CLI option with git-generate-changelog (50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe
   - Working on new API (121b99285d2a04f9159951fa0e3f849d0d618fef
   - **bootstrap**
     - creating initial structure (dea45d68ce9555e876680bf7c0778add2f367a30)

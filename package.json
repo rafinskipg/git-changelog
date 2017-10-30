@@ -1,5 +1,5 @@
 {
-  "name": "git-changelog",
+  "name": "git-generate-changelog",
   "description": "A git changelog tool",
   "version": "1.1.2",
   "homepage": "https://github.com/rafinskipg/git-changelog",
@@ -41,7 +41,7 @@
   },
   "preferGlobal": "true",
   "bin": {
-    "git-changelog": "tasks/command.js"
+    "git-generate-changelog": "tasks/command.js"
   },
   "devDependencies": {
     "chai": "^2.2.0",
@@ -56,6 +56,6 @@
     "sinon-chai": "^2.7.0"
   },
   "keywords": [
-    "gruntplugin, git, git-changelog, angularjs, angular, commit, log"
+    "gruntplugin, git, git-generate-changelog, angularjs, angular, commit, log"
   ]
 }
