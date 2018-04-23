@@ -7,7 +7,7 @@ function printCommit(commit, printCommitLinks) {
   var result = '';
 
   if (printCommitLinks) {
-    result += format('%s\n  (%s', commit.subject, this.linkToCommit(commit.hash));
+    result += format('%s  (%s', commit.subject, this.linkToCommit(commit.hash));
 
     if (commit.closes.length) {
      result += ',\n   ' + commit.closes.map(this.linkToIssue, this).join(', ');
