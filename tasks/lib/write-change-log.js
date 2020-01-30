@@ -44,7 +44,7 @@ function writeChangelog(commits) {
       .then(function(template){
 
         if (module.options.file) {
-          stream = fse.createOutputStream(module.options.file);
+          stream = fse.createWriteStream(module.options.file);
         } else {
           stream = process.stdout;
         }
