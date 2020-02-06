@@ -22,7 +22,7 @@
   ],
   "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.12.0"
+    "node": ">= 8.17.0"
   },
   "scripts": {
     "pre-test": "grunt",
@@ -36,8 +36,7 @@
     "commander": "^2.8.0",
     "debug": "^2.1.3",
     "fs-extra": "^8.1.0",
-    "lodash": "^3.7.0",
-    "q": "^1.2.0"
+    "lodash": "^3.7.0"
   },
   "preferGlobal": "true",
   "bin": {
