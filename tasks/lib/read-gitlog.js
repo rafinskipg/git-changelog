@@ -1,46 +1,51 @@
 'use strict';
 
-var debug = require('debug')('changelog:readGitLog');
-var format = require('util').format;
-var child = require('child_process');
-var q = require('q');
+const { format, promisify } = require('util');
+const { exec } = require('child_process');
+const execAsync = promisify(exec);
+const log = require('./log');
+const debug = require('debug')('changelog:readGitLog');
 
-function processRawCommit(commits, rawCommit) {
-  var commit = this.parseRawCommit(rawCommit);
-  if (commit) {
-    commits.push(commit);
-  }
-}
-
-function cmdDone(deferred, code, stdout, stderr) {
+function cmdDone(stdout, stderr) {
   debug('returning from git log command');
-  var commits = [];
 
-  stdout
+  if(!!stderr) {
+    log.call(this, 'error', 'Error reading gitlog', stderr);
+  }
+
+  return stdout
     .split('\n==END==\n')
-    .forEach(processRawCommit.bind(this, commits), this);
+    .reduce((commits, rawCommit) => {
+      const commit = this.parseRawCommit(rawCommit);
 
-  deferred.resolve(commits);
+      if (commit) {
+        commits.push(commit);
+      }
+
+      return commits;
+    }, []);
 }
 
 function gitLogCommand(git_log_command, from) {
-  if (git_log_command === this.cmd.gitLog) {
-    return format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==', from);
+  const { cmd, options } = this || {};
+
+  if (git_log_command === cmd.gitLog) {
+    return format(git_log_command, options.grep_commits, '%H%n%s%n%b%n==END==', from);
   } else {
-    return format(git_log_command, this.options.grep_commits, '%H%n%s%n%b%n==END==');
+    return format(git_log_command, options.grep_commits, '%H%n%s%n%b%n==END==');
   }
 }
 
 function readGitLog(git_log_command, from) {
   debug('reading git log ...');
-  var deferred = q.defer();
 
   git_log_command = gitLogCommand.call(this, git_log_command, from);
-  this.log('debug', 'Executing : ', git_log_command);
+  
+  log.call(this, 'debug', 'Executing : ', git_log_command);
   debug('executing git log command');
-  child.exec(git_log_command , {timeout: 1000}, cmdDone.bind(this, deferred));
-
-  return deferred.promise;
+  
+  return execAsync(git_log_command , {timeout: 1000})
+    .then(({stdout, stderr}) => cmdDone.call(this, stdout, stderr));
 }
 
 module.exports = readGitLog;

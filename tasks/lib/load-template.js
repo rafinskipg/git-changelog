@@ -1,27 +1,25 @@
 'use strict';
 
-var debug = require('debug')('changelog:loadTemplateFile');
-var q = require('q');
-var _ = require('lodash');
-var fs = require('fs');
+const { readFile } = require('fs');
+const { promisify } = require('util');
+const readFileAsync = promisify(readFile);
+const _ = require('lodash');
+const log = require('./log');
+const debug = require('debug')('changelog:loadTemplateFile');
 
 
 function loadDefaultTemplate(logger){
-  return new Promise(function(resolve, reject){
+  const templatePath = `${__dirname}/../../templates/template.md`;
 
-    debug('loading default template');
-
-    fs.readFile(__dirname +'/../../templates/template.md', 'utf8', function(err, data){
-      if (err) {
-        logger('error', 'No default template found', err);
-        resolve(null);
-      }else{
-        logger('info', 'Found default template');
-        resolve(data);
-      }
+  return readFileAsync(templatePath, 'utf8')
+    .then(data => {
+      logger('info', 'Found default template');
+      return data;
+    })
+    .catch(err => {
+      logger('error', 'No default template found', err);
+      return null;
     });
-    
-  });
 }
 
 
@@ -32,51 +30,40 @@ function readTemplateFile(template, logger) {
     return Promise.resolve(null);
   }
 
-  var dfd = q.defer();
-
-  fs.readFile(template, 'utf8' ,function (err, data) {
-    if (err) {
-      logger('error', 'No custom template found', err);
-      loadDefaultTemplate(logger)
-        .then(dfd.resolve)
-        .catch(dfd.reject);
-    }else{
+  return readFileAsync(template, 'utf8')
+    .then(data => {
       logger('info', 'Found template');
-      dfd.resolve(data);
-    }
-  });
-
-  return dfd.promise;
+      return data;
+    })
+    .catch(err => {
+      logger('error', 'No custom template found', err);
+      return loadDefaultTemplate(logger);
+    });
 }
 
 
 function loadTemplateFile(data) {
-  this.log('debug','loading template from', this.options.template);
-  
-  var module = this;
+  const { printCommit, linkToCommit, linkToIssue, options } = this;
 
-  var viewHelpers = {
-    getCommitLinks: function(commit){
-      return module.linkToCommit(commit.hash);
-    },
-    getCommitCloses: function(commit){
-      return commit.closes.map(module.linkToIssue, module);
-    },
-    printCommit: this.printCommit.bind(this)
+  log.call(this, 'debug','loading template from', options.template);
+  
+  const viewHelpers = {
+    getCommitLinks: commit => linkToCommit(commit.hash),
+    getCommitCloses: commit => commit.closes.map(linkToIssue, this),
+    printCommit: printCommit.bind(this)
   };
 
   _.extend(data, viewHelpers);
 
-  return readTemplateFile(this.options.template, this.log.bind(this))
-    .then(function(contents){
+  return readTemplateFile(options.template, log.bind(this))
+    .then(contents => {
       if(contents){
         try{  
-          var fn = _.template(contents, data);
-          var tpl =  fn(data);
-          return tpl;
+          const template = _.template(contents, data);
+          return template(data);
         }catch(e){
-          module.log('error', 'Invalid template file', e);
-          throw 'Invalid template file \n' + e;
+          log.call(this, 'error', 'Invalid template file', e);
+          throw `Invalid template file:\n ${e}`;
         }
       }else{
         return null;

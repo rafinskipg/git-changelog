@@ -1,61 +1,55 @@
 'use strict';
 
-var debug = require('debug')('changelog:loadChangelogRc');
-var q = require('q'),
-  fs = require('fs');
+const log = require('./log');
+const { readFile } = require('fs');
+const { promisify } = require('util');
+const readFileAsync = promisify(readFile);
+
+const debug = require('debug')('changelog:loadChangelogRc');
 
 function readChangelogRcFile(changelogrc, logger) {
   debug('finding changelogrc file');
 
   if(!changelogrc){
-    return q.reject();
+    return Promise.reject();
   }
 
-  var dfd = q.defer();
-
-  fs.readFile(changelogrc, 'utf8' ,function (err, data) {
-    if (err) {
-      logger('error', 'No changelog found', err);
-      dfd.reject(err);
-    }else{
+  return readFileAsync(changelogrc, 'utf8')
+    .then(data => {
       logger('info', 'Found changelog rc');
-      dfd.resolve(data);
-    }
-  });
-
-  return dfd.promise;
+      return data;
+    })
+    .catch(err => {
+      logger('error', 'No changelog found', err);
+      throw err;
+    });
 }
 
 
 function loadChangelogRc() {
-  this.log('debug','loading changelog rc specification from', this.options.changelogrc);
-  var module = this;
-  var deferred = q.defer();
+  const { changelogrc, sections } = this.options;
 
-  readChangelogRcFile(this.options.changelogrc, this.log.bind(this))
-    .then(function(contents){
+  log.call(this, 'debug','loading changelog rc specification from', changelogrc);
+
+  return readChangelogRcFile(this.options.changelogrc, log.bind(this))
+    .then(contents => {
 
       try{
         contents = JSON.parse(contents);
-
-        deferred.resolve(contents);
+        return contents;
       }catch(e){
-        module.log('error', 'Invalid changelogrc file', e);
-        return deferred.reject('Invalid changelogrc file' + e);
+        log.call(this, 'error', 'Invalid changelogrc file:\r\n', e);
+        throw `Invalid changelogrc file:\r\n ${e}`;
       }
 
     })
-    .catch(function(){
-      var sectionNames = module.options.sections.map(function(section){
-        return section.title;
-      }).join(', ');
+    .catch(() => {
+      var sectionNames = sections.map(section => section.title).join(', ');
 
-      module.log('error', 'No .changelog.rc file found, using default settings');
-      module.log('info', 'Sections: ', sectionNames);
-      deferred.resolve({});
-    }.bind(this));
-
-  return deferred.promise;
+      log.call(this, 'error', 'No .changelog.rc file found, using default settings');
+      log.call(this, 'info', 'Sections: ', sectionNames);
+      return {};
+    });
 }
 
 module.exports = loadChangelogRc;
