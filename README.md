@@ -370,6 +370,7 @@ _Add your name here by contributing to this project_
 - [JohnnyEstilles][JohnnyEstilles]
 - [colegleason][colegleason]
 - [jodybrewster][jodybrewster]
+- [Glebcha][glebcha]
 
 
 
@@ -391,6 +392,8 @@ _Add your name here by contributing to this project_
 
 [jodybrewster]: https://github.com/jodybrewster
 [colegleason]: https://github.com/colegleason
+
+[Glebcha]: https://github.com/glebcha
 
 [npm-versioning]: https://docs.npmjs.com/cli/version
 [changelog_specification]: https://github.com/rafinskipg/git-changelog/#changelog-specification
