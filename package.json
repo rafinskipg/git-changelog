@@ -25,8 +25,8 @@
     "node": ">= 8.17.0"
   },
   "scripts": {
-    "pre-test": "grunt",
-    "post-test": "grunt",
+    "pretest": "grunt",
+    "posttest": "grunt",
     "test": "mocha -R spec test/**/*.spec.js",
     "preversion": "npm test",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- -R dot"
