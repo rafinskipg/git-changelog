@@ -22,11 +22,12 @@ function parseRawCommit(raw) {
   msg.breaks = [];
 
   lines.forEach(parseLine.bind(null, msg));
-
+  
   msg.hash = lines.shift();
-  msg.subject = lines.shift();
+  msg.subject = lines.length > 0 ? lines.shift() : '';
 
   match = raw.match(/BREAKING CHANGE:([\s\S]*)/);
+  
   if (match) {
     msg.breaking = match[1];
   }
@@ -35,7 +36,7 @@ function parseRawCommit(raw) {
   match = msg.subject.match(/^(.*)\((.*)\)\:\s(.*)$/);
   //@TODO: match merges and pull request messages
   if (!match) {
-    match = msg.subject.match(/^(.*)\:\s(.*)$/);
+    match = msg.subject && msg.subject.match(/^(.*)\:\s(.*)$/);
     
     if (!match) {
       //console.log(msg.subject, '------------');
