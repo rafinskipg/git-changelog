@@ -1,19 +1,20 @@
 'use strict';
 
-var fs = require('fs');
-var child = require('child_process');
+const proxyquire = require('proxyquire');
 
-var chai = require('chai');
-var expect = chai.expect;
-var sinon = require('sinon');
-var sinonChai = require('sinon-chai');
-var chaiAsPromised = require("chai-as-promised");
+const child = require('child_process');
 
-var defaults = require('../tasks/defaults');
-var _ = require('lodash');
+const chai = require('chai');
+const expect = chai.expect;
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+const chaiAsPromised = require("chai-as-promised");
 
-var changelog = require('../tasks/git_changelog_generate');
-var Q = require('q');
+const changelog = require('../tasks/git_changelog_generate');
+
+const { promisify } = require('util');
+const { readFile } = require('fs');
+const readFileAsync = promisify(readFile);
 
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
@@ -30,7 +31,7 @@ describe('changelogrc.spec.js', function() {
     describe('.parseRawCommit()', function() {
 
       it('should parse raw commit', function() {
-        var msg = changelog.parseRawCommit(
+        const msg = changelog.parseRawCommit(
             '9b1aff905b638aa274a5fc8f88662df446d374bd\n' +
             'feat(scope): broadcast $destroy event on scope destruction\n' +
             'perf testing shows that in chrome this change adds 5-15% overhead\n' +
@@ -45,7 +46,7 @@ describe('changelogrc.spec.js', function() {
       });
 
       it('should parse closed issues', function() {
-        var msg = changelog.parseRawCommit(
+        const msg = changelog.parseRawCommit(
             '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
             'feat(ng-list): Allow custom separator\n' +
             'bla bla bla\n\n' +
@@ -56,7 +57,7 @@ describe('changelogrc.spec.js', function() {
       });
 
       it('should parse closed issues in the body comment', function() {
-        var msg = changelog.parseRawCommit(
+        const msg = changelog.parseRawCommit(
             '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
             'feat(ng-list): Allow custom separator and Closes #33\n');
 
@@ -64,7 +65,7 @@ describe('changelogrc.spec.js', function() {
       });
 
       it('should parse breaking changes', function() {
-        var msg = changelog.parseRawCommit(
+        const msg = changelog.parseRawCommit(
             '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
             'feat(ng-list): Allow custom separator\n' +
             'bla bla bla\n\n' +
@@ -75,21 +76,20 @@ describe('changelogrc.spec.js', function() {
       });
 
       it('should organize commits', function() {
-        var msg = changelog.parseRawCommit(
+        const msg = changelog.parseRawCommit(
             '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
             'feat(ng-list): Allow custom separator\n' +
             'bla bla bla\n\n' +
             'BREAKING CHANGE: first breaking change\nsomething else\n' +
             'another line with more info\n');
 
-        var sections = [{
+        const commits = [];
+        let sections = [{
           title: 'Bug Fixes',
           grep: '^fix'
         }];
 
-        var commits = [];
-
-        for(var i = 0; i < 10; i++){
+        for(let i = 0; i < 10; i++){
           commits.push(changelog.parseRawCommit(
             '13f31602f396bc269076ab4d389cfd8ca94b20ba\n' +
             'fix(myModule): Allow custom separator\n' +
@@ -104,30 +104,34 @@ describe('changelogrc.spec.js', function() {
     });
 
     describe('.readGitLog()', function() {
+      let execStub;
 
-      before(function(done) {
-        changelog.init({ app_name: 'test' }).then(function() {
-          this.exec = sinon.stub(child, 'exec', function(cmd, opts, cb) {
-            var commits = fs.readFileSync('./test/fixtures/list.txt', { encoding: 'utf-8' });
-            cb(null, commits, null);
-          });
-          done();
-        }.bind(this));
+      before(done => {
+          changelog.init({app_name: 'test'})
+            .then(() => readFileAsync('./test/fixtures/list.txt', {encoding: 'utf-8'}))
+            .then(fakeCommits => {
+                execStub = sinon
+                    .stub(child, 'exec')
+                    .callsFake((cmd, opts, callback) => callback(null, {code: null, stdout: fakeCommits, stderr: null}));
+                changelog.readGitLog = proxyquire('../tasks/lib/read-gitlog', { 'child_process': { exec: execStub } });
+
+                done();
+            });
       });
 
       after(function () {
-        this.exec.restore();
+          execStub.restore();
       });
 
       it('should read log and parse commits', function() {
         return expect(changelog.readGitLog(changelog.cmd.gitLog, 'tag'))
           .to.eventually.be.fulfilled
-          .then(function(commits) {
-            expect(this.exec).to.have.been.calledOnce;
-            expect(this.exec).to.have.been.calledWithMatch(/^git log/);
+          .then(commits => {
+            expect(execStub).to.have.been.calledOnce;
+            expect(execStub).to.have.been.calledWithMatch(/^git log/);
             expect(commits).to.be.an('array');
             expect(commits).to.have.length(6);
-          }.bind(this));
+          });
       });
 
     });
