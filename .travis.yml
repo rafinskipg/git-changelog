@@ -20,7 +20,7 @@ before_install:
   - npm install -g codeclimate-test-reporter
 
 before_script:
-  - grunt jshint pretest
+  - grunt jshint pre-test
 
 after_script:
   - istanbul cover node_modules/.bin/_mocha -- -R dot
