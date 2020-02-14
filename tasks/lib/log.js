@@ -2,7 +2,9 @@
 var colors = require('colors');
 var debug = require('debug')('changelog:log');
 
-function getColor(type){
+function log() {
+  var args = Array.prototype.slice.call(arguments);
+  var type = args.length >= 2 ? args[0] : 'info';
   var colorList = {
     'info' : 'blue',
     'success' : 'green',
@@ -11,21 +13,15 @@ function getColor(type){
     'warn' : 'yellow'
   };
 
-  return colorList[type] ;
-}
+  var isValidType = Object.keys(colorList).indexOf(type) > -1;
 
-function log() {
-
-  var args = Array.prototype.slice.call(arguments);
-  var type = args.length >= 2 ? args[0] : 'info';
-  
   if(args.length >= 2){
     args.splice(0, 1);
   }
 
-  var color = getColor(type);
-
-  if( (this.options && this.options.debug) || type === 'info' || type === 'error' || type === 'success'){
+  var color = colorList[type];
+  
+  if((this.options && this.options.debug) || isValidType){
     console.log(colors[color].apply(null, args));
   }
 }
