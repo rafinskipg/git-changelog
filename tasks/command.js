@@ -19,6 +19,7 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     .option('-b, --branch [branch]', 'Branch name [branch]')
     .option('-f, --file [file]', 'File [file]')
     .option('-tpl, --template [template]', 'Template [template]')
+    .option('-ctpl, --commit_template [commit_template]', 'Commit Template [commit_template]')
     .option('-r, --repo_url [repo_url]', 'Repo url [repo_url]')
     .option('-l, --logo [logo]', 'Logo path [logo]')
     .option('-i, --intro [intro]', 'intro text [intro]')
@@ -59,6 +60,10 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
 
   if (program.template){
     options.template = program.template;
+  }
+
+  if (program.commit_template){
+    options.commit_template = program.commit_template;
   }
 
   if (program.changelogrc){

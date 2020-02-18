@@ -1,7 +1,6 @@
 'use strict';
 
 var debug = require('debug')('changelog:loadTemplateFile');
-var q = require('q');
 var _ = require('lodash');
 var fs = require('fs');
 
@@ -32,21 +31,19 @@ function readTemplateFile(template, logger) {
     return Promise.resolve(null);
   }
 
-  var dfd = q.defer();
-
-  fs.readFile(template, 'utf8' ,function (err, data) {
-    if (err) {
-      logger('error', 'No custom template found', err);
-      loadDefaultTemplate(logger)
-        .then(dfd.resolve)
-        .catch(dfd.reject);
-    }else{
-      logger('info', 'Found template');
-      dfd.resolve(data);
-    }
-  });
-
-  return dfd.promise;
+  return new Promise((resolve, reject) => {
+    fs.readFile(template, 'utf8' ,function (err, data) {
+      if (err) {
+        logger('error', 'No custom template found', err);
+        loadDefaultTemplate(logger)
+          .then(resolve)
+          .catch(reject);
+      }else{
+        logger('info', 'Found template');
+        resolve(data)
+      }
+    });
+  })
 }
 
 
