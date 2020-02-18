@@ -4,6 +4,7 @@
     "intro": "Git changelog is a utility tool for generating changelogs. It is free and opensource. :)",
     "debug": "true",
     "template": "templates/template.md",
+    "commit_template": "templates/commit_template.md",
     "sections": [
         {
             "title": "Bug Fixes",

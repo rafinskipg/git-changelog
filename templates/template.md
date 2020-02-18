@@ -4,9 +4,9 @@
 <% _.forEach(sections, function(section){ 
   if(section.commitsCount > 0) { %>
 ## <%= section.title %>
-<% _.forEach(section.commits, function(commit){ %>  - <%= printCommit(commit, true) %><% }) %>
+<% _.forEach(section.commits, function(commit){ %>  - <%= printCommit(commit) %><% }) %>
 <% _.forEach(section.components, function(component){ %>  - **<%= component.name %>**
-<% _.forEach(component.commits, function(commit){ %>    - <%= printCommit(commit, true) %><% }) %>
+<% _.forEach(component.commits, function(commit){ %>    - <%= printCommit(commit) %><% }) %>
 <% }) %>
 <% } %>
 <% }) %>

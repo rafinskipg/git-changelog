@@ -12,6 +12,7 @@ module.exports = {
   intro : null,
   debug: false,
   template: 'templates/template.md',
+  commit_template: 'templates/commit_template.md',
   changelogrc : '.changelogrc',
   sections: [
     {
