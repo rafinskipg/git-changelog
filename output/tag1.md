@@ -4,14 +4,10 @@
 
 _This changelog is from the previous tag_
 
-## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 09:56:49 GMT+0100 (Central European Standard Time) )
+## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 20:14:36 GMT+0100 (Central European Standard Time) )
 
 
 ## Bug Fixes
-  - naming of pre/post scripts
-  ([f9e283b3](git@github.com:rafinskipg/git-changelog/commit/f9e283b3ac82e598baac3d06d088163ff15c33d9))
-  - return promises in getPreviousTag
-  ([58626f23](git@github.com:rafinskipg/git-changelog/commit/58626f23c036eb5000f063318fe400589c61fbe9))
   - fix error messages
   ([ee5068bf](git@github.com:rafinskipg/git-changelog/commit/ee5068bffdbb9c0e45c8ce9ce0c2f790440f19e3))
   - Fix generation of logs

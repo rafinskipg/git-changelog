@@ -4,12 +4,10 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 09:56:49 GMT+0100 (Central European Standard Time) )
+## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 20:14:36 GMT+0100 (Central European Standard Time) )
 
 
 ## Bug Fixes
-  - naming of pre/post scripts (f9e283b3ac82e598baac3d06d088163ff15c33d9
-  - return promises in getPreviousTag (58626f23c036eb5000f063318fe400589c61fbe9
   - fix error messages (ee5068bffdbb9c0e45c8ce9ce0c2f790440f19e3
   - Fix generation of logs (cddb2408fa3017be704acac51dabbba9f477a547
   - correctly get branch name from the command line (4baa075bd93f878ee708817f911fe89c102dec02
@@ -78,10 +76,7 @@ _This changelog is generated with a custom template_
 
 
 ## Refactor
-  - use proxyquire to stub module dependencies / migration to new sinon api (d76856053180503a28f0b64bf824bc27c0bafe8e
-  - prevent empty commit message subject to throw error (bce83af7289847d9917dab5f2b53f361d138c3f4
-  - replaced Q with native promises (dd08c16d6a29f498686ba2bd47a738ac7236a898
-  - required node version is >= 8 / removed Q promise library (52b5e30a90a42b5628dfbae55ea2639822001584
+  - Use native promises (6a36fac0e4670240155bfdc0800cbc28fdfc545f
   - replaced deprecated createOutputStream method with createWriteStream (f27a64c4451e73d85dfe06c394e2368ce4d3c33a
   - Refactor branch name (8774b963fd5e15de1cc1066c91034f9b1d34c4bc
   - added debug messages and refactored some additional code (70e48caf330b7f76fdea474ce58bcf96cb11ccbc
@@ -96,8 +91,6 @@ _This changelog is generated with a custom template_
     - replace `#getStream` with `fse#createOutputStream` (2d252d89017a70008896497e36f03e9d2add2c97)
   - **lib**
     - simplify methods and refactor into separate files (7a3600bf9a5487cb26e3eb4b65ac774a68b6b91e)
-  - **log**
-    - show log message (when second argument) passed if the type exist log('faulty', 'type') - type 'faulty' won't output log message 'type' (fb44053ff5eb6cbebbfe2a2a75f36064d2953e51)
   - **writechangelog**
     - method now returns a promise (69fa1b0b11a603683342a9e0626cb69550b92002)
 
@@ -129,10 +122,6 @@ _This changelog is generated with a custom template_
 
 
 ## Chore
-  - attempt to investigate travis build failure (bc2a080332bb10dd3a5eec761429d8c74bf00e55
-  - use new mocha configuration format (d42dd30ab96c3055b5b2ac9d34d93c4c2c47aa01
-  - added new contributor in readme (6828776ac660cd92b3f2515b4250587e16d8b8c1
-  - updated dependencies (ec6bea4dc7aa71d12e39747a4f7f9b49abc15a51
   - added node v12 to travis config (b527965ba0922f16342801c258790349f7195766
   - updated fs-extra version to latest (99905e5c0d44fb33305d27fd94540304b145405e
   - updated grunt contrib clean (e28c0c763b7953861c05bcbedf04c3d6d48f8243
@@ -168,8 +157,6 @@ _This changelog is generated with a custom template_
   - added node.js `0.12` to travis-ci config (24d9c58a0a4ea349709719c431ca9878a2f01bc4
   - Updated readme (fca6ecbac686661ece15acdb41d23e86011457f2
   - package json version 1.1.3 (9d6003868e352ae21383913f671bc091afc9d8c7
-  - **ci**
-    - use 8 and 10 node versions (6b3985177fd8f27d9b9933642814182ff7dd0670)
   - **cleanup**
     - remove unnecessary code [skip ci] (80dbe3ec7a28e7c20d99e89009856c70138350b0)    - remove `#getStream` and `#checkPath` (cd75ebc44e39242b7e9c8ef2363c86d3f1cabc0e)
   - **deps**
