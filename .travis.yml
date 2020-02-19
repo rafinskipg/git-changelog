@@ -9,6 +9,9 @@ notifications:
     - "rafinskipg@gmail.com"
     - "johnny.estilles@agentia.asia"
 
+git:
+  depth: false
+
 addons:
   code_climate:
     repo_token: b6ed20570f0ec30b5b2acdbd706593928f204693efcd634110a36bc5f94822d9
@@ -18,8 +21,6 @@ before_install:
   - npm install -g mocha
   - npm install -g istanbul
   - npm install -g codeclimate-test-reporter
-  - git remote set-branches --add origin master
-  - git fetch
 
 before_script:
   - grunt jshint pre-test
