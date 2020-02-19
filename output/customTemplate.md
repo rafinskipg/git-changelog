@@ -4,10 +4,12 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Wed Jan 18 2017 13:36:19 GMT+0100 (CET) )
+## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 09:39:17 GMT+0100 (Central European Standard Time) )
 
 
 ## Bug Fixes
+  - naming of pre/post scripts (f9e283b3ac82e598baac3d06d088163ff15c33d9
+  - return promises in getPreviousTag (58626f23c036eb5000f063318fe400589c61fbe9
   - fix error messages (ee5068bffdbb9c0e45c8ce9ce0c2f790440f19e3
   - Fix generation of logs (cddb2408fa3017be704acac51dabbba9f477a547
   - correctly get branch name from the command line (4baa075bd93f878ee708817f911fe89c102dec02
@@ -20,21 +22,23 @@ _This changelog is generated with a custom template_
   - **generate**
     - create path to file if it does not already exist (62f6210f6895bcf5f9984b26948178b1a93cbc9e)
   - **git log**
-    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](https://github.com/rafinskipg/git-changelog/issues/54))
+    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](git@github.com:rafinskipg/git-changelog/issues/54))
   - **git tag**
     - get latest tag, regardless of branch for workflows that rely on git-flow releases (48800306fa5ac19b7e9a4c6d7f2f432ee8ae4d84)
   - **git_changelog_generate**
-    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](https://github.com/rafinskipg/git-changelog/issues/5))
+    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](git@github.com:rafinskipg/git-changelog/issues/5))
   - **nested lists**
-    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](https://github.com/rafinskipg/git-changelog/issues/9))
+    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](git@github.com:rafinskipg/git-changelog/issues/9))
   - **options**
     - Use version_name instead of version (43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c)    - use repo_url instead of url (346b39491923a49a3421f174a566b204d5fc7db9)
   - **package.json**
     - move q to dependancies since it is required to run (257119cf2bb6d8f341a5d65a2f47bcf803dff205)
   - **params**
     - Restores versionName in CLI (1d97f952bd5d37f67c1febdf161f4ce9b310eebf)
+  - **provider**
+    - Added provider option in the command (8f3b3fef0d123e4fd11ea79bb9552285befc6689)
   - **template**
-    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/rafinskipg/git-changelog/issues/72))
+    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](git@github.com:rafinskipg/git-changelog/issues/72))
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0 (1819083690e70e0af28d0c155b6fa67cbeb1dfb3)
 
@@ -69,11 +73,16 @@ _This changelog is generated with a custom template_
   - added documentation for explaining the commit message (d516c2fb464072fc1f4c86ec71a910eeab3e830c
   - Added docs (e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644
   - **readme**
-    - Updated readme (2d7b17625b9783532ee9ba655651cf8d475aa4ce)    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](https://github.com/rafinskipg/git-changelog/issues/1))
+    - Updated readme (2d7b17625b9783532ee9ba655651cf8d475aa4ce)    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](git@github.com:rafinskipg/git-changelog/issues/1))
 
 
 
 ## Refactor
+  - use proxyquire to stub module dependencies / migration to new sinon api (d76856053180503a28f0b64bf824bc27c0bafe8e
+  - prevent empty commit message subject to throw error (bce83af7289847d9917dab5f2b53f361d138c3f4
+  - replaced Q with native promises (dd08c16d6a29f498686ba2bd47a738ac7236a898
+  - required node version is >= 8 / removed Q promise library (52b5e30a90a42b5628dfbae55ea2639822001584
+  - replaced deprecated createOutputStream method with createWriteStream (f27a64c4451e73d85dfe06c394e2368ce4d3c33a
   - Refactor branch name (8774b963fd5e15de1cc1066c91034f9b1d34c4bc
   - added debug messages and refactored some additional code (70e48caf330b7f76fdea474ce58bcf96cb11ccbc
   - modified the task using a factory pattern to improve testability (1a0f25d3d9bbedd029c810c4dd2d35419cbb9276
@@ -87,6 +96,8 @@ _This changelog is generated with a custom template_
     - replace `#getStream` with `fse#createOutputStream` (2d252d89017a70008896497e36f03e9d2add2c97)
   - **lib**
     - simplify methods and refactor into separate files (7a3600bf9a5487cb26e3eb4b65ac774a68b6b91e)
+  - **log**
+    - show log message (when second argument) passed if the type exist log('faulty', 'type') - type 'faulty' won't output log message 'type' (fb44053ff5eb6cbebbfe2a2a75f36064d2953e51)
   - **writechangelog**
     - method now returns a promise (69fa1b0b11a603683342a9e0626cb69550b92002)
 
@@ -118,6 +129,12 @@ _This changelog is generated with a custom template_
 
 
 ## Chore
+  - attempt to investigate travis build failure (bc2a080332bb10dd3a5eec761429d8c74bf00e55
+  - use new mocha configuration format (d42dd30ab96c3055b5b2ac9d34d93c4c2c47aa01
+  - added new contributor in readme (6828776ac660cd92b3f2515b4250587e16d8b8c1
+  - updated dependencies (ec6bea4dc7aa71d12e39747a4f7f9b49abc15a51
+  - added node v12 to travis config (b527965ba0922f16342801c258790349f7195766
+  - updated fs-extra version to latest (99905e5c0d44fb33305d27fd94540304b145405e
   - updated grunt contrib clean (e28c0c763b7953861c05bcbedf04c3d6d48f8243
   - Remove grunt from peer dependencies (f6111d31f0c70f8368d2a57ea708bf58990f6bfd
   - Updated jshint (1d5f6b1d471e9d48ac2b4c7c8b78e3e5a8021ff4
@@ -151,6 +168,8 @@ _This changelog is generated with a custom template_
   - added node.js `0.12` to travis-ci config (24d9c58a0a4ea349709719c431ca9878a2f01bc4
   - Updated readme (fca6ecbac686661ece15acdb41d23e86011457f2
   - package json version 1.1.3 (9d6003868e352ae21383913f671bc091afc9d8c7
+  - **ci**
+    - use 8 and 10 node versions (6b3985177fd8f27d9b9933642814182ff7dd0670)
   - **cleanup**
     - remove unnecessary code [skip ci] (80dbe3ec7a28e7c20d99e89009856c70138350b0)    - remove `#getStream` and `#checkPath` (cd75ebc44e39242b7e9c8ef2363c86d3f1cabc0e)
   - **deps**
