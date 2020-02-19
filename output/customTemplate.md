@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 09:39:17 GMT+0100 (Central European Standard Time) )
+## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 09:56:49 GMT+0100 (Central European Standard Time) )
 
 
 ## Bug Fixes
