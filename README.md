@@ -4,6 +4,7 @@
 [![Build Status][travis-badge]][travis-url]
 [![Test Coverage][coverage-badge]][codeclimate-url]
 [![Code Climate][codeclimate-badge]][codeclimate-url]
+[![Discord chat][discord-badge]][discord-url]
 
 > A git changelog based on ANGULAR JS commit standards (but adaptable to your needs). [NPM page][npm-url]
 
@@ -386,6 +387,9 @@ _Add your name here by contributing to this project_
 [codeclimate-url]: https://codeclimate.com/github/rafinskipg/git-changelog
 
 [coverage-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/coverage.svg
+
+[discord-badge]: https://img.shields.io/discord/679622129037475850?label=discord%20chat&logo=discord
+[discord-url]: https://discordapp.com/channels/679622129037475850
 
 [Rafinskipg]: https://github.com/rafinskipg
 [JohnnyEstilles]: https://github.com/JohnnyEstilles
