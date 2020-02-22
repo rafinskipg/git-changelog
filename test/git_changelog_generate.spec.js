@@ -52,7 +52,7 @@ describe('git_changelog_generate.js', () => {
             expect(changelog).to.have.property('cmd');
 
             expect(changelog).to.have.nested.property('cmd.gitTag');
-            expect(changelog.cmd.gitTag).to.equal('git tag | tail -n1');
+            expect(changelog.cmd.gitTag).to.equal('git tag -l --sort=v:refname | tail -n1');
 
             expect(changelog).to.have.nested.property('cmd.gitRepoUrl');
             expect(changelog.cmd.gitRepoUrl).to.equal('git config --get remote.origin.url');
