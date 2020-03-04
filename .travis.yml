@@ -1,13 +1,16 @@
 language: node_js
 node_js:
-  - "6.1"
-  - "7.3.0"
+  - "8.17.0"
+  - "10.13.0"
   - "12.14.1"
 
 notifications:
   email:
     - "rafinskipg@gmail.com"
     - "johnny.estilles@agentia.asia"
+
+git:
+  depth: false
 
 addons:
   code_climate:

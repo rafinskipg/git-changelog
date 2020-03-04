@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Wed Jan 18 2017 13:36:19 GMT+0100 (CET) )
+## squeezy potatoe v0.0.1 ( Wed Mar 04 2020 16:21:28 GMT+0100 (Central European Standard Time) )
 
 
 ## Bug Fixes
@@ -20,21 +20,23 @@ _This changelog is generated with a custom template_
   - **generate**
     - create path to file if it does not already exist (62f6210f6895bcf5f9984b26948178b1a93cbc9e)
   - **git log**
-    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](https://github.com/rafinskipg/git-changelog/issues/54))
+    - Ignores letter case (d4cff0a86c5ce46405f3c0dd03f9c49a7d620792, Closes: [#54](git@github.com:rafinskipg/git-changelog/issues/54))
   - **git tag**
     - get latest tag, regardless of branch for workflows that rely on git-flow releases (48800306fa5ac19b7e9a4c6d7f2f432ee8ae4d84)
   - **git_changelog_generate**
-    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](https://github.com/rafinskipg/git-changelog/issues/5))
+    - pass tag if it exists to gitReadLog (7c801927672792fc9a818653b74c78d77c7bff9e, Closes: [#5](git@github.com:rafinskipg/git-changelog/issues/5))
   - **nested lists**
-    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](https://github.com/rafinskipg/git-changelog/issues/9))
+    - nested list fix. Closes #9 (2285551810919bd4d8a749ae3ddd88f9cedcdd0e, Closes: [#9](git@github.com:rafinskipg/git-changelog/issues/9))
   - **options**
     - Use version_name instead of version (43fdac855bfd2f67a43acc93ecc8ef2e7a81f45c)    - use repo_url instead of url (346b39491923a49a3421f174a566b204d5fc7db9)
   - **package.json**
     - move q to dependancies since it is required to run (257119cf2bb6d8f341a5d65a2f47bcf803dff205)
   - **params**
     - Restores versionName in CLI (1d97f952bd5d37f67c1febdf161f4ce9b310eebf)
+  - **provider**
+    - Added provider option in the command (8f3b3fef0d123e4fd11ea79bb9552285befc6689)
   - **template**
-    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/rafinskipg/git-changelog/issues/72))
+    - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](git@github.com:rafinskipg/git-changelog/issues/72))
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0 (1819083690e70e0af28d0c155b6fa67cbeb1dfb3)
 
@@ -69,11 +71,12 @@ _This changelog is generated with a custom template_
   - added documentation for explaining the commit message (d516c2fb464072fc1f4c86ec71a910eeab3e830c
   - Added docs (e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644
   - **readme**
-    - Updated readme (2d7b17625b9783532ee9ba655651cf8d475aa4ce)    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](https://github.com/rafinskipg/git-changelog/issues/1))
+    - Updated readme (2d7b17625b9783532ee9ba655651cf8d475aa4ce)    - Unuseful commit (4373f4726eedad6d450c8255f5e57036a3e5e223)    - fix link to the `.changelogrc` section (2975171d89e1823253399bbe87a184e9164e9799)    - Follow proper style in example commits (6fef01ba8a71bb5cd779ddb84f52b8f75296618d)    - Reorder contents (14e8a772c3a05c32bc9fba6f75565132025d4942)    - TOC (d6338ab45f6e45e5562e5e6f4f1db86f39ca458d)    - Added more information on the new specification (f984eedde6be5db804d0b6bf2e238ab2e7ca15fb)    - added more commit examples and npm versioning usage (51341b7aae082c6c1a1caaa77dfdbfdc2622a56f)    - add logo (1af36c9b0dad5cc0c2a321e3f280a89d76a8fb2b)    - Final readme Fixes #1 Closes #1 (e725d8f4bf477b517ca6185a75fdfa0aa660b3be, Closes: [#1](git@github.com:rafinskipg/git-changelog/issues/1))
 
 
 
 ## Refactor
+  - replaced deprecated createOutputStream method with createWriteStream (f27a64c4451e73d85dfe06c394e2368ce4d3c33a
   - Refactor branch name (8774b963fd5e15de1cc1066c91034f9b1d34c4bc
   - added debug messages and refactored some additional code (70e48caf330b7f76fdea474ce58bcf96cb11ccbc
   - modified the task using a factory pattern to improve testability (1a0f25d3d9bbedd029c810c4dd2d35419cbb9276
@@ -118,6 +121,8 @@ _This changelog is generated with a custom template_
 
 
 ## Chore
+  - added node v12 to travis config (b527965ba0922f16342801c258790349f7195766
+  - updated fs-extra version to latest (99905e5c0d44fb33305d27fd94540304b145405e
   - updated grunt contrib clean (e28c0c763b7953861c05bcbedf04c3d6d48f8243
   - Remove grunt from peer dependencies (f6111d31f0c70f8368d2a57ea708bf58990f6bfd
   - Updated jshint (1d5f6b1d471e9d48ac2b4c7c8b78e3e5a8021ff4

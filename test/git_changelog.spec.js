@@ -1,33 +1,31 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
-var sinon = require('sinon');
-var sinonChai = require('sinon-chai');
+const chai = require('chai');
+const expect = chai.expect;
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+
 chai.use(sinonChai);
 
-var q = require('q');
-var grunt = require('grunt');
-var changelog = require('../tasks/git_changelog_generate');
+const grunt = require('grunt');
+const changelog = require('../tasks/git_changelog_generate');
 
-describe('git_changelog.js', function() {
+describe('git_changelog.js', () => {
 
-  before(function() {
+  before(() => {
     sinon.spy(grunt, 'registerMultiTask');
-    sinon.stub(changelog, 'generate', function() {
-      var deferred = q.defer();
-      deferred.resolve();
-      return deferred.promise;
+    sinon.stub(changelog, 'generate').callsFake(() => {
+      return Promise.resolve();
     });
   });
 
-  after(function() {
+  after(() => {
     grunt.registerMultiTask.restore();
     changelog.generate.restore();
   });
 
-  it('should call grunt.registerMultiTask()', function() {
-    var taskRegister = require('../tasks/git_changelog');
+  it('should call grunt.registerMultiTask()', () => {
+    const taskRegister = require('../tasks/git_changelog');
 
     taskRegister(grunt);
     expect(grunt.registerMultiTask).to.have.been.calledOnce;
@@ -36,12 +34,12 @@ describe('git_changelog.js', function() {
     expect(grunt.registerMultiTask.getCall(0).args[2]).to.be.a('function');
   });
 
-  it('should register the "git_changelog" task', function() {
+  it('should register the "git_changelog" task', () => {
     expect(grunt.task.exists('git_changelog')).to.be.true;
   });
 
-  it('shoud call "changelog.generate()" when task is run', function() {
-    var config = {
+  it('shoud call "changelog.generate()" when task is run', () => {
+    const config = {
       git_changelog: {
         minimal: {
           options: {

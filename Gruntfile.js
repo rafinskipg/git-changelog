@@ -73,6 +73,18 @@ module.exports = function(grunt) {
           debug: true
         }
       },
+      customCommitTemplate: {
+        options: {
+          app_name : 'Custom Commit Template',
+          intro: 'This changelog is generated with a custom commit template',
+          file: 'output/customCommitTemplate.md',
+          commit_template: 'templates/commit_template_two.md',
+          logo : 'https://github.com/rafinskipg/git-changelog/raw/master/images/git-changelog-logo.png',
+          version_name : 'custom commit template potatoe',
+          tag: 'v0.0.1',
+          debug: true
+        }
+      },
       extended: {
         options: {
           app_name : 'Git changelog extended',

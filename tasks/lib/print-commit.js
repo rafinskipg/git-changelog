@@ -5,8 +5,8 @@ var _ = require('lodash');
 
 function printCommit(commit, printCommitLinks, template) {
   
-  const commitLink = format('%s\n  (%s', commit.subject, this.linkToCommit(commit.hash))
-  const closes = commit.closes.length ? commit.closes.map(this.linkToIssue, this).join(', ') : ''
+  const commitLink = format('%s\n  (%s', commit.subject, this.linkToCommit(commit.hash));
+  const closes = commit.closes.length ? commit.closes.map(this.linkToIssue, this).join(', ') : '';
   
   if (!template) {
     var result = '';
@@ -23,10 +23,10 @@ function printCommit(commit, printCommitLinks, template) {
   
     return result;
   } else {
-    try{  
-      var fn = _.template(template, {commit, closes, link: this.linkToCommit(commit.hash)});
-      var tpl =  fn(data);
-      return tpl;
+    try{
+      const data = {commit, closes, link: this.linkToCommit(commit.hash)};
+      const fn = _.template(template, data );
+      return fn(data);
     }catch(e){
       this.log('error', 'Invalid commit template file', e);
       throw 'Invalid commit template file \n' + e;

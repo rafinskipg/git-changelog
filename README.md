@@ -4,6 +4,7 @@
 [![Build Status][travis-badge]][travis-url]
 [![Test Coverage][coverage-badge]][codeclimate-url]
 [![Code Climate][codeclimate-badge]][codeclimate-url]
+[![Discord chat][discord-badge]][discord-url]
 
 > A git changelog based on ANGULAR JS commit standards (but adaptable to your needs). [NPM page][npm-url]
 
@@ -16,25 +17,25 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Breaking changes](#breaking-changes)
-- [`.changelogrc` specification](#changelogrc-specification)
-- [The "git_changelog" task](#the-git_changelog-task)
-  - [Grunt Task](#grunt-task)
-    - [Getting Started](#getting-started)
-    - [Options | Defaults](#options-%7C-defaults)
-  - [Command Line](#command-line)
-- [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--angular-js)
-  - [Commit Message Format](#commit-message-format)
-  - [Example types](#example-types)
-  - [Scope](#scope)
-  - [Subject](#subject)
-  - [Body](#body)
-  - [Footer](#footer)
-- [Tagging your project](#tagging-your-project)
-- [ROADMAP](#roadmap)
-  - [v0.3.0](#v030)
-- [Release History](#release-history)
-- [Contributors](#contributors)
+- [V1.0.0](#v100)
+    - [v1.1.0](#v110)
+  - [`.changelogrc` specification](#changelogrc-specification)
+    - [Options | Defaults](#options--defaults)
+  - [The "git_changelog" task](#the-%22gitchangelog%22-task)
+    - [Grunt Task](#grunt-task)
+      - [Getting Started](#getting-started)
+    - [Command Line](#command-line)
+  - [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--%22angular-js%22)
+    - [Commit Message Format](#commit-message-format)
+    - [Example types](#example-types)
+    - [Scope](#scope)
+    - [Subject](#subject)
+  - [Tagging your project](#tagging-your-project)
+  - [ROADMAP](#roadmap)
+    - [v2.0.0](#v200-1)
+  - [Release History](#release-history)
+    - [v1.0.0](#v100-1)
+  - [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -54,6 +55,8 @@ You can use the following commit properties:
 - commit.breaks
 - commit.type
 - commit.component
+- closes: String containing the issues closed
+- link: Link to the commit
 - ~~commit.author~~
 
 # V1.0.0
@@ -391,6 +394,7 @@ _Add your name here by contributing to this project_
 - [JohnnyEstilles][JohnnyEstilles]
 - [colegleason][colegleason]
 - [jodybrewster][jodybrewster]
+- [Glebcha][glebcha]
 
 
 
@@ -407,11 +411,16 @@ _Add your name here by contributing to this project_
 
 [coverage-badge]: https://codeclimate.com/github/rafinskipg/git-changelog/badges/coverage.svg
 
+[discord-badge]: https://img.shields.io/discord/679622129037475850?label=discord%20chat&logo=discord
+[discord-url]: https://discordapp.com/channels/679622129037475850
+
 [Rafinskipg]: https://github.com/rafinskipg
 [JohnnyEstilles]: https://github.com/JohnnyEstilles
 
 [jodybrewster]: https://github.com/jodybrewster
 [colegleason]: https://github.com/colegleason
+
+[Glebcha]: https://github.com/glebcha
 
 [npm-versioning]: https://docs.npmjs.com/cli/version
 [changelog_specification]: https://github.com/rafinskipg/git-changelog/#changelog-specification

@@ -1,55 +1,48 @@
 'use strict';
 
-var q = require('q');
-var _ = require('lodash');
+const log = require('./log');
+const _ = require('lodash');
 
-function getRepoSuccess(deferred, url) {
-  var module = this;
+function setOptions(options) {
+  this.options = _.defaults(options, this.options);
 
+  log.call(this, 'info', '  - The APP name is', this.options.app_name);
+  log.call(this, 'info', '  - The output file is', this.options.file);
+  log.call(this, 'info', '  - The template file is', this.options.template);
+  log.call(this, 'info', '  - The commit template file is', this.options.commit_template);
+
+  this.options.grep_commits = this.options.sections.map(({ grep }) => grep).join('|');
+
+  log.call(this, 'debug', 'Grep commits: ', this.options.grep_commits);
+
+  return options;
+}
+
+function getRepoSuccess(url) {
   this.options.repo_url = url;
   this.message('remote', this.options.repo_url);
 
   this.getProviderLinks();
   this.getGitLogCommands();
-  deferred.resolve();
 }
 
-function getRepoFailure(deferred, err) {
+function getRepoFailure(err) {
   this.message('not remote');
-  deferred.reject(err);
+  throw err;
 }
 
 function init(params, loadRC) {
-  this.log('debug', 'Initializing changelog options');
-  var module = this;
-
-  var deferred = q.defer();
+  log.call(this, 'debug', 'Initializing changelog options');
 
   this.initOptions(params);
-  var promise = loadRC ? this.loadChangelogRc() : new Promise(function (resolve) { resolve(params); });
 
-  promise
-    .then(function(options) {
+  const promise = loadRC ? this.loadChangelogRc() : Promise.resolve(params);
 
-      module.options = _.defaults(options, module.options);
-
-      module.log('info', '  - The APP name is', module.options.app_name);
-      module.log('info', '  - The output file is', module.options.file);
-      module.log('info', '  - The template file is', module.options.template);
-      module.log('info', '  - The commit template file is', module.options.commit_template);
-
-      module.options.grep_commits = module.options.sections.map(function(section) {
-        return section.grep;
-      }).join('|');
-
-      module.log('debug', 'Grep commits: ', module.options.grep_commits);
-    
-      return module.getRepoUrl();
-    })
-    .then(getRepoSuccess.bind(this, deferred))
-    .catch(getRepoFailure.bind(this, deferred));
-
-  return deferred.promise;
+  return promise
+    .then(setOptions.bind(this))
+    .then(this.getRepoUrl.bind(this))
+    .then(getRepoSuccess.bind(this))
+    .catch(getRepoFailure.bind(this));
 }
 
 module.exports = init;

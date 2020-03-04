@@ -1,32 +1,34 @@
 'use strict';
 
-var debug = require('debug')('changelog:getRepoUrl');
-var child = require('child_process');
-var q = require('q');
+const { promisify } = require('util');
+const { exec } = require('child_process');
+const execAsync = promisify(exec);
+const debug = require('debug')('changelog:getRepoUrl');
 
-function cmdDone(deferred, code, stdout, stderr) {
+function cmdDone(code, stdout) {
   debug('returning git repo url command');
   if (code) {
-    deferred.reject("Sorry, you've not configured an origin remote or passed a `repo_url` config value");
+    throw "Sorry, you've not configured an origin remote or passed a `repo_url` config value";
   } else {
     stdout = stdout.replace('\n', '').replace('.git', '');
-    deferred.resolve(stdout);
+    return stdout;
   }
 }
 
 function getRepoUrl() {
   debug('getting repo url');
-  var deferred = q.defer();
 
   if (this.options.repo_url) {
-    deferred.resolve(this.options.repo_url);
+    return Promise.resolve(this.options.repo_url);
   } else {
     //IF we dont find a previous tag, we get all the commits from the beginning - The bigbang of the code
     debug('calling git repo url command');
-    child.exec(this.cmd.gitRepoUrl, cmdDone.bind(null, deferred));
+
+    return execAsync(this.cmd.gitRepoUrl)
+      .then(({code, stdout}) => cmdDone(code, stdout));
+
   }
 
-  return deferred.promise;
 }
 
 module.exports = getRepoUrl;
