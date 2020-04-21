@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Wed Mar 04 2020 16:21:28 GMT+0100 (Central European Standard Time) )
+## squeezy potatoe v0.0.1 ( Tue Apr 21 2020 11:43:57 GMT+0200 (Central European Summer Time) )
 
 
 ## Bug Fixes
@@ -43,6 +43,7 @@ _This changelog is generated with a custom template_
 
 
 ## Features
+  - commit template (#91) (06eebc4ddc477842d0e12cf7fb68c5b22814ffbf, Closes: [#71](git@github.com:rafinskipg/git-changelog/issues/71)
   - Show pull requests merged (65f5504ce8e92fa39ced7da308e471cc85f750b5
   - improve `git log` synthax command to use the branch name (4ce6128103ece64b44695ac196b457e63649229b
   - CLI option with git-changelog (50af9f0aeba14e88254aaf1bfd6433c4c6bc9fbe
@@ -76,6 +77,7 @@ _This changelog is generated with a custom template_
 
 
 ## Refactor
+  - Use native promises (6a36fac0e4670240155bfdc0800cbc28fdfc545f
   - replaced deprecated createOutputStream method with createWriteStream (f27a64c4451e73d85dfe06c394e2368ce4d3c33a
   - Refactor branch name (8774b963fd5e15de1cc1066c91034f9b1d34c4bc
   - added debug messages and refactored some additional code (70e48caf330b7f76fdea474ce58bcf96cb11ccbc
@@ -121,6 +123,7 @@ _This changelog is generated with a custom template_
 
 
 ## Chore
+  - New version (567232d0ee3db9c598c89a2154701dd89f0244e0
   - added node v12 to travis config (b527965ba0922f16342801c258790349f7195766
   - updated fs-extra version to latest (99905e5c0d44fb33305d27fd94540304b145405e
   - updated grunt contrib clean (e28c0c763b7953861c05bcbedf04c3d6d48f8243

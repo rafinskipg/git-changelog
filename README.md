@@ -17,25 +17,27 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [V1.0.0](#v100)
+- [![git-changelog logo][logo-image]](#git-changelog-logo)
+- [Breaking changes and updates](#breaking-changes-and-updates)
+  - [v2.0.0](#v200)
+  - [V1.0.0](#v100)
     - [v1.1.0](#v110)
-  - [`.changelogrc` specification](#changelogrc-specification)
-    - [Options | Defaults](#options--defaults)
-  - [The "git_changelog" task](#the-%22gitchangelog%22-task)
-    - [Grunt Task](#grunt-task)
-      - [Getting Started](#getting-started)
-    - [Command Line](#command-line)
-  - [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--%22angular-js%22)
-    - [Commit Message Format](#commit-message-format)
-    - [Example types](#example-types)
-    - [Scope](#scope)
-    - [Subject](#subject)
-  - [Tagging your project](#tagging-your-project)
-  - [ROADMAP](#roadmap)
-    - [v2.0.0](#v200-1)
-  - [Release History](#release-history)
-    - [v1.0.0](#v100-1)
-  - [Contributors](#contributors)
+- [`.changelogrc` specification](#changelogrc-specification)
+  - [Options | Defaults](#options--defaults)
+- [The "git_changelog" task](#the-%22gitchangelog%22-task)
+  - [Grunt Task](#grunt-task)
+    - [Getting Started](#getting-started)
+  - [Command Line](#command-line)
+- [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--%22angular-js%22)
+  - [Commit Message Format](#commit-message-format)
+  - [Example types](#example-types)
+  - [Scope](#scope)
+  - [Subject](#subject)
+- [Tagging your project](#tagging-your-project)
+- [Release History](#release-history)
+  - [v2.0.0](#v200-1)
+  - [v1.0.0](#v100-1)
+- [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -59,19 +61,16 @@ You can use the following commit properties:
 - link: Link to the commit
 - ~~commit.author~~
 
-# V1.0.0
+### V1.0.0
 
 Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelogrc-specification) and has discontinued the next options:
 - `grep_commits` option has been removed in favour of the `.changelogrc` options
 - `repo_url` fixed as parameter
 - `branch_name` changed to `branch`
 
-### v1.1.0
+#### v1.1.0
 - `version_name` instead of `version`
 
-
-
-**ATTENTION: Help wanted, there are some easy issues that you can contribute to. WINK WINK**
 
 
 ## `.changelogrc` specification
@@ -373,13 +372,12 @@ If you are publishing NPM modules you can let NPM [do that for you][npm-versioni
 npm version patch -m "chore(release): %s codename(furious-stallman)"
 ```
 
-## ROADMAP
-
-### v2.0.0
-- Downloadable resources area on the generated changelog, for linking to your zip project folder of certain tag.
 
 
 ## Release History
+
+### v2.0.0
+- Introduced *Commit Template*
 
 ### v1.0.0
 

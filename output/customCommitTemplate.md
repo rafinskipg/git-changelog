@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom commit template_
 
-## custom commit template potatoe v0.0.1 ( Wed Mar 04 2020 16:21:28 GMT+0100 (Central European Standard Time) )
+## custom commit template potatoe v0.0.1 ( Tue Apr 21 2020 11:43:57 GMT+0200 (Central European Summer Time) )
 
 
 ## Bug Fixes
@@ -77,7 +77,9 @@ _This changelog is generated with a custom commit template_
 
 
 ## Features
-  - DA COMMIT: Show pull requests merged [65f5504c](git@github.com:rafinskipg/git-changelog/commit/65f5504ce8e92fa39ced7da308e471cc85f750b5) 
+  - DA COMMIT: commit template (#91) [06eebc4d](git@github.com:rafinskipg/git-changelog/commit/06eebc4ddc477842d0e12cf7fb68c5b22814ffbf) 
+  ([#71](git@github.com:rafinskipg/git-changelog/issues/71))
+  {"closes":[71],"breaks":[],"hash":"06eebc4ddc477842d0e12cf7fb68c5b22814ffbf","subject":"commit template (#91)","body":"* fix(tests): expect the right git tag command\r\n\r\nCo-authored-by: Gleb Popov <glebcha@gmail.com>\r\n\r\nCloses #71 #84 #79","type":"feat"}  - DA COMMIT: Show pull requests merged [65f5504c](git@github.com:rafinskipg/git-changelog/commit/65f5504ce8e92fa39ced7da308e471cc85f750b5) 
   
   {"closes":[],"breaks":[],"hash":"65f5504ce8e92fa39ced7da308e471cc85f750b5","subject":"Show pull requests merged","body":"","type":"feat"}  - DA COMMIT: improve `git log` synthax command to use the branch name [4ce61281](git@github.com:rafinskipg/git-changelog/commit/4ce6128103ece64b44695ac196b457e63649229b) 
   
@@ -157,7 +159,9 @@ _This changelog is generated with a custom commit template_
 
 
 ## Refactor
-  - DA COMMIT: replaced deprecated createOutputStream method with createWriteStream [f27a64c4](git@github.com:rafinskipg/git-changelog/commit/f27a64c4451e73d85dfe06c394e2368ce4d3c33a) 
+  - DA COMMIT: Use native promises [6a36fac0](git@github.com:rafinskipg/git-changelog/commit/6a36fac0e4670240155bfdc0800cbc28fdfc545f) 
+  
+  {"closes":[],"breaks":[],"hash":"6a36fac0e4670240155bfdc0800cbc28fdfc545f","subject":"Use native promises","body":"* refactor: required node version is >= 8 / removed Q promise library\r\n\r\n* refactor: replaced Q with native promises\r\n\r\n* chore: updated dependencies\r\n\r\n* fix: return promises in getPreviousTag\r\n\r\n* refactor(log): show log message (when second argument) passed if the type exist\r\nlog('faulty', 'type') - type 'faulty' won't output log message 'type'\r\n\r\n* refactor: prevent empty commit message subject to throw error\r\n\r\n* refactor: use proxyquire to stub module dependencies / migration to new sinon api\r\n\r\n* chore(ci): use 8 and 10 node versions\r\n\r\n* chore: added new contributor in readme\r\n\r\n* fix: naming of pre/post scripts\r\n\r\n* chore: use new mocha configuration format\r\n\r\n* chore: attempt to investigate travis build failure\r\n\r\n* attempt to investigate travis build failure\r\n\r\n* package lock\r\n\r\n* add -- to separate files from revisions\r\n\r\n* try new travis config\r\n\r\n* try new travis config with depth false\r\n\r\nCo-authored-by: Glebcha <glebcha@gmail.com>\r\n\r\ncloses: #89 #22 \r\n","type":"refactor"}  - DA COMMIT: replaced deprecated createOutputStream method with createWriteStream [f27a64c4](git@github.com:rafinskipg/git-changelog/commit/f27a64c4451e73d85dfe06c394e2368ce4d3c33a) 
   
   {"closes":[],"breaks":[],"hash":"f27a64c4451e73d85dfe06c394e2368ce4d3c33a","subject":"replaced deprecated createOutputStream method with createWriteStream","body":"","type":"refactor"}  - DA COMMIT: Refactor branch name [8774b963](git@github.com:rafinskipg/git-changelog/commit/8774b963fd5e15de1cc1066c91034f9b1d34c4bc) 
   
@@ -240,7 +244,9 @@ _This changelog is generated with a custom commit template_
 
 
 ## Chore
-  - DA COMMIT: added node v12 to travis config [b527965b](git@github.com:rafinskipg/git-changelog/commit/b527965ba0922f16342801c258790349f7195766) 
+  - DA COMMIT: New version [567232d0](git@github.com:rafinskipg/git-changelog/commit/567232d0ee3db9c598c89a2154701dd89f0244e0) 
+  
+  {"closes":[],"breaks":[],"hash":"567232d0ee3db9c598c89a2154701dd89f0244e0","subject":"New version","body":"","type":"chore"}  - DA COMMIT: added node v12 to travis config [b527965b](git@github.com:rafinskipg/git-changelog/commit/b527965ba0922f16342801c258790349f7195766) 
   
   {"closes":[],"breaks":[],"hash":"b527965ba0922f16342801c258790349f7195766","subject":"added node v12 to travis config","body":"","type":"chore"}  - DA COMMIT: updated fs-extra version to latest [99905e5c](git@github.com:rafinskipg/git-changelog/commit/99905e5c0d44fb33305d27fd94540304b145405e) 
   
