@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Wed Feb 19 2020 20:14:36 GMT+0100 (Central European Standard Time) )
+## squeezy potatoe v0.0.1 ( Wed Mar 04 2020 16:21:28 GMT+0100 (Central European Standard Time) )
 
 
 ## Bug Fixes
@@ -76,7 +76,6 @@ _This changelog is generated with a custom template_
 
 
 ## Refactor
-  - Use native promises (6a36fac0e4670240155bfdc0800cbc28fdfc545f
   - replaced deprecated createOutputStream method with createWriteStream (f27a64c4451e73d85dfe06c394e2368ce4d3c33a
   - Refactor branch name (8774b963fd5e15de1cc1066c91034f9b1d34c4bc
   - added debug messages and refactored some additional code (70e48caf330b7f76fdea474ce58bcf96cb11ccbc

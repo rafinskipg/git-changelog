@@ -17,30 +17,49 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Breaking changes](#breaking-changes)
-- [`.changelogrc` specification](#changelogrc-specification)
-- [The "git_changelog" task](#the-git_changelog-task)
-  - [Grunt Task](#grunt-task)
-    - [Getting Started](#getting-started)
-    - [Options | Defaults](#options-%7C-defaults)
-  - [Command Line](#command-line)
-- [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--angular-js)
-  - [Commit Message Format](#commit-message-format)
-  - [Example types](#example-types)
-  - [Scope](#scope)
-  - [Subject](#subject)
-  - [Body](#body)
-  - [Footer](#footer)
-- [Tagging your project](#tagging-your-project)
-- [ROADMAP](#roadmap)
-  - [v0.3.0](#v030)
-- [Release History](#release-history)
-- [Contributors](#contributors)
+- [V1.0.0](#v100)
+    - [v1.1.0](#v110)
+  - [`.changelogrc` specification](#changelogrc-specification)
+    - [Options | Defaults](#options--defaults)
+  - [The "git_changelog" task](#the-%22gitchangelog%22-task)
+    - [Grunt Task](#grunt-task)
+      - [Getting Started](#getting-started)
+    - [Command Line](#command-line)
+  - [Git Commit Guidelines - Source : "Angular JS"](#git-commit-guidelines---source--%22angular-js%22)
+    - [Commit Message Format](#commit-message-format)
+    - [Example types](#example-types)
+    - [Scope](#scope)
+    - [Subject](#subject)
+  - [Tagging your project](#tagging-your-project)
+  - [ROADMAP](#roadmap)
+    - [v2.0.0](#v200-1)
+  - [Release History](#release-history)
+    - [v1.0.0](#v100-1)
+  - [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-## Breaking changes
+## Breaking changes and updates
+
+
+### v2.0.0
+
+Included `commit_template` option, allows to customize commit outputs.
+
+You can use the following commit properties:
+- commit.subject
+- commit.body
+- commit.link
+- commit.hash
+- commit.breaks
+- commit.type
+- commit.component
+- closes: String containing the issues closed
+- link: Link to the commit
+- ~~commit.author~~
+
+# V1.0.0
 
 Since version `1.0.0` git-changelog has included the [`.changelogrc` specification](#changelogrc-specification) and has discontinued the next options:
 - `grep_commits` option has been removed in favour of the `.changelogrc` options
@@ -49,6 +68,7 @@ Since version `1.0.0` git-changelog has included the [`.changelogrc` specificati
 
 ### v1.1.0
 - `version_name` instead of `version`
+
 
 
 **ATTENTION: Help wanted, there are some easy issues that you can contribute to. WINK WINK**
@@ -70,6 +90,7 @@ This specification is used to grep the commits on your log, it contains a valid 
     "version_name" : "v1.0.0",
     "file": "CHANGELOG.md",
     "template": "myCustomTemplate.md",
+    "commit_template": "myCommitTemplate.md"
     "sections": [
         {
             "title": "Bug Fixes",
@@ -121,8 +142,9 @@ This specification is used to grep the commits on your log, it contains a valid 
 * **repo_url** : The url of the project. For issues and commits links. Defaults to `git config --get remote.origin.url`
 * **provider** : Optional field, the provider is calculated from the repo_url, but can also be passed as config parameter. Values available: gitlab, github, bitbucket.
 * **version_name**: The version name of the project.
-* **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`,
+* **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`, leave empty for console stream
 * **template**: The template for generating the changelog. It defaults to the one inside this project (/templates/template.md)
+* **commit_template**: The template for printing each of the commits of the project. It defaults to the one inside this project (/templates/commit_template.md) 
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
 * **intro** : The introduction text on the header of the changelog. Defaults to `null`
 * **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
@@ -226,23 +248,24 @@ Use it directly with the common options
  Usage: git-changelog [options]
 
   Options:
+    -V, --version                               output the version number
+    -e, --extended                              Extended log
+    -n, --version_name [version_name]           Name of the version
+    -a, --app_name [app_name]                   Name [app_name]
+    -b, --branch [branch]                       Branch name [branch]
+    -f, --file [file]                           File [file]
+    -tpl, --template [template]                 Template [template]
+    -ctpl, --commit_template [commit_template]  Commit Template [commit_template]
+    -r, --repo_url [repo_url]                   Repo url [repo_url]
+    -l, --logo [logo]                           Logo path [logo]
+    -i, --intro [intro]                         intro text [intro]
+    -t, --tag [tag]                             Since tag [tag]
+    -rc, --changelogrc [changelogrc]            .changelogrc relative path [changelogrc]
+    -g, --grep [grep]                           Grep commits for [grep]
+    -d, --debug                                 Debugger
+    -p, --provider [provider]                   Provider: gitlab, github, bitbucket (Optional)
+    -h, --help                                  output usage information
 
-    -h, --help                         output usage information
-    -V, --version                      output the version number
-    -e, --extended                     Extended log
-    -n, --version_name [version_name]  Name of the version
-    -a, --app_name [app_name]          Name [app_name]
-    -b, --branch [branch]              Branch name [branch]
-    -f, --file [file]                  File [file]
-    -tpl, --template [template]        Template [template]
-    -r, --repo_url [repo_url]          Repo url [repo_url]
-    -l, --logo [logo]                  Logo path [logo]
-    -i, --intro [intro]                intro text [intro]
-    -t, --tag [tag]                    Since tag [tag]
-    -rc, --changelogrc [changelogrc]   .changelogrc relative path [changelogrc]
-    -g, --grep [grep]                  Grep commits for [grep]
-    -d, --debug                        Debugger
-    -p, --provider [provider]          Provider: gitlab, github, bitbucket (Optional)
 
 ```
 

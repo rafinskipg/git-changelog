@@ -1,5 +1,6 @@
 'use strict';
 
+
 const { readFile } = require('fs');
 const { promisify } = require('util');
 const readFileAsync = promisify(readFile);
@@ -8,9 +9,8 @@ const log = require('./log');
 const debug = require('debug')('changelog:loadTemplateFile');
 
 
-function loadDefaultTemplate(logger){
-  const templatePath = `${__dirname}/../../templates/template.md`;
-
+function loadDefaultTemplate(templatePath, logger){
+  
   return readFileAsync(templatePath, 'utf8')
     .then(data => {
       logger('info', 'Found default template');
@@ -23,7 +23,7 @@ function loadDefaultTemplate(logger){
 }
 
 
-function readTemplateFile(template, logger) {
+function readTemplateFile(template, defaultTemplate, logger) {
   debug('finding template file');
 
   if(!template){
@@ -37,38 +37,60 @@ function readTemplateFile(template, logger) {
     })
     .catch(err => {
       logger('error', 'No custom template found', err);
-      return loadDefaultTemplate(logger);
+      return loadDefaultTemplate(defaultTemplate, logger);
     });
 }
 
+function loadCommitTemplateFile(file, defaultTemplate, log) {
+  return readTemplateFile(file, defaultTemplate, log)
+  .then(contents => {
+    log('debug', 'Commit template loaded');
+    return contents;
+  })
+  .catch(err => {
+    log('error', 'Error loading commit template', err);
+    return null;
+  });
+}
 
 function loadTemplateFile(data) {
+
+  this.log('debug','loading template from', this.options.template);
+  this.log('debug', 'loading commit template from ', this.options.commit_template);
   const { printCommit, linkToCommit, linkToIssue, options } = this;
 
-  log.call(this, 'debug','loading template from', options.template);
+  const commitTemplatePath =  `${__dirname}/../../templates/commit_template.md`;
+  const templatePath = `${__dirname}/../../templates/template.md`;
   
-  const viewHelpers = {
-    getCommitLinks: commit => linkToCommit(commit.hash),
-    getCommitCloses: commit => commit.closes.map(linkToIssue, this),
-    printCommit: printCommit.bind(this)
-  };
+  return loadCommitTemplateFile(options.commit_template, commitTemplatePath, this.log.bind(this))
+    .then(commitTemplate => {
+ 
+      const viewHelpers = {
+        getCommitLinks: commit => linkToCommit(commit.hash),
+        getCommitCloses: commit => commit.closes.map(linkToIssue, this),
+        printCommit: (commit, printCommitLinks) => printCommit.bind(this)(commit, printCommitLinks, commitTemplate)
+      };
 
-  _.extend(data, viewHelpers);
+      _.extend(data, viewHelpers);
+      
 
-  return readTemplateFile(options.template, log.bind(this))
-    .then(contents => {
-      if(contents){
-        try{  
-          const template = _.template(contents, data);
-          return template(data);
-        }catch(e){
-          log.call(this, 'error', 'Invalid template file', e);
-          throw `Invalid template file:\n ${e}`;
-        }
-      }else{
-        return null;
-      }
+      return readTemplateFile(options.template, templatePath,  log.bind(this))
+        .then(contents => {
+          if(contents){
+            try{  
+              const template = _.template(contents, data);
+              return template(data);
+            }catch(e){
+              log.call(this, 'error', 'Invalid template file', e);
+              throw `Invalid template file:\n ${e}`;
+            }
+          }else{
+            return null;
+          }
+        });
+
     });
+  
 }
 
 module.exports = loadTemplateFile;

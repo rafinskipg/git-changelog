@@ -52,7 +52,7 @@ describe('git_changelog_generate.js', () => {
             expect(changelog).to.have.property('cmd');
 
             expect(changelog).to.have.nested.property('cmd.gitTag');
-            expect(changelog.cmd.gitTag).to.equal('git tag | tail -n1');
+            expect(changelog.cmd.gitTag).to.equal('git tag -l --sort=v:refname | tail -n1');
 
             expect(changelog).to.have.nested.property('cmd.gitRepoUrl');
             expect(changelog.cmd.gitRepoUrl).to.equal('git config --get remote.origin.url');
@@ -1007,6 +1007,16 @@ describe('git_changelog_generate.js', () => {
 
         it('should create tag1.md', () => {
             const exists_file = existsSync('output/tag1.md');
+            expect(exists_file).to.equal(true);
+        });
+
+        it('should create customTemplate.md', () => {
+            const exists_file = existsSync('output/customTemplate.md');
+            expect(exists_file).to.equal(true);
+        });
+
+        it('should create customCommitTemplate.md', () => {
+            const exists_file = existsSync('output/customCommitTemplate.md');
             expect(exists_file).to.equal(true);
         });
 
