@@ -95,7 +95,8 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
     - Added docs [e0ba50c0](https://github.com/rafinskipg/git-changelog/commit/e0ba50c0bb0b13e9b39a59b8f4dda96e86d55644) 
   
   - **readme**
-    - Updated readme [2d7b1762](https://github.com/rafinskipg/git-changelog/commit/2d7b17625b9783532ee9ba655651cf8d475aa4ce) 
+    - Changed readme structure [59ba5bc0](https://github.com/rafinskipg/git-changelog/commit/59ba5bc0ab86f39d46a0403d9403351eed0bc692) 
+      - Updated readme [2d7b1762](https://github.com/rafinskipg/git-changelog/commit/2d7b17625b9783532ee9ba655651cf8d475aa4ce) 
       - Unuseful commit [4373f472](https://github.com/rafinskipg/git-changelog/commit/4373f4726eedad6d450c8255f5e57036a3e5e223) 
       - fix link to the `.changelogrc` section [2975171d](https://github.com/rafinskipg/git-changelog/commit/2975171d89e1823253399bbe87a184e9164e9799) 
       - Follow proper style in example commits [6fef01ba](https://github.com/rafinskipg/git-changelog/commit/6fef01ba8a71bb5cd779ddb84f52b8f75296618d) 
