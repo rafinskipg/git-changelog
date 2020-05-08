@@ -917,6 +917,53 @@ describe('git_changelog_generate.js', () => {
 
         });
 
+        describe('.getGitRepoInfo()', () => {
+            let gitRepoInfo = require('../tasks/lib/get-git-repo-info');
+            
+            before(() => {
+                changelog.setDefaults();
+            });
+
+            it('should return initial http url if Invalid git url provided', () => {
+                let invalidRepo = 'http://github.com/rafinskipg/git-changelog';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(invalidRepo).repoUrl
+                    ))
+                    .to.eventually.become(invalidRepo);
+            });
+
+            it('should return valid http url from Github git url', () => {
+                let githubRepo = 'git@github.com:rafinskipg/git-changelog.git';
+                let githubResult = 'https://github.com/rafinskipg/git-changelog';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(githubRepo).repoUrl
+                    ))
+                    .to.eventually.become(githubResult);
+            });
+
+            it('should return valid http url from Gitlab git url', () => {
+                let gitlabRepo = 'https://gitlab.com/inkscape/inkscape.git';
+                let gitlabResult = 'https://gitlab.com/inkscape/inkscape';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(gitlabRepo).repoUrl
+                    ))
+                    .to.eventually.become(gitlabResult);
+            });
+
+            it('should return valid http url from Bitbucket ssh url', () => {
+                let bitbucketRepo = 'ssh://git@bitbucket.es.ad.adp.com:7999/upenv/configuration-values.git';
+                let bitbucketResult = 'https://bitbucket.es.ad.adp.com:7999/upenv/configuration-values';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(bitbucketRepo).repoUrl
+                    ))
+                    .to.eventually.become(bitbucketResult);
+            });
+        });
+
         describe('.getRepoUrl()', () => {
             let execStub;
 
