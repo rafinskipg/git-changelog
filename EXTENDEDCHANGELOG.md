@@ -52,6 +52,9 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0 [18190836](https://github.com/rafinskipg/git-changelog/commit/1819083690e70e0af28d0c155b6fa67cbeb1dfb3) 
   
+  - **url**
+    - extract http url from any provided git url [aeae305a](https://github.com/rafinskipg/git-changelog/commit/aeae305a9ce35d7ecb93ff116f02afc887dd5639) 
+  
 
 
 

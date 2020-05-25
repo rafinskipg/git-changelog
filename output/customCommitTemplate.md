@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom commit template_
 
-## custom commit template potatoe v0.0.1 ( Mon May 04 2020 21:26:28 GMT+0700 (GMT+07:00) )
+## custom commit template potatoe v0.0.1 ( Mon May 25 2020 10:21:49 GMT+0200 (Central European Summer Time) )
 
 
 ## Bug Fixes
@@ -73,6 +73,10 @@ _This changelog is generated with a custom commit template_
     - DA COMMIT: Removed 0.12 nodejs version, addd 7.3.0 [18190836](https://github.com/rafinskipg/git-changelog/commit/1819083690e70e0af28d0c155b6fa67cbeb1dfb3) 
   
   {"closes":[],"breaks":[],"hash":"1819083690e70e0af28d0c155b6fa67cbeb1dfb3","subject":"Removed 0.12 nodejs version, addd 7.3.0","body":"","type":"fix","component":"travis"}
+  - **url**
+    - DA COMMIT: extract http url from any provided git url [aeae305a](https://github.com/rafinskipg/git-changelog/commit/aeae305a9ce35d7ecb93ff116f02afc887dd5639) 
+  
+  {"closes":[],"breaks":[],"hash":"aeae305a9ce35d7ecb93ff116f02afc887dd5639","subject":"extract http url from any provided git url","body":"* feat: extract http url from any provided git url\r\n\r\n* chore: replaced git urls with valid http urls\r\n\r\ncloses #93 ","type":"fix","component":"url"}
 
 
 

@@ -4,7 +4,7 @@
 
 _This changelog is generated with a custom template_
 
-## squeezy potatoe v0.0.1 ( Mon May 04 2020 21:26:28 GMT+0700 (GMT+07:00) )
+## squeezy potatoe v0.0.1 ( Mon May 25 2020 10:21:49 GMT+0200 (Central European Summer Time) )
 
 
 ## Bug Fixes
@@ -39,6 +39,8 @@ _This changelog is generated with a custom template_
     - Fixes missing space in version_name output in template (f494f4a93a3c4a245f706cfb65f735a5ccccb2ce, Closes: [#72](https://github.com/rafinskipg/git-changelog/issues/72))
   - **travis**
     - Removed 0.12 nodejs version, addd 7.3.0 (1819083690e70e0af28d0c155b6fa67cbeb1dfb3)
+  - **url**
+    - extract http url from any provided git url (aeae305a9ce35d7ecb93ff116f02afc887dd5639)
 
 
 

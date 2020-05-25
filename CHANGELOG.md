@@ -6,6 +6,14 @@ _Git changelog is a utility tool for generating changelogs. It is free and opens
 
 
 
+## Bug Fixes
+
+  - **url**
+    - extract http url from any provided git url [aeae305a](https://github.com/rafinskipg/git-changelog/commit/aeae305a9ce35d7ecb93ff116f02afc887dd5639) 
+  
+
+
+
 ## Features
   - commit template (#91) [06eebc4d](https://github.com/rafinskipg/git-changelog/commit/06eebc4ddc477842d0e12cf7fb68c5b22814ffbf) ([#71](https://github.com/rafinskipg/git-changelog/issues/71))
   
