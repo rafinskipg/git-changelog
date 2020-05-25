@@ -16,6 +16,7 @@ function initOptions(params) {
   this.message('intro', this.options.intro);
   this.message('file', this.options.file);
   this.message('template', this.options.template);
+  this.message('commit_template', this.options.commit_template);
   this.message('logo', this.options.logo);
   this.message('sections', this.options.sections);
   this.message('debug', this.options.debug);

@@ -52,7 +52,7 @@ describe('git_changelog_generate.js', () => {
             expect(changelog).to.have.property('cmd');
 
             expect(changelog).to.have.nested.property('cmd.gitTag');
-            expect(changelog.cmd.gitTag).to.equal('git tag | tail -n1');
+            expect(changelog.cmd.gitTag).to.equal('git tag -l --sort=v:refname | tail -n1');
 
             expect(changelog).to.have.nested.property('cmd.gitRepoUrl');
             expect(changelog.cmd.gitRepoUrl).to.equal('git config --get remote.origin.url');
@@ -917,6 +917,53 @@ describe('git_changelog_generate.js', () => {
 
         });
 
+        describe('.getGitRepoInfo()', () => {
+            let gitRepoInfo = require('../tasks/lib/get-git-repo-info');
+            
+            before(() => {
+                changelog.setDefaults();
+            });
+
+            it('should return initial http url if Invalid git url provided', () => {
+                let invalidRepo = 'http://github.com/rafinskipg/git-changelog';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(invalidRepo).repoUrl
+                    ))
+                    .to.eventually.become(invalidRepo);
+            });
+
+            it('should return valid http url from Github git url', () => {
+                let githubRepo = 'git@github.com:rafinskipg/git-changelog.git';
+                let githubResult = 'https://github.com/rafinskipg/git-changelog';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(githubRepo).repoUrl
+                    ))
+                    .to.eventually.become(githubResult);
+            });
+
+            it('should return valid http url from Gitlab git url', () => {
+                let gitlabRepo = 'https://gitlab.com/inkscape/inkscape.git';
+                let gitlabResult = 'https://gitlab.com/inkscape/inkscape';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(gitlabRepo).repoUrl
+                    ))
+                    .to.eventually.become(gitlabResult);
+            });
+
+            it('should return valid http url from Bitbucket ssh url', () => {
+                let bitbucketRepo = 'ssh://git@bitbucket.es.ad.adp.com:7999/upenv/configuration-values.git';
+                let bitbucketResult = 'https://bitbucket.es.ad.adp.com:7999/upenv/configuration-values';
+
+                return expect(Promise.resolve(
+                        gitRepoInfo(bitbucketRepo).repoUrl
+                    ))
+                    .to.eventually.become(bitbucketResult);
+            });
+        });
+
         describe('.getRepoUrl()', () => {
             let execStub;
 
@@ -1007,6 +1054,16 @@ describe('git_changelog_generate.js', () => {
 
         it('should create tag1.md', () => {
             const exists_file = existsSync('output/tag1.md');
+            expect(exists_file).to.equal(true);
+        });
+
+        it('should create customTemplate.md', () => {
+            const exists_file = existsSync('output/customTemplate.md');
+            expect(exists_file).to.equal(true);
+        });
+
+        it('should create customCommitTemplate.md', () => {
+            const exists_file = existsSync('output/customCommitTemplate.md');
             expect(exists_file).to.equal(true);
         });
 

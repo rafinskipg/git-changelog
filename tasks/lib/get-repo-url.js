@@ -4,14 +4,17 @@ const { promisify } = require('util');
 const { exec } = require('child_process');
 const execAsync = promisify(exec);
 const debug = require('debug')('changelog:getRepoUrl');
+const getGitRepoInfo = require('./get-git-repo-info');
 
 function cmdDone(code, stdout) {
   debug('returning git repo url command');
+
   if (code) {
     throw "Sorry, you've not configured an origin remote or passed a `repo_url` config value";
   } else {
-    stdout = stdout.replace('\n', '').replace('.git', '');
-    return stdout;
+    let { repoUrl } = getGitRepoInfo(stdout);
+
+    return repoUrl;
   }
 }
 
