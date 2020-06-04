@@ -954,8 +954,8 @@ describe('git_changelog_generate.js', () => {
             });
 
             it('should return valid http url from Bitbucket ssh url', () => {
-                let bitbucketRepo = 'ssh://git@bitbucket.es.ad.adp.com:7999/upenv/configuration-values.git';
-                let bitbucketResult = 'https://bitbucket.es.ad.adp.com:7999/upenv/configuration-values';
+                let bitbucketRepo = 'ssh://git@bitbucket.es.zapatitto.com:1234/whatever.git';
+                let bitbucketResult = 'https://bitbucket.es.zapatitto.com:1234/whatever';
 
                 return expect(Promise.resolve(
                         gitRepoInfo(bitbucketRepo).repoUrl
