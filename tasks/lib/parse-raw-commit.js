@@ -9,6 +9,12 @@ function parseLine(msg, line) {
   }
 }
 
+function isPRMergeCommit(msg) {
+  var match = msg && msg.match(/Merge pull/);
+
+  return (match) ? true : false;
+}
+
 function parseRawCommit(raw) {
   debug('parsing raw commit');
   if (!raw) {
@@ -32,15 +38,25 @@ function parseRawCommit(raw) {
     msg.breaking = match[1];
   }
 
+  if (msg.subject && lines.length > 0 && isPRMergeCommit(msg.subject)) {
+    // Replace subject with first line of the merge commit
+    msg.subject = lines.shift();
+  }
+
   msg.body = lines.join('\n');
-  match = msg.subject.match(/^(.*)\((.*)\)\:\s(.*)$/);
+
+  const subjectWithScopeRegex = /^(.*)\((.*)\)\:\s(.*)$/;
+  const subjectWithoutScopeRegex = /^(.*)\:\s(.*)$/;
+  match = msg.subject.match(subjectWithScopeRegex);
+
   //@TODO: match merges and pull request messages
   if (!match) {
-    match = msg.subject && msg.subject.match(/^(.*)\:\s(.*)$/);
-    
+    match = msg.subject && msg.subject.match(subjectWithoutScopeRegex);
+
     if (!match) {
       //console.log(msg.subject, '------------');
       this.log('warn', 'Incorrect message:', msg.hash, msg.subject);
+
       //return null;
     }
     msg.type = match ? match[1] : null;
@@ -48,6 +64,7 @@ function parseRawCommit(raw) {
 
     return msg;
   }
+
   msg.type = match[1];
   msg.component = match[2];
   msg.subject = match[3];
