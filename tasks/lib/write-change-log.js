@@ -23,7 +23,7 @@ function writeChangelog(commits) {
   var module = this;
 
   debug('writing change log');
-  var sections = this.organizeCommits(commits, this.options.sections);
+  var sections = this.organizeCommits(commits, this.options.sections, this.options.strict_conv_commits);
   var stream;
   
   var data = {

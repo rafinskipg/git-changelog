@@ -18,6 +18,8 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     .option('-a, --app_name [app_name]', 'Name [app_name]')
     .option('-b, --branch [branch]', 'Branch name [branch]')
     .option('-f, --file [file]', 'File [file]')
+    .option('-cb, --commit_body', 'Analyze the commit body as well as the commit subject. This is useful when you have to analyze Merge commits')
+    .option('-strictcc, --strict_conv_commits', 'Enforce type detected from conventional commits standard')
     .option('-tpl, --template [template]', 'Template [template]')
     .option('-ctpl, --commit_template [commit_template]', 'Commit Template [commit_template]')
     .option('-r, --repo_url [repo_url]', 'Repo url [repo_url]')
@@ -49,6 +51,11 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
     options.branch = program.branch;
     console.log('  - Branch %s', program.branch);
   }
+
+  if (program.strict_conv_commits){
+    options.strict_conv_commits = program.strict_conv_commits;
+  }
+
   if (program.debug){
     console.log('Debug enabled');
     options.debug = program.debug;
@@ -64,6 +71,10 @@ if (process.argv.join('').replace(/\\/g,'/').indexOf('/grunt') === -1) {
 
   if (program.commit_template){
     options.commit_template = program.commit_template;
+  }
+
+  if (program.commit_body){
+    options.commit_body = program.commit_body;
   }
 
   if (program.changelogrc){

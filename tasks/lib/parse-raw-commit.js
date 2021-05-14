@@ -15,10 +15,14 @@ function isPRMergeCommit(msg) {
   return (match) ? true : false;
 }
 
-function parseRawCommit(raw) {
+function parseRawCommit(raw, useCommitBody) {
   debug('parsing raw commit');
   if (!raw) {
     return null;
+  }
+
+  if (!useCommitBody) {
+    useCommitBody = false;
   }
 
   var lines = raw.split('\n');
@@ -38,7 +42,7 @@ function parseRawCommit(raw) {
     msg.breaking = match[1];
   }
 
-  if (msg.subject && lines.length > 0 && isPRMergeCommit(msg.subject)) {
+  if (msg.subject && lines.length > 0 && isPRMergeCommit(msg.subject) && useCommitBody) {
     // Replace subject with first line of the merge commit
     msg.subject = lines.shift();
   }
