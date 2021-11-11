@@ -18,8 +18,13 @@ function grepSection(sections, commit){
   return null;
 }
 
-function organizeCommit(sections, commit) {
-  var section = commit.type ? sections[commit.type] : grepSection(sections, commit) ;
+function organizeCommit(sections, strictConventionalCommits, commit) {
+  var section;
+  if (!strictConventionalCommits) {
+    section = commit.type ? sections[commit.type] : grepSection(sections, commit) ;
+  } else {
+    section = commit.type ? sections[commit.type] : null ;
+  }
   
   var component = commit.component ? commit.component.toLowerCase() : this.emptyComponent;
 
@@ -52,7 +57,7 @@ function organizeCommit(sections, commit) {
   }
 }
 
-function organizeCommits(commits, defaultSections) {
+function organizeCommits(commits, defaultSections, strictConventionalCommits) {
   commits = commits ? commits : [];
 
   var sections = {
@@ -81,7 +86,7 @@ function organizeCommits(commits, defaultSections) {
 
   debug('organizaing commits');
 
-  commits.forEach(organizeCommit.bind(this, sections), this);
+  commits.forEach(organizeCommit.bind(this, sections, strictConventionalCommits), this);
 
   return _.compact(Object.keys(sections).map(function(key){
     var section = sections[key];

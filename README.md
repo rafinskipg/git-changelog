@@ -144,6 +144,8 @@ This specification is used to grep the commits on your log, it contains a valid 
 * **file**: The name of the file that will be generated. Defaults to `CHANGELOG.md`, leave empty for console stream
 * **template**: The template for generating the changelog. It defaults to the one inside this project (/templates/template.md)
 * **commit_template**: The template for printing each of the commits of the project. It defaults to the one inside this project (/templates/commit_template.md) 
+* **commit_body**: Analyze the commit body as well as the commit subject. This is useful when you have to analyze Merge commits. Defaults to `false`
+* **strict_conv_commits**: Enforce type detected from conventional commits standard. Defaults to `false`
 * **app_name** : The name of the project. Defaults to `My App - Changelog`
 * **intro** : The introduction text on the header of the changelog. Defaults to `null`
 * **logo** : A logo URL to be included in the header of the changelog. Defaults to `null`
@@ -253,8 +255,10 @@ Use it directly with the common options
     -a, --app_name [app_name]                   Name [app_name]
     -b, --branch [branch]                       Branch name [branch]
     -f, --file [file]                           File [file]
+    -cb, --commit_body                          Analyze commits bodies as well as title
     -tpl, --template [template]                 Template [template]
     -ctpl, --commit_template [commit_template]  Commit Template [commit_template]
+    -strictcc, --strict_conv_commits            Enforce type detected from [conventional commits standard](https://www.conventionalcommits.org/en/v1.0.0/)
     -r, --repo_url [repo_url]                   Repo url [repo_url]
     -l, --logo [logo]                           Logo path [logo]
     -i, --intro [intro]                         intro text [intro]
@@ -327,6 +331,41 @@ Must be one of the following:
 * **refactor**: A code change that neither fixes a bug or adds a feature
 * **test**: Adding missing tests
 * **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+### Strict conventional commits messages
+
+If `--strict_conv_commits` flag is provided, commit messages must be in the format described in the [Standard Document](https://www.conventionalcommits.org/en/v1.0.0/). If the commit message does not match the format, it is not assigned to the section. 
+
+Example: 
+
+Let's say, We have three commits:
+
+```
+fix small issues in the code
+fix: updated scoring algorithm
+feat: integration with Instagram
+```
+
+If the `--strict_conv_commits` is disabled, the following changelog is produced:
+
+```
+Fix:
+  - fix small issues in the code
+  - updated scoring algorithm
+
+Features:
+  - integration with Instagram
+```
+
+If the flag is enabled:
+
+```
+Fix:
+  - updated scoring algorithm
+
+Features:
+  - integration with Instagram
+```
 
 
 ### Scope
@@ -419,6 +458,7 @@ _Add your name here by contributing to this project_
 [colegleason]: https://github.com/colegleason
 
 [Glebcha]: https://github.com/glebcha
+[daniel1302]: https://github.com/daniel1302
 
 [npm-versioning]: https://docs.npmjs.com/cli/version
 [changelog_specification]: https://github.com/rafinskipg/git-changelog/#changelog-specification

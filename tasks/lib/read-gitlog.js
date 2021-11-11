@@ -16,7 +16,7 @@ function cmdDone(stdout, stderr) {
   return stdout
     .split('\n==END==\n')
     .reduce((commits, rawCommit) => {
-      const commit = this.parseRawCommit(rawCommit);
+      const commit = this.parseRawCommit(rawCommit, this.options.commit_body);
 
       if (commit) {
         commits.push(commit);

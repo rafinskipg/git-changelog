@@ -11,6 +11,8 @@ module.exports = {
   logo : null,
   intro : null,
   debug: false,
+  commit_body: false,
+  strict_conv_commits: false,
   template: 'templates/template.md',
   commit_template: 'templates/commit_template.md',
   changelogrc : '.changelogrc',
